@@ -92,6 +92,10 @@ jobs:
           pnpm exec tsc --noEmit
           pnpm run build
 
+      # Two encoder tests check their output with ffprobe.
+      - name: Install ffprobe
+        run: brew install ffmpeg
+
       - name: Rust tests
         run: bash scripts/test-rust.sh --locked --lib
 

@@ -397,14 +397,19 @@ describe("timeouts", () => {
   });
 
   it("keeps a slow upload going while it moves, and sends the body intact", async () => {
-    // A server that reads about 64 KB every 50 ms: 4 MB takes about 3 s, many idle limits
-    // (the socket buffers only the last part, so most of that time is upload).
+    // A server that reads 64 KB every 25 ms (about 2.6 MB/s), paced by bytes rather than by
+    // chunk so every OS reads at the same rate. 16 MB is larger than the socket buffers, so
+    // most of the ~6 s is upload, and a full buffer never stalls the sender for a whole idle limit.
     const slow = createServer((req, res) => {
       let bytes = 0;
+      let sincePause = 0;
       req.on("data", (chunk: Buffer) => {
         bytes += chunk.length;
+        sincePause += chunk.length;
+        if (sincePause < 64 * 1024) return;
+        sincePause = 0;
         req.pause();
-        setTimeout(() => req.resume(), 50);
+        setTimeout(() => req.resume(), 25);
       });
       req.on("end", () => {
         res.setHeader("content-type", "application/json");
@@ -414,8 +419,8 @@ describe("timeouts", () => {
     await new Promise<void>((r) => slow.listen(0, "127.0.0.1", r));
     try {
       const { port } = slow.address() as AddressInfo;
-      const audio = new Uint8Array(4 * 1024 * 1024).fill(3);
-      const idleMs = 500;
+      const audio = new Uint8Array(16 * 1024 * 1024).fill(3);
+      const idleMs = 1500;
       const t0 = Date.now();
       const r = await requestJson<{ bytes: number; type: string; length: string }>(
         "assemblyai",
@@ -425,7 +430,7 @@ describe("timeouts", () => {
         undefined,
         { idleMs },
       );
-      expect(Date.now() - t0).toBeGreaterThan(3 * idleMs);
+      expect(Date.now() - t0).toBeGreaterThan(2 * idleMs);
       expect(r).toEqual({ bytes: audio.length, type: "application/octet-stream", length: String(audio.length) });
     } finally {
       await new Promise((r) => slow.close(r));

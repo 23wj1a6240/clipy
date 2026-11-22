@@ -1312,7 +1312,9 @@ mod tests {
 
         // Hand the file to ffprobe — if it can demux video + audio
         // streams cleanly, we're confident the muxer output is sound.
-        let ffprobe = std::process::Command::new("/opt/homebrew/opt/ffmpeg@7/bin/ffprobe")
+        let pinned = std::path::Path::new("/opt/homebrew/opt/ffmpeg@7/bin/ffprobe");
+        let ffprobe_bin = if pinned.exists() { pinned.as_os_str() } else { std::ffi::OsStr::new("ffprobe") };
+        let ffprobe = std::process::Command::new(ffprobe_bin)
             .args([
                 "-v",
                 "error",
