@@ -1,0 +1,26 @@
+[package]
+name = "clipy-local-edition"
+version = "0.1.0"
+edition = "2021"
+rust-version = "1.82"
+license = "Apache-2.0"
+description = "The pure glue of the Clipy Local desktop edition: settings and keys, sidecar to planner input, and what the AREC says left the computer."
+publish = false
+
+# Its own workspace root, so `cargo test` in this folder never picks up the
+# desktop app's manifest. The app uses it as a path dependency.
+[workspace]
+
+[features]
+default = []
+# Provider configs for clipy-local-stt (Windows transcription) built from the
+# saved settings. The app turns it on for Windows only, where it links
+# clipy-local-stt; the Mac never does.
+stt = ["dep:clipy-local-stt"]
+
+[dependencies]
+clipy-local-moments = { path = "../clipy-local-moments" }
+clipy-local-stt = { path = "../clipy-local-stt", default-features = false, optional = true }
+serde = { version = "1", features = ["derive"] }
+serde_json = "1"
+url = "2"

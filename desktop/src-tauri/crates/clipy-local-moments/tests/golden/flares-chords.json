@@ -1,0 +1,564 @@
+{
+  "name": "flares-chords",
+  "description": "Hold-Control flares: parked, sweeping, right Control with Shift, a Ctrl+C chord, a tap under the grace, a short hold.",
+  "input": {
+    "schemaVersion": 2,
+    "durationMs": 22000,
+    "transcript": [
+      {
+        "startMs": 20000,
+        "endMs": 20323,
+        "text": "that"
+      },
+      {
+        "startMs": 20333,
+        "endMs": 20657,
+        "text": "is"
+      },
+      {
+        "startMs": 20667,
+        "endMs": 20990,
+        "text": "all"
+      }
+    ],
+    "interactions": [
+      {
+        "kind": "move",
+        "time_ms": 500,
+        "x": 400,
+        "y": 400
+      },
+      {
+        "kind": "key_down",
+        "time_ms": 1000,
+        "key_code": 59
+      },
+      {
+        "kind": "key_up",
+        "time_ms": 2500,
+        "key_code": 59
+      },
+      {
+        "kind": "key_down",
+        "time_ms": 4000,
+        "key_code": 59
+      },
+      {
+        "kind": "key_down",
+        "time_ms": 4300,
+        "key_code": 8
+      },
+      {
+        "kind": "key_up",
+        "time_ms": 4350,
+        "key_code": 8
+      },
+      {
+        "kind": "key_up",
+        "time_ms": 4600,
+        "key_code": 59
+      },
+      {
+        "kind": "key_down",
+        "time_ms": 6000,
+        "key_code": 62
+      },
+      {
+        "kind": "key_down",
+        "time_ms": 6100,
+        "key_code": 56
+      },
+      {
+        "kind": "key_up",
+        "time_ms": 6200,
+        "key_code": 56
+      },
+      {
+        "kind": "key_up",
+        "time_ms": 7600,
+        "key_code": 62
+      },
+      {
+        "kind": "key_down",
+        "time_ms": 9000,
+        "key_code": 59
+      },
+      {
+        "kind": "key_up",
+        "time_ms": 9100,
+        "key_code": 59
+      },
+      {
+        "kind": "key_down",
+        "time_ms": 10000,
+        "key_code": 59
+      },
+      {
+        "kind": "key_up",
+        "time_ms": 10400,
+        "key_code": 59
+      },
+      {
+        "kind": "move",
+        "time_ms": 11930,
+        "x": 408,
+        "y": 402
+      },
+      {
+        "kind": "move",
+        "time_ms": 11960,
+        "x": 416,
+        "y": 403
+      },
+      {
+        "kind": "move",
+        "time_ms": 11990,
+        "x": 424,
+        "y": 405
+      },
+      {
+        "kind": "key_down",
+        "time_ms": 12000,
+        "key_code": 59
+      },
+      {
+        "kind": "move",
+        "time_ms": 12020,
+        "x": 432,
+        "y": 406
+      },
+      {
+        "kind": "move",
+        "time_ms": 12050,
+        "x": 439,
+        "y": 408
+      },
+      {
+        "kind": "move",
+        "time_ms": 12080,
+        "x": 447,
+        "y": 409
+      },
+      {
+        "kind": "move",
+        "time_ms": 12110,
+        "x": 455,
+        "y": 411
+      },
+      {
+        "kind": "move",
+        "time_ms": 12140,
+        "x": 463,
+        "y": 413
+      },
+      {
+        "kind": "move",
+        "time_ms": 12170,
+        "x": 471,
+        "y": 414
+      },
+      {
+        "kind": "move",
+        "time_ms": 12200,
+        "x": 479,
+        "y": 416
+      },
+      {
+        "kind": "move",
+        "time_ms": 12230,
+        "x": 487,
+        "y": 417
+      },
+      {
+        "kind": "move",
+        "time_ms": 12260,
+        "x": 495,
+        "y": 419
+      },
+      {
+        "kind": "move",
+        "time_ms": 12290,
+        "x": 503,
+        "y": 421
+      },
+      {
+        "kind": "move",
+        "time_ms": 12320,
+        "x": 511,
+        "y": 422
+      },
+      {
+        "kind": "move",
+        "time_ms": 12350,
+        "x": 518,
+        "y": 424
+      },
+      {
+        "kind": "move",
+        "time_ms": 12380,
+        "x": 526,
+        "y": 425
+      },
+      {
+        "kind": "move",
+        "time_ms": 12410,
+        "x": 534,
+        "y": 427
+      },
+      {
+        "kind": "move",
+        "time_ms": 12440,
+        "x": 542,
+        "y": 428
+      },
+      {
+        "kind": "move",
+        "time_ms": 12470,
+        "x": 550,
+        "y": 430
+      },
+      {
+        "kind": "move",
+        "time_ms": 12500,
+        "x": 558,
+        "y": 432
+      },
+      {
+        "kind": "move",
+        "time_ms": 12530,
+        "x": 566,
+        "y": 433
+      },
+      {
+        "kind": "move",
+        "time_ms": 12560,
+        "x": 574,
+        "y": 435
+      },
+      {
+        "kind": "move",
+        "time_ms": 12590,
+        "x": 582,
+        "y": 436
+      },
+      {
+        "kind": "move",
+        "time_ms": 12620,
+        "x": 589,
+        "y": 438
+      },
+      {
+        "kind": "move",
+        "time_ms": 12650,
+        "x": 597,
+        "y": 439
+      },
+      {
+        "kind": "move",
+        "time_ms": 12680,
+        "x": 605,
+        "y": 441
+      },
+      {
+        "kind": "move",
+        "time_ms": 12710,
+        "x": 613,
+        "y": 443
+      },
+      {
+        "kind": "move",
+        "time_ms": 12740,
+        "x": 621,
+        "y": 444
+      },
+      {
+        "kind": "move",
+        "time_ms": 12770,
+        "x": 629,
+        "y": 446
+      },
+      {
+        "kind": "move",
+        "time_ms": 12800,
+        "x": 637,
+        "y": 447
+      },
+      {
+        "kind": "move",
+        "time_ms": 12830,
+        "x": 645,
+        "y": 449
+      },
+      {
+        "kind": "move",
+        "time_ms": 12860,
+        "x": 653,
+        "y": 451
+      },
+      {
+        "kind": "move",
+        "time_ms": 12890,
+        "x": 661,
+        "y": 452
+      },
+      {
+        "kind": "move",
+        "time_ms": 12920,
+        "x": 668,
+        "y": 454
+      },
+      {
+        "kind": "move",
+        "time_ms": 12950,
+        "x": 676,
+        "y": 455
+      },
+      {
+        "kind": "move",
+        "time_ms": 12980,
+        "x": 684,
+        "y": 457
+      },
+      {
+        "kind": "move",
+        "time_ms": 13010,
+        "x": 692,
+        "y": 458
+      },
+      {
+        "kind": "move",
+        "time_ms": 13040,
+        "x": 700,
+        "y": 460
+      },
+      {
+        "kind": "move",
+        "time_ms": 13070,
+        "x": 708,
+        "y": 462
+      },
+      {
+        "kind": "move",
+        "time_ms": 13100,
+        "x": 716,
+        "y": 463
+      },
+      {
+        "kind": "move",
+        "time_ms": 13130,
+        "x": 724,
+        "y": 465
+      },
+      {
+        "kind": "move",
+        "time_ms": 13160,
+        "x": 732,
+        "y": 466
+      },
+      {
+        "kind": "move",
+        "time_ms": 13190,
+        "x": 739,
+        "y": 468
+      },
+      {
+        "kind": "move",
+        "time_ms": 13220,
+        "x": 747,
+        "y": 469
+      },
+      {
+        "kind": "move",
+        "time_ms": 13250,
+        "x": 755,
+        "y": 471
+      },
+      {
+        "kind": "move",
+        "time_ms": 13280,
+        "x": 763,
+        "y": 473
+      },
+      {
+        "kind": "move",
+        "time_ms": 13310,
+        "x": 771,
+        "y": 474
+      },
+      {
+        "kind": "move",
+        "time_ms": 13340,
+        "x": 779,
+        "y": 476
+      },
+      {
+        "kind": "move",
+        "time_ms": 13370,
+        "x": 787,
+        "y": 477
+      },
+      {
+        "kind": "move",
+        "time_ms": 13400,
+        "x": 795,
+        "y": 479
+      },
+      {
+        "kind": "move",
+        "time_ms": 13430,
+        "x": 803,
+        "y": 481
+      },
+      {
+        "kind": "move",
+        "time_ms": 13460,
+        "x": 811,
+        "y": 482
+      },
+      {
+        "kind": "move",
+        "time_ms": 13490,
+        "x": 818,
+        "y": 484
+      },
+      {
+        "kind": "move",
+        "time_ms": 13520,
+        "x": 826,
+        "y": 485
+      },
+      {
+        "kind": "move",
+        "time_ms": 13550,
+        "x": 834,
+        "y": 487
+      },
+      {
+        "kind": "move",
+        "time_ms": 13580,
+        "x": 842,
+        "y": 488
+      },
+      {
+        "kind": "move",
+        "time_ms": 13610,
+        "x": 850,
+        "y": 490
+      },
+      {
+        "kind": "move",
+        "time_ms": 13640,
+        "x": 858,
+        "y": 492
+      },
+      {
+        "kind": "move",
+        "time_ms": 13670,
+        "x": 866,
+        "y": 493
+      },
+      {
+        "kind": "move",
+        "time_ms": 13700,
+        "x": 874,
+        "y": 495
+      },
+      {
+        "kind": "move",
+        "time_ms": 13730,
+        "x": 882,
+        "y": 496
+      },
+      {
+        "kind": "move",
+        "time_ms": 13760,
+        "x": 889,
+        "y": 498
+      },
+      {
+        "kind": "move",
+        "time_ms": 13790,
+        "x": 897,
+        "y": 499
+      },
+      {
+        "kind": "move",
+        "time_ms": 13800,
+        "x": 900,
+        "y": 500
+      },
+      {
+        "kind": "key_up",
+        "time_ms": 13900,
+        "key_code": 59
+      },
+      {
+        "kind": "key_down",
+        "time_ms": 15000,
+        "key_code": 59
+      },
+      {
+        "kind": "key_down",
+        "time_ms": 15200,
+        "key_code": 59
+      },
+      {
+        "kind": "key_up",
+        "time_ms": 16000,
+        "key_code": 59
+      },
+      {
+        "kind": "key_up",
+        "time_ms": 17000,
+        "key_code": 59
+      }
+    ],
+    "clickElements": [],
+    "interactionSelection": "bounded sample; full stream retained locally",
+    "capture": {
+      "x": 0,
+      "y": 0,
+      "width": 1440,
+      "height": 900,
+      "output_width": 1440,
+      "output_height": 900
+    }
+  },
+  "rules": {
+    "planner": "rules",
+    "moments": [
+      {
+        "timestamp_ms": 1120,
+        "frame_at_ms": 2380,
+        "reason": "Highlights this spot with Flare for 1.4s (no narration at this moment)",
+        "source": "flare",
+        "x": 0.2778,
+        "y": 0.4444
+      },
+      {
+        "timestamp_ms": 6120,
+        "frame_at_ms": 7480,
+        "reason": "Highlights this spot with Flare for 1.5s (no narration at this moment)",
+        "source": "flare",
+        "x": 0.2778,
+        "y": 0.4444
+      },
+      {
+        "timestamp_ms": 12120,
+        "frame_at_ms": 13780,
+        "reason": "Highlights this spot with Flare for 1.8s, while saying: \"that\"",
+        "source": "flare",
+        "x": 0.6229,
+        "y": 0.5544
+      },
+      {
+        "timestamp_ms": 15120,
+        "frame_at_ms": 15880,
+        "reason": "Highlights this spot with Flare for 0.9s, while saying: \"that is all\"",
+        "source": "flare",
+        "x": 0.625,
+        "y": 0.5556
+      }
+    ]
+  }
+}

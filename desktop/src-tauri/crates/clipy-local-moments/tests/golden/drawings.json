@@ -1,0 +1,428 @@
+{
+  "name": "drawings",
+  "description": "Pen strokes drawn with the overlay on by hand: grouping, a secondary button, a flare-owned span, an open span, an off-picture stroke.",
+  "input": {
+    "schemaVersion": 2,
+    "durationMs": 15000,
+    "transcript": [
+      {
+        "startMs": 2000,
+        "endMs": 2365,
+        "text": "look"
+      },
+      {
+        "startMs": 2375,
+        "endMs": 2740,
+        "text": "at"
+      },
+      {
+        "startMs": 2750,
+        "endMs": 3115,
+        "text": "this"
+      },
+      {
+        "startMs": 3125,
+        "endMs": 3490,
+        "text": "circle"
+      }
+    ],
+    "interactions": [
+      {
+        "kind": "annotation",
+        "time_ms": 1000,
+        "active": true
+      },
+      {
+        "kind": "down",
+        "time_ms": 1200,
+        "x": 300,
+        "y": 300,
+        "button": 1
+      },
+      {
+        "kind": "move",
+        "time_ms": 1230,
+        "x": 312,
+        "y": 303
+      },
+      {
+        "kind": "move",
+        "time_ms": 1260,
+        "x": 324,
+        "y": 306
+      },
+      {
+        "kind": "move",
+        "time_ms": 1290,
+        "x": 336,
+        "y": 309
+      },
+      {
+        "kind": "move",
+        "time_ms": 1320,
+        "x": 348,
+        "y": 312
+      },
+      {
+        "kind": "move",
+        "time_ms": 1350,
+        "x": 360,
+        "y": 315
+      },
+      {
+        "kind": "move",
+        "time_ms": 1380,
+        "x": 372,
+        "y": 318
+      },
+      {
+        "kind": "move",
+        "time_ms": 1410,
+        "x": 384,
+        "y": 321
+      },
+      {
+        "kind": "move",
+        "time_ms": 1440,
+        "x": 396,
+        "y": 324
+      },
+      {
+        "kind": "move",
+        "time_ms": 1470,
+        "x": 408,
+        "y": 327
+      },
+      {
+        "kind": "move",
+        "time_ms": 1500,
+        "x": 420,
+        "y": 330
+      },
+      {
+        "kind": "move",
+        "time_ms": 1530,
+        "x": 432,
+        "y": 333
+      },
+      {
+        "kind": "move",
+        "time_ms": 1560,
+        "x": 444,
+        "y": 336
+      },
+      {
+        "kind": "move",
+        "time_ms": 1590,
+        "x": 456,
+        "y": 339
+      },
+      {
+        "kind": "move",
+        "time_ms": 1620,
+        "x": 468,
+        "y": 342
+      },
+      {
+        "kind": "move",
+        "time_ms": 1650,
+        "x": 480,
+        "y": 345
+      },
+      {
+        "kind": "move",
+        "time_ms": 1680,
+        "x": 492,
+        "y": 348
+      },
+      {
+        "kind": "move",
+        "time_ms": 1700,
+        "x": 500,
+        "y": 350
+      },
+      {
+        "kind": "up",
+        "time_ms": 1700,
+        "x": 500,
+        "y": 350,
+        "button": 1
+      },
+      {
+        "kind": "down",
+        "time_ms": 2500,
+        "x": 520,
+        "y": 360,
+        "button": 1
+      },
+      {
+        "kind": "move",
+        "time_ms": 2530,
+        "x": 523,
+        "y": 365
+      },
+      {
+        "kind": "move",
+        "time_ms": 2560,
+        "x": 526,
+        "y": 369
+      },
+      {
+        "kind": "move",
+        "time_ms": 2590,
+        "x": 529,
+        "y": 374
+      },
+      {
+        "kind": "move",
+        "time_ms": 2620,
+        "x": 532,
+        "y": 378
+      },
+      {
+        "kind": "move",
+        "time_ms": 2650,
+        "x": 535,
+        "y": 383
+      },
+      {
+        "kind": "move",
+        "time_ms": 2680,
+        "x": 538,
+        "y": 387
+      },
+      {
+        "kind": "move",
+        "time_ms": 2710,
+        "x": 541,
+        "y": 392
+      },
+      {
+        "kind": "move",
+        "time_ms": 2740,
+        "x": 544,
+        "y": 396
+      },
+      {
+        "kind": "move",
+        "time_ms": 2770,
+        "x": 547,
+        "y": 401
+      },
+      {
+        "kind": "move",
+        "time_ms": 2800,
+        "x": 550,
+        "y": 405
+      },
+      {
+        "kind": "move",
+        "time_ms": 2830,
+        "x": 553,
+        "y": 410
+      },
+      {
+        "kind": "move",
+        "time_ms": 2860,
+        "x": 556,
+        "y": 414
+      },
+      {
+        "kind": "move",
+        "time_ms": 2890,
+        "x": 559,
+        "y": 419
+      },
+      {
+        "kind": "move",
+        "time_ms": 2900,
+        "x": 560,
+        "y": 420
+      },
+      {
+        "kind": "up",
+        "time_ms": 2900,
+        "x": 560,
+        "y": 420,
+        "button": 1
+      },
+      {
+        "kind": "down",
+        "time_ms": 3000,
+        "x": 560,
+        "y": 420,
+        "button": 2
+      },
+      {
+        "kind": "up",
+        "time_ms": 3100,
+        "x": 560,
+        "y": 420,
+        "button": 2
+      },
+      {
+        "kind": "down",
+        "time_ms": 7000,
+        "x": 900,
+        "y": 600,
+        "button": 1
+      },
+      {
+        "kind": "up",
+        "time_ms": 7050,
+        "x": 900,
+        "y": 600,
+        "button": 1
+      },
+      {
+        "kind": "annotation",
+        "time_ms": 8000,
+        "active": false
+      },
+      {
+        "kind": "annotation",
+        "time_ms": 10000,
+        "active": true
+      },
+      {
+        "kind": "key_down",
+        "time_ms": 10000,
+        "key_code": 59
+      },
+      {
+        "kind": "down",
+        "time_ms": 10500,
+        "x": 700,
+        "y": 700,
+        "button": 1
+      },
+      {
+        "kind": "up",
+        "time_ms": 10700,
+        "x": 710,
+        "y": 700,
+        "button": 1
+      },
+      {
+        "kind": "key_up",
+        "time_ms": 11500,
+        "key_code": 59
+      },
+      {
+        "kind": "annotation",
+        "time_ms": 11500,
+        "active": false
+      },
+      {
+        "kind": "annotation",
+        "time_ms": 13000,
+        "active": true
+      },
+      {
+        "kind": "down",
+        "time_ms": 13200,
+        "x": 100,
+        "y": 800,
+        "button": 1
+      },
+      {
+        "kind": "move",
+        "time_ms": 13300,
+        "x": 140,
+        "y": 820
+      },
+      {
+        "kind": "up",
+        "time_ms": 13400,
+        "x": 160,
+        "y": 830,
+        "button": 1
+      },
+      {
+        "kind": "down",
+        "time_ms": 14000,
+        "x": 2000,
+        "y": 2000,
+        "button": 1
+      },
+      {
+        "kind": "up",
+        "time_ms": 14100,
+        "x": 2100,
+        "y": 2000,
+        "button": 1
+      }
+    ],
+    "clickElements": [],
+    "interactionSelection": "bounded sample; full stream retained locally",
+    "capture": {
+      "x": 0,
+      "y": 0,
+      "width": 1440,
+      "height": 900,
+      "output_width": 1440,
+      "output_height": 900
+    }
+  },
+  "rules": {
+    "planner": "rules",
+    "moments": [
+      {
+        "timestamp_ms": 1200,
+        "frame_at_ms": 2900,
+        "reason": "Draws over this area, while saying: \"look at this circle\"",
+        "source": "draw",
+        "x": 0.2986,
+        "y": 0.4
+      },
+      {
+        "timestamp_ms": 2500,
+        "frame_at_ms": 2500,
+        "reason": "Clicks here, while saying: \"look at this circle\"",
+        "source": "click",
+        "x": 0.3611,
+        "y": 0.4
+      },
+      {
+        "timestamp_ms": 3000,
+        "frame_at_ms": 3000,
+        "reason": "Clicks here, while saying: \"look at this circle\"",
+        "source": "click",
+        "x": 0.3889,
+        "y": 0.4667
+      },
+      {
+        "timestamp_ms": 7000,
+        "frame_at_ms": 7050,
+        "reason": "Draws over this area, while saying: \"look at this circle\"",
+        "source": "draw",
+        "x": 0.625,
+        "y": 0.6667
+      },
+      {
+        "timestamp_ms": 10120,
+        "frame_at_ms": 11380,
+        "reason": "Highlights this spot with Flare for 1.4s, while saying: \"look at this circle\"",
+        "source": "flare",
+        "x": 0.3889,
+        "y": 0.4667
+      },
+      {
+        "timestamp_ms": 10500,
+        "frame_at_ms": 10500,
+        "reason": "Clicks here, while saying: \"at this circle\"",
+        "source": "click",
+        "x": 0.4861,
+        "y": 0.7778
+      },
+      {
+        "timestamp_ms": 13200,
+        "frame_at_ms": 13400,
+        "reason": "Draws over this area (no narration at this moment)",
+        "source": "draw",
+        "x": 0.0902,
+        "y": 0.9056
+      }
+    ]
+  }
+}

@@ -1,0 +1,11 @@
+{
+  // Type check against @clipy/moments' source, so it works before moments is
+  // built. The build (tsconfig.json) uses the built package, as consumers do.
+  "extends": "./tsconfig.json",
+  "compilerOptions": {
+    "noEmit": true,
+    "rootDir": "..",
+    "paths": { "@clipy/moments": ["../moments/src/index.ts"] }
+  },
+  "include": ["src/**/*.ts", "test/**/*.ts"]
+}

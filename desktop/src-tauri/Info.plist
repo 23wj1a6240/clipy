@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>NSSpeechRecognitionUsageDescription</key>
+	<string>Clipy Local transcribes your recordings on this Mac. Audio is never sent to Apple.</string>
+	<key>NSMicrophoneUsageDescription</key>
+	<string>Clipy Local uses your microphone to record narration alongside your screen capture.</string>
+	<key>NSCameraUsageDescription</key>
+	<string>Clipy Local uses your camera for the optional webcam bubble in your recordings.</string>
+	<key>NSCameraUseContinuityCameraDeviceType</key>
+	<true/>
+	<key>NSScreenCaptureUsageDescription</key>
+	<string>Clipy Local captures your screen so you can record it.</string>
+</dict>
+</plist>

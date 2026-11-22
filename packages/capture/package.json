@@ -1,0 +1,22 @@
+{
+  "name": "@clipy/capture",
+  "version": "0.1.0",
+  "private": true,
+  "description": "Record the screen with ffmpeg on macOS, Windows and Linux, with a pointer and click sidecar where the OS allows it.",
+  "license": "Apache-2.0",
+  "type": "module",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "files": ["dist"],
+  "scripts": {
+    "build": "tsc -p tsconfig.json",
+    "typecheck": "tsc -p tsconfig.json --noEmit",
+    "test": "vitest run"
+  },
+  "devDependencies": {
+    "@types/node": "^22.0.0",
+    "typescript": "^5.6.0",
+    "vitest": "^4.1.4"
+  },
+  "engines": { "node": ">=20" }
+}

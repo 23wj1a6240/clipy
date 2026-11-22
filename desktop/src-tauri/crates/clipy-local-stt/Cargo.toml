@@ -1,0 +1,49 @@
+[package]
+name = "clipy-local-stt"
+version = "0.1.0"
+edition = "2021"
+rust-version = "1.82"
+license = "Apache-2.0"
+description = "Timestamped transcripts from 16 kHz mono audio: on-device sherpa-onnx models or the user's own provider key."
+publish = false
+
+# Its own workspace root, so `cargo test` in this folder never picks up the
+# desktop app's manifest. The app can still use it as a path dependency.
+[workspace]
+
+[features]
+default = ["local", "static"]
+# The on-device engine (sherpa-onnx). Without it, model download, chunking
+# and the hosted providers still build, and `transcribe_local` returns an
+# error saying this build has no local engine.
+local = ["dep:sherpa-onnx-sys"]
+# Link sherpa-onnx and onnxruntime into the binary (macOS, Linux).
+static = ["sherpa-onnx-sys?/static"]
+# Link against sherpa-onnx-c-api and onnxruntime shared libraries, which must
+# ship next to the executable (Windows; see README).
+shared = ["sherpa-onnx-sys?/shared"]
+
+[dependencies]
+# k2-fsa's own FFI crate for the sherpa-onnx C API. Pinned exactly: its build
+# script downloads the matching prebuilt native archive for this version.
+sherpa-onnx-sys = { version = "=2.0.2", default-features = false, optional = true }
+reqwest = { version = "0.12", default-features = false, features = ["blocking", "multipart", "rustls-tls"] }
+serde = { version = "1", features = ["derive"] }
+serde_json = "1"
+sha2 = "0.10"
+# 0.6 decodes with libbz2-rs-sys (pure Rust): no C toolchain needed on Windows.
+bzip2 = "0.6"
+tar = "0.4"
+dirs = "6"
+thiserror = "2"
+base64 = "0.22"
+
+[target.'cfg(unix)'.dependencies]
+libc = "0.2"
+
+[target.'cfg(windows)'.dependencies]
+windows-sys = { version = "0.61", features = ["Win32_Foundation", "Win32_System_Threading"] }
+
+[dev-dependencies]
+tiny_http = "0.12"
+tempfile = "3"

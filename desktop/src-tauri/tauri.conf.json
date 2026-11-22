@@ -1,0 +1,289 @@
+{
+  "$schema": "https://schema.tauri.app/config/2",
+  "productName": "Clipy Local",
+  "version": "1.1.82",
+  "identifier": "online.clipy.local",
+  "build": {
+    "beforeDevCommand": "pnpm run dev",
+    "beforeBuildCommand": "pnpm run build",
+    "devUrl": "http://127.0.0.1:1420",
+    "frontendDist": "../dist"
+  },
+  "app": {
+    "macOSPrivateApi": true,
+    "withGlobalTauri": true,
+    "windows": [
+      {
+        "label": "main",
+        "title": "Clipy",
+        "width": 340,
+        "height": 503,
+        "resizable": false,
+        "fullscreen": false,
+        "visible": false,
+        "decorations": false,
+        "transparent": true,
+        "alwaysOnTop": false,
+        "acceptFirstMouse": true,
+        "center": false,
+        "backgroundColor": "#00000000",
+        "shadow": true
+      },
+      {
+        "label": "countdown",
+        "url": "index.html#countdown",
+        "title": "Clipy Countdown",
+        "width": 240,
+        "height": 240,
+        "resizable": false,
+        "fullscreen": false,
+        "visible": false,
+        "decorations": false,
+        "transparent": true,
+        "backgroundColor": "#00000000",
+        "alwaysOnTop": true,
+        "skipTaskbar": true,
+        "focus": false,
+        "shadow": false,
+        "center": true
+      },
+      {
+        "label": "share",
+        "url": "index.html#share",
+        "title": "Clipy — Recording shared",
+        "width": 340,
+        "height": 170,
+        "resizable": false,
+        "fullscreen": false,
+        "visible": false,
+        "decorations": false,
+        "transparent": true,
+        "backgroundColor": "#00000000",
+        "alwaysOnTop": true,
+        "skipTaskbar": true,
+        "shadow": true,
+        "center": true
+      },
+      {
+        "label": "webcam",
+        "url": "index.html#webcam",
+        "title": "Clipy — Webcam",
+        "width": 240,
+        "height": 240,
+        "minWidth": 120,
+        "minHeight": 120,
+        "resizable": false,
+        "fullscreen": false,
+        "visible": false,
+        "decorations": false,
+        "transparent": true,
+        "backgroundColor": "#00000000",
+        "alwaysOnTop": true,
+        "skipTaskbar": true,
+        "acceptFirstMouse": true,
+        "focus": true,
+        "shadow": false
+      },
+      {
+        "label": "webcam-controls",
+        "url": "index.html#webcam-controls",
+        "title": "Clipy — Webcam controls",
+        "width": 132,
+        "height": 52,
+        "resizable": false,
+        "fullscreen": false,
+        "visible": false,
+        "decorations": false,
+        "transparent": true,
+        "backgroundColor": "#00000000",
+        "alwaysOnTop": true,
+        "skipTaskbar": true,
+        "focus": false,
+        "acceptFirstMouse": true,
+        "shadow": false
+      },
+      {
+        "label": "stop-controls",
+        "url": "index.html#stop-controls",
+        "title": "Clipy — Recording controls",
+        "width": 56,
+        "height": 396,
+        "resizable": false,
+        "fullscreen": false,
+        "visible": false,
+        "decorations": false,
+        "transparent": true,
+        "backgroundColor": "#00000000",
+        "alwaysOnTop": true,
+        "skipTaskbar": true,
+        "focus": false,
+        "acceptFirstMouse": true,
+        "shadow": false
+      },
+      {
+        "label": "recording-hint",
+        "url": "index.html#recording-hint",
+        "title": "Clipy Recording Hint",
+        "width": 208,
+        "height": 144,
+        "resizable": false,
+        "visible": false,
+        "decorations": false,
+        "transparent": true,
+        "backgroundColor": "#00000000",
+        "alwaysOnTop": true,
+        "skipTaskbar": true,
+        "focus": false,
+        "shadow": false
+      },
+      {
+        "label": "source-highlight",
+        "url": "index.html#source-highlight",
+        "title": "Clipy — Source Highlight",
+        "width": 1,
+        "height": 1,
+        "resizable": false,
+        "fullscreen": false,
+        "visible": false,
+        "decorations": false,
+        "transparent": true,
+        "backgroundColor": "#00000000",
+        "alwaysOnTop": true,
+        "skipTaskbar": true,
+        "focus": false,
+        "shadow": false
+      },
+      {
+        "label": "area-select",
+        "url": "index.html#area-select",
+        "title": "Clipy — Select Area",
+        "width": 1,
+        "height": 1,
+        "resizable": false,
+        "fullscreen": false,
+        "visible": false,
+        "decorations": false,
+        "transparent": true,
+        "backgroundColor": "#00000000",
+        "alwaysOnTop": true,
+        "skipTaskbar": true,
+        "focus": false,
+        "acceptFirstMouse": true,
+        "shadow": false
+      },
+      {
+        "label": "cursor-trail",
+        "url": "index.html#cursor-trail",
+        "title": "Clipy — Annotation",
+        "width": 1,
+        "height": 1,
+        "resizable": false,
+        "fullscreen": false,
+        "visible": false,
+        "decorations": false,
+        "transparent": true,
+        "backgroundColor": "#00000000",
+        "alwaysOnTop": true,
+        "skipTaskbar": true,
+        "focus": false,
+        "focusable": false,
+        "acceptFirstMouse": true,
+        "shadow": false
+      }
+    ],
+    "security": {
+      "csp": {
+        "connect-src": "'self' ipc: http://ipc.localhost asset: http://asset.localhost https://asset.localhost ws://127.0.0.1:* http://127.0.0.1:1420 ws://localhost:* blob: data:"
+      },
+      "assetProtocol": {
+        "enable": true,
+        "scope": [
+          "$APPDATA/local-recordings/**"
+        ]
+      },
+      "dangerousDisableAssetCspModification": true
+    }
+  },
+  "bundle": {
+    "active": true,
+    "fileAssociations": [
+      {
+        "ext": [
+          "arec"
+        ],
+        "name": "Clipy recording",
+        "description": "Agent-readable recording",
+        "role": "Viewer",
+        "mimeType": "text/markdown"
+      }
+    ],
+    "resources": {
+      "LICENSES/Apache-2.0.txt": "LICENSES/Apache-2.0.txt"
+    },
+    "targets": [
+      "app",
+      "dmg",
+      "nsis"
+    ],
+    "category": "public.app-category.productivity",
+    "shortDescription": "Clipy Local screen recorder",
+    "longDescription": "Record your screen. Recordings and their transcripts stay on this computer.",
+    "icon": [
+      "icons/32x32.png",
+      "icons/128x128.png",
+      "icons/128x128@2x.png",
+      "icons/icon.icns",
+      "icons/icon.ico"
+    ],
+    "macOS": {
+      "minimumSystemVersion": "12.3",
+      "entitlements": "./entitlements.plist",
+      "signingIdentity": "-",
+      "providerShortName": null,
+      "frameworks": [
+        "target/native-deps/Spacedrive.framework"
+      ],
+      "dmg": {
+        "appPosition": {
+          "x": 180,
+          "y": 170
+        },
+        "applicationFolderPosition": {
+          "x": 480,
+          "y": 170
+        },
+        "windowSize": {
+          "width": 660,
+          "height": 400
+        }
+      },
+      "hardenedRuntime": false
+    },
+    "windows": {
+      "webviewInstallMode": {
+        "type": "downloadBootstrapper"
+      },
+      "nsis": {
+        "installMode": "both",
+        "languages": [
+          "English"
+        ],
+        "displayLanguageSelector": false
+      },
+      "wix": {
+        "language": [
+          "en-US"
+        ]
+      }
+    }
+  },
+  "plugins": {
+    "deep-link": {
+      "desktop": {
+        "schemes": [
+          "clipy-local"
+        ]
+      }
+    }
+  }
+}

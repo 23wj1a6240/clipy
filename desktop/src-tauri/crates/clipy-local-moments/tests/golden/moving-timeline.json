@@ -1,0 +1,182 @@
+{
+  "name": "moving-timeline",
+  "description": "Window-following capture: the capture timeline moves the picture at 4 s.",
+  "input": {
+    "schemaVersion": 2,
+    "durationMs": 10000,
+    "transcript": [],
+    "interactions": [
+      {
+        "kind": "down",
+        "time_ms": 1000,
+        "x": 150,
+        "y": 150,
+        "button": 1
+      },
+      {
+        "kind": "up",
+        "time_ms": 1080,
+        "x": 150,
+        "y": 150,
+        "button": 1
+      },
+      {
+        "kind": "down",
+        "time_ms": 5000,
+        "x": 1650,
+        "y": 200,
+        "button": 1
+      },
+      {
+        "kind": "up",
+        "time_ms": 5080,
+        "x": 1650,
+        "y": 200,
+        "button": 1
+      },
+      {
+        "kind": "move",
+        "time_ms": 6000,
+        "x": 1651,
+        "y": 200
+      },
+      {
+        "kind": "move",
+        "time_ms": 6250,
+        "x": 1650,
+        "y": 200
+      },
+      {
+        "kind": "move",
+        "time_ms": 6500,
+        "x": 1651,
+        "y": 200
+      },
+      {
+        "kind": "move",
+        "time_ms": 6750,
+        "x": 1650,
+        "y": 200
+      },
+      {
+        "kind": "move",
+        "time_ms": 7000,
+        "x": 1651,
+        "y": 200
+      },
+      {
+        "kind": "move",
+        "time_ms": 7250,
+        "x": 1650,
+        "y": 200
+      },
+      {
+        "kind": "move",
+        "time_ms": 7500,
+        "x": 1651,
+        "y": 200
+      },
+      {
+        "kind": "move",
+        "time_ms": 7750,
+        "x": 1650,
+        "y": 200
+      },
+      {
+        "kind": "move",
+        "time_ms": 8000,
+        "x": 1651,
+        "y": 200
+      },
+      {
+        "kind": "move",
+        "time_ms": 8250,
+        "x": 1650,
+        "y": 200
+      },
+      {
+        "kind": "move",
+        "time_ms": 8500,
+        "x": 1651,
+        "y": 200
+      },
+      {
+        "kind": "down",
+        "time_ms": 9000,
+        "x": 100,
+        "y": 120,
+        "button": 1
+      },
+      {
+        "kind": "up",
+        "time_ms": 9080,
+        "x": 100,
+        "y": 120,
+        "button": 1
+      }
+    ],
+    "clickElements": [
+      {
+        "time_ms": 1000,
+        "role": "AXButton",
+        "label": "Left"
+      },
+      {
+        "time_ms": 5000,
+        "role": "AXButton",
+        "label": "Moved"
+      },
+      {
+        "time_ms": 9000,
+        "role": "AXButton",
+        "label": "Gone"
+      }
+    ],
+    "interactionSelection": "bounded sample; full stream retained locally",
+    "capture": {
+      "x": 0,
+      "y": 0,
+      "width": 800,
+      "height": 600,
+      "output_width": 1600,
+      "output_height": 1200
+    },
+    "captureTimeline": [
+      {
+        "time_ms": 0,
+        "x": 0,
+        "y": 0,
+        "width": 800,
+        "height": 600
+      },
+      {
+        "time_ms": 4000,
+        "x": 1200,
+        "y": 100,
+        "width": 800,
+        "height": 600
+      }
+    ]
+  },
+  "rules": {
+    "planner": "rules",
+    "moments": [
+      {
+        "timestamp_ms": 1000,
+        "frame_at_ms": 1000,
+        "reason": "Clicks 'Left' (no narration at this moment)",
+        "source": "click",
+        "x": 0.1875,
+        "y": 0.25
+      },
+      {
+        "timestamp_ms": 5000,
+        "frame_at_ms": 5000,
+        "reason": "Clicks 'Moved' (no narration at this moment)",
+        "source": "click",
+        "x": 0.5625,
+        "y": 0.1667
+      }
+    ]
+  }
+}

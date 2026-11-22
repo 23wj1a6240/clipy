@@ -1,0 +1,7276 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+html,
+body,
+#root {
+  height: 100%;
+}
+
+/* ---------------------------------------------------------------------------
+ * Native control appearance.
+ *
+ * ROOT CAUSE of the invisible dropdown options on Windows: this is a dark UI
+ * that never declared `color-scheme`, so the engine assumed *light* and drew
+ * every native control — <select> popups, scrollbars, focus rings — with light
+ * chrome, while our CSS painted near-white text into them. White on white.
+ *
+ * macOS never showed the bug: WKWebView renders the popup natively following
+ * the system appearance and ignores the page's colours entirely. WebView2
+ * honours them, so the mismatch only surfaced on Windows.
+ *
+ * `color-scheme: dark` is the standards-compliant fix and repairs every native
+ * control at once rather than one dropdown at a time.
+ * ------------------------------------------------------------------------ */
+:root {
+  /* The recorder is a light sheet now (a compact panel on the web app's
+     light tokens). Overlay windows that stay dark (recording dock, camera
+     bubble, countdown) set their own colours explicitly. */
+  color-scheme: light;
+}
+
+/* Belt-and-braces for WebView2, whose popup honours `background-color` on the
+ * option list. Scoped to Windows so it can never override WKWebView's native
+ * popup rendering on macOS, which already looks correct.
+ *
+ * `background-color` (not the `background` shorthand) is deliberate: Chromium
+ * only applies the solid colour to the popup row, and the shorthand's
+ * image/position resets are ignored there anyway. */
+[data-os="windows"] select option,
+[data-os="windows"] select optgroup {
+  background-color: #12151f;
+  color: rgba(245, 245, 244, 1);
+}
+
+[data-os="windows"] select option:checked {
+  background-color: #ff4d29;
+  color: #ffffff;
+}
+
+[data-os="windows"] select option:disabled {
+  color: rgba(245, 245, 244, 0.4);
+}
+
+@keyframes countdown-pop {
+  0% {
+    opacity: 0;
+    transform: scale(0.78);
+  }
+  30% {
+    opacity: 1;
+    transform: scale(1);
+  }
+  100% {
+    opacity: 0.92;
+    transform: scale(1);
+  }
+}
+
+.animate-countdown-pop {
+  animation: countdown-pop 1s ease-out forwards;
+}
+
+@keyframes grid-slide {
+  from {
+    transform: translateY(0);
+  }
+  to {
+    transform: translateY(28px);
+  }
+}
+
+@keyframes stage-enter {
+  from {
+    opacity: 0;
+    transform: translateY(14px) scale(0.985);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+@keyframes live-shadow {
+  0%,
+  100% {
+    box-shadow:
+      0 24px 60px rgba(10, 13, 22, 0.45),
+      0 0 0 1px rgba(255, 77, 41, 0.18),
+      0 0 24px rgba(255, 77, 41, 0.16);
+  }
+  50% {
+    box-shadow:
+      0 24px 60px rgba(10, 13, 22, 0.45),
+      0 0 0 1px rgba(255, 77, 41, 0.34),
+      0 0 42px rgba(255, 77, 41, 0.32);
+  }
+}
+
+@keyframes clipy-mark-float {
+  0%,
+  100% {
+    transform: translate3d(0, 0, 0) rotate(-1deg);
+  }
+  50% {
+    transform: translate3d(0, -3px, 0) rotate(1deg);
+  }
+}
+
+@keyframes clipy-mark-dot-pulse {
+  0%,
+  100% {
+    opacity: 0.88;
+    transform: scale(0.92);
+  }
+  50% {
+    opacity: 1;
+    transform: scale(1.22);
+  }
+}
+
+@keyframes clipy-mark-glow {
+  0%,
+  100% {
+    opacity: 0.56;
+    transform: scale(0.92);
+  }
+  50% {
+    opacity: 0.88;
+    transform: scale(1.08);
+  }
+}
+
+@keyframes clipy-mark-scan-a {
+  0%,
+  100% {
+    transform: translateX(-12px);
+    opacity: 0.12;
+  }
+  50% {
+    transform: translateX(42px);
+    opacity: 0.62;
+  }
+}
+
+@keyframes clipy-mark-scan-b {
+  0%,
+  100% {
+    transform: translateX(12px);
+    opacity: 0.12;
+  }
+  50% {
+    transform: translateX(-42px);
+    opacity: 0.52;
+  }
+}
+
+@keyframes share-dot {
+  0%,
+  100% {
+    opacity: 0.55;
+    transform: scale(0.75);
+  }
+  50% {
+    opacity: 1;
+    transform: scale(1.1);
+  }
+}
+
+@keyframes countdown-ring {
+  from {
+    opacity: 0.85;
+    transform: scale(0.72);
+  }
+  to {
+    opacity: 0;
+    transform: scale(1.18);
+  }
+}
+
+@keyframes countdown-sweep {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes source-highlight-pulse {
+  0%,
+  100% {
+    opacity: 0.78;
+    box-shadow:
+      0 0 0 1px rgba(255, 255, 255, 0.82),
+      0 0 20px rgba(255, 77, 41, 0.62),
+      inset 0 0 22px rgba(255, 77, 41, 0.12);
+  }
+  50% {
+    opacity: 1;
+    box-shadow:
+      0 0 0 1px rgba(255, 255, 255, 0.95),
+      0 0 36px rgba(255, 77, 41, 0.88),
+      inset 0 0 34px rgba(255, 77, 41, 0.2);
+  }
+}
+
+@keyframes webcam-ready {
+  from {
+    opacity: 0;
+    transform: scale(0.9);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+@keyframes recording-wave {
+  0%,
+  100% {
+    transform: scaleY(0.42);
+  }
+  50% {
+    transform: scaleY(1);
+  }
+}
+
+@keyframes processing-line {
+  from {
+    transform: translateX(-120%);
+  }
+  to {
+    transform: translateX(120%);
+  }
+}
+
+@keyframes processing-float {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-3px);
+  }
+}
+
+@keyframes upload-spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes backdrop-enter {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes panel-enter {
+  from {
+    opacity: 0;
+    transform: translateY(10px) scale(0.985);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+@keyframes sweep {
+  0% {
+    transform: translateX(-110%) rotate(10deg);
+  }
+  100% {
+    transform: translateX(110%) rotate(10deg);
+  }
+}
+
+.app-shell {
+  position: relative;
+  background:
+    linear-gradient(135deg, rgba(255, 77, 41, 0.16), transparent 36%),
+    linear-gradient(315deg, rgba(0, 194, 255, 0.12), transparent 38%),
+    #0a0d16;
+}
+.share-ready-shell {
+  position: relative;
+  background: #ffffff;
+  width: 380px;
+  zoom: 0.9;
+}
+
+/* 380px at zoom 0.9 is 342px in the 340px share window; WebView2's classic
+   scrollbars turn that 2px into both scrollbars and a cropped button row. */
+/* [data-os="windows"] .share-ready-shell {
+  width: calc(340px / 0.9);
+} */
+
+.app-grid {
+  position: absolute;
+  inset: 0;
+  opacity: 0.16;
+  background-image:
+    linear-gradient(rgba(255, 255, 255, 0.055) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255, 255, 255, 0.055) 1px, transparent 1px);
+  background-size: 28px 28px;
+  mask-image: linear-gradient(to bottom, transparent, black 18%, black 78%, transparent);
+  animation: grid-slide 18s linear infinite;
+}
+
+.app-sweep {
+  position: absolute;
+  inset: -20% 0;
+  width: 42%;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgba(255, 255, 255, 0.055),
+    transparent
+  );
+  animation: sweep 8s ease-in-out infinite;
+}
+
+.home-stage {
+  animation: stage-enter 420ms cubic-bezier(0.2, 0.9, 0.18, 1) both;
+}
+
+/* ---------------------------------------------------------------------------
+ * Recorder sheet colours: day for Cloud, night for Local AI ("day and
+ * night glass").
+ *
+ * Every sheet token in tailwind.config.js (`bg-row`, `text-ink-text`, ...)
+ * reads one of these channel triplets, so the whole popover, its sheets and
+ * menus change together. Only the recorder sets `data-recorder-look` (on its
+ * own window's <html>), so every other window keeps the light values below.
+ *
+ * `data-recorder-glass="on"` is set only after the native macOS blur behind
+ * the window was applied (lib/recorderLook.ts). Without it the sheet stays
+ * opaque: a see-through window over an unblurred desktop is unreadable.
+ * ------------------------------------------------------------------------ */
+:root {
+  --rc-sheet: 255 255 255;
+  --rc-sheet-a: 1;
+  --rc-overlay-a: 1;
+  --rc-shell-ring: rgba(10, 13, 22, 0.08);
+  --rc-canvas: 250 246 240;
+  --rc-surface: 255 255 255;
+  --rc-raised: 243 237 227;
+  --rc-subtle: 230 226 218;
+  --rc-strong: 208 202 190;
+  --rc-row: 242 242 244;
+  --rc-row-hover: 233 233 236;
+  --rc-ink-text: 10 13 22;
+  --rc-ink-secondary: 91 97 114;
+  --rc-ink-muted: 107 113 128;
+  --rc-link: 47 95 208;
+  --rc-link-soft: 233 239 252;
+  /* Tailwind emerald 800/50/200, amber 900/50/200, red 800/50/200. */
+  --rc-ok: 6 95 70;
+  --rc-ok-soft: 236 253 245;
+  --rc-ok-line: 167 243 208;
+  --rc-warn: 120 53 15;
+  --rc-warn-soft: 255 251 235;
+  --rc-warn-line: 253 230 138;
+  --rc-error: 153 27 27;
+  --rc-error-soft: 254 242 242;
+  --rc-error-line: 254 202 202;
+}
+
+/* Night: Local AI. Clipy's own ink and stone greys, orange stays the accent. */
+:root[data-recorder-look="night"] {
+  color-scheme: dark;
+  --rc-sheet: 17 21 31;
+  --rc-shell-ring: rgba(238, 240, 245, 0.12);
+  --rc-canvas: 10 13 22;
+  --rc-surface: 37 43 58;
+  --rc-raised: 26 31 45;
+  --rc-subtle: 48 55 72;
+  --rc-strong: 70 78 97;
+  --rc-row: 28 33 48;
+  --rc-row-hover: 37 43 58;
+  --rc-ink-text: 238 240 245;
+  /* Brighter than stone-400 so small labels keep 4.5:1 on the rows, and on
+     night glass over a bright desktop. */
+  --rc-ink-secondary: 176 183 200;
+  --rc-ink-muted: 166 173 191;
+  --rc-link: 143 180 255;
+  --rc-link-soft: 37 52 92;
+  --rc-ok: 110 231 183;
+  --rc-ok-soft: 18 58 46;
+  --rc-ok-line: 6 95 70;
+  --rc-warn: 252 211 77;
+  --rc-warn-soft: 66 44 12;
+  --rc-warn-line: 120 53 15;
+  --rc-error: 252 165 165;
+  --rc-error-soft: 72 24 28;
+  --rc-error-line: 127 29 29;
+}
+
+/* Glass: frosted white by day, smoked ink by night, both over the same light
+   native blur (lib/recorderLook.ts applies it once). The tints are as light as
+   they can be while secondary text keeps 4.5:1 over a bright desktop (night)
+   or a dark one (day); night needs the heavier one to read dark over the light
+   blur. Rows become a light tint of the text colour so the blur shows through
+   them too. */
+:root[data-recorder-glass="on"] {
+  --rc-sheet-a: 0.9;
+  --rc-overlay-a: 0.94;
+  /* A little darker than the solid sheet's greys: a dark desktop behind the
+     glass pulls the white tint down. */
+  --rc-ink-secondary: 80 86 102;
+  --rc-ink-muted: 88 94 110;
+  --rc-row: 10 13 22;
+  --rc-row-a: 0.055;
+  --rc-row-hover: 10 13 22;
+  --rc-row-hover-a: 0.09;
+}
+
+:root[data-recorder-glass="on"][data-recorder-look="night"] {
+  --rc-sheet-a: 0.9;
+  --rc-overlay-a: 0.95;
+  --rc-ink-secondary: 176 183 200;
+  --rc-ink-muted: 166 173 191;
+  --rc-row: 238 240 245;
+  --rc-row-a: 0.08;
+  --rc-row-hover: 238 240 245;
+  --rc-row-hover-a: 0.13;
+}
+
+/* Menu-bar popover: an undecorated, transparent window, so the rounded
+   card and its hairline are drawn here rather than by the window server.
+ *
+ * Three things here are load-bearing for the corners, and all three were
+ * wrong before:
+ *
+ * 1. The radius lives in `--popover-radius` and every layer inside the
+ *    popover clips to `.popover-radius`. When the shell and its overlays
+ *    disagreed by even a pixel, the overlay's square corner showed through
+ *    the shell's curve as a hard nub.
+ * 2. The hairline is an INSET RING, not a `border`. A 1px border makes the
+ *    padding box 1px smaller than the border box, so its inner curve has a
+ *    1px smaller radius than the children clipped at the full radius — the
+ *    children poke past it and each corner reads as slightly pointed.
+ * 3. NO outer drop shadow. The card is flush with the window, and the
+ *    window is exactly the card's size, so an outer shadow is clipped at
+ *    the window's square edge and paints a dark rectangular wedge in the
+ *    four corners — the "rectangular section over the roundness". macOS
+ *    draws the popover's shadow natively from the window's alpha mask, so
+ *    it follows the rounded corners for free. */
+:root {
+  --popover-radius: 18px;
+}
+
+.popover-radius {
+  border-radius: var(--popover-radius);
+}
+
+.popover-shell {
+  border-radius: var(--popover-radius);
+  background: rgb(var(--rc-sheet) / var(--rc-sheet-a));
+  color: rgb(var(--rc-ink-text));
+  box-shadow: inset 0 0 0 1px var(--rc-shell-ring);
+  transition: background-color 0.3s ease, color 0.3s ease;
+  /* Drawn at its authored size, 1:1. It used to be shrunk with
+     `zoom: 0.87` to fit a 296x438 sheet, which took every font size
+     down 13% with it: 11px captions rendered at 9.6px and 10px labels at
+     8.7px, below anything macOS itself draws. A user reported the recorder
+     as "barely legible". Do not bring the zoom back; if the
+     sheet needs to be smaller, cut content or spacing, not type.
+
+     Height is the starting point, not the final word: the recorder measures
+     what its content column needs and overrides this inline, growing the
+     window to match. See `fitPopoverToContent` in routes/Home.tsx, which
+     mirrors both numbers below. */
+  width: 340px;
+  height: 503px;
+}
+
+/* ---------------------------------------------------------------------------
+ * Recorder sheet
+ * ------------------------------------------------------------------------ */
+.clipy-scroll {
+  flex: 1 1 auto;
+  min-height: 0;
+  overflow-y: auto;
+  overflow-x: hidden;
+}
+.clipy-fade-in {
+  animation: fade-up 220ms ease-out both;
+}
+@keyframes fade-up {
+  from { opacity: 0; transform: translateY(6px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+/* Mic level "water": a translucent fill that rises from the bottom of the
+   row. Height is driven inline from the analyser; the wave rides on top. */
+.clipy-water {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: linear-gradient(180deg, rgba(102, 143, 235, 0.42), rgba(102, 143, 235, 0.62));
+  transition: height 90ms linear;
+  pointer-events: none;
+}
+.clipy-water::before {
+  content: "";
+  position: absolute;
+  left: -20%;
+  right: -20%;
+  top: -6px;
+  height: 12px;
+  background: radial-gradient(12px 6px at 12px 6px, rgba(102, 143, 235, 0.55) 60%, transparent 62%) repeat-x;
+  background-size: 24px 12px;
+  animation: clipy-wave 1.6s linear infinite;
+}
+@keyframes clipy-wave {
+  from { transform: translateX(0); }
+  to { transform: translateX(24px); }
+}
+.clipy-note-paper {
+  background:
+    linear-gradient(180deg, rgba(255,255,255,0.35), rgba(255,255,255,0) 30%),
+    repeating-linear-gradient(180deg, transparent 0 calc(var(--note-pitch, 28px) - 1px), rgba(160, 130, 30, 0.16) calc(var(--note-pitch, 28px) - 1px) var(--note-pitch, 28px)),
+    #fff5b8;
+  box-shadow: 0 10px 24px -12px rgba(120, 90, 0, 0.45);
+}
+.clipy-sheet {
+  position: absolute;
+  inset: 0;
+  z-index: 50;
+  display: flex;
+  flex-direction: column;
+  background: rgb(var(--rc-sheet) / var(--rc-overlay-a));
+  border-radius: var(--popover-radius);
+  animation: slide-in 200ms cubic-bezier(0.2, 0.8, 0.2, 1) both;
+}
+/* On glass, Settings, Effects and the source pickers stay frosted like the
+   shell. They sit over the recorder's own controls, so they are a little
+   more solid than the shell (`--rc-overlay-a`) and blur what is underneath;
+   at the shell's own alpha, Start and the device rows read through the sheet
+   as ghosts. */
+:root[data-recorder-glass="on"] .clipy-sheet {
+  -webkit-backdrop-filter: blur(28px) saturate(1.2);
+  backdrop-filter: blur(28px) saturate(1.2);
+}
+@keyframes slide-in {
+  from { opacity: 0; transform: translateX(24px); }
+  to { opacity: 1; transform: translateX(0); }
+}
+@media (prefers-reduced-motion: reduce) {
+  .clipy-sheet, .clipy-fade-in, .clipy-water, .clipy-water::before { animation: none; transition: none; }
+}
+
+.popover-icon-button {
+  display: inline-flex;
+  height: 26px;
+  width: 26px;
+  align-items: center;
+  justify-content: center;
+  border-radius: 7px;
+  color: rgba(168, 162, 158, 1);
+  transition:
+    background-color 130ms ease,
+    color 130ms ease;
+}
+
+.popover-icon-button:hover {
+  background: rgba(255, 255, 255, 0.08);
+  color: rgba(245, 245, 244, 1);
+}
+
+.popover-menu-item {
+  display: block;
+  width: 100%;
+  padding: 7px 12px;
+  text-align: left;
+  font-size: 12px;
+  color: rgba(214, 211, 209, 1);
+  transition:
+    background-color 120ms ease,
+    color 120ms ease;
+}
+
+.popover-menu-item:hover:not(:disabled) {
+  background: rgba(255, 255, 255, 0.07);
+  color: #fff;
+}
+
+.popover-menu-item:disabled {
+  opacity: 0.5;
+}
+
+.panel-tab {
+  border-bottom: 2px solid transparent;
+}
+
+.panel-tab-active {
+  border-bottom-color: #ff4d29;
+}
+
+.panel-select {
+  border-color: rgba(255, 255, 255, 0.1);
+  background: rgba(255, 255, 255, 0.045);
+  transition: border-color 130ms ease;
+}
+
+.panel-select:hover {
+  border-color: rgba(255, 255, 255, 0.18);
+}
+
+.panel-select-icon {
+  display: inline-flex;
+  height: 22px;
+  width: 22px;
+  flex: 0 0 auto;
+  align-items: center;
+  justify-content: center;
+  border-radius: 6px;
+  border: 1px solid rgba(255, 77, 41, 0.28);
+  background: rgba(255, 77, 41, 0.14);
+  color: #ff8a63;
+}
+
+.panel-field {
+  border-radius: 7px;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  background: rgba(255, 255, 255, 0.045);
+  padding: 4px 6px;
+  font-size: 11px;
+  color: rgba(245, 245, 244, 1);
+}
+
+.panel-field:focus {
+  border-color: #ff4d29;
+  outline: none;
+}
+
+.recording-live {
+  animation:
+    stage-enter 420ms cubic-bezier(0.2, 0.9, 0.18, 1) both,
+    live-shadow 1.8s ease-in-out infinite;
+}
+
+.clipy-mark-motion {
+  position: relative;
+  display: grid;
+  height: 86px;
+  width: 136px;
+  place-items: center;
+  overflow: hidden;
+  border-radius: 8px;
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  background:
+    radial-gradient(circle at 70% 72%, rgba(255, 39, 120, 0.2), transparent 28%),
+    radial-gradient(circle at 32% 28%, rgba(255, 106, 61, 0.2), transparent 32%),
+    linear-gradient(180deg, rgba(255, 255, 255, 0.09), transparent),
+    rgba(255, 255, 255, 0.045);
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.14),
+    0 18px 34px rgba(10, 13, 22, 0.24);
+}
+
+.clipy-mark-glow {
+  position: absolute;
+  inset: 20px 26px 14px;
+  border-radius: 999px;
+  background: linear-gradient(135deg, rgba(255, 77, 41, 0.42), rgba(155, 30, 255, 0.26));
+  filter: blur(16px);
+  opacity: 0.72;
+  animation: clipy-mark-glow 2.8s ease-in-out infinite;
+}
+
+.clipy-mark-motion-svg {
+  position: relative;
+  z-index: 2;
+  width: 58px;
+  height: 58px;
+  filter:
+    drop-shadow(0 10px 18px rgba(10, 13, 22, 0.48))
+    drop-shadow(0 0 14px rgba(255, 77, 41, 0.26));
+  animation: clipy-mark-float 3.4s ease-in-out infinite;
+}
+
+.clipy-mark-cursor {
+  transform-box: fill-box;
+  transform-origin: center;
+}
+
+.clipy-mark-dot {
+  transform-box: fill-box;
+  transform-origin: center;
+  animation: clipy-mark-dot-pulse 1.8s ease-in-out infinite;
+}
+
+.clipy-mark-scan {
+  position: absolute;
+  z-index: 1;
+  width: 44px;
+  height: 1px;
+  border-radius: 999px;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.42), transparent);
+  opacity: 0.55;
+}
+
+.clipy-mark-scan-a {
+  top: 24px;
+  left: 20px;
+  animation: clipy-mark-scan-a 2.6s ease-in-out infinite;
+}
+
+.clipy-mark-scan-b {
+  right: 18px;
+  bottom: 23px;
+  animation: clipy-mark-scan-b 2.6s ease-in-out infinite 380ms;
+}
+
+.countdown-card {
+  position: relative;
+  overflow: hidden;
+  border-radius: 9999px;
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  background:
+    radial-gradient(circle at 50% 50%, rgba(255, 77, 41, 0.32), transparent 34%),
+    rgba(10, 13, 22, 0.66);
+  /* No outer drop-shadow and no backdrop-filter: the countdown lives in a
+     transparent 240px overlay window, and both painted a dark square across
+     the window bounds (the "black rectangle" behind the circle). */
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.18);
+}
+
+.countdown-ring {
+  position: absolute;
+  inset: 18px;
+  border-radius: 9999px;
+  border: 2px solid rgba(255, 255, 255, 0.2);
+  animation: countdown-ring 1s ease-out both;
+}
+
+.countdown-ring-b {
+  inset: 42px;
+  border-color: rgba(255, 77, 41, 0.35);
+  animation-delay: 120ms;
+}
+
+.countdown-sweep {
+  position: absolute;
+  inset: 6px;
+  border-radius: 9999px;
+  background: conic-gradient(
+    from 0deg,
+    rgba(255, 77, 41, 0.78),
+    rgba(255, 255, 255, 0.18),
+    transparent 34%,
+    transparent
+  );
+  mask: radial-gradient(circle, transparent 59%, black 60%);
+  animation: countdown-sweep 1s linear both;
+}
+
+.source-highlight-frame {
+  position: relative;
+  border: 4px solid #ff4d29;
+  animation: source-highlight-pulse 1.4s ease-in-out infinite;
+}
+
+/* Custom size take: the frame stays up for the whole recording, so it must
+   read as a boundary, not an alert. The stroke keeps the 4px width the
+   capture inset is computed from. */
+.source-highlight-frame--recording {
+  border-style: dashed;
+  border-color: rgba(255, 77, 41, 0.85);
+  animation: none;
+}
+
+.source-highlight-frame.source-highlight-frame--recording::before,
+.source-highlight-frame.source-highlight-frame--recording::after {
+  content: none;
+}
+
+.source-highlight-frame::before,
+.source-highlight-frame::after {
+  position: absolute;
+  width: 32px;
+  height: 32px;
+  content: "";
+  border-color: rgba(255, 255, 255, 0.9);
+}
+
+.source-highlight-frame::before {
+  top: 10px;
+  left: 10px;
+  border-top: 2px solid;
+  border-left: 2px solid;
+}
+
+.source-highlight-frame::after {
+  right: 10px;
+  bottom: 10px;
+  border-right: 2px solid;
+  border-bottom: 2px solid;
+}
+
+.cursor-target-shell {
+  display: grid;
+  width: 100vw;
+  height: 100vh;
+  place-items: stretch;
+  background: #0a0d13;
+  color: #f8fafc;
+  font-family: "Gabarito Variable", ui-sans-serif, system-ui, sans-serif;
+}
+
+.cursor-target-grid {
+  display: grid;
+  grid-template-columns: repeat(6, minmax(0, 1fr));
+  grid-template-rows: repeat(3, minmax(0, 1fr));
+  gap: 8px;
+  padding: 10px;
+}
+
+.cursor-target-zone {
+  display: grid;
+  min-width: 0;
+  min-height: 0;
+  place-items: center;
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  border-radius: 8px;
+  background:
+    linear-gradient(135deg, rgba(76, 141, 255, 0.18), rgba(255, 107, 61, 0.14)),
+    rgba(20, 24, 34, 0.96);
+  color: #f8fafc;
+  font-size: 13px;
+  font-weight: 800;
+  letter-spacing: 0;
+}
+
+textarea.cursor-target-zone {
+  resize: none;
+  text-align: center;
+}
+
+a.cursor-target-zone {
+  text-decoration: none;
+}
+
+.cursor-target-text {
+  cursor: text;
+}
+
+.cursor-target-pointer {
+  cursor: pointer;
+}
+
+.cursor-target-resize-x {
+  cursor: ew-resize;
+}
+
+.cursor-target-resize-y {
+  cursor: ns-resize;
+}
+
+.cursor-target-resize-east {
+  cursor: e-resize;
+}
+
+.cursor-target-resize-west {
+  cursor: w-resize;
+}
+
+.cursor-target-resize-north {
+  cursor: n-resize;
+}
+
+.cursor-target-resize-south {
+  cursor: s-resize;
+}
+
+.cursor-target-resize-nwse {
+  cursor: nwse-resize;
+}
+
+.cursor-target-resize-nesw {
+  cursor: nesw-resize;
+}
+
+.cursor-target-cross {
+  cursor: crosshair;
+}
+
+.cursor-target-not-allowed {
+  cursor: not-allowed;
+}
+
+.cursor-target-move {
+  cursor: move;
+}
+
+.cursor-target-grab {
+  cursor: grab;
+}
+
+.cursor-target-grabbing {
+  cursor: grabbing;
+}
+
+.cursor-target-help {
+  cursor: help;
+}
+
+.cursor-target-zoom {
+  cursor: zoom-in;
+}
+
+.cursor-target-zoom-out {
+  cursor: zoom-out;
+}
+
+.webcam-bubble {
+  border: 1px solid rgba(10, 13, 22, 0.12);
+  animation: webcam-ready 240ms cubic-bezier(0.2, 0.9, 0.18, 1) both;
+}
+
+.webcam-layout-bubble {
+  width: calc(100% - 24px);
+  height: calc(100% - 24px);
+  box-shadow:
+    0 2px 6px rgba(10, 13, 22, 0.20),
+    0 1px 2px rgba(10, 13, 22, 0.12);
+}
+
+.webcam-layout-bubble[data-webcam-shape="square"] {
+  border-radius: 22%;
+}
+
+.webcam-layout-bubble[data-webcam-shape="pill"] {
+  border-radius: 9999px;
+}
+
+.webcam-layout-bubble[data-webcam-shape="circle"] {
+  border-radius: 50%;
+}
+
+/* "Clear": the cut-out floats over the screen with nothing around it, so
+   no shape clips the shoulders and no shadow outlines an invisible box. */
+.webcam-layout-bubble[data-webcam-cutout="true"] {
+  border-radius: 0 !important;
+  border: 0 !important;
+  box-shadow: none !important;
+}
+
+/* Windows: soften the camera bubble's shadow.
+ *
+ * WGC captures the bubble window as part of the display, so the shadow is
+ * baked into the recording rather than just being on-screen chrome. macOS has
+ * dedicated work to keep that halo out of the capture; Windows has none, so
+ * the macOS-tuned depth reads as a heavy dark ring around the camera in the
+ * final video. Scoped so macOS keeps its original treatment. */
+[data-os="windows"] .webcam-layout-bubble {
+  box-shadow:
+    0 4px 10px -4px rgba(7, 10, 18, 0.42),
+    inset 0 1px 0 rgba(255, 255, 255, 0.14);
+}
+
+[data-os="windows"] .webcam-layout-bubble[data-webcam-shape="square"] {
+  box-shadow:
+    0 6px 14px -6px rgba(7, 10, 18, 0.48),
+    0 0 0 1px rgba(255, 255, 255, 0.1),
+    inset 0 1px 0 rgba(255, 255, 255, 0.16);
+}
+
+.webcam-layout-left,
+.webcam-layout-right,
+.webcam-layout-top,
+.webcam-layout-bottom {
+  border-radius: 18px;
+}
+
+.webcam-layout-left canvas,
+.webcam-layout-right canvas,
+.webcam-layout-top canvas,
+.webcam-layout-bottom canvas {
+  border-radius: 16px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .webcam-bubble {
+    animation: none;
+  }
+}
+
+.recording-controls-overlay {
+  box-sizing: border-box;
+  overflow: hidden;
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  background:
+    radial-gradient(circle at 24% 12%, rgba(255, 77, 41, 0.24), transparent 48%),
+    linear-gradient(180deg, rgba(255, 255, 255, 0.18), rgba(255, 255, 255, 0.055)),
+    rgba(9, 12, 20, 0.9);
+  box-shadow:
+    0 16px 34px rgba(10, 13, 22, 0.34),
+    0 0 0 1px rgba(255, 77, 41, 0.16),
+    inset 0 1px 0 rgba(255, 255, 255, 0.22);
+  backdrop-filter: blur(18px);
+  animation: webcam-ready 180ms cubic-bezier(0.2, 0.9, 0.18, 1) both;
+}
+
+.recording-controls-led {
+  width: 8px;
+  height: 8px;
+  flex: 0 0 auto;
+  border-radius: 9999px;
+  background: #ff4d29;
+  box-shadow:
+    0 0 0 3px rgba(255, 77, 41, 0.16),
+    0 0 14px rgba(255, 77, 41, 0.78);
+  animation: share-dot 1.25s ease-in-out infinite;
+}
+
+.recording-controls-time {
+  color: rgba(255, 255, 255, 0.94);
+  letter-spacing: 0;
+  text-shadow: 0 1px 10px rgba(0, 0, 0, 0.36);
+}
+
+/* The recording dock is a vertical column on the left, so its tooltips and
+   coach mark sit to the right of it, pinned by their vertical center. */
+.hud-tooltip,
+.hud-coach {
+  position: absolute;
+  left: 0;
+  max-width: 100%;
+  transform: translateY(-50%);
+  border-radius: 9px;
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: -0.01em;
+  line-height: 1.35;
+  animation: hud-tip-in 130ms cubic-bezier(0.2, 0.9, 0.3, 1) both;
+}
+
+.hud-tooltip {
+  padding: 7px 11px;
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  background: rgba(10, 13, 22, 0.94);
+  color: rgba(245, 245, 244, 0.96);
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.38);
+}
+
+.hud-coach {
+  display: flex;
+  align-items: flex-start;
+  gap: 6px;
+  padding: 8px 12px;
+  border: 1px solid rgba(255, 143, 102, 0.5);
+  background:
+    linear-gradient(180deg, rgba(255, 96, 48, 0.2), rgba(150, 48, 20, 0.12)),
+    rgba(12, 10, 9, 0.94);
+  color: rgba(255, 236, 226, 0.98);
+  cursor: pointer;
+  box-shadow: 0 6px 22px rgba(255, 77, 41, 0.22);
+}
+
+.hud-coach kbd {
+  padding: 1px 5px 2px;
+  border: 1px solid rgba(255, 255, 255, 0.22);
+  border-radius: 4px;
+  background: rgba(255, 255, 255, 0.08);
+  font-family: inherit;
+  font-size: 10px;
+}
+
+.hud-coach-spark {
+  color: #ffb020;
+  flex: 0 0 auto;
+  margin-top: 2px;
+}
+
+.hud-coach-copy {
+  display: flex;
+  min-width: 0;
+  flex-direction: column;
+  gap: 3px;
+  text-align: left;
+}
+
+.hud-coach-copy strong {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  color: #fff;
+  font-size: 12px;
+}
+
+.hud-coach-copy > span {
+  color: rgba(255, 236, 226, 0.9);
+  font-size: 10px;
+}
+
+.hud-coach-badge {
+  border-radius: 9999px;
+  background: #ffb020;
+  color: #0a0d16;
+  padding: 1px 5px;
+  font-size: 8px;
+  font-weight: 800;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+@keyframes hud-tip-in {
+  from {
+    opacity: 0;
+    transform: translate(-4px, -50%);
+  }
+  to {
+    opacity: 1;
+    transform: translate(0, -50%);
+  }
+}
+
+.recording-controls-flare {
+  border: 1px solid rgba(255, 178, 148, 0.16);
+  background:
+    linear-gradient(180deg, rgba(255, 128, 88, 0.13), rgba(190, 84, 52, 0.07)),
+    rgba(255, 255, 255, 0.035);
+}
+
+.recording-controls-flare:hover {
+  border-color: rgba(255, 168, 132, 0.3);
+}
+
+.recording-controls-flare-on {
+  border-color: rgba(255, 143, 102, 0.55);
+  color: rgba(255, 233, 222, 0.98);
+  background:
+    radial-gradient(circle at 22% 18%, rgba(255, 176, 128, 0.42), transparent 44%),
+    linear-gradient(180deg, rgba(255, 110, 66, 0.36), rgba(198, 66, 30, 0.22)),
+    rgba(224, 84, 42, 0.18);
+  box-shadow:
+    0 0 22px rgba(255, 96, 48, 0.3),
+    inset 0 1px 0 rgba(255, 255, 255, 0.22);
+}
+
+.recording-controls-stop {
+  background:
+    linear-gradient(180deg, rgba(255, 105, 66, 0.95), rgba(255, 77, 41, 0.9)),
+    #ff4d29;
+  box-shadow:
+    0 12px 24px rgba(255, 77, 41, 0.24),
+    inset 0 1px 0 rgba(255, 255, 255, 0.22);
+}
+
+.recording-controls-stop:hover:not(:disabled) {
+  transform: translateY(-1px);
+  background:
+    linear-gradient(180deg, rgba(255, 122, 84, 0.98), rgba(255, 77, 41, 0.94)),
+    #ff4d29;
+}
+
+.recording-controls-spinner {
+  width: 16px;
+  height: 16px;
+  border: 2px solid rgba(255, 255, 255, 0.4);
+  border-top-color: #fff;
+  border-radius: 9999px;
+  animation: recording-controls-spin 720ms linear infinite;
+}
+
+@keyframes recording-controls-spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.recording-badge {
+  display: flex;
+  height: 72px;
+  width: 132px;
+  align-items: center;
+  justify-content: center;
+  gap: 7px;
+  border-radius: 8px;
+  border: 1px solid rgba(255, 77, 41, 0.22);
+  background:
+    linear-gradient(180deg, rgba(255, 77, 41, 0.13), transparent),
+    rgba(255, 255, 255, 0.045);
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.16),
+    0 18px 36px rgba(10, 13, 22, 0.26);
+}
+
+.recording-badge-dot {
+  width: 15px;
+  height: 15px;
+  border-radius: 9999px;
+  background: #ff4d29;
+  box-shadow: 0 0 18px rgba(255, 77, 41, 0.74);
+}
+
+.recording-wave {
+  width: 8px;
+  height: 38px;
+  border-radius: 9999px;
+  background: linear-gradient(180deg, #fff, rgba(255, 255, 255, 0.28));
+  transform-origin: center;
+  animation: recording-wave 880ms ease-in-out infinite;
+}
+
+.recording-wave-a {
+  animation-delay: 0ms;
+}
+
+.recording-wave-b {
+  animation-delay: 110ms;
+}
+
+.recording-wave-c {
+  animation-delay: 220ms;
+}
+
+.recording-wave-d {
+  animation-delay: 330ms;
+}
+
+.processing-stack {
+  display: grid;
+  width: 116px;
+  gap: 8px;
+  animation: processing-float 1.8s ease-in-out infinite;
+}
+
+.processing-stack span {
+  display: block;
+  height: 12px;
+  border-radius: 9999px;
+  background: linear-gradient(90deg, #ff4d29, #ffb8a6);
+  box-shadow: 0 6px 16px rgba(255, 77, 41, 0.18);
+}
+
+.processing-stack span:nth-child(2) {
+  width: 82%;
+  margin-left: auto;
+}
+
+.processing-stack span:nth-child(3) {
+  width: 62%;
+}
+
+.processing-line {
+  position: relative;
+  height: 6px;
+  overflow: hidden;
+  border-radius: 9999px;
+  background: rgba(255, 255, 255, 0.08);
+}
+
+.processing-line::after {
+  position: absolute;
+  inset: 0;
+  content: "";
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgba(255, 255, 255, 0.62),
+    transparent
+  );
+  animation: processing-line 1.2s ease-in-out infinite;
+}
+
+.processing-line-b::after {
+  animation-delay: 120ms;
+}
+
+.processing-line-c::after {
+  animation-delay: 240ms;
+}
+
+.upload-ring {
+  position: relative;
+  display: grid;
+  width: 92px;
+  height: 92px;
+  place-items: center;
+  border-radius: 9999px;
+  box-shadow: 0 10px 24px rgba(10, 13, 22, 0.1);
+}
+
+.upload-ring::before {
+  position: absolute;
+  inset: 7px;
+  content: "";
+  border-radius: 9999px;
+  background: rgb(var(--rc-surface));
+}
+
+.upload-ring::after {
+  position: absolute;
+  inset: -4px;
+  content: "";
+  border-radius: 9999px;
+  border: 1px solid rgba(10, 13, 22, 0.06);
+  border-top-color: rgba(255, 77, 41, 0.8);
+  animation: upload-spin 2.4s linear infinite;
+}
+
+.upload-ring span {
+  position: relative;
+  z-index: 1;
+  font-size: 18px;
+  font-weight: 700;
+  font-variant-numeric: tabular-nums;
+  color: rgb(var(--rc-ink-text));
+}
+
+.upload-track {
+  position: relative;
+}
+
+.upload-fill {
+  background: #ff4d29;
+}
+
+/* Simple on-brand boot loader (Clipy orange ring). */
+.clipy-boot-spinner {
+  width: 26px;
+  height: 26px;
+  border-radius: 999px;
+  border: 2.5px solid rgba(255, 77, 41, 0.22);
+  border-top-color: #ff4d29;
+  animation: clipy-boot-spin 0.7s linear infinite;
+}
+
+@keyframes clipy-boot-spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .clipy-boot-spinner {
+    animation-duration: 1.6s;
+  }
+}
+
+.picker-tabs {
+  position: relative;
+}
+
+.picker-tab {
+  position: relative;
+  z-index: 1;
+}
+
+.picker-tab-active {
+  background:
+    linear-gradient(180deg, rgba(255, 255, 255, 0.13), rgba(255, 255, 255, 0.045)),
+    rgba(255, 255, 255, 0.08);
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.14),
+    0 8px 18px rgba(10, 13, 22, 0.2);
+}
+
+.webcam-layout-pill {
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  background: rgba(255, 255, 255, 0.035);
+}
+
+.webcam-layout-pill-active {
+  border-color: rgba(255, 77, 41, 0.38);
+  background:
+    linear-gradient(180deg, rgba(255, 77, 41, 0.16), rgba(255, 255, 255, 0.05)),
+    rgba(255, 255, 255, 0.06);
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.12),
+    0 8px 18px rgba(255, 77, 41, 0.12);
+}
+
+.camera-option-row {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.camera-option-label {
+  width: 34px;
+  flex: 0 0 34px;
+  color: rgb(123 129 146);
+  font-size: 10px;
+  font-weight: 600;
+}
+
+.camera-shape-button,
+.camera-size-button {
+  display: inline-flex;
+  min-height: 28px;
+  align-items: center;
+  justify-content: center;
+  gap: 5px;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 7px;
+  background: rgba(255, 255, 255, 0.035);
+  color: rgb(123 129 146);
+  font-size: 10px;
+  transition: color 120ms ease, border-color 120ms ease, background 120ms ease, box-shadow 120ms ease;
+}
+
+.camera-shape-button {
+  flex: 1 1 0;
+}
+
+.camera-size-button {
+  width: 32px;
+}
+
+.camera-shape-button:hover,
+.camera-size-button:hover {
+  color: rgb(238 240 245);
+}
+
+.camera-shape-button.active,
+.camera-size-button.active {
+  border-color: rgba(255, 77, 41, 0.42);
+  background: linear-gradient(180deg, rgba(255, 77, 41, 0.18), rgba(255, 255, 255, 0.055));
+  color: white;
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.13), 0 6px 14px rgba(255, 77, 41, 0.12);
+}
+
+.camera-shape-glyph {
+  width: 11px;
+  height: 9px;
+  border: 1.4px solid currentColor;
+}
+
+.camera-shape-glyph.square {
+  border-radius: 3px;
+}
+
+.camera-shape-glyph.pill {
+  width: 14px;
+  border-radius: 9999px;
+}
+
+.camera-shape-glyph.circle {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+}
+
+/* The Touch up strength slider (a blue filled track). `--fill` is the filled
+   fraction, set inline from the value. */
+.clipy-range {
+  -webkit-appearance: none;
+  appearance: none;
+  height: 4px;
+  margin: 6px 0 2px;
+  border-radius: 999px;
+  background:
+    linear-gradient(#2f5fd0, #2f5fd0) 0 0 / var(--fill, 50%) 100% no-repeat,
+    rgb(var(--rc-strong));
+  cursor: pointer;
+}
+
+.clipy-range::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  width: 18px;
+  height: 18px;
+  border-radius: 50%;
+  border: 1px solid rgb(var(--rc-strong));
+  background: #ffffff;
+  box-shadow: 0 1px 3px rgba(10, 13, 22, 0.25);
+}
+
+.clipy-range:focus-visible {
+  outline: 2px solid rgba(47, 95, 208, 0.5);
+  outline-offset: 4px;
+}
+
+.animate-share-dot {
+  animation: share-dot 900ms ease-in-out infinite;
+}
+
+.picker-backdrop {
+  animation: backdrop-enter 180ms ease-out both;
+}
+
+.picker-panel {
+  animation: panel-enter 300ms cubic-bezier(0.2, 0.9, 0.18, 1) both;
+}
+
+.source-tile {
+  transform: translateY(0) scale(1);
+  transition:
+    border-color 150ms ease,
+    background-color 150ms ease,
+    box-shadow 150ms ease,
+    transform 150ms ease;
+}
+
+.source-tile:hover {
+  transform: translateY(-2px) scale(1.01);
+  box-shadow: 0 14px 28px rgba(10, 13, 22, 0.24);
+}
+
+.area-selector {
+  display: grid;
+  gap: 8px;
+  margin-bottom: 12px;
+}
+
+.area-selector-preview {
+  position: relative;
+  width: 100%;
+  max-height: 240px;
+  overflow: hidden;
+  border-radius: 8px;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  background: rgba(8, 12, 20, 0.72);
+  cursor: crosshair;
+}
+
+.area-selector-preview img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  user-select: none;
+}
+
+.area-selector-placeholder {
+  display: grid;
+  height: 100%;
+  min-height: 140px;
+  place-items: center;
+  color: rgba(245, 245, 245, 0.38);
+  font-size: 11px;
+}
+
+.area-selector-dim {
+  position: absolute;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.34);
+  pointer-events: none;
+}
+
+.area-selector-rect {
+  position: absolute;
+  z-index: 2;
+  display: grid;
+  min-width: 28px;
+  min-height: 20px;
+  place-items: center;
+  border: 2px solid #ff5a2f;
+  border-radius: 7px;
+  background: rgba(255, 90, 47, 0.14);
+  box-shadow:
+    0 0 0 9999px rgba(0, 0, 0, 0.38),
+    0 0 24px rgba(255, 90, 47, 0.36);
+  pointer-events: none;
+}
+
+.area-selector-rect span {
+  max-width: calc(100% - 8px);
+  overflow: hidden;
+  border-radius: 999px;
+  background: rgba(8, 12, 20, 0.72);
+  padding: 2px 6px;
+  color: #fff;
+  font-size: 10px;
+  font-variant-numeric: tabular-nums;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.area-selector-presets {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 6px;
+}
+
+.area-selector-presets button {
+  height: 28px;
+  border-radius: 6px;
+  border: 1px solid rgba(255, 255, 255, 0.09);
+  background: rgba(255, 255, 255, 0.045);
+  color: rgba(245, 245, 245, 0.66);
+  font-size: 10px;
+  transition:
+    border-color 130ms ease,
+    background-color 130ms ease,
+    color 130ms ease;
+}
+
+.area-selector-presets button:hover {
+  border-color: rgba(255, 90, 47, 0.38);
+  background: rgba(255, 90, 47, 0.12);
+  color: #fff;
+}
+
+.native-studio-shell {
+  display: grid;
+  grid-template-rows: 58px minmax(0, 1fr) 184px;
+  grid-template-columns: 64px 330px minmax(0, 1fr);
+  min-width: 0;
+  min-height: 0;
+  background: #0b0d12;
+}
+
+.native-studio-topbar {
+  grid-column: 2 / 4;
+  grid-row: 1;
+  display: grid;
+  grid-template-columns: minmax(220px, 360px) minmax(0, 1fr);
+  align-items: center;
+  gap: 12px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+  background: #15171d;
+  padding: 0 14px;
+}
+
+.native-studio-project-title {
+  display: flex;
+  min-width: 0;
+  align-items: center;
+  gap: 6px;
+}
+
+.native-studio-project-title input {
+  width: min(100%, 280px);
+  min-width: 0;
+  height: 34px;
+  border: 0;
+  border-radius: 7px;
+  background: rgba(255, 255, 255, 0.055);
+  padding: 0 10px;
+  color: rgba(255, 255, 255, 0.92);
+  font-size: 13px;
+  font-weight: 700;
+}
+
+.native-studio-project-title span {
+  flex: 0 0 auto;
+  color: rgba(245, 245, 245, 0.44);
+  font-size: 13px;
+  font-weight: 800;
+}
+
+.native-studio-status-cluster {
+  display: flex;
+  min-width: 0;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 8px;
+}
+
+.native-studio-topbar-actions {
+  display: flex;
+  min-width: 0;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 8px;
+  overflow-x: auto;
+  padding-bottom: 2px;
+  scrollbar-width: none;
+}
+
+.native-studio-topbar-actions::-webkit-scrollbar {
+  display: none;
+}
+
+.native-studio-action-group {
+  display: flex;
+  flex: 0 0 auto;
+  align-items: center;
+  gap: 4px;
+  padding-right: 0;
+  border-right: 0;
+}
+
+/* Minimal toolbar: secondary actions are compact + muted so the
+   orange Export reads as the single primary action. */
+.native-studio-topbar-actions .native-studio-secondary {
+  height: 30px;
+  padding: 0 10px;
+  font-size: 12px;
+  font-weight: 600;
+  border-color: transparent;
+  background: transparent;
+  color: rgba(245, 245, 245, 0.62);
+}
+
+.native-studio-topbar-actions .native-studio-secondary:hover:not(:disabled) {
+  background: rgba(255, 255, 255, 0.07);
+  color: #fff;
+}
+
+/* Minimal top bar: undo/redo as bare icon buttons, everything
+   non-essential tucked behind a ⋯ overflow, leaving only Save + the orange
+   Export as standing actions. */
+.native-studio-icon-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex: 0 0 auto;
+  width: 28px;
+  height: 28px;
+  border: 0;
+  border-radius: 7px;
+  background: transparent;
+  color: rgba(245, 245, 245, 0.62);
+  font-size: 15px;
+  line-height: 1;
+  cursor: pointer;
+  transition:
+    background-color 130ms ease,
+    color 130ms ease;
+}
+
+.native-studio-icon-btn:hover:not(:disabled) {
+  background: rgba(255, 255, 255, 0.07);
+  color: #fff;
+}
+
+.native-studio-icon-btn:disabled {
+  opacity: 0.32;
+  cursor: default;
+}
+
+.native-studio-more {
+  position: relative;
+  flex: 0 0 auto;
+}
+
+.native-studio-more > summary {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 30px;
+  height: 30px;
+  border-radius: 7px;
+  background: transparent;
+  color: rgba(245, 245, 245, 0.62);
+  font-size: 18px;
+  line-height: 1;
+  list-style: none;
+  cursor: pointer;
+  user-select: none;
+  transition:
+    background-color 130ms ease,
+    color 130ms ease;
+}
+
+.native-studio-more > summary::-webkit-details-marker {
+  display: none;
+}
+
+.native-studio-more > summary:hover,
+.native-studio-more[open] > summary {
+  background: rgba(255, 255, 255, 0.07);
+  color: #fff;
+}
+
+.native-studio-more-menu {
+  position: absolute;
+  top: calc(100% + 8px);
+  right: 0;
+  z-index: 40;
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  min-width: 208px;
+  padding: 6px;
+  border-radius: 12px;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  background: #1b1e25;
+  box-shadow:
+    0 18px 48px rgba(0, 0, 0, 0.5),
+    0 0 0 1px rgba(0, 0, 0, 0.4);
+}
+
+.native-studio-more-menu > button {
+  display: flex;
+  align-items: center;
+  width: 100%;
+  height: 34px;
+  padding: 0 10px;
+  border: 0;
+  border-radius: 8px;
+  background: transparent;
+  color: rgba(245, 245, 245, 0.82);
+  font-size: 12.5px;
+  font-weight: 600;
+  text-align: left;
+  cursor: pointer;
+  transition:
+    background-color 120ms ease,
+    color 120ms ease;
+}
+
+.native-studio-more-menu > button:hover:not(:disabled) {
+  background: rgba(255, 255, 255, 0.07);
+  color: #fff;
+}
+
+.native-studio-more-menu > button:disabled {
+  opacity: 0.36;
+  cursor: default;
+}
+
+.native-studio-more-section {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+  padding: 6px 8px 8px;
+  margin-bottom: 4px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.native-studio-more-label {
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.02em;
+  text-transform: uppercase;
+  color: rgba(245, 245, 245, 0.42);
+}
+
+.native-studio-more-section .native-studio-compare-toggle button {
+  min-width: 50px;
+  height: 24px;
+  padding: 0 9px;
+  font-size: 11.5px;
+}
+
+.native-studio-status {
+  max-width: 360px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  font-size: 12px;
+  color: rgba(245, 245, 245, 0.72);
+}
+
+.native-studio-render-pill {
+  flex: 0 0 auto;
+  border-radius: 7px;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  background: rgba(255, 255, 255, 0.055);
+  padding: 7px 10px;
+  font-size: 11px;
+  font-weight: 800;
+  color: rgba(245, 245, 245, 0.7);
+}
+
+.native-studio-rail {
+  grid-column: 1;
+  grid-row: 1 / 4;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 22px;
+  border-right: 1px solid rgba(255, 255, 255, 0.08);
+  background: #191b20;
+  padding: 72px 10px 14px;
+}
+
+.native-studio-rail-button {
+  position: relative;
+  display: grid;
+  width: 42px;
+  height: 42px;
+  place-items: center;
+  border-radius: 9px;
+  border: 1px solid transparent;
+  color: rgba(245, 245, 245, 0.62);
+  transition:
+    background-color 140ms ease,
+    border-color 140ms ease,
+    color 140ms ease,
+    transform 140ms ease;
+}
+
+.native-studio-rail-button:hover,
+.native-studio-rail-button.active {
+  border-color: rgba(255, 255, 255, 0.12);
+  background: rgba(255, 255, 255, 0.075);
+  color: #fff;
+}
+
+.native-studio-rail-button:hover {
+  transform: translateY(-1px);
+}
+
+.native-studio-rail-button.active {
+  border-color: rgba(53, 194, 255, 0.32);
+  background: rgba(53, 194, 255, 0.12);
+  color: #fff;
+  box-shadow: inset 0 0 0 1px rgba(53, 194, 255, 0.18);
+}
+
+.native-studio-rail-button small {
+  position: absolute;
+  top: 44px;
+  left: 50%;
+  width: 58px;
+  overflow: hidden;
+  color: rgba(245, 245, 245, 0.74);
+  font-size: 10px;
+  font-weight: 800;
+  line-height: 1.1;
+  text-align: center;
+  text-overflow: ellipsis;
+  transform: translateX(-50%);
+  white-space: nowrap;
+}
+
+.native-studio-rail-button span,
+.native-studio-rail-button span::before,
+.native-studio-rail-button span::after {
+  position: absolute;
+  content: "";
+}
+
+.native-studio-rail-button.icon-settings span {
+  width: 18px;
+  height: 18px;
+  border: 2px solid currentColor;
+  border-radius: 999px;
+}
+
+.native-studio-rail-button.icon-settings span::before {
+  inset: 5px;
+  border-radius: 999px;
+  background: currentColor;
+}
+
+.native-studio-rail-button.icon-cursor span {
+  width: 0;
+  height: 0;
+  border-top: 18px solid currentColor;
+  border-right: 8px solid transparent;
+  transform: rotate(-18deg);
+}
+
+.native-studio-rail-button.icon-cursor span::after {
+  top: 10px;
+  left: 4px;
+  width: 9px;
+  height: 2px;
+  border-radius: 999px;
+  background: currentColor;
+  transform: rotate(45deg);
+}
+
+.native-studio-rail-button.icon-sound span {
+  width: 7px;
+  height: 12px;
+  border-radius: 2px 0 0 2px;
+  background: currentColor;
+}
+
+.native-studio-rail-button.icon-sound span::before {
+  left: 8px;
+  top: -3px;
+  width: 12px;
+  height: 18px;
+  border: 2px solid currentColor;
+  border-left: 0;
+  border-radius: 0 999px 999px 0;
+}
+
+.native-studio-rail-button.icon-camera span {
+  width: 22px;
+  height: 15px;
+  border: 2px solid currentColor;
+  border-radius: 4px;
+}
+
+.native-studio-rail-button.icon-camera span::after {
+  top: 3px;
+  right: -7px;
+  width: 0;
+  height: 0;
+  border-top: 5px solid transparent;
+  border-bottom: 5px solid transparent;
+  border-left: 6px solid currentColor;
+}
+
+.native-studio-rail-button.icon-frame span {
+  width: 22px;
+  height: 16px;
+  border: 2px solid currentColor;
+  border-radius: 4px;
+}
+
+.native-studio-rail-button.icon-frame span::before {
+  left: 4px;
+  right: 4px;
+  bottom: -6px;
+  height: 2px;
+  border-radius: 999px;
+  background: currentColor;
+}
+
+.native-studio-rail-button.icon-share span {
+  width: 5px;
+  height: 5px;
+  border-radius: 999px;
+  background: currentColor;
+  box-shadow:
+    14px -8px 0 currentColor,
+    14px 8px 0 currentColor;
+}
+
+.native-studio-rail-button.icon-share span::before,
+.native-studio-rail-button.icon-share span::after {
+  left: 3px;
+  width: 14px;
+  height: 2px;
+  border-radius: 999px;
+  background: currentColor;
+}
+
+.native-studio-rail-button.icon-share span::before {
+  top: -4px;
+  transform: rotate(-30deg);
+}
+
+.native-studio-rail-button.icon-share span::after {
+  top: 6px;
+  transform: rotate(30deg);
+}
+
+.native-studio-render-pill.ready {
+  border-color: rgba(53, 194, 255, 0.26);
+  background: rgba(53, 194, 255, 0.12);
+  color: #bdefff;
+}
+
+.native-studio-hidden-panel {
+  display: none !important;
+}
+
+.native-studio-compare-toggle {
+  display: grid;
+  flex: 0 0 auto;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 4px;
+  border-radius: 8px;
+  background: rgba(255, 255, 255, 0.055);
+  padding: 4px;
+}
+
+.native-studio-compare-toggle button {
+  height: 28px;
+  min-width: 58px;
+  border-radius: 6px;
+  padding: 0 9px;
+  color: rgba(245, 245, 245, 0.62);
+  font-size: 12px;
+  font-weight: 800;
+  transition:
+    background-color 140ms ease,
+    color 140ms ease,
+    box-shadow 140ms ease;
+}
+
+.native-studio-compare-toggle button:hover,
+.native-studio-compare-toggle button.active {
+  background: rgba(255, 255, 255, 0.13);
+  color: #fff;
+}
+
+.native-studio-compare-toggle button.active {
+  box-shadow: inset 0 0 0 1px rgba(53, 194, 255, 0.2);
+}
+
+.native-studio-primary {
+  flex: 0 0 auto;
+  height: 36px;
+  border-radius: 7px;
+  background: #ff5a2f;
+  padding: 0 14px;
+  font-size: 13px;
+  font-weight: 700;
+  color: #fff;
+  box-shadow: 0 10px 24px rgba(255, 90, 47, 0.22);
+}
+
+.native-studio-primary:hover {
+  background: #ff6b45;
+}
+
+.native-studio-secondary {
+  flex: 0 0 auto;
+  height: 36px;
+  border-radius: 7px;
+  border: 1px solid rgba(255, 255, 255, 0.13);
+  background: rgba(255, 255, 255, 0.06);
+  padding: 0 14px;
+  font-size: 13px;
+  font-weight: 700;
+  color: rgba(255, 255, 255, 0.86);
+}
+
+.native-studio-secondary:hover:not(:disabled) {
+  background: rgba(255, 255, 255, 0.1);
+}
+
+.native-studio-secondary:disabled {
+  cursor: not-allowed;
+  opacity: 0.42;
+}
+
+.native-studio-danger {
+  width: 100%;
+  min-height: 40px;
+  border-radius: 8px;
+  border: 1px solid rgba(255, 90, 47, 0.46);
+  background: rgba(255, 90, 47, 0.08);
+  padding: 0 12px;
+  color: #ffb4a0;
+  font-size: 13px;
+  font-weight: 800;
+}
+
+.native-studio-danger:hover:not(:disabled) {
+  background: rgba(255, 90, 47, 0.14);
+}
+
+.native-studio-danger:disabled {
+  cursor: not-allowed;
+  opacity: 0.45;
+}
+
+.native-studio-switch-field {
+  display: flex !important;
+  min-height: 58px;
+  align-items: center;
+  justify-content: space-between;
+  gap: 14px;
+  border-radius: 8px;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  background: rgba(255, 255, 255, 0.055);
+  padding: 12px 12px 12px 14px;
+}
+
+.native-studio-switch-field span {
+  display: grid;
+  gap: 3px;
+  min-width: 0;
+}
+
+.native-studio-switch-field strong {
+  color: rgba(255, 255, 255, 0.9);
+  font-size: 13px;
+  font-weight: 850;
+}
+
+.native-studio-switch-field small {
+  overflow: hidden;
+  color: rgba(245, 245, 245, 0.58);
+  font-size: 12px;
+  font-weight: 650;
+  line-height: 1.35;
+  text-overflow: ellipsis;
+}
+
+.native-studio-switch-field input {
+  flex: 0 0 auto;
+}
+
+.native-studio-grid {
+  display: grid;
+  grid-column: 2 / 4;
+  grid-row: 2;
+  min-height: 0;
+  grid-template-columns: 330px minmax(0, 1fr);
+}
+
+.native-studio-stage {
+  grid-column: 2;
+  grid-row: 1;
+  position: relative;
+  display: grid;
+  min-width: 0;
+  min-height: 0;
+  place-items: center;
+  overflow: hidden;
+  padding: 32px 40px;
+  transition: background-color 160ms ease;
+}
+
+.native-studio-stage-background {
+  position: absolute;
+  inset: -36px;
+  z-index: 0;
+  background: #111827;
+  transition:
+    filter 180ms ease,
+    transform 180ms ease,
+    background 180ms ease;
+}
+
+.native-studio-video-frame {
+  position: relative;
+  z-index: 1;
+  display: grid;
+  width: min(100%, 1180px);
+  max-height: 100%;
+  place-items: center;
+  overflow: hidden;
+  background: rgba(255, 255, 255, 0.04);
+  transition:
+    border-radius 160ms ease,
+    box-shadow 160ms ease,
+    padding 160ms ease;
+}
+
+.native-studio-video-frame.is-zooming {
+  box-shadow:
+    0 34px 110px rgba(0, 0, 0, 0.34),
+    0 0 0 1px rgba(53, 194, 255, 0.28),
+    0 0 46px rgba(53, 194, 255, 0.16);
+}
+
+.native-studio-video-frame.is-muted {
+  outline: 1px solid rgba(239, 68, 68, 0.34);
+  outline-offset: 4px;
+}
+
+.native-studio-video-frame.is-speeding {
+  box-shadow:
+    0 34px 110px rgba(0, 0, 0, 0.34),
+    0 0 0 1px rgba(244, 193, 93, 0.28),
+    0 0 44px rgba(244, 193, 93, 0.14);
+}
+
+.native-studio-video-frame.is-before {
+  background: #05070c;
+  box-shadow:
+    0 18px 70px rgba(0, 0, 0, 0.3),
+    0 0 0 1px rgba(255, 255, 255, 0.08);
+}
+
+.native-studio-video-frame[style*="aspect-ratio"] {
+  height: min(100%, calc(100vh - 190px));
+  width: auto;
+}
+
+.native-studio-foreground {
+  position: absolute;
+  display: grid;
+  overflow: visible;
+}
+
+.native-studio-padding-shell {
+  position: absolute;
+  inset: 0;
+  display: grid;
+  /* Definite single cell so children (crop-window) fill the padded box height
+     instead of collapsing the implicit grid row to the video's natural height. */
+  grid-template: minmax(0, 1fr) / minmax(0, 1fr);
+  box-sizing: border-box;
+  transition:
+    inset 160ms ease,
+    left 160ms ease,
+    right 160ms ease,
+    top 160ms ease,
+    bottom 160ms ease;
+}
+
+.native-studio-padding-shell > .native-studio-device-frame {
+  inset: 0;
+}
+
+.native-studio-video {
+  grid-area: 1 / 1;
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  background: #000;
+  transition:
+    transform 80ms linear,
+    border-radius 160ms ease;
+}
+
+.native-studio-crop-window {
+  position: relative;
+  grid-area: 1 / 1;
+  display: grid;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  place-items: stretch;
+}
+
+.native-studio-crop-window.is-cropped {
+  outline: 1px solid rgba(53, 194, 255, 0.16);
+  outline-offset: -1px;
+}
+
+.native-studio-crop-content {
+  position: absolute;
+  display: grid;
+  min-width: 100%;
+  min-height: 100%;
+  transform-origin: top left;
+}
+
+.native-studio-fixture-video {
+  position: relative;
+  grid-area: 1 / 1;
+  display: grid;
+  width: 100%;
+  height: 100%;
+  min-height: min(520px, calc(100vh - 230px));
+  overflow: hidden;
+  background:
+    linear-gradient(135deg, rgba(255, 255, 255, 0.1), transparent 34%),
+    radial-gradient(circle at 74% 22%, rgba(53, 194, 255, 0.24), transparent 30%),
+    #111827;
+  color: #fff;
+  transition:
+    transform 80ms linear,
+    border-radius 160ms ease;
+}
+
+.native-studio-fixture-toolbar {
+  position: absolute;
+  top: 0;
+  right: 0;
+  left: 0;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  height: 42px;
+  padding: 0 16px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+  background: rgba(8, 12, 20, 0.78);
+}
+
+.native-studio-fixture-toolbar span {
+  width: 10px;
+  height: 10px;
+  border-radius: 999px;
+  background: #ff5f57;
+}
+
+.native-studio-fixture-toolbar span:nth-child(2) {
+  background: #ffbd2e;
+}
+
+.native-studio-fixture-toolbar span:nth-child(3) {
+  background: #28c840;
+}
+
+.native-studio-fixture-toolbar strong {
+  min-width: 0;
+  margin-left: 8px;
+  overflow: hidden;
+  color: rgba(255, 255, 255, 0.72);
+  font-size: 12px;
+  font-weight: 700;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.native-studio-fixture-content {
+  display: grid;
+  grid-template-columns: minmax(0, 0.9fr) minmax(220px, 0.7fr);
+  align-items: center;
+  gap: 42px;
+  padding: 84px 70px 54px;
+}
+
+.native-studio-fixture-content section {
+  display: grid;
+  gap: 12px;
+}
+
+.native-studio-fixture-content small {
+  color: #35c2ff;
+  font-size: 12px;
+  font-weight: 900;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+}
+
+.native-studio-fixture-content strong {
+  max-width: 540px;
+  font-size: clamp(34px, 5vw, 64px);
+  font-weight: 900;
+  line-height: 0.98;
+}
+
+.native-studio-fixture-content p {
+  max-width: 520px;
+  color: rgba(255, 255, 255, 0.72);
+  font-size: 18px;
+  line-height: 1.5;
+}
+
+.native-studio-fixture-panel {
+  display: grid;
+  gap: 14px;
+  padding: 22px;
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  border-radius: 18px;
+  background: rgba(255, 255, 255, 0.08);
+  box-shadow: 0 24px 80px rgba(0, 0, 0, 0.26);
+}
+
+.native-studio-fixture-panel i {
+  display: block;
+  height: 52px;
+  border-radius: 12px;
+  background:
+    linear-gradient(90deg, rgba(255, 255, 255, 0.16), transparent),
+    rgba(255, 255, 255, 0.1);
+}
+
+.native-studio-fixture-panel i:nth-child(2) {
+  width: 86%;
+}
+
+.native-studio-fixture-panel i:nth-child(3) {
+  width: 68%;
+}
+
+.native-studio-fixture-panel i:nth-child(4) {
+  width: 78%;
+  background:
+    linear-gradient(90deg, rgba(255, 77, 41, 0.66), rgba(53, 194, 255, 0.42)),
+    rgba(255, 255, 255, 0.1);
+}
+
+.native-studio-device-frame {
+  pointer-events: none;
+  position: absolute;
+  inset: 0;
+  z-index: 3;
+  border: 7px solid currentColor;
+  border-radius: inherit;
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.12),
+    inset 0 0 0 1px rgba(255, 255, 255, 0.1);
+}
+
+.native-studio-device-browser::before,
+.native-studio-device-macos::before {
+  position: absolute;
+  top: 0;
+  right: 0;
+  left: 0;
+  height: 7%;
+  min-height: 26px;
+  content: "";
+  background: currentColor;
+}
+
+.native-studio-device-browser::after {
+  position: absolute;
+  top: max(7px, 2%);
+  left: 18%;
+  width: 62%;
+  height: max(10px, 2.6%);
+  content: "";
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.18);
+}
+
+.native-studio-device-macos::after {
+  position: absolute;
+  top: max(8px, 2.2%);
+  left: 18px;
+  width: 42px;
+  height: 12px;
+  content: "";
+  border-radius: 999px;
+  background:
+    radial-gradient(circle at 6px 6px, #ff5f57 0 5px, transparent 6px),
+    radial-gradient(circle at 21px 6px, #ffbd2e 0 5px, transparent 6px),
+    radial-gradient(circle at 36px 6px, #28c840 0 5px, transparent 6px);
+}
+
+.native-studio-device-window::before {
+  position: absolute;
+  inset: 8px;
+  content: "";
+  border: 2px solid rgba(255, 255, 255, 0.14);
+  border-radius: 6px;
+}
+
+.native-studio-device-macbook {
+  border-width: max(9px, 1.8%);
+  border-bottom-width: max(28px, 6%);
+  /* Bezel + chin are drawn with the borders (currentColor). The screen area
+     (content box) MUST stay transparent so the recorded video shows through. */
+  background: transparent;
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.2),
+    inset 0 -1px 0 rgba(255, 255, 255, 0.08),
+    0 14px 32px rgba(0, 0, 0, 0.22);
+}
+
+.native-studio-device-macbook::before {
+  position: absolute;
+  top: max(4px, 0.8%);
+  left: 50%;
+  width: max(13px, 1.4%);
+  height: max(6px, 0.8%);
+  content: "";
+  border-radius: 999px;
+  background: rgba(5, 7, 11, 0.88);
+  transform: translateX(-50%);
+}
+
+.native-studio-device-macbook::after {
+  position: absolute;
+  right: 28%;
+  bottom: max(6px, 1.2%);
+  left: 28%;
+  height: max(5px, 0.8%);
+  content: "";
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.12);
+}
+
+.native-studio-camera-guide {
+  pointer-events: none;
+  position: absolute;
+  z-index: 5;
+  border: 2px dashed rgba(255, 255, 255, 0.82);
+  background:
+    linear-gradient(135deg, rgba(255, 77, 41, 0.26), rgba(53, 194, 255, 0.18)),
+    rgba(8, 12, 20, 0.54);
+  box-shadow: 0 18px 44px rgba(0, 0, 0, calc(0.3 * var(--camera-shadow-strength, 1)));
+}
+
+.native-studio-motion-hud {
+  pointer-events: none;
+  position: absolute;
+  z-index: 8;
+  right: 18px;
+  bottom: 18px;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: flex-end;
+  gap: 8px;
+  max-width: min(72%, 560px);
+  animation: native-studio-hud-enter 180ms ease-out both;
+}
+
+.native-studio-motion-hud span {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  min-height: 30px;
+  border: 1px solid rgba(255, 255, 255, 0.16);
+  border-radius: 999px;
+  background:
+    linear-gradient(135deg, rgba(53, 194, 255, 0.18), rgba(255, 90, 47, 0.18)),
+    rgba(8, 12, 20, 0.76);
+  padding: 0 11px;
+  color: rgba(255, 255, 255, 0.86);
+  font-size: 11px;
+  font-weight: 800;
+  letter-spacing: 0.02em;
+  box-shadow: 0 10px 24px rgba(0, 0, 0, 0.26);
+  backdrop-filter: blur(14px);
+}
+
+.native-studio-motion-hud strong {
+  color: #fff;
+  font-weight: 900;
+}
+
+@keyframes native-studio-hud-enter {
+  from {
+    opacity: 0;
+    transform: translateY(6px) scale(0.98);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+.native-studio-camera-guide::after {
+  position: absolute;
+  right: 10px;
+  bottom: 8px;
+  content: "camera";
+  font-size: 10px;
+  font-weight: 900;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: rgba(255, 255, 255, 0.78);
+}
+
+.native-studio-camera-video {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center center;
+  transform-origin: center;
+}
+
+.native-studio-camera-guide:has(.native-studio-camera-video)::after {
+  content: "camera track";
+}
+
+.native-studio-camera-bubble {
+  right: 5%;
+  bottom: 6%;
+  width: min(calc(24% * var(--camera-scale, 1)), calc(190px * var(--camera-scale, 1)));
+  aspect-ratio: 1;
+  border-radius: 999px;
+}
+
+.native-studio-camera-shape-circle {
+  border-radius: 999px;
+}
+
+.native-studio-camera-shape-rounded {
+  border-radius: 18px;
+}
+
+.native-studio-camera-shape-squircle {
+  border-radius: 32%;
+}
+
+.native-studio-camera-shape-rectangle {
+  border-radius: 4px;
+}
+
+.native-studio-camera-left,
+.native-studio-camera-right {
+  top: 28%;
+  width: min(calc(20% * var(--camera-scale, 1)), calc(220px * var(--camera-scale, 1)));
+  height: calc(44% * var(--camera-scale, 1));
+  border-radius: 16px;
+}
+
+.native-studio-camera-left {
+  left: 5%;
+}
+
+.native-studio-camera-right {
+  right: 5%;
+}
+
+.native-studio-camera-top,
+.native-studio-camera-bottom {
+  left: 50%;
+  width: min(calc(40% * var(--camera-scale, 1)), calc(360px * var(--camera-scale, 1)));
+  height: calc(22% * var(--camera-scale, 1));
+  border-radius: 16px;
+  transform: translateX(-50%);
+}
+
+.native-studio-camera-top {
+  top: 6%;
+}
+
+.native-studio-camera-bottom {
+  bottom: 6%;
+}
+
+.native-studio-overlay {
+  pointer-events: none;
+  position: absolute;
+  inset: 0;
+  z-index: 4;
+  overflow: hidden;
+  border-radius: inherit;
+}
+
+.native-studio-annotation-text {
+  pointer-events: auto;
+  position: absolute;
+  max-width: 72%;
+  border-radius: 7px;
+  background: rgba(8, 12, 20, 0.62);
+  padding: 0.16em 0.34em;
+  cursor: move;
+  user-select: none;
+  font-weight: 800;
+  line-height: 1.1;
+  text-shadow: 0 2px 10px rgba(0, 0, 0, 0.5);
+  transform: translate3d(0, 0, 0);
+  animation: native-studio-annotation-enter 170ms ease-out both;
+}
+
+.native-studio-click-ring {
+  pointer-events: none;
+  position: absolute;
+  z-index: 2;
+  width: 62px;
+  height: 62px;
+  border: max(2px, 8%) solid currentColor;
+  border-radius: 999px;
+  background: radial-gradient(circle, var(--click-fill, rgba(255, 255, 255, 0.72)) 0 18%, transparent 20%);
+  box-shadow: 0 0 0 max(2px, 4%) var(--click-shadow, rgba(0, 0, 0, 0.3));
+  transform: translate(-50%, -50%) scale(0);
+  animation: native-studio-click-ring-primary 550ms linear both;
+}
+
+.native-studio-click-ring::before,
+.native-studio-click-ring::after {
+  position: absolute;
+  inset: 0;
+  border: inherit;
+  border-radius: inherit;
+  box-shadow: inherit;
+  content: "";
+  transform: scale(0);
+}
+
+.native-studio-click-ring::before {
+  animation: native-studio-click-ring-secondary 430ms linear 100ms both;
+}
+
+.native-studio-click-ring::after {
+  animation: native-studio-click-ring-tertiary 320ms linear 200ms both;
+}
+
+.native-studio-cursor-spotlight {
+  pointer-events: none;
+  position: absolute;
+  z-index: 1;
+  border-radius: 999px;
+  transform: translate(-50%, -50%);
+  mix-blend-mode: multiply;
+}
+
+.native-studio-cursor-trail {
+  pointer-events: none;
+  position: absolute;
+  z-index: 2;
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.86);
+  box-shadow:
+    0 0 0 1px rgba(53, 194, 255, 0.3),
+    0 0 14px rgba(53, 194, 255, 0.45);
+  transform: translate(-12%, -12%);
+}
+
+.native-studio-cursor-overlay {
+  pointer-events: none;
+  position: absolute;
+  z-index: 3;
+  border: 0;
+  background: rgba(255, 255, 255, 0.94);
+  clip-path: polygon(0 0, 0 88%, 28% 68%, 40% 100%, 56% 94%, 44% 64%, 82% 64%);
+  filter:
+    drop-shadow(0 1px 0 rgba(0, 0, 0, 0.85))
+    drop-shadow(0 0 7px rgba(0, 0, 0, 0.48))
+    blur(var(--cursor-motion-blur, 0px));
+  transform: translate(
+    calc(-1 * var(--cursor-hotspot-x, 0px)),
+    calc(-1 * var(--cursor-hotspot-y, 0px))
+  );
+}
+
+.native-studio-cursor-overlay::after {
+  position: absolute;
+  top: -18%;
+  left: -18%;
+  width: 44%;
+  height: 44%;
+  border-top: max(2px, 12%) solid rgba(8, 12, 20, 0.78);
+  border-left: max(2px, 12%) solid rgba(8, 12, 20, 0.78);
+  content: "";
+  display: none;
+}
+
+.native-studio-cursor-dot {
+  border: 0;
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.94);
+  clip-path: none;
+  box-shadow:
+    0 0 0 2px rgba(8, 12, 20, 0.52),
+    0 0 18px rgba(53, 194, 255, 0.42);
+  transform: translate(-50%, -50%);
+}
+
+.native-studio-cursor-dot::after {
+  display: none;
+}
+
+.native-studio-cursor-ring {
+  border: 3px solid rgba(255, 255, 255, 0.94);
+  border-radius: 999px;
+  background: rgba(53, 194, 255, 0.08);
+  clip-path: none;
+  box-shadow:
+    0 0 0 1px rgba(8, 12, 20, 0.54),
+    0 0 20px rgba(53, 194, 255, 0.38);
+  transform: translate(-50%, -50%);
+}
+
+.native-studio-cursor-ring::after {
+  display: none;
+}
+
+.native-studio-cursor-crosshair {
+  border: 0;
+  background: transparent;
+  clip-path: none;
+  filter:
+    drop-shadow(0 1px 0 rgba(0, 0, 0, 0.85))
+    drop-shadow(0 0 7px rgba(0, 0, 0, 0.48))
+    blur(var(--cursor-motion-blur, 0px));
+  transform: translate(-50%, -50%);
+}
+
+.native-studio-cursor-crosshair::before,
+.native-studio-cursor-crosshair::after {
+  position: absolute;
+  display: block;
+  content: "";
+  background: rgba(255, 255, 255, 0.94);
+  box-shadow: 0 0 0 1px rgba(8, 12, 20, 0.58);
+}
+
+.native-studio-cursor-crosshair::before {
+  top: 50%;
+  left: 0;
+  width: 100%;
+  height: max(2px, 10%);
+  transform: translateY(-50%);
+}
+
+.native-studio-cursor-crosshair::after {
+  top: 0;
+  left: 50%;
+  width: max(2px, 10%);
+  height: 100%;
+  border: 0;
+  transform: translateX(-50%);
+}
+
+.native-studio-cursor-resize-horizontal,
+.native-studio-cursor-resize-vertical,
+.native-studio-cursor-resize-diagonal-nesw,
+.native-studio-cursor-resize-diagonal-nwse,
+.native-studio-cursor-move {
+  border: 0;
+  background: transparent;
+  clip-path: none;
+  filter:
+    drop-shadow(0 1px 0 rgba(0, 0, 0, 0.85))
+    drop-shadow(0 0 7px rgba(0, 0, 0, 0.48))
+    blur(var(--cursor-motion-blur, 0px));
+  transform: translate(-50%, -50%);
+}
+
+.native-studio-cursor-resize-horizontal::before,
+.native-studio-cursor-resize-horizontal::after,
+.native-studio-cursor-resize-vertical::before,
+.native-studio-cursor-resize-vertical::after,
+.native-studio-cursor-resize-diagonal-nesw::before,
+.native-studio-cursor-resize-diagonal-nesw::after,
+.native-studio-cursor-resize-diagonal-nwse::before,
+.native-studio-cursor-resize-diagonal-nwse::after,
+.native-studio-cursor-move::before,
+.native-studio-cursor-move::after {
+  position: absolute;
+  display: block;
+  content: "";
+  background: rgba(255, 255, 255, 0.94);
+  box-shadow: 0 0 0 1px rgba(8, 12, 20, 0.58);
+}
+
+.native-studio-cursor-resize-horizontal::before,
+.native-studio-cursor-move::before {
+  top: 50%;
+  left: 0;
+  width: 100%;
+  height: max(2px, 10%);
+  transform: translateY(-50%);
+}
+
+.native-studio-cursor-resize-vertical::before,
+.native-studio-cursor-move::after {
+  top: 0;
+  left: 50%;
+  width: max(2px, 10%);
+  height: 100%;
+  transform: translateX(-50%);
+}
+
+.native-studio-cursor-resize-horizontal::after {
+  inset: 18% 0;
+  background:
+    linear-gradient(135deg, transparent 0 38%, rgba(255, 255, 255, 0.94) 39% 61%, transparent 62%),
+    linear-gradient(45deg, transparent 0 38%, rgba(255, 255, 255, 0.94) 39% 61%, transparent 62%);
+  box-shadow: none;
+}
+
+.native-studio-cursor-resize-vertical::after {
+  inset: 0 18%;
+  background:
+    linear-gradient(135deg, transparent 0 38%, rgba(255, 255, 255, 0.94) 39% 61%, transparent 62%),
+    linear-gradient(45deg, transparent 0 38%, rgba(255, 255, 255, 0.94) 39% 61%, transparent 62%);
+  box-shadow: none;
+}
+
+.native-studio-cursor-resize-diagonal-nesw::before,
+.native-studio-cursor-resize-diagonal-nwse::before {
+  top: 50%;
+  left: 4%;
+  width: 92%;
+  height: max(2px, 10%);
+}
+
+.native-studio-cursor-resize-diagonal-nesw::before {
+  transform: translateY(-50%) rotate(-45deg);
+}
+
+.native-studio-cursor-resize-diagonal-nwse::before {
+  transform: translateY(-50%) rotate(45deg);
+}
+
+.native-studio-cursor-resize-diagonal-nesw::after,
+.native-studio-cursor-resize-diagonal-nwse::after {
+  display: none;
+}
+
+.native-studio-cursor-ibeam {
+  border: 0;
+  background: transparent;
+  clip-path: none;
+  filter:
+    drop-shadow(0 1px 0 rgba(0, 0, 0, 0.85))
+    drop-shadow(0 0 7px rgba(0, 0, 0, 0.48))
+    blur(var(--cursor-motion-blur, 0px));
+  transform: translate(-50%, -50%);
+}
+
+.native-studio-cursor-ibeam::before,
+.native-studio-cursor-ibeam::after {
+  position: absolute;
+  display: block;
+  left: 50%;
+  width: 42%;
+  height: max(2px, 10%);
+  background: rgba(255, 255, 255, 0.94);
+  box-shadow: 0 0 0 1px rgba(8, 12, 20, 0.58);
+  content: "";
+  transform: translateX(-50%);
+}
+
+.native-studio-cursor-ibeam::before {
+  top: 0;
+}
+
+.native-studio-cursor-ibeam::after {
+  top: auto;
+  bottom: 0;
+  border: 0;
+}
+
+.native-studio-cursor-ibeam {
+  background:
+    linear-gradient(
+      90deg,
+      transparent 0 calc(50% - max(1px, 5%)),
+      rgba(255, 255, 255, 0.94) calc(50% - max(1px, 5%)) calc(50% + max(1px, 5%)),
+      transparent calc(50% + max(1px, 5%)) 100%
+    );
+}
+
+.native-studio-cursor-highlight {
+  border: 0;
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.86);
+  clip-path: none;
+  box-shadow:
+    0 0 0 max(2px, 10%) rgba(255, 107, 61, 0.38),
+    0 0 24px rgba(255, 107, 61, 0.44),
+    0 0 0 1px rgba(8, 12, 20, 0.44);
+  filter: blur(var(--cursor-motion-blur, 0px));
+  transform: translate(-50%, -50%);
+}
+
+.native-studio-cursor-highlight::after {
+  display: none;
+}
+
+.native-studio-cursor-pointer {
+  border: 0;
+  background: rgba(255, 255, 255, 0.94);
+  clip-path: polygon(
+    28% 0,
+    45% 0,
+    45% 48%,
+    56% 39%,
+    68% 42%,
+    72% 52%,
+    82% 51%,
+    93% 60%,
+    86% 100%,
+    32% 100%,
+    18% 70%,
+    0 56%,
+    8% 44%,
+    28% 55%
+  );
+  filter:
+    drop-shadow(0 1px 0 rgba(0, 0, 0, 0.85))
+    drop-shadow(0 0 7px rgba(0, 0, 0, 0.48))
+    blur(var(--cursor-motion-blur, 0px));
+}
+
+.native-studio-cursor-pointer::after {
+  display: none;
+}
+
+.native-studio-cursor-hand-open,
+.native-studio-cursor-hand-grab {
+  border: 0;
+  background: transparent;
+  clip-path: none;
+  filter:
+    drop-shadow(0 1px 0 rgba(0, 0, 0, 0.85))
+    drop-shadow(0 0 7px rgba(0, 0, 0, 0.48))
+    blur(var(--cursor-motion-blur, 0px));
+  transform: translate(-50%, -50%);
+}
+
+.native-studio-cursor-hand-open::before,
+.native-studio-cursor-hand-open::after,
+.native-studio-cursor-hand-grab::before,
+.native-studio-cursor-hand-grab::after {
+  position: absolute;
+  display: block;
+  background: rgba(255, 255, 255, 0.94);
+  content: "";
+  box-shadow: 0 0 0 1px rgba(8, 12, 20, 0.58);
+}
+
+.native-studio-cursor-hand-open::before {
+  top: 34%;
+  left: 16%;
+  width: 68%;
+  height: 54%;
+  border-radius: 44% 44% 48% 48%;
+}
+
+.native-studio-cursor-hand-open::after {
+  top: 2%;
+  left: 8%;
+  width: 84%;
+  height: 56%;
+  border-radius: 42% 42% 30% 30%;
+  background:
+    linear-gradient(90deg, transparent 0 12%, rgba(255, 255, 255, 0.94) 13% 27%, transparent 28% 35%, rgba(255, 255, 255, 0.94) 36% 50%, transparent 51% 58%, rgba(255, 255, 255, 0.94) 59% 73%, transparent 74% 81%, rgba(255, 255, 255, 0.94) 82% 96%, transparent 97%),
+    linear-gradient(38deg, transparent 0 10%, rgba(255, 255, 255, 0.94) 11% 28%, transparent 29%);
+  box-shadow: none;
+}
+
+.native-studio-cursor-hand-grab::before {
+  top: 30%;
+  left: 14%;
+  width: 72%;
+  height: 58%;
+  border-radius: 42% 42% 48% 48%;
+}
+
+.native-studio-cursor-hand-grab::after {
+  top: 10%;
+  left: 7%;
+  width: 86%;
+  height: 40%;
+  border-radius: 40% 40% 30% 30%;
+  background:
+    linear-gradient(90deg, transparent 0 8%, rgba(255, 255, 255, 0.94) 9% 26%, transparent 27% 33%, rgba(255, 255, 255, 0.94) 34% 51%, transparent 52% 58%, rgba(255, 255, 255, 0.94) 59% 76%, transparent 77% 83%, rgba(255, 255, 255, 0.94) 84% 100%),
+    linear-gradient(35deg, transparent 0 13%, rgba(255, 255, 255, 0.94) 14% 31%, transparent 32%);
+  box-shadow: none;
+}
+
+.native-studio-cursor-not-allowed,
+.native-studio-cursor-zoom-in,
+.native-studio-cursor-zoom-out {
+  border: 3px solid rgba(255, 255, 255, 0.94);
+  border-radius: 999px;
+  background: rgba(8, 12, 20, 0.28);
+  clip-path: none;
+  box-shadow:
+    0 0 0 1px rgba(8, 12, 20, 0.54),
+    0 0 20px rgba(53, 194, 255, 0.24);
+  transform: translate(-50%, -50%);
+}
+
+.native-studio-cursor-not-allowed::after,
+.native-studio-cursor-zoom-in::after,
+.native-studio-cursor-zoom-out::after {
+  position: absolute;
+  display: block;
+  content: "";
+  background: rgba(255, 255, 255, 0.94);
+  box-shadow: 0 0 0 1px rgba(8, 12, 20, 0.42);
+}
+
+.native-studio-cursor-not-allowed::after {
+  top: 50%;
+  left: 14%;
+  width: 72%;
+  height: max(2px, 12%);
+  transform: translateY(-50%) rotate(-45deg);
+}
+
+.native-studio-cursor-zoom-in::after {
+  inset: 31%;
+  background:
+    linear-gradient(90deg, transparent 0 42%, rgba(255, 255, 255, 0.94) 43% 57%, transparent 58%),
+    linear-gradient(0deg, transparent 0 42%, rgba(255, 255, 255, 0.94) 43% 57%, transparent 58%);
+  box-shadow: none;
+}
+
+.native-studio-cursor-zoom-out::after {
+  top: 48%;
+  left: 28%;
+  width: 44%;
+  height: max(2px, 12%);
+}
+
+.native-studio-cursor-help {
+  border: 0;
+  background: rgba(255, 255, 255, 0.94);
+  clip-path: polygon(0 0, 0 88%, 28% 68%, 40% 100%, 56% 94%, 44% 64%, 82% 64%);
+  filter:
+    drop-shadow(0 1px 0 rgba(0, 0, 0, 0.85))
+    drop-shadow(0 0 7px rgba(0, 0, 0, 0.48))
+    blur(var(--cursor-motion-blur, 0px));
+}
+
+.native-studio-cursor-help::after {
+  top: -10%;
+  right: -16%;
+  left: auto;
+  display: grid;
+  width: 36%;
+  height: 36%;
+  border: 1px solid rgba(8, 12, 20, 0.58);
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.94);
+  color: rgba(8, 12, 20, 0.82);
+  content: "?";
+  font-size: max(8px, 42%);
+  font-weight: 800;
+  line-height: 1;
+  place-items: center;
+}
+
+@keyframes native-studio-click-ring-primary {
+  0% {
+    opacity: 0;
+    transform: translate(-50%, -50%) scale(0);
+  }
+  1% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+    transform: translate(-50%, -50%) scale(1);
+  }
+}
+
+@keyframes native-studio-click-ring-secondary {
+  0% {
+    opacity: 0.88;
+    transform: scale(0);
+  }
+  100% {
+    opacity: 0;
+    transform: scale(0.72);
+  }
+}
+
+@keyframes native-studio-click-ring-tertiary {
+  0% {
+    opacity: 0.68;
+    transform: scale(0);
+  }
+  100% {
+    opacity: 0;
+    transform: scale(0.46);
+  }
+}
+
+.native-studio-annotation-box {
+  pointer-events: auto;
+  position: absolute;
+  border: 4px solid;
+  border-radius: 8px;
+  background: rgba(255, 77, 41, 0.08);
+  cursor: move;
+  user-select: none;
+  box-shadow: 0 0 22px rgba(255, 77, 41, 0.28);
+  animation: native-studio-annotation-enter 170ms ease-out both;
+}
+
+.native-studio-annotation-redact {
+  pointer-events: auto;
+  position: absolute;
+  border: 2px solid rgba(255, 255, 255, 0.22);
+  border-radius: 8px;
+  cursor: move;
+  user-select: none;
+  box-shadow:
+    inset 0 0 0 1px rgba(0, 0, 0, 0.5),
+    0 8px 26px rgba(0, 0, 0, 0.34);
+  animation: native-studio-annotation-enter 170ms ease-out both;
+}
+
+.native-studio-annotation-blur {
+  pointer-events: auto;
+  position: absolute;
+  border: 2px solid rgba(125, 211, 252, 0.78);
+  border-radius: 8px;
+  cursor: move;
+  user-select: none;
+  background: rgba(125, 211, 252, 0.12);
+  backdrop-filter: blur(12px) saturate(0.82);
+  box-shadow:
+    inset 0 0 0 1px rgba(255, 255, 255, 0.18),
+    0 8px 26px rgba(14, 165, 233, 0.26);
+  animation: native-studio-annotation-enter 170ms ease-out both;
+}
+
+.native-studio-annotation-draw {
+  pointer-events: auto;
+  position: absolute;
+  cursor: move;
+  overflow: visible;
+  user-select: none;
+  filter: drop-shadow(0 8px 16px rgba(0, 0, 0, 0.24));
+  animation: native-studio-annotation-enter 170ms ease-out both;
+}
+
+.native-studio-annotation-resize {
+  position: absolute;
+  right: -9px;
+  bottom: -9px;
+  width: 18px;
+  height: 18px;
+  border-radius: 999px;
+  border: 2px solid rgba(8, 12, 20, 0.9);
+  background: #fff;
+  cursor: nwse-resize;
+  box-shadow: 0 6px 14px rgba(0, 0, 0, 0.32);
+}
+
+.native-studio-annotation-resize::after {
+  position: absolute;
+  right: 4px;
+  bottom: 4px;
+  width: 6px;
+  height: 6px;
+  content: "";
+  border-right: 2px solid rgba(8, 12, 20, 0.72);
+  border-bottom: 2px solid rgba(8, 12, 20, 0.72);
+}
+
+.native-studio-annotation-arrow {
+  pointer-events: auto;
+  position: absolute;
+  width: 18%;
+  height: 6px;
+  border-radius: 999px;
+  cursor: move;
+  user-select: none;
+  box-shadow: 0 0 18px rgba(255, 77, 41, 0.4);
+  transform-origin: left center;
+  animation: native-studio-annotation-enter 170ms ease-out both;
+}
+
+.native-studio-annotation-text:hover,
+.native-studio-annotation-box:hover,
+.native-studio-annotation-redact:hover,
+.native-studio-annotation-blur:hover,
+.native-studio-annotation-draw:hover,
+.native-studio-annotation-arrow:hover {
+  outline: 2px solid rgba(255, 255, 255, 0.72);
+  outline-offset: 4px;
+}
+
+.native-studio-keystroke-overlay {
+  pointer-events: auto;
+  position: absolute;
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  max-width: min(72%, 520px);
+  border-radius: 8px;
+  border: 1px solid rgba(255, 255, 255, 0.16);
+  background: rgba(5, 7, 11, 0.78);
+  padding: 8px 10px;
+  box-shadow:
+    0 18px 42px rgba(0, 0, 0, 0.34),
+    inset 0 1px 0 rgba(255, 255, 255, 0.12);
+  cursor: move;
+  user-select: none;
+  transform: translate(-50%, -50%);
+  animation: native-studio-keystroke-enter 180ms ease-out both;
+}
+
+.native-studio-keystroke-overlay kbd {
+  min-width: 28px;
+  border-radius: 6px;
+  border: 1px solid rgba(255, 255, 255, 0.14);
+  background:
+    linear-gradient(180deg, rgba(255, 255, 255, 0.18), rgba(255, 255, 255, 0.05)),
+    rgba(255, 255, 255, 0.08);
+  padding: 5px 8px;
+  color: rgba(255, 255, 255, 0.94);
+  font-size: clamp(10px, 2vw, 18px);
+  font-weight: 800;
+  line-height: 1;
+  text-align: center;
+  white-space: nowrap;
+  box-shadow: inset 0 -2px 0 rgba(0, 0, 0, 0.3);
+}
+
+.native-studio-caption-overlay {
+  pointer-events: auto;
+  position: absolute;
+  left: 50%;
+  max-width: min(82%, 760px);
+  border-radius: 8px;
+  border: 1px solid rgba(255, 255, 255, 0.14);
+  background: rgba(5, 7, 11, 0.78);
+  padding: 10px 18px;
+  color: #fff;
+  font-weight: 800;
+  line-height: 1.18;
+  text-align: center;
+  text-shadow: 0 2px 10px rgba(0, 0, 0, 0.55);
+  transform: translate(-50%, -50%);
+  box-shadow:
+    0 18px 42px rgba(0, 0, 0, 0.34),
+    inset 0 1px 0 rgba(255, 255, 255, 0.12);
+  cursor: move;
+  user-select: none;
+  animation: native-studio-caption-enter 190ms ease-out both;
+}
+
+@keyframes native-studio-keystroke-enter {
+  from {
+    opacity: 0;
+    transform: translate(-50%, -44%) scale(0.96);
+  }
+  to {
+    opacity: 1;
+    transform: translate(-50%, -50%) scale(1);
+  }
+}
+
+@keyframes native-studio-caption-enter {
+  from {
+    opacity: 0;
+    transform: translate(-50%, -42%) scale(0.97);
+    filter: blur(3px);
+  }
+  to {
+    opacity: 1;
+    transform: translate(-50%, -50%) scale(1);
+    filter: blur(0);
+  }
+}
+
+@keyframes native-studio-annotation-enter {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .native-studio-annotation-text,
+  .native-studio-annotation-box,
+  .native-studio-annotation-redact,
+  .native-studio-annotation-blur,
+  .native-studio-annotation-draw,
+  .native-studio-annotation-arrow,
+  .native-studio-keystroke-overlay,
+  .native-studio-caption-overlay {
+    animation-duration: 1ms;
+  }
+}
+
+.native-studio-annotation-arrow::after {
+  position: absolute;
+  top: 50%;
+  right: -2px;
+  width: 16px;
+  height: 16px;
+  content: "";
+  border-top: 6px solid currentColor;
+  border-right: 6px solid currentColor;
+  transform: translateY(-50%) rotate(45deg);
+}
+
+.native-studio-empty {
+  max-width: 460px;
+  border-radius: 8px;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  background: rgba(255, 255, 255, 0.04);
+  padding: 28px;
+  text-align: center;
+  color: rgba(245, 245, 245, 0.72);
+}
+
+.native-studio-inspector {
+  grid-column: 1;
+  grid-row: 1;
+  display: flex;
+  flex-direction: column;
+  min-height: 0;
+  overflow-y: auto;
+  overflow-x: hidden;
+  border-right: 1px solid rgba(255, 255, 255, 0.06);
+  background: #14171e;
+  padding: 18px 16px 28px;
+  scrollbar-gutter: stable;
+}
+
+.native-studio-inspector::-webkit-scrollbar {
+  width: 11px;
+}
+
+.native-studio-inspector::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.native-studio-inspector::-webkit-scrollbar-thumb {
+  border: 3px solid transparent;
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.1);
+  background-clip: padding-box;
+}
+
+.native-studio-inspector::-webkit-scrollbar-thumb:hover {
+  background: rgba(255, 255, 255, 0.2);
+  background-clip: padding-box;
+}
+
+.native-studio-panel-aspect {
+  order: 10;
+}
+
+.native-studio-panel-background {
+  order: 20;
+}
+
+.native-studio-panel-playback {
+  order: 30;
+}
+
+.native-studio-panel-zoom-level {
+  order: 40;
+}
+
+.native-studio-panel-layout {
+  order: 45;
+}
+
+.native-studio-panel-zoom-effect {
+  order: 50;
+}
+
+.native-studio-inspector section {
+  padding: 0 0 28px;
+}
+
+/* Minimal: clean whitespace between sections, no divider lines. */
+.native-studio-inspector section + section {
+  border-top: 0;
+  padding-top: 4px;
+}
+
+.native-studio-inspector h2 {
+  margin-bottom: 14px;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: rgba(245, 245, 245, 0.5);
+}
+
+.native-studio-inspector label {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  align-items: center;
+  gap: 8px;
+  margin-top: 12px;
+  font-size: 12px;
+  color: rgba(245, 245, 245, 0.76);
+}
+
+.native-studio-inspector label span {
+  color: rgba(245, 245, 245, 0.5);
+  font-variant-numeric: tabular-nums;
+}
+
+.native-studio-inspector input[type="range"] {
+  grid-column: 1 / -1;
+  width: 100%;
+  accent-color: #ff5a2f;
+}
+
+.native-studio-inspector input[type="color"] {
+  width: 44px;
+  height: 28px;
+  border: 0;
+  border-radius: 6px;
+  background: transparent;
+}
+
+.native-studio-preset-row {
+  display: grid;
+  grid-template-columns: repeat(6, minmax(0, 1fr));
+  gap: 8px;
+  margin-bottom: 12px;
+}
+
+.native-studio-shuffle-look {
+  width: 100%;
+  margin: 0 0 10px;
+  border-radius: 7px;
+  border: 1px solid rgba(53, 194, 255, 0.22);
+  background: rgba(53, 194, 255, 0.08);
+  padding: 8px 10px;
+  color: rgba(245, 245, 245, 0.82);
+  font-size: 12px;
+  font-weight: 800;
+  transition:
+    border-color 140ms ease,
+    background-color 140ms ease,
+    color 140ms ease;
+}
+
+.native-studio-shuffle-look:hover {
+  border-color: rgba(53, 194, 255, 0.42);
+  background: rgba(53, 194, 255, 0.14);
+  color: #fff;
+}
+
+.native-studio-background-actions {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 8px;
+  margin: 0 0 12px;
+}
+
+.native-studio-background-actions .native-studio-secondary:only-child {
+  grid-column: 1 / -1;
+}
+
+.native-studio-background-tabs {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 3px;
+  margin-bottom: 12px;
+  border-radius: 9px;
+  border: 1px solid rgba(255, 255, 255, 0.05);
+  background: rgba(0, 0, 0, 0.24);
+  padding: 3px;
+}
+
+.native-studio-background-tabs button {
+  min-width: 0;
+  height: 28px;
+  border-radius: 6px;
+  color: rgba(245, 245, 245, 0.6);
+  font-size: 11px;
+  font-weight: 700;
+  transition:
+    background-color 130ms ease,
+    color 130ms ease,
+    box-shadow 130ms ease;
+}
+
+.native-studio-background-tabs button:hover {
+  background: rgba(255, 255, 255, 0.06);
+  color: rgba(255, 255, 255, 0.92);
+}
+
+.native-studio-background-tabs button.active {
+  background: rgba(255, 255, 255, 0.14);
+  color: #fff;
+  box-shadow:
+    0 1px 2px rgba(0, 0, 0, 0.34),
+    inset 0 1px 0 rgba(255, 255, 255, 0.1);
+}
+
+.native-studio-speed-grid button,
+.native-studio-zoom-grid button {
+  min-width: 0;
+  height: 32px;
+  border-radius: 8px;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  background: rgba(255, 255, 255, 0.04);
+  color: rgba(245, 245, 245, 0.74);
+  font-size: 12px;
+  font-weight: 750;
+  transition:
+    background-color 130ms ease,
+    border-color 130ms ease,
+    color 130ms ease;
+}
+
+.native-studio-speed-grid button:hover,
+.native-studio-zoom-grid button:hover {
+  border-color: rgba(255, 255, 255, 0.18);
+  background: rgba(255, 255, 255, 0.08);
+  color: #fff;
+}
+
+.native-studio-speed-grid button.active,
+.native-studio-zoom-grid button.active {
+  border-color: rgba(255, 90, 47, 0.6);
+  background: rgba(255, 90, 47, 0.16);
+  color: #fff;
+}
+
+.native-studio-speed-grid,
+.native-studio-zoom-grid {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 7px;
+}
+
+.native-studio-zoom-grid {
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+}
+
+.native-studio-swatch {
+  height: 28px;
+  border-radius: 7px;
+  border: 1px solid rgba(255, 255, 255, 0.16);
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.15);
+}
+
+.native-studio-swatch:hover {
+  border-color: rgba(255, 255, 255, 0.42);
+}
+
+/* Clean thumbnail grid: rounded squares, no labels,
+   orange (Clipy brand) active border. */
+.native-studio-background-presets {
+  display: grid;
+  grid-template-columns: repeat(5, minmax(0, 1fr));
+  gap: 7px;
+  margin: 0 0 14px;
+}
+
+.native-studio-background-preset {
+  position: relative;
+  display: block;
+  min-width: 0;
+  aspect-ratio: 1 / 1;
+  border-radius: 12px;
+  border: 2px solid transparent;
+  background: transparent;
+  padding: 0;
+  transition:
+    border-color 140ms ease,
+    transform 140ms ease;
+}
+
+.native-studio-background-preset:hover {
+  border-color: rgba(255, 255, 255, 0.32);
+  transform: translateY(-1px);
+}
+
+.native-studio-background-preset.is-active {
+  border-color: #ff5a2f;
+  box-shadow: 0 0 0 1px rgba(255, 90, 47, 0.32);
+}
+
+.native-studio-background-preset-thumb {
+  position: relative;
+  display: block;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  border-radius: 10px;
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  background-size: cover;
+  background-position: center;
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.14);
+}
+
+.native-studio-background-preset-thumb::before {
+  position: absolute;
+  inset: 0;
+  content: "";
+  background: linear-gradient(180deg, rgba(255, 255, 255, 0.1), transparent 60%);
+  pointer-events: none;
+}
+
+/* Hide the inner mini-screen indicator so thumbnails read as clean
+   background swatches. */
+.native-studio-background-preset-thumb span {
+  display: none;
+}
+
+.native-studio-background-preset-name {
+  display: block;
+  min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.native-studio-style-presets {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 8px;
+  margin-bottom: 12px;
+}
+
+.native-studio-style-presets button {
+  display: flex;
+  min-width: 0;
+  height: 34px;
+  align-items: center;
+  gap: 8px;
+  border-radius: 7px;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  background: rgba(255, 255, 255, 0.045);
+  padding: 0 9px;
+  color: rgba(245, 245, 245, 0.78);
+  font-size: 12px;
+  font-weight: 800;
+  transition:
+    border-color 140ms ease,
+    background-color 140ms ease,
+    color 140ms ease;
+}
+
+.native-studio-style-presets button:hover {
+  border-color: rgba(255, 90, 47, 0.42);
+  background: rgba(255, 90, 47, 0.12);
+  color: #fff;
+}
+
+.native-studio-style-presets span {
+  width: 22px;
+  height: 18px;
+  flex: 0 0 auto;
+  border-radius: 5px;
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.14);
+}
+
+.native-studio-polish-presets {
+  display: grid;
+  gap: 8px;
+}
+
+.native-studio-polish-presets button {
+  display: grid;
+  gap: 3px;
+  width: 100%;
+  border-radius: 8px;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  background:
+    linear-gradient(135deg, rgba(255, 90, 47, 0.12), rgba(53, 194, 255, 0.08)),
+    rgba(255, 255, 255, 0.045);
+  padding: 10px;
+  text-align: left;
+  transition:
+    border-color 140ms ease,
+    background-color 140ms ease,
+    transform 140ms ease;
+}
+
+.native-studio-polish-presets button:hover {
+  border-color: rgba(255, 90, 47, 0.42);
+  background-color: rgba(255, 90, 47, 0.1);
+  transform: translateY(-1px);
+}
+
+.native-studio-polish-presets strong {
+  color: #fff;
+  font-size: 12px;
+}
+
+.native-studio-polish-presets span {
+  color: rgba(245, 245, 245, 0.62);
+  font-size: 11px;
+  line-height: 1.35;
+}
+
+.native-studio-cursor-presets {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 8px;
+  margin-bottom: 12px;
+}
+
+.native-studio-cursor-presets button {
+  display: grid;
+  min-width: 0;
+  gap: 3px;
+  border-radius: 8px;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  background: rgba(255, 255, 255, 0.045);
+  padding: 9px;
+  text-align: left;
+  transition:
+    border-color 140ms ease,
+    background-color 140ms ease,
+    transform 140ms ease;
+}
+
+.native-studio-cursor-presets button:hover {
+  border-color: rgba(53, 194, 255, 0.42);
+  background: rgba(53, 194, 255, 0.1);
+  transform: translateY(-1px);
+}
+
+.native-studio-cursor-presets strong {
+  color: #fff;
+  font-size: 11px;
+}
+
+.native-studio-cursor-presets span {
+  color: rgba(245, 245, 245, 0.58);
+  font-size: 10px;
+  line-height: 1.3;
+}
+
+.native-studio-segmented {
+  display: grid;
+  grid-template-columns: repeat(5, minmax(0, 1fr));
+  gap: 3px;
+  border-radius: 9px;
+  border: 1px solid rgba(255, 255, 255, 0.05);
+  background: rgba(0, 0, 0, 0.24);
+  padding: 3px;
+}
+
+.native-studio-segmented-four {
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+}
+
+.native-studio-segmented-three {
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+}
+
+.native-studio-stack-gap {
+  margin-top: 7px;
+}
+
+.native-studio-camera-layout-grid {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  gap: 8px;
+  margin-bottom: 12px;
+}
+
+.native-studio-camera-layout {
+  display: flex;
+  min-width: 0;
+  min-height: 62px;
+  flex-direction: row;
+  align-items: center;
+  justify-content: flex-start;
+  gap: 12px;
+  border-radius: 8px;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  background:
+    linear-gradient(180deg, rgba(255, 255, 255, 0.065), rgba(255, 255, 255, 0.028)),
+    rgba(255, 255, 255, 0.035);
+  padding: 10px;
+  text-align: left;
+  transition:
+    border-color 140ms ease,
+    background-color 140ms ease,
+    box-shadow 140ms ease,
+    transform 140ms ease;
+}
+
+.native-studio-camera-layout:hover {
+  border-color: rgba(53, 194, 255, 0.38);
+  background:
+    linear-gradient(180deg, rgba(53, 194, 255, 0.1), rgba(255, 255, 255, 0.035)),
+    rgba(255, 255, 255, 0.05);
+  transform: translateY(-1px);
+}
+
+.native-studio-camera-layout.active {
+  border-color: rgba(53, 194, 255, 0.76);
+  background:
+    linear-gradient(180deg, rgba(53, 194, 255, 0.17), rgba(255, 90, 47, 0.09)),
+    rgba(255, 255, 255, 0.055);
+  box-shadow:
+    inset 0 0 0 1px rgba(53, 194, 255, 0.18),
+    0 10px 24px rgba(0, 0, 0, 0.18);
+}
+
+.native-studio-camera-layout:focus-visible {
+  outline: 2px solid rgba(53, 194, 255, 0.72);
+  outline-offset: 2px;
+}
+
+.native-studio-camera-layout-preview {
+  position: relative;
+  display: block;
+  width: 78px;
+  height: 42px;
+  flex: 0 0 78px;
+  overflow: hidden;
+  border-radius: 7px;
+  background:
+    linear-gradient(135deg, rgba(255, 255, 255, 0.08), transparent 42%),
+    rgba(5, 8, 14, 0.76);
+  box-shadow:
+    inset 0 0 0 1px rgba(255, 255, 255, 0.11),
+    0 8px 18px rgba(0, 0, 0, 0.22);
+}
+
+.native-studio-camera-layout-copy {
+  display: flex;
+  min-width: 0;
+  flex: 1;
+  flex-direction: column;
+  gap: 3px;
+}
+
+.native-studio-camera-layout-copy strong {
+  overflow: hidden;
+  color: rgba(255, 255, 255, 0.94);
+  font-size: 12px;
+  font-weight: 760;
+  line-height: 1.15;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.native-studio-camera-layout-copy small {
+  color: rgba(228, 232, 242, 0.58);
+  font-size: 10px;
+  font-weight: 650;
+  line-height: 1.2;
+}
+
+.native-studio-camera-layout-screen {
+  position: absolute;
+  inset: 6px;
+  border-radius: 6px;
+  background:
+    linear-gradient(135deg, rgba(53, 194, 255, 0.18), transparent 55%),
+    linear-gradient(180deg, rgba(255, 255, 255, 0.13), rgba(255, 255, 255, 0.045));
+}
+
+.native-studio-camera-layout-camera {
+  position: absolute;
+  border-radius: 999px;
+  background:
+    radial-gradient(circle at 36% 30%, rgba(255, 255, 255, 0.9) 0 8%, transparent 9%),
+    linear-gradient(135deg, #ff7a52, #ff4d29);
+  box-shadow:
+    inset 0 0 0 1px rgba(255, 255, 255, 0.28),
+    0 6px 16px rgba(0, 0, 0, 0.28);
+}
+
+.preview-hidden::after {
+  position: absolute;
+  top: 21px;
+  left: 17px;
+  width: 40px;
+  height: 2px;
+  content: "";
+  border-radius: 999px;
+  background: rgba(245, 245, 245, 0.62);
+  transform: rotate(-24deg);
+}
+
+.preview-bubble .native-studio-camera-layout-camera {
+  right: 8px;
+  bottom: 7px;
+  width: 18px;
+  height: 18px;
+}
+
+.preview-left .native-studio-camera-layout-camera,
+.preview-right .native-studio-camera-layout-camera {
+  top: 10px;
+  width: 14px;
+  height: 24px;
+  border-radius: 6px;
+}
+
+.preview-left .native-studio-camera-layout-camera {
+  left: 8px;
+}
+
+.preview-right .native-studio-camera-layout-camera {
+  right: 8px;
+}
+
+.preview-top .native-studio-camera-layout-camera,
+.preview-bottom .native-studio-camera-layout-camera {
+  left: 16px;
+  width: 36px;
+  height: 12px;
+  border-radius: 6px;
+}
+
+.preview-top .native-studio-camera-layout-camera {
+  top: 8px;
+}
+
+.preview-bottom .native-studio-camera-layout-camera {
+  bottom: 8px;
+}
+
+.native-studio-segment {
+  height: 28px;
+  border-radius: 6px;
+  font-size: 12px;
+  font-weight: 650;
+  color: rgba(245, 245, 245, 0.58);
+  transition:
+    background-color 130ms ease,
+    color 130ms ease,
+    box-shadow 130ms ease;
+}
+
+.native-studio-segment:hover {
+  background: rgba(255, 255, 255, 0.06);
+  color: rgba(255, 255, 255, 0.92);
+}
+
+.native-studio-segment.active {
+  background: rgba(255, 255, 255, 0.14);
+  color: #fff;
+  box-shadow:
+    0 1px 2px rgba(0, 0, 0, 0.34),
+    inset 0 1px 0 rgba(255, 255, 255, 0.1);
+}
+
+.native-studio-readout {
+  border-radius: 7px;
+  background: rgba(255, 255, 255, 0.055);
+  padding: 9px 10px;
+  font-size: 12px;
+  color: rgba(245, 245, 245, 0.72);
+}
+
+.native-studio-music-preview-row {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 92px;
+  align-items: stretch;
+  gap: 8px;
+}
+
+.native-studio-music-preview-row .native-studio-readout {
+  min-width: 0;
+}
+
+.native-studio-music-preview-row .native-studio-secondary {
+  width: 92px;
+  height: auto;
+  min-height: 36px;
+  padding: 0 10px;
+}
+
+.native-studio-export-note {
+  margin-top: 12px;
+  border-radius: 7px;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  background: rgba(255, 255, 255, 0.035);
+  padding: 9px 10px;
+  font-size: 11px;
+  line-height: 1.45;
+  color: rgba(245, 245, 245, 0.58);
+}
+
+.native-studio-tool-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 7px;
+  margin-top: 10px;
+}
+
+.native-studio-tool-row button {
+  min-height: 28px;
+  border-radius: 7px;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  background: rgba(255, 255, 255, 0.06);
+  padding: 0 9px;
+  font-size: 11px;
+  font-weight: 800;
+  color: rgba(245, 245, 245, 0.78);
+  transition:
+    border-color 120ms ease,
+    background-color 120ms ease,
+    color 120ms ease;
+}
+
+.native-studio-tool-row button:hover {
+  border-color: rgba(255, 90, 47, 0.42);
+  background: rgba(255, 90, 47, 0.13);
+  color: #fff;
+}
+
+.native-studio-effect-list {
+  display: grid;
+  gap: 10px;
+  margin-top: 12px;
+}
+
+.native-studio-smart-cleanup {
+  display: grid;
+  gap: 10px;
+  margin-bottom: 12px;
+  border-radius: 8px;
+  border: 1px solid rgba(53, 194, 255, 0.22);
+  background:
+    linear-gradient(135deg, rgba(53, 194, 255, 0.12), rgba(255, 90, 47, 0.08)),
+    rgba(255, 255, 255, 0.04);
+  padding: 11px;
+}
+
+.native-studio-smart-cleanup strong,
+.native-studio-smart-cleanup span {
+  display: block;
+}
+
+.native-studio-smart-cleanup strong {
+  font-size: 12px;
+  color: rgba(255, 255, 255, 0.92);
+}
+
+.native-studio-smart-cleanup span {
+  margin-top: 2px;
+  font-size: 11px;
+  line-height: 1.45;
+  color: rgba(245, 245, 245, 0.55);
+}
+
+.native-studio-tool-row button:disabled {
+  cursor: not-allowed;
+  opacity: 0.45;
+}
+
+.native-studio-cleanup-list {
+  display: grid;
+  gap: 6px;
+  margin: -4px 0 12px;
+}
+
+.native-studio-cleanup-item {
+  display: flex;
+  min-width: 0;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+  border-radius: 7px;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  background: rgba(255, 255, 255, 0.045);
+  padding: 7px 9px;
+  text-align: left;
+  transition:
+    border-color 140ms ease,
+    background-color 140ms ease,
+    transform 140ms ease;
+}
+
+.native-studio-cleanup-item:hover {
+  border-color: rgba(53, 194, 255, 0.34);
+  background: rgba(53, 194, 255, 0.09);
+  transform: translateY(-1px);
+}
+
+.native-studio-cleanup-seek {
+  min-width: 0;
+  flex: 1;
+  border: 0;
+  background: transparent;
+  padding: 0;
+  text-align: left;
+}
+
+.native-studio-cleanup-list span {
+  min-width: 0;
+  overflow: hidden;
+  color: rgba(245, 245, 245, 0.72);
+  font-size: 11px;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.native-studio-cleanup-list strong,
+.native-studio-cleanup-list p {
+  color: rgba(245, 245, 245, 0.48);
+  font-size: 10px;
+  font-variant-numeric: tabular-nums;
+}
+
+.native-studio-cleanup-actions {
+  display: flex;
+  flex: 0 0 auto;
+  gap: 6px;
+}
+
+.native-studio-cleanup-actions button {
+  border-radius: 6px;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  background: rgba(255, 255, 255, 0.06);
+  padding: 5px 7px;
+  color: rgba(245, 245, 245, 0.76);
+  font-size: 10px;
+}
+
+.native-studio-cleanup-actions button:hover {
+  border-color: rgba(53, 194, 255, 0.34);
+  background: rgba(53, 194, 255, 0.12);
+}
+
+.native-studio-effect-card {
+  border-radius: 8px;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  background: rgba(255, 255, 255, 0.045);
+  padding: 10px;
+}
+
+.native-studio-effect-card.selected {
+  border-color: rgba(53, 194, 255, 0.76);
+  background: rgba(53, 194, 255, 0.08);
+  box-shadow:
+    inset 0 0 0 1px rgba(53, 194, 255, 0.18),
+    0 10px 24px rgba(0, 0, 0, 0.18);
+}
+
+.native-studio-effect-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+  margin-bottom: 8px;
+  font-size: 12px;
+}
+
+.native-studio-effect-header strong {
+  min-width: 0;
+  overflow: hidden;
+  color: rgba(255, 255, 255, 0.9);
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.native-studio-effect-header span {
+  color: rgba(245, 245, 245, 0.48);
+  font-variant-numeric: tabular-nums;
+}
+
+.native-studio-text-field {
+  grid-template-columns: 1fr;
+}
+
+.native-studio-text-field input[type="text"] {
+  width: 100%;
+  min-width: 0;
+  height: 30px;
+  border-radius: 7px;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  background: rgba(0, 0, 0, 0.22);
+  padding: 0 9px;
+  color: rgba(255, 255, 255, 0.88);
+}
+
+.native-studio-checkbox-field {
+  grid-template-columns: auto minmax(0, 1fr) !important;
+  justify-content: start;
+}
+
+.native-studio-checkbox-field input[type="checkbox"] {
+  width: 16px;
+  height: 16px;
+  accent-color: #35c2ff;
+}
+
+.native-studio-meta {
+  display: grid;
+  gap: 12px;
+  font-size: 12px;
+}
+
+.native-studio-meta div {
+  min-width: 0;
+}
+
+.native-studio-meta dt {
+  margin-bottom: 3px;
+  color: rgba(245, 245, 245, 0.44);
+}
+
+.native-studio-meta dd {
+  overflow-wrap: anywhere;
+  color: rgba(245, 245, 245, 0.8);
+}
+
+.native-studio-timeline {
+  grid-column: 2 / 4;
+  grid-row: 3;
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr) 196px;
+  align-items: center;
+  gap: 14px;
+  border-top: 1px solid rgba(255, 255, 255, 0.06);
+  background: #0c0f15;
+  padding: 0 18px;
+}
+
+.native-studio-transport-left {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+/* ✂ Cutting toggle: a bordered pill that turns brand-orange
+   when active; in that mode clicking the timeline marks a segment to remove. */
+.native-studio-cutting-toggle {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  height: 34px;
+  padding: 0 12px;
+  border-radius: var(--ns-radius-sm, 8px);
+  border: 1px solid var(--ns-border-strong, rgba(255, 255, 255, 0.16));
+  background: transparent;
+  color: var(--ns-text-2, rgba(245, 245, 245, 0.7));
+  font-size: 12px;
+  font-weight: 600;
+  white-space: nowrap;
+  cursor: pointer;
+  transition:
+    background-color 130ms ease,
+    border-color 130ms ease,
+    color 130ms ease;
+}
+
+.native-studio-cutting-toggle:hover {
+  color: #fff;
+  border-color: var(--ns-border-strong, rgba(255, 255, 255, 0.28));
+}
+
+.native-studio-cutting-toggle.is-active {
+  border-color: rgba(255, 90, 47, 0.55);
+  background: rgba(255, 90, 47, 0.16);
+  color: #ff7a52;
+}
+
+.native-studio-track.is-cutting {
+  cursor: crosshair;
+}
+
+.native-studio-play {
+  height: 34px;
+  border-radius: 7px;
+  background: rgba(255, 255, 255, 0.09);
+  font-size: 12px;
+  font-weight: 800;
+  color: #fff;
+}
+
+.native-studio-play:hover {
+  background: rgba(255, 255, 255, 0.14);
+}
+
+.native-studio-time {
+  display: grid;
+  gap: 2px;
+  min-width: 0;
+  font-size: 12px;
+  color: rgba(245, 245, 245, 0.62);
+  font-variant-numeric: tabular-nums;
+}
+
+.native-studio-time strong {
+  min-width: 0;
+  overflow: hidden;
+  color: rgba(245, 245, 245, 0.86);
+  font-size: 10px;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.native-studio-selected-actions {
+  display: grid;
+  min-width: 0;
+  gap: 7px;
+}
+
+.native-studio-selected-buttons {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 5px;
+}
+
+.native-studio-selected-buttons button {
+  height: 28px;
+  min-width: 0;
+  border-radius: 7px;
+  border: 1px solid rgba(255, 255, 255, 0.11);
+  background: rgba(255, 255, 255, 0.065);
+  color: rgba(245, 245, 245, 0.84);
+  font-size: 14px;
+  font-weight: 900;
+  line-height: 1;
+  transition:
+    background-color 140ms ease,
+    border-color 140ms ease,
+    color 140ms ease,
+    transform 140ms ease;
+}
+
+.native-studio-selected-buttons button:hover:not(:disabled) {
+  border-color: rgba(53, 194, 255, 0.36);
+  background: rgba(53, 194, 255, 0.12);
+  color: #fff;
+  transform: translateY(-1px);
+}
+
+.native-studio-selected-buttons button:disabled {
+  cursor: not-allowed;
+  opacity: 0.36;
+}
+
+.native-studio-track {
+  position: relative;
+  height: 64px;
+  border-radius: 10px;
+  background:
+    linear-gradient(90deg, rgba(255, 255, 255, 0.08), rgba(255, 255, 255, 0.035)),
+    rgba(255, 255, 255, 0.045);
+  overflow: hidden;
+}
+
+.native-studio-scrubber {
+  position: absolute;
+  top: 0;
+  right: 10px;
+  bottom: 0;
+  left: 92px;
+  z-index: 1;
+  width: auto;
+  opacity: 0;
+  cursor: pointer;
+}
+
+.native-studio-timeline-surface {
+  position: absolute;
+  top: 8px;
+  right: 10px;
+  bottom: 8px;
+  left: 92px;
+  border-radius: 8px;
+  background:
+    repeating-linear-gradient(
+      90deg,
+      rgba(255, 255, 255, 0.055) 0,
+      rgba(255, 255, 255, 0.055) 1px,
+      transparent 1px,
+      transparent 10%
+    );
+  opacity: 0.7;
+  pointer-events: none;
+}
+
+.native-studio-playhead {
+  position: absolute;
+  z-index: 8;
+  top: 8px;
+  bottom: 8px;
+  /* Initial position; the live value is written every frame by the rAF loop. */
+  left: 92px;
+  width: 2px;
+  border-radius: 999px;
+  background: #fff;
+  box-shadow:
+    0 0 0 1px rgba(8, 12, 20, 0.32),
+    0 0 18px rgba(255, 255, 255, 0.52);
+  transform: translateX(-50%);
+  /* No transition on `left`: the playhead is driven every frame from rAF, so a
+     CSS transition would make it perpetually lag behind playback (and only
+     "catch up" on pause). */
+}
+
+.native-studio-playhead::before {
+  position: absolute;
+  top: -5px;
+  left: 50%;
+  width: 10px;
+  height: 10px;
+  content: "";
+  border-radius: 999px;
+  background: #fff;
+  transform: translateX(-50%);
+}
+
+.native-studio-lanes {
+  position: absolute;
+  inset: 8px 10px 8px 8px;
+  z-index: 2;
+  display: grid;
+  grid-template-rows: repeat(2, 20px);
+  gap: 4px;
+  pointer-events: none;
+}
+
+.native-studio-zoom-disabled-banner {
+  position: absolute;
+  right: 16px;
+  bottom: 10px;
+  z-index: 8;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  border-radius: 999px;
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  background: rgba(5, 7, 11, 0.68);
+  padding: 5px 9px;
+  color: rgba(245, 245, 245, 0.68);
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0;
+  pointer-events: none;
+}
+
+.native-studio-zoom-disabled-banner span {
+  display: inline-grid;
+  width: 13px;
+  height: 13px;
+  place-items: center;
+  border-radius: 999px;
+  border: 1px solid currentColor;
+  font-size: 9px;
+  line-height: 1;
+}
+
+.native-studio-lane {
+  display: grid;
+  grid-template-columns: 72px minmax(0, 1fr);
+  align-items: center;
+  min-width: 0;
+  height: 20px;
+  border-radius: 6px;
+  background: rgba(255, 255, 255, 0.035);
+}
+
+.native-studio-lane-label,
+.native-studio-lane-count {
+  min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.native-studio-lane-label {
+  padding-left: 9px;
+  color: rgba(245, 245, 245, 0.74);
+  font-size: 10px;
+  font-weight: 800;
+  letter-spacing: 0;
+  text-transform: uppercase;
+}
+
+.native-studio-lane-count {
+  justify-self: end;
+  padding-right: 9px;
+  color: rgba(245, 245, 245, 0.4);
+  font-size: 10px;
+  font-variant-numeric: tabular-nums;
+}
+
+.native-studio-lane-clips {
+  position: absolute;
+  right: 10px;
+  left: 92px;
+  z-index: 5;
+  height: 20px;
+  pointer-events: none;
+}
+
+/* Video row (top) holds the kept segments + cut markers; Zoom row below. */
+.native-studio-lane-clips-video {
+  top: 8px;
+  z-index: 4;
+}
+
+.native-studio-lane-clips-cuts {
+  top: 8px;
+}
+
+.native-studio-lane-clips-zoom {
+  top: 32px;
+}
+
+.native-studio-video-segment {
+  position: absolute;
+  top: 0;
+  display: grid;
+  align-items: center;
+  height: 20px;
+  border-radius: 6px;
+  /* Two-colour timeline: video clips read blue, zoom clips
+     stay Clipy-orange. */
+  background: linear-gradient(180deg, #4f7cf0, #3b63db);
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  overflow: hidden;
+  pointer-events: none;
+}
+
+.native-studio-video-segment .native-studio-chip-label {
+  padding: 0 8px;
+  color: rgba(255, 255, 255, 0.92);
+  font-size: 10px;
+  font-weight: 700;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.native-studio-lane-clips-speed {
+  top: 56px;
+}
+
+.native-studio-lane-clips-captions {
+  top: 80px;
+}
+
+.native-studio-lane-clips-notes {
+  top: 104px;
+}
+
+.native-studio-lane-clips-audio {
+  top: 128px;
+}
+
+.native-studio-zoom-chip {
+  position: absolute;
+  z-index: 4;
+  top: 2px;
+  bottom: 2px;
+  min-width: 8px;
+  border-radius: 6px;
+  background: #35c2ff;
+  box-shadow: 0 0 18px rgba(53, 194, 255, 0.34);
+}
+
+.native-studio-zoom-chip,
+.native-studio-mute-chip,
+.native-studio-speed-chip,
+.native-studio-cut-chip,
+.native-studio-annotation-chip,
+.native-studio-keystroke-chip,
+.native-studio-caption-chip {
+  padding: 0;
+  border: 0;
+  cursor: grab;
+  pointer-events: auto;
+}
+
+.native-studio-chip-label {
+  display: block;
+  max-width: 100%;
+  min-width: 0;
+  overflow: hidden;
+  padding: 0 7px;
+  color: rgba(8, 12, 20, 0.78);
+  font-size: 10px;
+  font-weight: 800;
+  line-height: 16px;
+  text-align: left;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  pointer-events: none;
+}
+
+.native-studio-zoom-chip:active,
+.native-studio-mute-chip:active,
+.native-studio-speed-chip:active,
+.native-studio-cut-chip:active,
+.native-studio-annotation-chip:active,
+.native-studio-keystroke-chip:active,
+.native-studio-caption-chip:active {
+  cursor: grabbing;
+}
+
+.native-studio-zoom-chip:hover,
+.native-studio-zoom-chip:focus-visible {
+  background: #7ad8ff;
+}
+
+.native-studio-mute-chip,
+.native-studio-speed-chip,
+.native-studio-cut-chip,
+.native-studio-annotation-chip,
+.native-studio-keystroke-chip,
+.native-studio-caption-chip {
+  position: absolute;
+  z-index: 4;
+  min-width: 8px;
+  border-radius: 6px;
+}
+
+.native-studio-chip-handle {
+  position: absolute;
+  z-index: 3;
+  top: 50%;
+  width: 10px;
+  height: 20px;
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.92);
+  box-shadow:
+    0 0 0 1px rgba(15, 20, 30, 0.56),
+    0 2px 8px rgba(0, 0, 0, 0.28);
+  opacity: 0;
+  transform: translateY(-50%);
+  transition:
+    opacity 120ms ease,
+    transform 120ms ease;
+  cursor: ew-resize;
+}
+
+.native-studio-chip-handle.start {
+  left: -4px;
+}
+
+.native-studio-chip-handle.end {
+  right: -4px;
+}
+
+.native-studio-zoom-chip:hover .native-studio-chip-handle,
+.native-studio-zoom-chip:focus-visible .native-studio-chip-handle,
+.native-studio-mute-chip:hover .native-studio-chip-handle,
+.native-studio-mute-chip:focus-visible .native-studio-chip-handle,
+.native-studio-speed-chip:hover .native-studio-chip-handle,
+.native-studio-speed-chip:focus-visible .native-studio-chip-handle,
+.native-studio-cut-chip:hover .native-studio-chip-handle,
+.native-studio-cut-chip:focus-visible .native-studio-chip-handle,
+.native-studio-annotation-chip:hover .native-studio-chip-handle,
+.native-studio-annotation-chip:focus-visible .native-studio-chip-handle,
+.native-studio-keystroke-chip:hover .native-studio-chip-handle,
+.native-studio-keystroke-chip:focus-visible .native-studio-chip-handle,
+.native-studio-caption-chip:hover .native-studio-chip-handle,
+.native-studio-caption-chip:focus-visible .native-studio-chip-handle,
+.native-studio-zoom-chip.selected .native-studio-chip-handle,
+.native-studio-mute-chip.selected .native-studio-chip-handle,
+.native-studio-speed-chip.selected .native-studio-chip-handle,
+.native-studio-cut-chip.selected .native-studio-chip-handle,
+.native-studio-annotation-chip.selected .native-studio-chip-handle,
+.native-studio-keystroke-chip.selected .native-studio-chip-handle,
+.native-studio-caption-chip.selected .native-studio-chip-handle {
+  opacity: 1;
+}
+
+.native-studio-chip-handle:hover {
+  transform: translateY(-50%) scale(1.08);
+}
+
+.native-studio-zoom-chip.selected,
+.native-studio-mute-chip.selected,
+.native-studio-speed-chip.selected,
+.native-studio-cut-chip.selected,
+.native-studio-annotation-chip.selected,
+.native-studio-keystroke-chip.selected,
+.native-studio-caption-chip.selected {
+  z-index: 5;
+  outline: 2px solid rgba(255, 255, 255, 0.92);
+  outline-offset: 2px;
+  filter: saturate(1.2);
+}
+
+.native-studio-mute-chip {
+  top: 2px;
+  height: 16px;
+  background: #ef4444;
+  box-shadow: 0 0 12px rgba(239, 68, 68, 0.34);
+}
+
+.native-studio-speed-chip {
+  top: 2px;
+  height: 16px;
+  background: #f4c15d;
+  box-shadow: 0 0 12px rgba(244, 193, 93, 0.32);
+}
+
+.native-studio-cut-chip {
+  top: 2px;
+  height: 16px;
+  background: #fb7185;
+  box-shadow: 0 0 12px rgba(251, 113, 133, 0.34);
+}
+
+.native-studio-annotation-chip {
+  top: 2px;
+  height: 16px;
+  background: #a78bfa;
+  box-shadow: 0 0 12px rgba(167, 139, 250, 0.34);
+}
+
+.native-studio-keystroke-chip {
+  top: 2px;
+  height: 16px;
+  background: #34d399;
+  box-shadow: 0 0 12px rgba(52, 211, 153, 0.34);
+}
+
+.native-studio-caption-chip {
+  top: 2px;
+  height: 16px;
+  background: #f472b6;
+  box-shadow: 0 0 12px rgba(244, 114, 182, 0.34);
+}
+
+/* ============================================================================
+   NATIVE STUDIO — SCREEN-CHARM REDESIGN (token-driven override layer)
+   Single cohesive design system applied last; equal specificity → source
+   order wins. Tokens defined once on .native-studio-shell, referenced via var().
+   ============================================================================ */
+
+/* ---- Region A: palette tokens + shell + grid + hero stage ---------------- */
+.native-studio-shell {
+  /* Clipy brand palette: navy-slate dark chrome + the Clipy brand orange
+     (#ff4d29) as the single accent. A calm look: one accent, a big soft
+     canvas shadow and a de-rainbowed timeline. */
+  --ns-bg: #0a0c14;
+  --ns-stage: #07090f;
+  --ns-surface-1: #12141d;
+  --ns-surface-2: #181b25;
+  --ns-surface-3: #20232f;
+  --ns-surface: #12141d;
+  --ns-border: rgba(255, 255, 255, 0.07);
+  --ns-border-strong: rgba(255, 255, 255, 0.13);
+  --ns-text: rgba(255, 255, 255, 0.95);
+  --ns-text-2: rgba(228, 232, 242, 0.62);
+  --ns-text-3: rgba(228, 232, 242, 0.40);
+  --ns-text-muted: rgba(228, 232, 242, 0.62);
+  --ns-accent: #ff4d29;
+  --ns-accent-hover: #ff6a47;
+  --ns-accent-soft: rgba(255, 77, 41, 0.15);
+  --ns-accent-ring: rgba(255, 77, 41, 0.5);
+  --ns-sel: #ff4d29;
+  --ns-sel-soft: rgba(255, 77, 41, 0.16);
+  --ns-selection: #ff4d29;
+  --ns-radius-lg: 16px;
+  --ns-radius: 10px;
+  --ns-radius-sm: 8px;
+  --ns-shadow-1: 0 1px 2px rgba(0, 0, 0, 0.5);
+  --ns-shadow-2: 0 14px 40px rgba(0, 0, 0, 0.45);
+  --ns-shadow-pop: 0 28px 70px rgba(0, 0, 0, 0.42);
+  background: var(--ns-bg);
+  color: var(--ns-text);
+  grid-template-columns: 56px 300px minmax(0, 1fr);
+}
+
+.native-studio-grid {
+  grid-template-columns: 300px minmax(0, 1fr);
+}
+
+.native-studio-stage {
+  /* Preview framing: the canvas fills most of the
+     right section with tight, symmetric breathing room. */
+  padding: 20px 28px;
+  background-color: var(--ns-stage);
+  transition: background-color 160ms ease;
+}
+
+.native-studio-stage-background {
+  position: absolute;
+  inset: -36px;
+  z-index: 0;
+  transition:
+    filter 180ms ease,
+    transform 180ms ease,
+    background 180ms ease;
+}
+
+/* ---- Region B: top toolbar ---------------------------------------------- */
+.native-studio-topbar {
+  gap: 14px;
+  height: 48px;
+  padding: 0 12px;
+  background: var(--ns-surface-1);
+  border-bottom: 1px solid var(--ns-border);
+}
+
+.native-studio-project-title {
+  /* The project name is flat text on the bar, with no boxed
+     input chrome. */
+  gap: 0;
+  height: 30px;
+  padding: 0 4px;
+  border-radius: var(--ns-radius-sm);
+  background: transparent;
+  box-shadow: none;
+}
+
+.native-studio-project-title input {
+  width: min(100%, 220px);
+  height: 28px;
+  padding: 0 4px 0 0;
+  border: 0;
+  border-radius: 6px;
+  background: transparent;
+  color: var(--ns-text);
+  font-size: 13px;
+  font-weight: 600;
+  letter-spacing: -0.01em;
+}
+
+.native-studio-project-title input:focus {
+  outline: none;
+  color: var(--ns-text);
+}
+
+.native-studio-project-title span {
+  flex: 0 0 auto;
+  padding-right: 8px;
+  color: var(--ns-text-3);
+  font-size: 12px;
+  font-weight: 500;
+  letter-spacing: -0.01em;
+}
+
+.native-studio-status-cluster {
+  gap: 10px;
+}
+
+.native-studio-status {
+  max-width: 300px;
+  font-size: 11.5px;
+  font-weight: 500;
+  color: var(--ns-text-2);
+}
+
+.native-studio-render-pill {
+  border-radius: var(--ns-radius-sm);
+  border: 1px solid var(--ns-border);
+  background: var(--ns-surface-2);
+  padding: 5px 9px;
+  font-size: 10.5px;
+  font-weight: 600;
+  letter-spacing: 0.02em;
+  color: var(--ns-text-3);
+}
+
+.native-studio-render-pill.ready {
+  border-color: rgba(76, 141, 255, 0.28);
+  background: var(--ns-sel-soft);
+  color: var(--ns-sel);
+}
+
+.native-studio-compare-toggle {
+  gap: 2px;
+  border-radius: var(--ns-radius-sm);
+  padding: 2px;
+  background: var(--ns-bg);
+  box-shadow: inset 0 0 0 1px var(--ns-border);
+}
+
+.native-studio-compare-toggle button {
+  height: 26px;
+  min-width: 56px;
+  border-radius: 5px;
+  padding: 0 11px;
+  background: transparent;
+  color: var(--ns-text-2);
+  font-size: 12px;
+  font-weight: 600;
+  box-shadow: none;
+  transition:
+    background-color 130ms ease,
+    color 130ms ease,
+    box-shadow 130ms ease;
+}
+
+.native-studio-compare-toggle button:hover {
+  background: var(--ns-surface-2);
+  color: var(--ns-text);
+  box-shadow: none;
+}
+
+.native-studio-compare-toggle button.active {
+  background: var(--ns-sel-soft);
+  color: var(--ns-sel);
+  box-shadow:
+    inset 0 0 0 1px rgba(255, 77, 41, 0.3),
+    var(--ns-shadow-1);
+}
+
+.native-studio-topbar-actions {
+  gap: 6px;
+}
+
+.native-studio-action-group {
+  gap: 6px;
+  padding-right: 10px;
+  border-right: 1px solid var(--ns-border);
+}
+
+.native-studio-action-group:last-child {
+  padding-right: 0;
+  border-right: 0;
+}
+
+.native-studio-topbar-actions .native-studio-secondary {
+  height: 30px;
+  padding: 0 10px;
+  font-size: 12px;
+  font-weight: 500;
+}
+
+/* ---- Region C: left rail + line icons ----------------------------------- */
+.native-studio-rail {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 3px;
+  width: 56px;
+  border-right: 1px solid var(--ns-border);
+  background: var(--ns-surface-1);
+  padding: 48px 4px 12px;
+}
+
+.native-studio-rail-button {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  width: 48px;
+  height: 46px;
+  border-radius: var(--ns-radius);
+  border: 1px solid transparent;
+  background: transparent;
+  color: var(--ns-text-2);
+  box-shadow: none;
+  transition:
+    background-color 140ms ease,
+    color 140ms ease;
+}
+
+.native-studio-rail-button svg {
+  width: 18px;
+  height: 18px;
+  flex: none;
+}
+
+.native-studio-rail-button:hover {
+  background: var(--ns-surface-2);
+  color: var(--ns-text);
+}
+
+.native-studio-rail-button.active {
+  background: var(--ns-accent-soft);
+  color: var(--ns-text);
+  box-shadow: none;
+}
+
+.native-studio-rail-button.active svg {
+  color: var(--ns-accent);
+}
+
+.native-studio-rail-button small {
+  position: static;
+  transform: none;
+  width: auto;
+  max-width: 100%;
+  text-align: center;
+  color: inherit;
+  font-size: 9px;
+  font-weight: 600;
+  letter-spacing: 0.01em;
+  line-height: 1;
+}
+
+.native-studio-rail-button span,
+.native-studio-rail-button span::before,
+.native-studio-rail-button span::after {
+  position: absolute;
+  content: "";
+  border-color: currentColor;
+}
+
+.native-studio-rail-button.icon-settings span {
+  width: 17px;
+  height: 17px;
+  border: 1.6px solid currentColor;
+  border-radius: 999px;
+  background: none;
+  box-shadow: none;
+  transform: none;
+}
+.native-studio-rail-button.icon-settings span::before {
+  inset: auto;
+  top: 50%;
+  left: 50%;
+  width: 4.5px;
+  height: 4.5px;
+  margin: -2.25px 0 0 -2.25px;
+  border: 0;
+  border-radius: 999px;
+  background: currentColor;
+  box-shadow: none;
+  transform: none;
+}
+.native-studio-rail-button.icon-settings span::after {
+  top: 50%;
+  left: 50%;
+  width: 1.6px;
+  height: 1.6px;
+  margin: -0.8px 0 0 -0.8px;
+  border: 0;
+  border-radius: 999px;
+  background: currentColor;
+  box-shadow:
+    0 -11px 0 currentColor,
+    0 11px 0 currentColor,
+    -11px 0 0 currentColor,
+    11px 0 0 currentColor;
+  transform: none;
+}
+
+.native-studio-rail-button.icon-cursor span {
+  width: 0;
+  height: 0;
+  border: 0;
+  border-top: 16px solid currentColor;
+  border-right: 9px solid transparent;
+  border-radius: 0;
+  background: none;
+  box-shadow: none;
+  transform: rotate(-20deg);
+}
+.native-studio-rail-button.icon-cursor span::before {
+  display: none;
+}
+.native-studio-rail-button.icon-cursor span::after {
+  top: 9px;
+  left: 3px;
+  width: 2px;
+  height: 9px;
+  border: 0;
+  border-radius: 999px;
+  background: currentColor;
+  box-shadow: none;
+  transform: rotate(38deg);
+}
+
+.native-studio-rail-button.icon-sound span {
+  left: 12px;
+  top: 50%;
+  width: 6px;
+  height: 8px;
+  margin-top: -4px;
+  border: 0;
+  border-radius: 1px;
+  background: currentColor;
+  box-shadow: none;
+  transform: none;
+}
+.native-studio-rail-button.icon-sound span::before {
+  left: 17px;
+  top: 50%;
+  width: 0;
+  height: 0;
+  margin-top: -9px;
+  border: 0;
+  border-top: 9px solid transparent;
+  border-bottom: 9px solid transparent;
+  border-left: 9px solid currentColor;
+  border-radius: 0;
+  background: none;
+  box-shadow: none;
+  transform: none;
+}
+.native-studio-rail-button.icon-sound span::after {
+  left: 28px;
+  top: 50%;
+  width: 7px;
+  height: 12px;
+  margin-top: -6px;
+  border: 1.6px solid currentColor;
+  border-left: 0;
+  border-radius: 0 999px 999px 0;
+  background: none;
+  box-shadow: none;
+  transform: none;
+}
+
+.native-studio-rail-button.icon-camera span {
+  left: 11px;
+  top: 50%;
+  width: 16px;
+  height: 13px;
+  margin-top: -6.5px;
+  border: 1.6px solid currentColor;
+  border-radius: 3px;
+  background: none;
+  box-shadow: none;
+  transform: none;
+}
+.native-studio-rail-button.icon-camera span::before {
+  display: none;
+}
+.native-studio-rail-button.icon-camera span::after {
+  top: 50%;
+  right: 5px;
+  width: 0;
+  height: 0;
+  margin-top: -5px;
+  border: 0;
+  border-top: 5px solid transparent;
+  border-bottom: 5px solid transparent;
+  border-left: 7px solid currentColor;
+  border-radius: 0;
+  background: none;
+  box-shadow: none;
+  transform: none;
+}
+
+.native-studio-rail-button.icon-frame span {
+  width: 20px;
+  height: 16px;
+  border: 1.6px solid currentColor;
+  border-radius: 3px;
+  background: none;
+  box-shadow: none;
+  transform: none;
+}
+.native-studio-rail-button.icon-frame span::before {
+  top: 4px;
+  left: 0;
+  right: 0;
+  bottom: auto;
+  width: auto;
+  height: 1.6px;
+  border: 0;
+  border-radius: 0;
+  background: currentColor;
+  box-shadow: none;
+  transform: none;
+}
+.native-studio-rail-button.icon-frame span::after {
+  top: 1.5px;
+  left: 3px;
+  width: 1.6px;
+  height: 1.6px;
+  border: 0;
+  border-radius: 999px;
+  background: currentColor;
+  box-shadow: 4px 0 0 currentColor;
+  transform: none;
+}
+
+.native-studio-rail-button.icon-share span {
+  left: 50%;
+  top: 50%;
+  width: 5px;
+  height: 5px;
+  margin: -2.5px 0 0 -2.5px;
+  border: 1.6px solid currentColor;
+  border-radius: 999px;
+  background: var(--ns-surface-1);
+  box-shadow: none;
+  transform: none;
+}
+.native-studio-rail-button.icon-share span::before {
+  left: auto;
+  right: 11px;
+  top: 11px;
+  width: 5px;
+  height: 5px;
+  border: 1.6px solid currentColor;
+  border-radius: 999px;
+  background: var(--ns-surface-1);
+  box-shadow: 0 16px 0 -0.1px currentColor;
+  transform: none;
+  z-index: 1;
+}
+.native-studio-rail-button.icon-share span::after {
+  left: 50%;
+  top: 50%;
+  width: 13px;
+  height: 1.6px;
+  margin: -0.8px 0 0 0;
+  border: 0;
+  border-radius: 999px;
+  background: currentColor;
+  box-shadow: 0 0 0 currentColor;
+  transform: rotate(0deg);
+  transform-origin: left center;
+  z-index: 0;
+}
+
+/* ---- Region D: inspector shell + typography ----------------------------- */
+.native-studio-inspector {
+  background: var(--ns-surface-1);
+  border-right: 1px solid var(--ns-border);
+  padding: 18px 16px 28px;
+  scrollbar-gutter: stable;
+}
+
+.native-studio-inspector::-webkit-scrollbar {
+  width: 10px;
+}
+
+.native-studio-inspector::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.native-studio-inspector::-webkit-scrollbar-thumb {
+  border: 3px solid transparent;
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.08);
+  background-clip: padding-box;
+}
+
+.native-studio-inspector::-webkit-scrollbar-thumb:hover {
+  background: rgba(255, 255, 255, 0.16);
+  background-clip: padding-box;
+}
+
+.native-studio-inspector section {
+  padding: 0 0 18px;
+}
+
+.native-studio-inspector section + section {
+  border-top: 1px solid var(--ns-border);
+  padding-top: 18px;
+}
+
+/* Recording metadata is the always-visible last section in the DOM; the
+   ordered General panels (order 10-50) would otherwise let it (order 0)
+   float to the top. Pin it to the bottom of every tab. */
+.native-studio-inspector > section:last-child {
+  order: 120;
+}
+
+.native-studio-inspector h2 {
+  margin-bottom: 12px;
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--ns-text-3);
+}
+
+.native-studio-inspector label {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  align-items: center;
+  gap: 8px;
+  margin-top: 12px;
+  font-size: 12px;
+  color: var(--ns-text-2);
+}
+
+.native-studio-inspector label span {
+  color: var(--ns-text-3);
+  font-variant-numeric: tabular-nums;
+  font-feature-settings: "tnum" 1;
+}
+
+.native-studio-readout {
+  border: 0;
+  border-radius: var(--ns-radius-sm);
+  background: var(--ns-surface-2);
+  padding: 8px 10px;
+  font-size: 12px;
+  color: var(--ns-text-2);
+}
+
+.native-studio-export-note {
+  margin-top: 14px;
+  border: 0;
+  border-radius: 0;
+  background: transparent;
+  padding: 0;
+  font-size: 11px;
+  line-height: 1.5;
+  color: var(--ns-text-3);
+}
+
+.native-studio-meta {
+  display: grid;
+  gap: 14px;
+  font-size: 12px;
+}
+
+.native-studio-meta div {
+  min-width: 0;
+}
+
+.native-studio-meta dt {
+  margin-bottom: 4px;
+  font-size: 11px;
+  letter-spacing: 0.04em;
+  color: var(--ns-text-3);
+}
+
+.native-studio-meta dd {
+  overflow-wrap: anywhere;
+  color: var(--ns-text);
+}
+
+/* ---- Region E: sliders (keep native accent-color fill) ------------------ */
+.native-studio-inspector input[type="range"] {
+  grid-column: 1 / -1;
+  width: 100%;
+  -webkit-appearance: auto;
+  appearance: auto;
+  accent-color: var(--ns-accent);
+  height: 18px;
+  margin: 6px 0;
+  padding: 0;
+  background: transparent;
+  border: 0;
+  cursor: pointer;
+  vertical-align: middle;
+}
+
+.native-studio-inspector input[type="range"]:hover {
+  filter: brightness(1.06);
+}
+
+.native-studio-inspector input[type="range"]:focus-visible {
+  outline: none;
+}
+
+.native-studio-inspector input[type="range"]:disabled {
+  accent-color: var(--ns-text-3);
+  opacity: 0.45;
+  cursor: not-allowed;
+  filter: none;
+}
+
+/* ---- Region F: segmented controls + preset grids ------------------------ */
+.native-studio-segmented,
+.native-studio-background-tabs {
+  gap: 2px;
+  padding: 3px;
+  border-radius: var(--ns-radius-sm);
+  border: 1px solid var(--ns-border);
+  background: rgba(0, 0, 0, 0.28);
+  box-shadow:
+    inset 0 1px 2px rgba(0, 0, 0, 0.4),
+    inset 0 0 0 1px rgba(0, 0, 0, 0.12);
+}
+
+.native-studio-segment,
+.native-studio-background-tabs button {
+  height: 28px;
+  min-width: 0;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0 6px;
+  border: none;
+  border-radius: 5px;
+  background: transparent;
+  color: var(--ns-text-2);
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: -0.01em;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  box-shadow: none;
+  transition:
+    background-color 130ms ease,
+    color 130ms ease,
+    box-shadow 130ms ease;
+}
+
+.native-studio-segment:hover,
+.native-studio-background-tabs button:hover {
+  background: rgba(255, 255, 255, 0.05);
+  color: var(--ns-text);
+  box-shadow: none;
+}
+
+.native-studio-segment.active,
+.native-studio-background-tabs button.active {
+  background: var(--ns-sel-soft);
+  color: #fff;
+  box-shadow:
+    var(--ns-shadow-1),
+    inset 0 1px 0 rgba(255, 255, 255, 0.16),
+    inset 0 0 0 1px rgba(255, 77, 41, 0.28);
+}
+
+.native-studio-segment.active:hover,
+.native-studio-background-tabs button.active:hover {
+  background: var(--ns-sel-soft);
+  color: #fff;
+}
+
+.native-studio-speed-grid button,
+.native-studio-zoom-grid button {
+  height: 32px;
+  min-width: 0;
+  border-radius: var(--ns-radius-sm);
+  border: 1px solid var(--ns-border-strong);
+  background: var(--ns-surface-2);
+  color: var(--ns-text-2);
+  font-size: 12px;
+  font-weight: 650;
+  box-shadow: var(--ns-shadow-1);
+  transition:
+    background-color 130ms ease,
+    border-color 130ms ease,
+    color 130ms ease;
+}
+
+.native-studio-speed-grid button:hover,
+.native-studio-zoom-grid button:hover {
+  background: var(--ns-surface-3);
+  border-color: var(--ns-border-strong);
+  color: var(--ns-text);
+}
+
+.native-studio-speed-grid button.active,
+.native-studio-zoom-grid button.active {
+  background: var(--ns-accent-soft);
+  border-color: var(--ns-accent);
+  color: #fff;
+  box-shadow: var(--ns-shadow-1);
+}
+
+/* ---- Region G: buttons + cards ------------------------------------------ */
+.native-studio-primary {
+  background: var(--ns-accent);
+  border: 1px solid transparent;
+  border-radius: var(--ns-radius-sm);
+  color: #fff;
+  font-weight: 650;
+  box-shadow: var(--ns-shadow-1);
+  transition:
+    background-color 130ms ease,
+    box-shadow 130ms ease;
+}
+
+.native-studio-primary:hover {
+  background: var(--ns-accent-hover);
+  box-shadow: 0 4px 14px rgba(255, 90, 47, 0.28);
+}
+
+.native-studio-secondary {
+  border: 1px solid var(--ns-border);
+  border-radius: var(--ns-radius-sm);
+  background: var(--ns-surface-2);
+  color: var(--ns-text);
+  font-weight: 600;
+  box-shadow: none;
+  transition:
+    background-color 130ms ease,
+    border-color 130ms ease;
+}
+
+.native-studio-secondary:hover:not(:disabled) {
+  background: var(--ns-surface-3);
+  border-color: var(--ns-border-strong);
+}
+
+.native-studio-secondary:disabled {
+  cursor: not-allowed;
+  opacity: 0.4;
+}
+
+.native-studio-danger {
+  border: 1px solid var(--ns-border);
+  border-radius: var(--ns-radius-sm);
+  background: var(--ns-surface-2);
+  color: #ff8e74;
+  font-weight: 650;
+  box-shadow: none;
+  transition:
+    background-color 130ms ease,
+    border-color 130ms ease,
+    color 130ms ease;
+}
+
+.native-studio-danger:hover:not(:disabled) {
+  background: rgba(255, 90, 47, 0.1);
+  border-color: rgba(255, 90, 47, 0.32);
+  color: #ffa78f;
+}
+
+.native-studio-danger:disabled {
+  cursor: not-allowed;
+  opacity: 0.42;
+}
+
+.native-studio-tool-row button {
+  border: 1px solid var(--ns-border);
+  border-radius: var(--ns-radius-sm);
+  background: var(--ns-surface-2);
+  color: var(--ns-text-2);
+  font-weight: 600;
+  transition:
+    background-color 120ms ease,
+    border-color 120ms ease,
+    color 120ms ease,
+    transform 120ms ease;
+}
+
+.native-studio-tool-row button:hover {
+  background: var(--ns-surface-3);
+  border-color: var(--ns-border-strong);
+  color: var(--ns-text);
+  transform: translateY(-1px);
+}
+
+.native-studio-tool-row button:disabled {
+  cursor: not-allowed;
+  opacity: 0.42;
+  transform: none;
+}
+
+.native-studio-shuffle-look {
+  border: 1px solid var(--ns-border);
+  border-radius: var(--ns-radius-sm);
+  background: var(--ns-surface-2);
+  color: var(--ns-text-2);
+  font-weight: 600;
+}
+
+.native-studio-shuffle-look:hover {
+  border-color: var(--ns-border-strong);
+  background: var(--ns-surface-3);
+  color: var(--ns-text);
+}
+
+.native-studio-polish-presets button {
+  border: 1px solid var(--ns-border);
+  border-radius: var(--ns-radius);
+  background: var(--ns-surface-2);
+  transition:
+    background-color 140ms ease,
+    border-color 140ms ease,
+    transform 140ms ease;
+}
+
+.native-studio-polish-presets button:hover {
+  border-color: var(--ns-border-strong);
+  background-color: var(--ns-surface-3);
+  transform: translateY(-1px);
+}
+
+.native-studio-polish-presets strong {
+  color: var(--ns-text);
+  font-weight: 650;
+}
+
+.native-studio-polish-presets span {
+  color: var(--ns-text-2);
+}
+
+.native-studio-cursor-presets button {
+  border: 1px solid var(--ns-border);
+  border-radius: var(--ns-radius);
+  background: var(--ns-surface-2);
+  transition:
+    background-color 140ms ease,
+    border-color 140ms ease,
+    transform 140ms ease;
+}
+
+.native-studio-cursor-presets button:hover {
+  border-color: var(--ns-border-strong);
+  background: var(--ns-surface-3);
+  transform: translateY(-1px);
+}
+
+.native-studio-cursor-presets strong {
+  color: var(--ns-text);
+  font-weight: 650;
+}
+
+.native-studio-cursor-presets span {
+  color: var(--ns-text-2);
+}
+
+.native-studio-style-presets button {
+  border: 1px solid var(--ns-border);
+  border-radius: var(--ns-radius-sm);
+  background: var(--ns-surface-2);
+  color: var(--ns-text-2);
+  font-weight: 600;
+  transition:
+    background-color 140ms ease,
+    border-color 140ms ease,
+    color 140ms ease;
+}
+
+.native-studio-style-presets button:hover {
+  border-color: var(--ns-border-strong);
+  background: var(--ns-surface-3);
+  color: var(--ns-text);
+}
+
+.native-studio-style-presets span {
+  border: 1px solid var(--ns-border-strong);
+}
+
+.native-studio-background-preset {
+  border: 1px solid var(--ns-border);
+  border-radius: var(--ns-radius);
+  background: var(--ns-surface-2);
+  color: var(--ns-text-2);
+  font-weight: 600;
+}
+
+.native-studio-background-preset:hover {
+  border-color: var(--ns-border-strong);
+  background-color: var(--ns-surface-3);
+  color: var(--ns-text);
+  transform: translateY(-1px);
+}
+
+.native-studio-background-preset.is-active {
+  border-color: var(--ns-sel);
+  background-color: var(--ns-sel-soft);
+  color: var(--ns-text);
+  box-shadow: inset 0 0 0 1px rgba(255, 77, 41, 0.22);
+}
+
+.native-studio-background-preset-thumb {
+  border: 1px solid var(--ns-border-strong);
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.1),
+    var(--ns-shadow-1);
+}
+
+.native-studio-background-preset-thumb span {
+  background: rgba(8, 12, 20, 0.78);
+  box-shadow:
+    var(--ns-shadow-1),
+    inset 0 1px 0 rgba(255, 255, 255, 0.12);
+}
+
+.native-studio-switch-field {
+  display: flex !important;
+  border: 1px solid var(--ns-border);
+  border-radius: var(--ns-radius);
+  background: var(--ns-surface-2);
+}
+
+.native-studio-switch-field strong {
+  color: var(--ns-text);
+  font-weight: 650;
+}
+
+.native-studio-switch-field span {
+  color: var(--ns-text-2);
+}
+
+.native-studio-switch-field small {
+  color: var(--ns-text-2);
+  font-weight: 500;
+}
+
+.native-studio-switch-field input {
+  accent-color: var(--ns-sel);
+}
+
+.native-studio-checkbox-field {
+  grid-template-columns: auto minmax(0, 1fr) !important;
+}
+
+.native-studio-checkbox-field input[type="checkbox"] {
+  accent-color: var(--ns-sel);
+}
+
+.native-studio-text-field input[type="text"] {
+  border: 1px solid var(--ns-border);
+  border-radius: var(--ns-radius-sm);
+  background: var(--ns-surface-1);
+  color: var(--ns-text);
+}
+
+.native-studio-text-field input[type="text"]:focus {
+  outline: none;
+  border-color: var(--ns-sel);
+  box-shadow: 0 0 0 2px var(--ns-sel-soft);
+}
+
+.native-studio-smart-cleanup {
+  border: 1px solid var(--ns-border);
+  border-radius: var(--ns-radius);
+  background: var(--ns-surface-2);
+}
+
+.native-studio-smart-cleanup strong {
+  color: var(--ns-text);
+  font-weight: 650;
+}
+
+.native-studio-smart-cleanup span {
+  color: var(--ns-text-2);
+}
+
+.native-studio-cleanup-item {
+  border: 1px solid var(--ns-border);
+  border-radius: var(--ns-radius-sm);
+  background: var(--ns-surface-2);
+}
+
+.native-studio-cleanup-item:hover {
+  border-color: var(--ns-sel);
+  background: var(--ns-sel-soft);
+  transform: translateY(-1px);
+}
+
+.native-studio-cleanup-seek {
+  border: 0;
+  background: transparent;
+}
+
+.native-studio-cleanup-actions button {
+  border: 1px solid var(--ns-border);
+  border-radius: var(--ns-radius-sm);
+  background: var(--ns-surface-3);
+  color: var(--ns-text-2);
+}
+
+.native-studio-cleanup-actions button:hover {
+  border-color: var(--ns-sel);
+  background: var(--ns-sel-soft);
+  color: var(--ns-text);
+}
+
+.native-studio-effect-card {
+  border: 1px solid var(--ns-border);
+  border-radius: var(--ns-radius);
+  background: var(--ns-surface-2);
+}
+
+.native-studio-effect-card.selected {
+  border-color: var(--ns-sel);
+  background: var(--ns-sel-soft);
+  box-shadow: inset 0 0 0 1px rgba(255, 77, 41, 0.22);
+}
+
+.native-studio-effect-header strong {
+  color: var(--ns-text);
+}
+
+.native-studio-effect-header span {
+  color: var(--ns-text-3);
+}
+
+.native-studio-music-preview-row .native-studio-secondary {
+  background: var(--ns-surface-2);
+  border: 1px solid var(--ns-border);
+  color: var(--ns-text);
+}
+
+.native-studio-music-preview-row .native-studio-secondary:hover:not(:disabled) {
+  background: var(--ns-surface-3);
+  border-color: var(--ns-border-strong);
+}
+
+/* ---- Region H: preview frame + device frames + camera ------------------- */
+/* The frame is now just the flat background canvas — the rounded + shadowed
+   "screen" lives on .native-studio-crop-window (set inline), so the preview is a
+   single frame, not a rounded card around a rounded
+   screen. overflow:visible lets the screen's drop shadow spill into the padding. */
+.native-studio-video-frame {
+  background: rgba(255, 255, 255, 0.03);
+  border-radius: 0;
+  box-shadow: none;
+  outline: none;
+  overflow: visible;
+  transition:
+    box-shadow 220ms ease,
+    outline-color 220ms ease,
+    padding 180ms ease;
+}
+
+.native-studio-video-frame[style*="aspect-ratio"] {
+  /* Fit the padded canvas inside the stage by BOTH axes: width is capped at the
+     stage width (100%) and at (stage height x aspect), so the frame never
+     overflows. Height is derived EXPLICITLY as width / aspect (not left to
+     aspect-ratio auto-sizing, which the stage grid was overriding), so the box
+     always renders at its true aspect. Without this the frame was height-bound
+     and overflowed its width whenever the canvas was wider than the stage,
+     desyncing the layout and squishing the video to a short, top-aligned strip. */
+  width: min(100%, calc((100vh - 150px) * var(--frame-ar, 1.6)));
+  height: auto;
+  max-height: calc(100vh - 150px);
+}
+
+/* State accents move off the (now invisible) frame card; the timeline chips
+   already signal zoom/speed/mute, so the single screen frame stays clean. */
+.native-studio-video-frame.is-zooming,
+.native-studio-video-frame.is-speeding,
+.native-studio-video-frame.is-muted {
+  outline: none;
+  box-shadow: none;
+}
+
+.native-studio-video-frame.is-before {
+  background: var(--ns-bg);
+  outline: none;
+  box-shadow: none;
+}
+
+.native-studio-video {
+  /* Rounding now comes from the crop-window (the single screen frame). */
+  border-radius: 0;
+}
+
+.native-studio-crop-window.is-cropped {
+  outline: 1px solid rgba(255, 77, 41, 0.28);
+  outline-offset: -1px;
+}
+
+.native-studio-device-frame {
+  background: transparent;
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.14),
+    inset 0 0 0 1px var(--ns-border-strong),
+    var(--ns-shadow-2);
+}
+
+.native-studio-device-window::before {
+  border: 1.5px solid var(--ns-border-strong);
+  border-radius: var(--ns-radius);
+}
+
+.native-studio-device-macbook {
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.22),
+    inset 0 -1px 0 rgba(255, 255, 255, 0.08),
+    var(--ns-shadow-pop);
+}
+
+.native-studio-device-macbook::after {
+  background: rgba(255, 255, 255, 0.16);
+}
+
+.native-studio-video-frame.is-macbook-frame {
+  overflow: visible;
+}
+
+.native-studio-padding-shell > .native-studio-device-macbook {
+  --macbook-frame-x: 16.4%;
+  --macbook-frame-y: 13.2%;
+  --macbook-outer-x: 12.35%;
+  --macbook-outer-y: 10.44%;
+  inset: 0;
+  border: 0;
+  border-radius: 0;
+  background: transparent;
+  box-shadow: none;
+  overflow: visible;
+}
+
+.native-studio-padding-shell > .native-studio-device-macbook::before {
+  position: absolute;
+  inset:
+    calc(-1 * var(--macbook-frame-y))
+    calc(-1 * var(--macbook-frame-x));
+  content: "";
+  border-radius: clamp(14px, 2.4vw, 34px);
+  background:
+    linear-gradient(180deg, rgba(255, 255, 255, 0.16), transparent) top / 100%
+      var(--macbook-outer-y) no-repeat,
+    linear-gradient(currentColor, currentColor) top / 100% var(--macbook-outer-y)
+      no-repeat,
+    linear-gradient(currentColor, currentColor) bottom / 100% var(--macbook-outer-y)
+      no-repeat,
+    linear-gradient(currentColor, currentColor) left / var(--macbook-outer-x) 100%
+      no-repeat,
+    linear-gradient(currentColor, currentColor) right / var(--macbook-outer-x) 100%
+      no-repeat;
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.2),
+    inset 0 0 0 1px rgba(255, 255, 255, 0.08),
+    var(--ns-shadow-pop);
+}
+
+.native-studio-padding-shell > .native-studio-device-macbook::after {
+  position: absolute;
+  inset:
+    calc(-1 * var(--macbook-frame-y))
+    calc(-1 * var(--macbook-frame-x));
+  content: "";
+  border-radius: clamp(14px, 2.4vw, 34px);
+  background:
+    radial-gradient(
+      circle at 50% 6.2%,
+      rgba(3, 5, 10, 0.92) 0 clamp(3px, 0.55vw, 8px),
+      transparent calc(clamp(3px, 0.55vw, 8px) + 1px)
+    ),
+    linear-gradient(
+        90deg,
+        transparent 30%,
+        rgba(255, 255, 255, 0.18) 44%,
+        rgba(255, 255, 255, 0.28) 50%,
+        rgba(255, 255, 255, 0.18) 56%,
+        transparent 70%
+      )
+      center bottom calc(var(--macbook-frame-y) * 0.46) /
+      34% clamp(4px, 0.55vw, 8px) no-repeat;
+}
+
+.native-studio-camera-guide {
+  border: 2px solid rgba(255, 255, 255, 0.16);
+  border-radius: var(--ns-radius);
+  background:
+    linear-gradient(
+      180deg,
+      rgba(255, 255, 255, 0.04),
+      rgba(10, 13, 19, 0.16)
+    );
+  box-shadow:
+    inset 0 0 0 1px rgba(255, 255, 255, 0.06),
+    0 22px 50px rgba(0, 0, 0, calc(0.46 * var(--camera-shadow-strength, 1))),
+    0 6px 16px rgba(0, 0, 0, calc(0.3 * var(--camera-shadow-strength, 1)));
+  overflow: hidden;
+}
+
+.native-studio-camera-bubble {
+  border-radius: 999px;
+}
+
+.native-studio-camera-shape-circle {
+  border-radius: 999px;
+}
+
+.native-studio-camera-shape-rounded {
+  border-radius: var(--ns-radius);
+}
+
+.native-studio-camera-shape-squircle {
+  border-radius: 32%;
+}
+
+.native-studio-camera-shape-rectangle {
+  border-radius: 4px;
+}
+
+.native-studio-camera-draggable {
+  pointer-events: auto;
+  cursor: grab;
+  touch-action: none;
+}
+
+.native-studio-camera-draggable:active {
+  cursor: grabbing;
+}
+
+.native-studio-camera-draggable.is-free {
+  z-index: 7;
+}
+
+.native-studio-camera-guide::after {
+  right: 8px;
+  bottom: 8px;
+  left: auto;
+  display: inline-flex;
+  align-items: center;
+  padding: 3px 8px;
+  border: 1px solid var(--ns-border-strong);
+  border-radius: 999px;
+  background: rgba(10, 13, 19, 0.66);
+  color: var(--ns-text);
+  font-size: 9px;
+  font-weight: 800;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.32);
+  backdrop-filter: blur(10px);
+}
+
+.native-studio-camera-guide:has(.native-studio-camera-video)::after {
+  background: rgba(10, 13, 19, 0.5);
+  color: var(--ns-text-3);
+  opacity: 0.85;
+}
+
+.native-studio-camera-video {
+  object-fit: cover;
+  object-position: center center;
+  border-radius: inherit;
+  transform-origin: center;
+}
+
+.native-studio-motion-hud span {
+  border: 1px solid var(--ns-border-strong);
+  border-radius: 999px;
+  background: rgba(26, 30, 40, 0.72);
+  color: var(--ns-text);
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.06),
+    var(--ns-shadow-2);
+  backdrop-filter: blur(16px) saturate(1.1);
+}
+
+.native-studio-motion-hud strong {
+  color: #fff;
+}
+
+/* ---- Region I: camera-layout picker + in-canvas overlays ---------------- */
+.native-studio-camera-layout-grid {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  gap: 8px;
+  margin-bottom: 12px;
+}
+
+.native-studio-camera-layout {
+  display: flex;
+  min-width: 0;
+  min-height: 62px;
+  flex-direction: row;
+  align-items: center;
+  justify-content: flex-start;
+  gap: 12px;
+  border-radius: var(--ns-radius-sm);
+  border: 1px solid var(--ns-border);
+  background: var(--ns-surface-2);
+  padding: 10px;
+  text-align: left;
+  box-shadow: var(--ns-shadow-1);
+  transition:
+    border-color 140ms ease,
+    background-color 140ms ease,
+    box-shadow 140ms ease,
+    transform 140ms ease;
+}
+
+.native-studio-camera-layout:hover {
+  border-color: var(--ns-border-strong);
+  background: var(--ns-surface-3);
+  box-shadow:
+    var(--ns-shadow-1),
+    0 6px 16px rgba(0, 0, 0, 0.28);
+  transform: translateY(-1px);
+}
+
+.native-studio-camera-layout.active {
+  border-color: var(--ns-sel);
+  background: var(--ns-sel-soft);
+  box-shadow:
+    inset 0 0 0 1px rgba(255, 77, 41, 0.45),
+    0 0 0 3px rgba(255, 77, 41, 0.12),
+    var(--ns-shadow-1);
+  transform: none;
+}
+
+.native-studio-camera-layout:focus-visible {
+  outline: 2px solid var(--ns-sel);
+  outline-offset: 2px;
+}
+
+.native-studio-camera-layout-preview {
+  position: relative;
+  display: block;
+  width: 78px;
+  height: 42px;
+  flex: 0 0 78px;
+  overflow: hidden;
+  border-radius: var(--ns-radius-sm);
+  background: var(--ns-bg);
+  box-shadow:
+    inset 0 0 0 1px var(--ns-border),
+    var(--ns-shadow-1);
+}
+
+.native-studio-camera-layout-copy {
+  display: flex;
+  min-width: 0;
+  flex: 1;
+  flex-direction: column;
+  gap: 3px;
+}
+
+.native-studio-camera-layout-copy strong {
+  overflow: hidden;
+  color: var(--ns-text);
+  font-size: 12px;
+  font-weight: 760;
+  line-height: 1.15;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.native-studio-camera-layout-copy small {
+  color: var(--ns-text-2);
+  font-size: 10px;
+  font-weight: 650;
+  line-height: 1.2;
+}
+
+.native-studio-camera-layout-screen {
+  position: absolute;
+  inset: 6px;
+  border-radius: 5px;
+  background:
+    linear-gradient(135deg, rgba(76, 141, 255, 0.16), transparent 60%),
+    var(--ns-surface-3);
+  box-shadow: inset 0 0 0 1px var(--ns-border);
+}
+
+.native-studio-camera-layout-camera {
+  position: absolute;
+  border-radius: 999px;
+  background:
+    radial-gradient(circle at 36% 30%, rgba(255, 255, 255, 0.92) 0 8%, transparent 9%),
+    var(--ns-accent);
+  box-shadow:
+    inset 0 0 0 1px rgba(255, 255, 255, 0.24),
+    0 4px 12px rgba(0, 0, 0, 0.32);
+}
+
+.preview-hidden::after {
+  background: var(--ns-text-3);
+  top: 21px;
+  left: 17px;
+  width: 40px;
+}
+
+.native-studio-empty {
+  border-radius: var(--ns-radius);
+  border: 1px solid var(--ns-border);
+  background: var(--ns-surface-1);
+  box-shadow: var(--ns-shadow-2);
+  color: var(--ns-text-2);
+}
+
+.native-studio-cursor-overlay {
+  background: var(--ns-text);
+  border-top-color: var(--ns-text);
+  border-left-color: var(--ns-text);
+  filter:
+    drop-shadow(0 1px 0 rgba(0, 0, 0, 0.85))
+    drop-shadow(0 0 6px rgba(0, 0, 0, 0.5))
+    blur(var(--cursor-motion-blur, 0px));
+  transform: translate(
+    calc(-1 * var(--cursor-hotspot-x, 0px)),
+    calc(-1 * var(--cursor-hotspot-y, 0px))
+  );
+}
+
+.native-studio-cursor-overlay::after {
+  border-top-color: rgba(10, 13, 19, 0.82);
+  border-left-color: rgba(10, 13, 19, 0.82);
+}
+
+.native-studio-cursor-dot {
+  background: var(--ns-text);
+  box-shadow:
+    0 0 0 2px rgba(10, 13, 19, 0.6),
+    0 0 16px rgba(76, 141, 255, 0.4);
+}
+
+.native-studio-cursor-ring {
+  border-color: var(--ns-text);
+  background: rgba(76, 141, 255, 0.07);
+  box-shadow:
+    0 0 0 1px rgba(10, 13, 19, 0.6),
+    0 0 18px rgba(76, 141, 255, 0.36);
+}
+
+.native-studio-cursor-trail {
+  background: rgba(255, 255, 255, 0.88);
+  box-shadow:
+    0 0 0 1px rgba(76, 141, 255, 0.28),
+    0 0 12px rgba(76, 141, 255, 0.42);
+}
+
+.native-studio-cursor-crosshair::before,
+.native-studio-cursor-crosshair::after {
+  background: var(--ns-text);
+  box-shadow: 0 0 0 1px rgba(10, 13, 19, 0.6);
+}
+
+.native-studio-cursor-resize-horizontal::before,
+.native-studio-cursor-resize-vertical::before,
+.native-studio-cursor-resize-diagonal-nesw::before,
+.native-studio-cursor-resize-diagonal-nwse::before,
+.native-studio-cursor-move::before,
+.native-studio-cursor-move::after {
+  background: var(--ns-text);
+  box-shadow: 0 0 0 1px rgba(10, 13, 19, 0.6);
+}
+
+.native-studio-cursor-resize-horizontal::after,
+.native-studio-cursor-resize-vertical::after {
+  background:
+    linear-gradient(135deg, transparent 0 38%, var(--ns-text) 39% 61%, transparent 62%),
+    linear-gradient(45deg, transparent 0 38%, var(--ns-text) 39% 61%, transparent 62%);
+}
+
+.native-studio-cursor-ibeam {
+  background:
+    linear-gradient(
+      90deg,
+      transparent 0 calc(50% - max(1px, 5%)),
+      var(--ns-text) calc(50% - max(1px, 5%)) calc(50% + max(1px, 5%)),
+      transparent calc(50% + max(1px, 5%)) 100%
+    );
+}
+
+.native-studio-cursor-ibeam::before,
+.native-studio-cursor-ibeam::after {
+  background: var(--ns-text);
+  box-shadow: 0 0 0 1px rgba(10, 13, 19, 0.6);
+}
+
+.native-studio-cursor-highlight {
+  background: var(--ns-text);
+  box-shadow:
+    0 0 0 max(2px, 10%) rgba(255, 107, 61, 0.34),
+    0 0 22px rgba(255, 107, 61, 0.4),
+    0 0 0 1px rgba(10, 13, 19, 0.56);
+}
+
+.native-studio-cursor-pointer {
+  background: var(--ns-text);
+}
+
+.native-studio-cursor-hand-open::before,
+.native-studio-cursor-hand-grab::before {
+  background: var(--ns-text);
+  box-shadow: 0 0 0 1px rgba(10, 13, 19, 0.6);
+}
+
+.native-studio-cursor-hand-open::after {
+  background:
+    linear-gradient(90deg, transparent 0 12%, var(--ns-text) 13% 27%, transparent 28% 35%, var(--ns-text) 36% 50%, transparent 51% 58%, var(--ns-text) 59% 73%, transparent 74% 81%, var(--ns-text) 82% 96%, transparent 97%),
+    linear-gradient(38deg, transparent 0 10%, var(--ns-text) 11% 28%, transparent 29%);
+}
+
+.native-studio-cursor-hand-grab::after {
+  background:
+    linear-gradient(90deg, transparent 0 8%, var(--ns-text) 9% 26%, transparent 27% 33%, var(--ns-text) 34% 51%, transparent 52% 58%, var(--ns-text) 59% 76%, transparent 77% 83%, var(--ns-text) 84% 100%),
+    linear-gradient(35deg, transparent 0 13%, var(--ns-text) 14% 31%, transparent 32%);
+}
+
+.native-studio-cursor-not-allowed,
+.native-studio-cursor-zoom-in,
+.native-studio-cursor-zoom-out {
+  border-color: var(--ns-text);
+  background: rgba(10, 13, 19, 0.24);
+  box-shadow:
+    0 0 0 1px rgba(10, 13, 19, 0.6),
+    0 0 18px rgba(76, 141, 255, 0.28);
+}
+
+.native-studio-cursor-not-allowed::after,
+.native-studio-cursor-zoom-in::after,
+.native-studio-cursor-zoom-out::after {
+  background: var(--ns-text);
+  box-shadow: 0 0 0 1px rgba(10, 13, 19, 0.52);
+}
+
+.native-studio-cursor-zoom-in::after {
+  background:
+    linear-gradient(90deg, transparent 0 42%, var(--ns-text) 43% 57%, transparent 58%),
+    linear-gradient(0deg, transparent 0 42%, var(--ns-text) 43% 57%, transparent 58%);
+}
+
+.native-studio-cursor-help {
+  background: var(--ns-text);
+}
+
+.native-studio-cursor-help::after {
+  border-color: rgba(10, 13, 19, 0.6);
+  background: var(--ns-text);
+  color: rgba(10, 13, 19, 0.82);
+}
+
+.native-studio-annotation-text {
+  border-radius: var(--ns-radius-sm);
+  background: rgba(10, 13, 19, 0.62);
+  box-shadow: var(--ns-shadow-1);
+  text-shadow: 0 2px 10px rgba(0, 0, 0, 0.55);
+}
+
+.native-studio-annotation-redact {
+  border-radius: var(--ns-radius-sm);
+  border: 1px solid var(--ns-border-strong);
+  box-shadow:
+    inset 0 0 0 1px rgba(0, 0, 0, 0.55),
+    var(--ns-shadow-2);
+}
+
+.native-studio-annotation-box {
+  border-radius: var(--ns-radius-sm);
+}
+
+.native-studio-annotation-blur {
+  border-radius: var(--ns-radius-sm);
+}
+
+.native-studio-annotation-resize {
+  border: 2px solid rgba(10, 13, 19, 0.9);
+  background: var(--ns-text);
+  box-shadow: var(--ns-shadow-1);
+}
+
+.native-studio-annotation-resize::after {
+  border-right-color: rgba(10, 13, 19, 0.72);
+  border-bottom-color: rgba(10, 13, 19, 0.72);
+}
+
+.native-studio-annotation-text:hover,
+.native-studio-annotation-box:hover,
+.native-studio-annotation-redact:hover,
+.native-studio-annotation-blur:hover,
+.native-studio-annotation-draw:hover,
+.native-studio-annotation-arrow:hover {
+  outline: 2px solid var(--ns-sel);
+  outline-offset: 4px;
+}
+
+.native-studio-keystroke-overlay {
+  border-radius: var(--ns-radius);
+  border: 1px solid var(--ns-border);
+  background: rgba(10, 13, 19, 0.78);
+  box-shadow:
+    var(--ns-shadow-2),
+    inset 0 1px 0 rgba(255, 255, 255, 0.08);
+}
+
+.native-studio-keystroke-overlay kbd {
+  border-radius: 6px;
+  border: 1px solid var(--ns-border-strong);
+  background:
+    linear-gradient(180deg, rgba(255, 255, 255, 0.14), rgba(255, 255, 255, 0.04)),
+    var(--ns-surface-3);
+  color: var(--ns-text);
+  box-shadow: inset 0 -2px 0 rgba(0, 0, 0, 0.32);
+}
+
+.native-studio-caption-overlay {
+  border-radius: var(--ns-radius);
+  border: 1px solid var(--ns-border);
+  background: rgba(10, 13, 19, 0.78);
+  color: var(--ns-text);
+  text-shadow: 0 2px 10px rgba(0, 0, 0, 0.6);
+  box-shadow:
+    var(--ns-shadow-2),
+    inset 0 1px 0 rgba(255, 255, 255, 0.08);
+}
+
+/* ---- Region J: timeline ------------------------------------------------- */
+.native-studio-timeline {
+  border-top: 1px solid var(--ns-border);
+  background: var(--ns-surface-1);
+}
+
+.native-studio-play {
+  height: 34px;
+  border-radius: var(--ns-radius-sm);
+  border: 1px solid var(--ns-border-strong);
+  background: var(--ns-surface-2);
+  font-size: 12px;
+  font-weight: 700;
+  color: var(--ns-text);
+  box-shadow: var(--ns-shadow-1);
+  transition:
+    background-color 140ms ease,
+    border-color 140ms ease,
+    transform 140ms ease,
+    box-shadow 140ms ease;
+}
+
+.native-studio-play:hover {
+  background: var(--ns-surface-3);
+  border-color: var(--ns-border-strong);
+  transform: translateY(-1px);
+  box-shadow: var(--ns-shadow-2);
+}
+
+.native-studio-time {
+  color: var(--ns-text-2);
+}
+
+.native-studio-time strong {
+  color: var(--ns-text);
+  font-weight: 600;
+}
+
+.native-studio-selected-buttons button {
+  height: 28px;
+  border-radius: var(--ns-radius-sm);
+  border: 1px solid var(--ns-border);
+  background: var(--ns-surface-2);
+  color: var(--ns-text-2);
+  font-size: 14px;
+  font-weight: 600;
+  box-shadow: var(--ns-shadow-1);
+  transition:
+    background-color 140ms ease,
+    border-color 140ms ease,
+    color 140ms ease,
+    transform 140ms ease,
+    box-shadow 140ms ease;
+}
+
+.native-studio-selected-buttons button:hover:not(:disabled) {
+  border-color: var(--ns-sel);
+  background: var(--ns-sel-soft);
+  color: var(--ns-text);
+  transform: translateY(-1px);
+  box-shadow: var(--ns-shadow-2);
+}
+
+.native-studio-selected-buttons button:disabled {
+  cursor: not-allowed;
+  opacity: 0.34;
+  box-shadow: none;
+}
+
+.native-studio-track {
+  border: 1px solid var(--ns-border);
+  background: var(--ns-surface-1);
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.02),
+    inset 0 0 24px rgba(0, 0, 0, 0.4);
+}
+
+.native-studio-timeline-surface {
+  background:
+    repeating-linear-gradient(
+      90deg,
+      rgba(255, 255, 255, 0.04) 0,
+      rgba(255, 255, 255, 0.04) 1px,
+      transparent 1px,
+      transparent 10%
+    );
+  opacity: 0.45;
+}
+
+.native-studio-playhead {
+  background: var(--ns-text);
+  box-shadow:
+    0 0 0 1px rgba(10, 13, 19, 0.5),
+    0 0 14px rgba(255, 255, 255, 0.45);
+}
+
+.native-studio-playhead::before {
+  background: var(--ns-text);
+  box-shadow:
+    0 0 0 1px rgba(10, 13, 19, 0.5),
+    0 1px 4px rgba(0, 0, 0, 0.45);
+}
+
+.native-studio-lane {
+  border: 0;
+  background: var(--ns-surface-2);
+}
+
+.native-studio-lane:nth-child(even) {
+  background: rgba(255, 255, 255, 0.018);
+}
+
+.native-studio-lane-label {
+  color: var(--ns-text-3);
+  letter-spacing: 0.06em;
+}
+
+.native-studio-lane-count {
+  color: var(--ns-text-3);
+}
+
+.native-studio-zoom-chip {
+  border: 1px solid rgba(255, 255, 255, 0.16);
+  border-radius: var(--ns-radius-sm);
+  background: linear-gradient(180deg, #ff7a52, #ff4d29);
+  box-shadow:
+    0 1px 2px rgba(0, 0, 0, 0.32),
+    inset 0 1px 0 rgba(255, 255, 255, 0.2);
+}
+
+.native-studio-zoom-chip,
+.native-studio-mute-chip,
+.native-studio-speed-chip,
+.native-studio-cut-chip,
+.native-studio-annotation-chip,
+.native-studio-keystroke-chip,
+.native-studio-caption-chip {
+  transition:
+    filter 130ms ease,
+    box-shadow 130ms ease,
+    transform 130ms ease,
+    outline-color 130ms ease;
+}
+
+.native-studio-chip-label {
+  color: rgba(8, 11, 17, 0.82);
+  font-weight: 700;
+  text-shadow: 0 1px 0 rgba(255, 255, 255, 0.18);
+}
+
+.native-studio-zoom-chip:hover,
+.native-studio-zoom-chip:focus-visible,
+.native-studio-mute-chip:hover,
+.native-studio-mute-chip:focus-visible,
+.native-studio-speed-chip:hover,
+.native-studio-speed-chip:focus-visible,
+.native-studio-cut-chip:hover,
+.native-studio-cut-chip:focus-visible,
+.native-studio-annotation-chip:hover,
+.native-studio-annotation-chip:focus-visible,
+.native-studio-keystroke-chip:hover,
+.native-studio-keystroke-chip:focus-visible,
+.native-studio-caption-chip:hover,
+.native-studio-caption-chip:focus-visible {
+  filter: brightness(1.14) saturate(1.08);
+}
+
+.native-studio-mute-chip,
+.native-studio-speed-chip,
+.native-studio-cut-chip,
+.native-studio-annotation-chip,
+.native-studio-keystroke-chip,
+.native-studio-caption-chip {
+  border: 1px solid rgba(255, 255, 255, 0.16);
+  border-radius: var(--ns-radius-sm);
+}
+
+.native-studio-chip-handle {
+  background: var(--ns-text);
+  box-shadow:
+    0 0 0 1px rgba(10, 13, 19, 0.6),
+    0 2px 8px rgba(0, 0, 0, 0.32);
+}
+
+.native-studio-zoom-chip.selected,
+.native-studio-mute-chip.selected,
+.native-studio-speed-chip.selected,
+.native-studio-cut-chip.selected,
+.native-studio-annotation-chip.selected,
+.native-studio-keystroke-chip.selected,
+.native-studio-caption-chip.selected {
+  z-index: 5;
+  outline: 1.5px solid var(--ns-text);
+  outline-offset: 2px;
+  filter: saturate(1.15) brightness(1.06);
+  box-shadow:
+    0 0 0 3px rgba(10, 13, 19, 0.5),
+    0 8px 18px rgba(0, 0, 0, 0.45);
+}
+
+.native-studio-mute-chip {
+  background: linear-gradient(180deg, #ff9166, #f4663f);
+  box-shadow:
+    0 1px 2px rgba(0, 0, 0, 0.3),
+    inset 0 1px 0 rgba(255, 255, 255, 0.18);
+}
+
+.native-studio-speed-chip {
+  background: linear-gradient(180deg, #ff8278, #f05a5f);
+  box-shadow:
+    0 1px 2px rgba(0, 0, 0, 0.3),
+    inset 0 1px 0 rgba(255, 255, 255, 0.18);
+}
+
+.native-studio-cut-chip {
+  background: linear-gradient(180deg, #ff6c98, #ec4680);
+  box-shadow:
+    0 1px 2px rgba(0, 0, 0, 0.3),
+    inset 0 1px 0 rgba(255, 255, 255, 0.18);
+}
+
+.native-studio-annotation-chip {
+  background: linear-gradient(180deg, #cf86ee, #b566e0);
+  box-shadow:
+    0 1px 2px rgba(0, 0, 0, 0.3),
+    inset 0 1px 0 rgba(255, 255, 255, 0.18);
+}
+
+.native-studio-keystroke-chip {
+  background: linear-gradient(180deg, #a47cf2, #8a5ae6);
+  box-shadow:
+    0 1px 2px rgba(0, 0, 0, 0.3),
+    inset 0 1px 0 rgba(255, 255, 255, 0.18);
+}
+
+.native-studio-caption-chip {
+  background: linear-gradient(180deg, #ff7ec2, #ed57a2);
+  box-shadow:
+    0 1px 2px rgba(0, 0, 0, 0.3),
+    inset 0 1px 0 rgba(255, 255, 255, 0.18);
+}
+
+/* ---- Responsive (consolidated) ------------------------------------------ */
+@media (max-width: 1280px) {
+  .native-studio-shell {
+    grid-template-columns: 60px 300px minmax(0, 1fr);
+  }
+  .native-studio-grid {
+    grid-template-columns: 300px minmax(0, 1fr);
+  }
+  .native-studio-stage {
+    padding: 40px 44px;
+  }
+}
+
+@media (max-width: 1120px) {
+  .native-studio-shell {
+    grid-template-columns: 56px 272px minmax(0, 1fr);
+  }
+  .native-studio-grid {
+    grid-template-columns: 272px minmax(0, 1fr);
+  }
+  .native-studio-inspector {
+    padding: 16px 12px 26px;
+  }
+  .native-studio-topbar {
+    grid-template-columns: minmax(150px, 1fr) auto;
+  }
+  .native-studio-stage {
+    padding: 26px 28px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 1ms !important;
+    animation-iteration-count: 1 !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+/* ---- Region J: portrait / vertical-split canvas composition ------------- */
+/* Active only when the chosen canvas is taller than the source (9:16, and
+   1:1 / 4:3 over a wide source). 16:9 + Auto never get .is-portrait, so the
+   default composition and the visual harness fixture are unaffected. */
+
+/* Width-fill: the wide screen recording fills the portrait frame width instead
+   of being letterboxed to a tiny centered strip. */
+.native-studio-video-frame.is-portrait .native-studio-video,
+.native-studio-video-frame.is-portrait .native-studio-fixture-video {
+  width: 100%;
+  height: 100%;
+  max-height: none;
+  object-fit: cover;
+}
+
+.native-studio-video-frame.is-portrait .native-studio-crop-window,
+.native-studio-video-frame.is-portrait .native-studio-crop-content {
+  width: 100%;
+  height: 100%;
+}
+
+/* Vertical split: reserve a horizontal band for the camera and let the screen
+   recording occupy the remaining height (still full width). Band height is a
+   single tunable custom property. */
+.native-studio-video-frame.is-portrait-split {
+  --portrait-camera-band: 28%;
+}
+
+.native-studio-video-frame.is-portrait-split .native-studio-crop-window {
+  height: calc(100% - var(--portrait-camera-band));
+}
+
+.native-studio-video-frame.is-portrait-camera-top .native-studio-crop-window {
+  margin-top: var(--portrait-camera-band);
+}
+
+.native-studio-video-frame.is-portrait-camera-bottom .native-studio-crop-window {
+  margin-bottom: var(--portrait-camera-band);
+}
+
+/* Camera as a full-width horizontal band (top or bottom of the portrait frame),
+   replacing the corner-bubble / side-strip geometry. Camera scale nudges the
+   band height a little but it is fundamentally width-spanning. */
+.native-studio-camera-portrait {
+  left: 0;
+  right: 0;
+  width: 100%;
+  height: calc(var(--portrait-camera-band, 28%) * clamp(0.82, var(--camera-scale, 1), 1.2));
+  border-radius: 0;
+  transform: none;
+}
+
+.native-studio-camera-portrait-top {
+  top: 0;
+  bottom: auto;
+}
+
+.native-studio-camera-portrait-bottom {
+  top: auto;
+  bottom: 0;
+}
+
+/* The camera band fills with the face video (cover) like the corner bubble. */
+.native-studio-camera-portrait .native-studio-camera-video {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center center;
+  border-radius: inherit;
+}
+
+/* ---------------------------------------------------------------------------
+ * Recording dock (a dark vertical pill) + pen palette
+ * ------------------------------------------------------------------------ */
+.hud-dock,
+.hud-palette {
+  box-sizing: border-box;
+  background: #2a2b31;
+  box-shadow:
+    0 14px 40px -8px rgba(0, 0, 0, 0.55),
+    0 0 0 1px rgba(255, 255, 255, 0.06);
+  animation: hud-in 220ms cubic-bezier(0.2, 0.8, 0.2, 1) both;
+}
+.hud-palette {
+  animation: hud-flyout-in 180ms cubic-bezier(0.2, 0.8, 0.2, 1) both;
+}
+@keyframes hud-in {
+  from { opacity: 0; transform: translateX(-12px) scale(0.96); }
+  to { opacity: 1; transform: translateX(0) scale(1); }
+}
+@keyframes hud-flyout-in {
+  from { opacity: 0; transform: translateX(-8px) scale(0.96); }
+  to { opacity: 1; transform: translateX(0) scale(1); }
+}
+.hud-stop {
+  background: #f0613f;
+  transition: background 120ms ease;
+}
+.hud-stop:hover { background: #ff7a59; }
+.hud-stop-square {
+  width: 18px;
+  height: 18px;
+  border-radius: 4px;
+  background: #ffffff;
+}
+.hud-time { color: #ffffff; }
+.hud-pause {
+  color: #ffffff;
+  background: #3d3e45;
+  transition: background 120ms ease;
+}
+.hud-pause:hover { background: #4a4b53; }
+.hud-btn { color: #ffffff; }
+.hud-btn:hover { background: rgba(255, 255, 255, 0.1); }
+.hud-btn-active { background: rgba(255, 255, 255, 0.16); }
+.hud-sep {
+  width: 40px;
+  height: 2px;
+  border-radius: 1px;
+  margin: 4px 0;
+  background: #5a5b62;
+  flex: 0 0 auto;
+}
+.hud-swatch {
+  border: 0;
+  padding: 0;
+  cursor: pointer;
+  box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.12);
+  transition: transform 120ms ease, box-shadow 120ms ease;
+}
+.hud-swatch:hover { transform: scale(1.08); }
+.hud-swatch-active { box-shadow: 0 0 0 2px #2a2b31, 0 0 0 4px #ffffff; }
+.hud-wedge-track { min-height: 210px; }
+.hud-wedge {
+  position: absolute;
+  left: 50%;
+  top: 4px;
+  bottom: 4px;
+  width: 22px;
+  transform: translateX(-50%);
+  background: #8d8e96;
+  clip-path: polygon(0 0, 100% 0, 58% 100%, 42% 100%);
+  border-radius: 11px;
+}
+.hud-wedge-knob {
+  position: absolute;
+  left: 50%;
+  width: 34px;
+  height: 34px;
+  border-radius: 50%;
+  background: #ffffff;
+  transform: translate(-50%, -50%);
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.4);
+  transition: top 60ms linear;
+}
+.hud-palette-link {
+  font-size: 11px;
+  color: #a5a6ad;
+  padding: 2px 8px;
+  border-radius: 8px;
+}
+.hud-palette-link:hover { color: #fff; background: rgba(255, 255, 255, 0.08); }
+.hud-done {
+  width: 100%;
+  border-radius: 12px;
+  padding: 6px 0 4px;
+  font-size: 15px;
+  font-weight: 700;
+  color: #ffffff;
+}
+.hud-done:hover { background: rgba(255, 255, 255, 0.08); }
+
+/* The collapsed dock: a tab notched into the screen edge, the same handle the
+   extension's rail leaves behind. It rests slim and faint so it stays out of
+   the way, and widens on hover so it is easy to hit. The hover width fits
+   inside a fixed 24px wrapper, so it never resizes the OS window under the
+   pointer. */
+.hud-peek {
+  box-sizing: border-box;
+  width: 14px;
+  padding: 0;
+  border: 0;
+  background: rgba(42, 43, 49, 0.72);
+  box-shadow: 0 0 0 1px rgba(255, 255, 255, 0.06);
+  opacity: 0.7;
+  transition: opacity 140ms ease, width 140ms ease, background 140ms ease;
+  /* No fill mode: a retained keyframe would outrank :hover below. */
+  animation: hud-peek-in 180ms ease-out;
+}
+.hud-peek-left { border-radius: 0 10px 10px 0; }
+.hud-peek-right { border-radius: 10px 0 0 10px; }
+@keyframes hud-peek-in {
+  from { opacity: 0; }
+  to { opacity: 0.7; }
+}
+.hud-peek:hover,
+.hud-peek:focus-visible {
+  opacity: 1;
+  width: 22px;
+  background: rgba(42, 43, 49, 0.95);
+}
+/* The one thing the peek has to say is "still recording", in the same red the
+   dock's own Stop button uses. */
+.hud-peek-dot {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: #f0613f;
+  animation: hud-peek-pulse 1.2s ease-in-out infinite;
+}
+/* Paused is not live: a steady grey dot, so the handle never claims a paused
+   take is still recording. */
+.hud-peek-dot.hud-peek-dot-paused {
+  background: rgba(255, 255, 255, 0.55);
+  animation: none;
+}
+@keyframes hud-peek-pulse {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.35; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .hud-dock, .hud-palette, .hud-peek { animation: none; }
+  /* A recording indicator that cannot blink still has to read as live, so it
+     stays at full strength rather than losing the cue entirely. */
+  .hud-peek-dot { animation: none; opacity: 1; }
+}
+
+/* ── First-run setup window (routes/Onboarding.tsx) ───────────────────────── */
+.onb-spinner {
+  display: inline-block;
+  width: 14px;
+  height: 14px;
+  border-radius: 9999px;
+  border: 2px solid rgba(255, 77, 41, 0.25);
+  border-top-color: #ff4d29;
+  animation: onb-spin 0.8s linear infinite;
+}
+@keyframes onb-spin { to { transform: rotate(360deg); } }
+
+.onb-float { animation: onb-float 4s ease-in-out infinite; }
+.onb-float-delayed { animation: onb-float 4s ease-in-out 1.2s infinite; }
+@keyframes onb-float {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-5px); }
+}
+
+.onb-cursor { animation: onb-cursor 3.2s ease-in-out infinite; }
+@keyframes onb-cursor {
+  0% { transform: translate(-46px, 24px); }
+  35%, 70% { transform: translate(0, 0); }
+  100% { transform: translate(-46px, 24px); }
+}
+.onb-click { opacity: 0; animation: onb-click 3.2s ease-out infinite; }
+@keyframes onb-click {
+  0%, 38% { opacity: 0; transform: scale(0.4); }
+  42% { opacity: 1; transform: scale(0.6); }
+  60%, 100% { opacity: 0; transform: scale(1.6); }
+}
+
+.onb-travel { animation: onb-travel 1.4s ease-in-out infinite; }
+@keyframes onb-travel {
+  from { left: 0; opacity: 0.3; }
+  50% { opacity: 1; }
+  to { left: calc(100% - 10px); opacity: 0.3; }
+}
+
+/* Settings mock: the pointer clicks Clipy's switch on, over and over, until
+   the real grant arrives and the switch renders on for good. */
+.onb-pointer { animation: onb-pointer 3s ease-in-out infinite; }
+@keyframes onb-pointer {
+  0% { transform: translate(-60px, 28px); opacity: 0; }
+  15% { opacity: 1; }
+  40%, 75% { transform: translate(-10px, -6px); opacity: 1; }
+  100% { transform: translate(-10px, -6px); opacity: 0; }
+}
+.onb-switch { animation: onb-switch 3s steps(1, end) infinite; }
+@keyframes onb-switch {
+  0%, 44% { background-color: #c3c8d4; }
+  45%, 100% { background-color: #0a84ff; }
+}
+.onb-knob { animation: onb-knob 3s ease-in-out infinite; }
+@keyframes onb-knob {
+  0%, 42% { left: 2px; }
+  48%, 100% { left: 16px; }
+}
+
+.onb-ring { animation: onb-ring 1.8s ease-out infinite; }
+@keyframes onb-ring {
+  0% { opacity: 0.9; transform: scale(0.9); }
+  100% { opacity: 0; transform: scale(1.35); }
+}
+.onb-pop { animation: pop-in-onb 380ms cubic-bezier(0.2, 0.8, 0.2, 1) 200ms both; }
+@keyframes pop-in-onb {
+  from { opacity: 0; transform: translateY(-6px) scale(0.96); }
+  to { opacity: 1; transform: none; }
+}
+.onb-done-badge { animation: pop-in-onb 420ms cubic-bezier(0.2, 1.4, 0.4, 1) both; }
+
+/* Windows tray step: drag Clipy out of the ^ overflow onto its taskbar slot
+   (48px right, 74px down), then the recorder opens above it. 6 s loop. */
+.onb-drag { animation: onb-drag 6s ease-in-out infinite; }
+@keyframes onb-drag {
+  0%, 18% { transform: translate(0, 0) scale(1); }
+  24% { transform: translate(0, -4px) scale(1.12); }
+  50% { transform: translate(48px, 74px) scale(1.12); }
+  56%, 100% { transform: translate(48px, 74px) scale(1); }
+}
+.onb-flyout { animation: onb-flyout 6s ease-in-out infinite; }
+@keyframes onb-flyout {
+  0%, 52% { opacity: 1; transform: none; }
+  60%, 94% { opacity: 0; transform: translateY(4px); }
+  100% { opacity: 1; transform: none; }
+}
+.onb-slot-ring { opacity: 0; animation: onb-slot-ring 6s ease-out infinite; }
+@keyframes onb-slot-ring {
+  0%, 56% { opacity: 0; transform: scale(0.9); }
+  62% { opacity: 0.9; transform: scale(0.9); }
+  76%, 100% { opacity: 0; transform: scale(1.35); }
+}
+.onb-tray-pop { opacity: 0; animation: onb-tray-pop 6s cubic-bezier(0.2, 0.8, 0.2, 1) infinite; }
+@keyframes onb-tray-pop {
+  0%, 64% { opacity: 0; transform: translateY(6px) scale(0.97); }
+  70%, 94% { opacity: 1; transform: none; }
+  100% { opacity: 0; transform: translateY(6px) scale(0.97); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .onb-spinner, .onb-float, .onb-float-delayed, .onb-cursor, .onb-click, .onb-travel,
+  .onb-pointer, .onb-switch, .onb-knob, .onb-ring, .onb-pop, .onb-done-badge,
+  .onb-drag, .onb-flyout, .onb-slot-ring, .onb-tray-pop {
+    animation: none;
+  }
+  /* Reduced motion shows the end state: Clipy on the taskbar, recorder open. */
+  .onb-drag { transform: translate(48px, 74px); }
+  .onb-flyout { opacity: 0; }
+  .onb-tray-pop { opacity: 1; }
+  .onb-click, .onb-pointer { opacity: 0; }
+}
+
+/* ---------------------------------------------------------------------------
+ * Clipboard history picker: Flash by day, Night by night.
+ *
+ * The picker follows the system appearance. It sets `data-recorder-look` on
+ * its own window from `prefers-color-scheme` (lib/recorderLook.ts,
+ * followSystemLook), so the sheet tokens above go light or dark, and the
+ * accents below follow. Other windows are separate documents and unaffected.
+ *
+ * Each item carries `data-kind` (lib/clipKind.ts): its icon, label and swatch
+ * take that kind's colour. Text colours keep 4.5:1 on their sheet. No
+ * color-mix(): macOS 12's WebKit may not have it, so every soft fill is its
+ * own value.
+ *
+ * Selection never changes a row's size: the border is always there and only
+ * its colour changes.
+ * ------------------------------------------------------------------------ */
+.clip-picker {
+  --clip-accent: #ff4d29;
+  --clip-accent-soft: rgba(255, 77, 41, 0.15);
+  --clip-field: #faf6f0;
+  --clip-field-line: #e6e2da;
+  --clip-tab: #f3efe8;
+  --clip-tab-fg: rgb(var(--rc-ink-secondary));
+  --clip-key: #ffffff;
+  --clip-key-fg: #363d4e;
+  --clip-key-edge: #d9d4ca;
+  --clip-foot: #faf6f0;
+  --clip-sel: #fff1ec;
+  --clip-sel-line: rgba(255, 77, 41, 0.35);
+  --clip-link: #0062cc;
+  --clip-link-soft: rgba(10, 132, 255, 0.13);
+  --clip-code: #7c3aed;
+  --clip-code-soft: rgba(139, 92, 246, 0.14);
+  --clip-image: #b45309;
+  --clip-image-soft: rgba(245, 158, 11, 0.16);
+  --clip-color: #c2410c;
+  --clip-color-soft: rgba(255, 77, 41, 0.14);
+  --clip-email: #be185d;
+  --clip-email-soft: rgba(255, 39, 120, 0.13);
+  --clip-text: #047857;
+  --clip-text-soft: rgba(16, 185, 129, 0.15);
+}
+
+:root[data-recorder-look="night"] .clip-picker {
+  --clip-accent: #ff7352;
+  --clip-accent-soft: rgba(255, 115, 82, 0.18);
+  --clip-field: #1a1f2d;
+  --clip-field-line: #303748;
+  --clip-tab: transparent;
+  --clip-key: #252b3a;
+  --clip-key-fg: #eef0f5;
+  --clip-key-edge: #0a0d16;
+  --clip-foot: rgba(10, 13, 22, 0.5);
+  --clip-sel: #1c2232;
+  --clip-link: #5ab8ff;
+  --clip-link-soft: rgba(90, 184, 255, 0.15);
+  --clip-code: #b79bff;
+  --clip-code-soft: rgba(183, 155, 255, 0.15);
+  --clip-image: #ffc44d;
+  --clip-image-soft: rgba(255, 196, 77, 0.15);
+  --clip-color: #ff7352;
+  --clip-color-soft: rgba(255, 115, 82, 0.15);
+  --clip-email: #ff6fa8;
+  --clip-email-soft: rgba(255, 111, 168, 0.15);
+  --clip-text: #4ade9f;
+  --clip-text-soft: rgba(74, 222, 159, 0.15);
+  /* A faint orange and purple glow from the top corners. */
+  background:
+    radial-gradient(120% 60% at 100% 0%, rgba(155, 30, 255, 0.16), transparent 60%),
+    radial-gradient(90% 50% at 0% 0%, rgba(255, 77, 41, 0.14), transparent 60%),
+    rgb(var(--rc-sheet));
+}
+
+.clip-strip {
+  height: 4px;
+  flex: none;
+  background: linear-gradient(90deg, #ff4d29 0%, #ff2778 55%, #9b1eff 100%);
+}
+
+.clip-search {
+  background: var(--clip-field);
+  border: 1px solid var(--clip-field-line);
+}
+.clip-search:focus-within {
+  border-color: var(--clip-accent);
+  box-shadow: 0 0 0 3px var(--clip-accent-soft);
+}
+.clip-search-icon {
+  color: var(--clip-accent);
+}
+
+.clip-tab {
+  background: var(--clip-tab);
+  color: var(--clip-tab-fg);
+}
+.clip-tab:hover {
+  color: rgb(var(--rc-ink-text));
+}
+/* Flash 600, not 500: white type on it stays readable. */
+.clip-tab[aria-pressed="true"] {
+  background: #e63c1c;
+  color: #ffffff;
+}
+:root[data-recorder-look="night"] .clip-tab[aria-pressed="true"] {
+  background: rgb(var(--rc-surface));
+  box-shadow: inset 0 0 0 1px rgb(var(--rc-strong));
+}
+:root[data-recorder-look="night"] .clip-tab[aria-pressed="true"]::before {
+  content: "";
+  width: 6px;
+  height: 6px;
+  border-radius: 999px;
+  background: linear-gradient(135deg, #ff4d29, #ff2778 55%, #9b1eff);
+}
+
+.clip-row {
+  border: 1.5px solid transparent;
+}
+.clip-row[data-selected="true"] {
+  background: var(--clip-sel);
+  border-color: var(--clip-sel-line);
+}
+:root[data-recorder-look="night"] .clip-row[data-selected="true"] {
+  /* Transparent, or the day border paints over the gradient below it. */
+  border-color: transparent;
+  background:
+    linear-gradient(var(--clip-sel), var(--clip-sel)) padding-box,
+    linear-gradient(135deg, #ff4d29 0%, #ff2778 55%, #9b1eff 100%) border-box;
+  box-shadow: 0 6px 24px -8px rgba(255, 39, 120, 0.45);
+}
+
+.clip-kind[data-kind="link"] { --clip-kind: var(--clip-link); --clip-kind-soft: var(--clip-link-soft); }
+.clip-kind[data-kind="code"] { --clip-kind: var(--clip-code); --clip-kind-soft: var(--clip-code-soft); }
+.clip-kind[data-kind="image"] { --clip-kind: var(--clip-image); --clip-kind-soft: var(--clip-image-soft); }
+.clip-kind[data-kind="color"] { --clip-kind: var(--clip-color); --clip-kind-soft: var(--clip-color-soft); }
+.clip-kind[data-kind="email"] { --clip-kind: var(--clip-email); --clip-kind-soft: var(--clip-email-soft); }
+.clip-kind[data-kind="text"] { --clip-kind: var(--clip-text); --clip-kind-soft: var(--clip-text-soft); }
+
+.clip-tile {
+  color: var(--clip-kind);
+  background: var(--clip-kind-soft);
+}
+:root[data-recorder-look="night"] .clip-tile {
+  box-shadow: 0 0 14px -4px var(--clip-kind);
+}
+.clip-kind-label {
+  color: var(--clip-kind);
+}
+.clip-swatch {
+  box-shadow: inset 0 0 0 1px rgba(10, 13, 22, 0.14);
+}
+:root[data-recorder-look="night"] .clip-swatch {
+  box-shadow: inset 0 0 0 1px rgba(238, 240, 245, 0.18);
+}
+
+.clip-key {
+  background: var(--clip-key);
+  color: var(--clip-key-fg);
+  box-shadow: inset 0 -1.5px 0 var(--clip-key-edge);
+}
+.clip-row[data-selected="true"] .clip-key {
+  background: #e63c1c;
+  color: #ffffff;
+  box-shadow: none;
+}
+
+.clip-foot {
+  background: var(--clip-foot);
+}

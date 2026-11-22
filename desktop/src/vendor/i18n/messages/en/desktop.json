@@ -1,0 +1,1185 @@
+{
+  "native": {
+    "tray": {
+      "openClipy": "Open Clipy",
+      "quit": "Quit Clipy",
+      "whatsNew": "What's New…",
+      "showPointer": "Show Pointer ({shortcut})",
+      "signIn": "Sign in to Clipy…",
+      "startRecording": "Start Recording",
+      "restartUpdate": "Restart to finish update ({version})",
+      "starting": "Starting…",
+      "cancel": "Cancel",
+      "stopRecordingElapsed": "Stop Recording  ({elapsed})",
+      "pauseRecording": "Pause Recording",
+      "cancelDiscard": "Cancel & Discard",
+      "resumeRecordingElapsed": "Resume Recording  ({elapsed})",
+      "stopRecording": "Stop Recording",
+      "stopping": "Stopping…",
+      "uploading": "Uploading…",
+      "cancelUpload": "Cancel Upload",
+      "localProcessing": "Processing…",
+      "localReady": "Ready"
+    },
+    "tooltip": {
+      "starting": "Clipy, starting…",
+      "recording": "Clipy, recording {elapsed}",
+      "paused": "Clipy, paused at {elapsed}",
+      "stopping": "Clipy, stopping…",
+      "uploading": "Clipy, uploading…"
+    },
+    "notifications": {
+      "micSilent": "No microphone input detected. Check your mic or choose another input.",
+      "micNotStartedMac": "Microphone could not be started. Check macOS Microphone permission or choose another input.",
+      "micNotStartedWindows": "Microphone could not be started. Check Settings > Privacy & security > Microphone or choose another input.",
+      "windowsMicStartFailed": "Clipy could not start your microphone, so this recording has no mic audio. Open Settings > Privacy & security > Microphone and allow desktop apps to use it, or choose another microphone.",
+      "micPaused": "Microphone paused, {device} disconnected. Waiting for it to return.",
+      "micSwitched": "Microphone switched to {device}",
+      "recoveryOne": "An unfinished recording is still saved on this computer. Open Clipy to upload or discard it.",
+      "recoveryMany": "{count} unfinished recordings are still saved on this computer. Open Clipy to upload or discard them.",
+      "clipboardCopiedOnly": "Copied. Clipy couldn't paste it for you, so press {key}."
+    },
+    "windowTitles": {
+      "whatsNew": "What's new in Clipy",
+      "selectWindow": "Select a window",
+      "clipboard": "Clipboard history",
+      "annotate": "Annotate screenshot",
+      "welcome": "Welcome to Clipy",
+      "notes": "Notes",
+      "localRecording": "Clipy recording"
+    },
+    "agentConsent": {
+      "title": "Clipy: allow AI agents to record?",
+      "body": "A local AI agent (for example Claude Code) is asking Clipy to record your screen.\n\nThe normal recording indicator will always be visible, recordings auto-stop at their time limit, and only programs running as your user can ask.\n\nAllow agent-triggered recordings?",
+      "allow": "Allow",
+      "dontAllow": "Don't Allow"
+    },
+    "errors": {
+      "notSignedIn": "Not signed in",
+      "offline": "You're offline. Connect to the internet and try again.",
+      "offlineRecover": "You're offline. Connect to the internet and try Recover again.",
+      "micUnavailable": "Microphone unavailable. Turn Microphone off to record without it.",
+      "noScreenFrames": "Clipy could not capture your screen, so the recording was stopped and nothing was uploaded. Open System Settings > Privacy & Security > Screen Recording, make sure Clipy is turned on, then quit and reopen Clipy and try again.",
+      "noWindowFrames": "Clipy could not capture that window, so the recording was stopped and nothing was uploaded. Make sure the window is open and not minimized, and that Clipy is turned on in System Settings > Privacy & Security > Screen Recording, then try again.",
+      "unreadableScreenFrames": "Clipy could not record what your screen sent, so the recording was stopped and nothing was uploaded. Try again, or choose another display or window.",
+      "updateWindows": "Screen recording needs Windows 10 version 1903 or later. Update Windows in Settings > Windows Update, then try again.",
+      "optionUnsupported": "This version of Windows refused a screen capture setting. Update Windows in Settings > Windows Update, then try again.",
+      "directxUnavailable": "Windows could not start screen capture on this graphics card. Update your graphics driver, or record on the computer itself if this is Remote Desktop.",
+      "itemFailed": "Windows could not open that screen or window for capture. Pick the source again, then retry.",
+      "wgcStartFailed": "Windows could not start screen capture. Restart Clipy and retry, or update Windows and your graphics driver if it keeps happening.",
+      "windowNotListed": "That window is no longer in the list. Pick it again, then retry.",
+      "windowClosed": "That window has closed or can no longer be recorded. Pick it again, then retry.",
+      "windowHidden": "That window is hidden or on another desktop. Bring it back, then retry.",
+      "windowMinimized": "That window is minimised. Restore it on screen, then retry.",
+      "wgcNoFrames": "Windows started screen capture but sent no picture. Make sure the screen is on and unlocked, then retry; some work computers block screen recording.",
+      "displayDisconnected": "That display is no longer connected. Pick a screen, then retry.",
+      "displayNotListed": "That display is no longer in the list. Pick a screen, then retry.",
+      "windowOffscreen": "That window is not on screen any more. Bring it into view, then retry.",
+      "micStartFailedWindows": "Clipy could not start your microphone, so this recording has no mic audio. Open Settings > Privacy & security > Microphone and allow desktop apps to use it, or choose another microphone.",
+      "micSilentWindows": "No microphone input detected. Check that your mic is not muted and is allowed in Settings > Privacy & security > Microphone, or choose another input.",
+      "micStoppedWindows": "No microphone input detected. Your mic stopped sending audio. Check that it is connected, or choose another input."
+    }
+  },
+  "app": {
+    "loading": "Loading Clipy…"
+  },
+  "local": {
+    "expiry": {
+      "kept": "Kept",
+      "soon": "Clears soon",
+      "days": "{days, plural, one {Clears tomorrow} other {Clears in # days}}"
+    },
+    "status": {
+      "ready": "Ready to paste into your agent",
+      "saved": "Saved on this {device}",
+      "failed": "Recording needs attention",
+      "recording": "Recording on this {device}"
+    },
+    "preparing": "Preparing recording…",
+    "pathCopied": "Path copied",
+    "copyArecPath": "Copy AREC path",
+    "open": "Open",
+    "showInExplorer": "Show in Explorer",
+    "showInFinder": "Show in Finder",
+    "retry": "Retry",
+    "stopKeeping": "Stop keeping",
+    "keep": "Keep",
+    "moveToTrash": "Move to Trash",
+    "cancel": "Cancel",
+    "delete": "Delete",
+    "sectionLabel": "Local recordings",
+    "openingSignIn": "Opening sign-in…",
+    "signInToRecord": "Sign in to record locally",
+    "totalOnDevice": "{size} on this {device} · clears after {days} days unless kept",
+    "windowsAudio": "Audio is transcribed on Clipy's server and deleted there afterwards. Video stays on this PC.",
+    "hidePrevious": "Hide previous recordings",
+    "previous": "Previous recordings ({count})",
+    "fullApp": {
+      "pitch": "Want share links anyone can watch, AI with no keys to manage and team workspaces? That is the full {fullApp} app, a separate download.",
+      "button": "Get {fullApp}"
+    },
+    "empty": "No local recordings yet"
+  },
+  "whatsNewCard": {
+    "updatedTo": "Updated to {version}",
+    "dismissLabel": "Dismiss what's new",
+    "dismiss": "Dismiss",
+    "newThings": "{count, plural, one {# new thing to try} other {# new things to try}}",
+    "more": "and {count} more",
+    "tryIt": "{count, plural, one {Try it} other {Try them}}",
+    "later": "Later"
+  },
+  "settings": {
+    "title": "Settings",
+    "tabs": {
+      "enhance": "Enhance",
+      "video": "Video & audio",
+      "preferences": "Preferences"
+    },
+    "clipboardSubtitle": {
+      "off": "Paste anything you copied before. Stays on this {device}.",
+      "registered": "Paste anything you copied before with {hotkey}. Stays on this {device}.",
+      "unavailable": "{hotkey} isn't available, so nothing is saved. Pick another key under Shortcuts.",
+      "noKey": "Needs a shortcut to open. Set one for Clipboard under Shortcuts."
+    },
+    "reduceNoise": {
+      "title": "Reduce background noise",
+      "subtitle": "Turns down steady room noise like a fan or air conditioning. Off unless you turn it on.",
+      "needsMic": "Available when the microphone is on"
+    },
+    "cameraEffects": {
+      "title": "Camera effects",
+      "subtitle": "Backgrounds, cut-out, and frames live under Effects on the recorder."
+    },
+    "resolution": {
+      "title": "Resolution",
+      "pro": "Recorded at up to this size",
+      "free": "1440p, 4K and Native need Pro",
+      "proSuffix": "{label} · Pro"
+    },
+    "windowRecording": {
+      "title": "Window recording",
+      "subtitle": "What a Specific window recording captures"
+    },
+    "countdown": {
+      "title": "Recording countdown",
+      "subtitle": "A short count before capture begins",
+      "label": "Countdown",
+      "off": "Off",
+      "seconds": "{seconds, plural, one {# second} other {# seconds}}"
+    },
+    "flip": {
+      "title": "Flip camera",
+      "subtitle": "Flip the orientation of your camera"
+    },
+    "persistBubble": {
+      "title": "Persist camera bubble location",
+      "subtitle": "Leave the camera bubble at its last position"
+    },
+    "systemAudio": {
+      "title": "Use system audio",
+      "cameraOnly": "Available with screen recording",
+      "subtitle": "Everything you hear, even with headphones on"
+    },
+    "camera": {
+      "title": "Camera",
+      "none": "No camera found. Connect one, then refresh.",
+      "found": "{count, plural, one {# camera found} other {# cameras found}}"
+    },
+    "systemDefault": "System default",
+    "microphone": {
+      "title": "Microphone",
+      "none": "No microphone"
+    },
+    "refreshing": "Refreshing…",
+    "refreshDevices": "Refresh devices",
+    "setup": {
+      "title": "Camera and mic setup",
+      "subtitle": "Check Clipy's {os} permissions",
+      "open": "Open setup"
+    },
+    "notSignedIn": "Not signed in",
+    "signInToCloud": "Sign in to record to the cloud",
+    "sections": {
+      "system": "System",
+      "recording": "Recording",
+      "screenshots": "Screenshots",
+      "clipboard": "Clipboard",
+      "shortcuts": "Shortcuts",
+      "recordingsOnDevice": "Recordings on this {device}",
+      "clipy": "Clipy",
+      "language": "Language"
+    },
+    "launchAtLogin": {
+      "title": "Launch at login",
+      "approval": "Allow Clipy in System Settings → General → Login Items to finish.",
+      "unavailable": "Move Clipy to Applications to use launch at login.",
+      "subtitle": "Keep Clipy ready in the menu bar"
+    },
+    "showInDock": {
+      "title": "Show in Dock",
+      "subtitle": "Also show Clipy in the Dock, not just the menu bar"
+    },
+    "recordingControls": {
+      "title": "Recording controls",
+      "subtitle": "The floating dock beside your capture. Off records invisibly; stop with the shortcut or from here."
+    },
+    "annotate": {
+      "title": "Annotate before copying",
+      "subtitle": "Open each screenshot in the editor to add arrows, boxes, text or a redaction. Off: the screenshot is copied straight away."
+    },
+    "clipboardHistory": "Clipboard history",
+    "clipboardClash": "{app} also opens on {hotkey}, so it may get the key instead of Clipy. Uninstall {app}, or pick another key for Clipboard under Shortcuts.",
+    "shortcutsHint": "Click a field and press the keys.",
+    "localInfo": "Local recordings and their AREC context stay in Clipy's folder on this {device} and clear after {days} days unless kept. Cloud recordings keep a local copy only until the upload completes.",
+    "localInfoWindows": "Local AI transcribes the audio on Clipy's server and deletes it there afterwards; the video never leaves this PC.",
+    "openArec": {
+      "title": "Open the AREC when it's ready",
+      "subtitle": "Local recordings open in the viewer as soon as they finish. Off: no window, but the AREC path is copied either way, ready to paste to your agent."
+    },
+    "links": {
+      "recordings": "Your recordings",
+      "recordingsHint": "Open your library on clipy.online",
+      "whatsNew": "What's new",
+      "whatsNewHint": "New features, and a place to try each one",
+      "updates": "Check for updates",
+      "version": "Version {version}",
+      "latest": "Latest release",
+      "privacy": "Privacy",
+      "privacyHint": "What Clipy stores, and what it never reads"
+    },
+    "signOut": "Sign out",
+    "editAccount": "Edit account",
+    "signIn": "Sign in",
+    "language": {
+      "title": "Language",
+      "subtitle": "Menus, windows and notifications. System default follows your {os} language.",
+      "label": "Language"
+    }
+  },
+  "ui": {
+    "on": "On",
+    "off": "Off",
+    "back": "Back",
+    "more": "More"
+  },
+  "camera": {
+    "touchUp": {
+      "title": "Touch up my appearance",
+      "subtitle": "Softens skin and evens out blemishes",
+      "strength": "Touch up strength"
+    },
+    "autoLighting": {
+      "title": "Auto lighting",
+      "subtitle": "Look great in any lighting"
+    },
+    "view": {
+      "title": "Camera view",
+      "subtitle": "A floating bubble, or docked to one side",
+      "floating": "Floating",
+      "square": "Square",
+      "left": "Docked left",
+      "right": "Docked right"
+    },
+    "size": {
+      "title": "Camera size",
+      "small": "Small",
+      "medium": "Medium",
+      "large": "Large"
+    }
+  },
+  "windowCapture": {
+    "label": "Window recording",
+    "default": "Default",
+    "window": {
+      "title": "Only the window",
+      "body": "Records just this window, even with other windows on top of it, and follows it if you move it. Keep working in other apps while it records."
+    },
+    "area": {
+      "title": "Window and screen area",
+      "body": "Records the part of the screen where the window starts, with your camera and Flare. The area stays put if the window moves, and anything that crosses it is recorded too."
+    },
+    "chips": {
+      "windowAnywhere": "The window, wherever it is",
+      "otherWindows": "Other windows",
+      "popups": "Pop-up menus",
+      "camera": "Camera",
+      "flare": "Flare",
+      "outsideArea": "Anything outside the area"
+    }
+  },
+  "selectDesktop": {
+    "title": "Select desktop",
+    "noPreview": "No preview"
+  },
+  "shortcuts": {
+    "rows": {
+      "screenshot_area": {
+        "label": "Screenshot",
+        "hint": "Drag to select an area"
+      },
+      "screenshot_display": {
+        "label": "Full screen",
+        "hint": "Screenshot the whole screen"
+      },
+      "annotation": {
+        "label": "Draw",
+        "hint": "Pen on or off"
+      },
+      "pause": {
+        "label": "Pause",
+        "hint": "Pause or resume"
+      },
+      "mic": {
+        "label": "Mute mic",
+        "hint": "Silence or restore your mic"
+      },
+      "camera": {
+        "label": "Camera",
+        "hint": "Show or hide the bubble"
+      },
+      "clipboard_history": {
+        "label": "Clipboard",
+        "hint": "Open clipboard history"
+      }
+    },
+    "stopNeedsKey": "Start/stop needs a shortcut.",
+    "stopName": "Start or stop recording",
+    "fieldLabel": "{name} shortcut",
+    "fieldLabelSet": "{name} shortcut: {hotkey}",
+    "pressKeys": "Press the keys… (Esc to cancel)",
+    "clickToSet": "Click to set",
+    "clearLabel": "Clear shortcut",
+    "clear": "Clear",
+    "startStop": "Start / stop",
+    "worksAnywhere": "Works anywhere"
+  },
+  "effects": {
+    "title": "Effects",
+    "tabs": {
+      "backgrounds": "Backgrounds",
+      "frames": "Frames",
+      "camera": "Camera"
+    },
+    "imageTooLarge": "Choose a PNG or JPEG smaller than {mb} MB.",
+    "backgrounds": {
+      "none": "None",
+      "blur": "Blur",
+      "clear": "Clear",
+      "sunset": "Sunset",
+      "aurora": "Aurora",
+      "dunes": "Dunes",
+      "studio": "Studio",
+      "ink": "Ink",
+      "cream": "Cream"
+    },
+    "frames": {
+      "none": "None",
+      "coral": "Coral",
+      "white": "White",
+      "amber": "Amber",
+      "geometric": "Geometric",
+      "confetti": "Confetti",
+      "botanical": "Botanical"
+    },
+    "cameraOff": "Turn the camera on to see these live on your bubble.",
+    "unsupported": "Camera backgrounds are available on macOS and Windows.",
+    "topPicks": "Top Picks",
+    "colors": "Colors",
+    "popularAtWork": "Popular at work",
+    "addImage": "Add a background image",
+    "addImageHint": "Add a background image (PNG or JPEG, up to {mb} MB)",
+    "customImage": "Custom background image",
+    "cutOutNote": "Blur and every background after it cut you out of what is behind you, right on this {device}.",
+    "pickBackgroundFirst": "Pick a background first."
+  },
+  "windowSource": {
+    "hintWindow": "Just the window, even\nunder other windows",
+    "hintArea": "A fixed area based on\nthe window",
+    "noteWindow": "Records only this window, even under others. Camera and Flare stay out.",
+    "noteArea": "Records this area of the screen, with camera and Flare.",
+    "cameraNote": "Not in window-only recordings"
+  },
+  "recovery": {
+    "failed": "Couldn't recover this recording: {error}",
+    "offline": "You're offline. Connect to the internet and try Recover again."
+  },
+  "home": {
+    "localStage": {
+      "recording": "Recording locally…",
+      "transcribingWindows": "Transcribing through Clipy…",
+      "transcribingMac": "Transcribing on this Mac…",
+      "selecting": "Picking key moments…",
+      "extracting": "Generating AREC…",
+      "readyCopied": "AREC ready · path copied",
+      "ready": "AREC ready",
+      "failed": "Local processing failed"
+    },
+    "recoveryAge": {
+      "minutes": "{minutes} min ago",
+      "hours": "{hours}h ago",
+      "days": "{days} days ago"
+    },
+    "recoveryExpiry": {
+      "hours": "{hours}h",
+      "days": "{days} days"
+    },
+    "source": {
+      "display": "Full screen",
+      "window": "Specific window",
+      "area": "Custom size",
+      "camera": "Camera only",
+      "select": "Select",
+      "displayHint": "Pick a display",
+      "areaHint": "Drag an area of your screen"
+    },
+    "permission": {
+      "screen": "macOS blocked screen recording for Clipy. If Screen Recording is already on for Clipy, remove Clipy from that list in System Settings, add it back, then reopen Clipy.",
+      "camera": "macOS blocked camera access for Clipy. Allow Clipy under Camera in System Settings, or turn the camera off for this recording.",
+      "microphone": "macOS blocked microphone access for Clipy. Allow Clipy under Microphone in System Settings, or turn the mic off for this recording."
+    },
+    "setupCard": {
+      "title": "Set up Clipy",
+      "body": "macOS needs to allow screen recording (and optionally your camera and microphone) before the first take. This happens in a separate window.",
+      "open": "Open setup"
+    },
+    "access": {
+      "title": "Change video access",
+      "public": "Public",
+      "restricted": "Restricted",
+      "private": "Private",
+      "anyone": "Anyone with the link",
+      "domains": "People on allowed domains",
+      "onlyMe": "Only me",
+      "allowedDomains": "Allowed domains",
+      "emailDomain": "Email domain",
+      "add": "Add",
+      "remove": "Remove {domain}"
+    },
+    "strip": {
+      "customized": "{label}, customized",
+      "effects": "Effects",
+      "notes": "Notes",
+      "library": "Library",
+      "localLibrary": "Local library",
+      "more": "More",
+      "label": "Recording options"
+    },
+    "summary": {
+      "region": "{width}×{height} region",
+      "dragRegion": "Drag on screen to choose a region",
+      "noWindow": "No window chosen yet",
+      "window": "Window",
+      "noDisplay": "No display chosen yet",
+      "display": "Display"
+    },
+    "shot": {
+      "uploaded": "Screenshot uploaded, link copied",
+      "copied": "Screenshot copied and saved to Pictures",
+      "saved": "Screenshot saved to Pictures",
+      "shareFailed": "Saved on this {device}, but sharing failed: {error}",
+      "closeEditorFirst": "Close the screenshot window first.",
+      "failed": "Screenshot failed: {error}",
+      "area": "Select an area",
+      "display": "Full screen",
+      "capturing": "Capturing…",
+      "shortcut": "Shortcut {keys}",
+      "showInFolder": "Show in folder",
+      "showInFinder": "Show in Finder",
+      "shortcutsHint": "The shortcuts work anywhere, even with Clipy closed. Change them in Settings → Preferences."
+    },
+    "camera": {
+      "permissionBubble": "Camera permission is needed for the webcam bubble. Enable Camera access for Clipy in System Settings.",
+      "noCamera": "No camera detected. Connect a camera (or open the MacBook lid) to use the bubble.",
+      "failedToStart": "Camera failed to start: {error}",
+      "settingsUnavailable": "Camera settings unavailable: {error}",
+      "permissionList": "Camera permission is needed to use the webcam bubble. Enable Camera access for Clipy in System Settings.",
+      "listFailed": "Could not list camera devices: {error}",
+      "systemDefault": "System default camera",
+      "choose": "Choose a camera",
+      "turnOff": "Turn camera off",
+      "turnOn": "Turn camera on",
+      "menuLabel": "Camera",
+      "chooseConnected": "Choose a connected camera before recording.",
+      "notFound": "Could not find the selected camera. Reconnect it or choose another camera."
+    },
+    "mic": {
+      "off": "Microphone off",
+      "systemDefault": "System default microphone",
+      "systemDefaultMenu": "System default",
+      "systemDefaultNamed": "System default ({name})",
+      "choose": "Choose a microphone",
+      "turnOff": "Turn microphone off",
+      "turnOn": "Turn microphone on",
+      "menuLabel": "Microphone",
+      "disconnected": "{name} is disconnected. Using the system default until it is back."
+    },
+    "upload": {
+      "failedSaved": "Upload failed. The recording file is saved on this Mac.",
+      "failedSavedError": "Upload failed: {error}. The recording file is saved on this Mac.",
+      "preparing": "Preparing upload",
+      "progress": "{uploaded} of {total}",
+      "liveStopped": "Live upload stopped. Your recording keeps capturing safely on this Mac.",
+      "liveStoppedError": "Live upload stopped: {error}. Your recording keeps capturing safely on this Mac.",
+      "failedNotLost": "Upload failed. The recording file is saved on this Mac and is not lost.",
+      "failedNotLostError": "Upload failed: {error}. The recording file is saved on this Mac and is not lost.",
+      "preparingStudio": "Preparing Studio",
+      "finishing": "Finishing up",
+      "uploading": "Uploading",
+      "studioOpens": "{status} · Studio opens automatically",
+      "creatingLink": "Creating your link, it opens in your browser",
+      "cancelUpload": "Cancel upload",
+      "cancel": "Cancel"
+    },
+    "toast": {
+      "openingStudio": "Opening Studio…",
+      "openingBrowser": "Opening in your browser · link copied",
+      "upToDate": "You're up to date ({version}).",
+      "recovered": "Recording recovered. Processing now."
+    },
+    "errors": {
+      "updateCheck": "Update check failed: {error}",
+      "openRecordings": "Could not open previous recordings: {error}",
+      "openUpgrade": "Could not open the upgrade page: {error}",
+      "installUpdate": "Update install failed: {error}",
+      "chooseSource": "Choose a source for the selected recording mode before starting.",
+      "discard": "Couldn't discard this recording: {error}"
+    },
+    "start": "Start recording",
+    "startLocal": "Start local recording",
+    "startWithCountdown": "{label} ({seconds}s)",
+    "starting": "Starting…",
+    "openSite": "Open clipy.online",
+    "captureMode": "Capture mode",
+    "recordVideo": "Record video",
+    "takeScreenshot": "Take a screenshot",
+    "close": "Close",
+    "recovery": {
+      "pending": "Recording pending recovery",
+      "expand": "Expand",
+      "available": "Local recording available",
+      "body": "Clipy could not confirm this local copy was cleaned up. Recover it if the upload failed, or discard it if it is already in your library.",
+      "collapse": "Collapse",
+      "from": "Recording from {age}",
+      "sizeExpiry": "{size} · auto-deletes in {expiry}",
+      "recovering": "Recovering…",
+      "recover": "Recover",
+      "discard": "Discard"
+    },
+    "destination": {
+      "label": "Recording destination",
+      "cloud": "Cloud",
+      "cloudShort": "Share link",
+      "cloudHint": "Uploads while you record, then gives you a share link",
+      "local": "Local AI",
+      "localShort": "On this {device}",
+      "localHint": "Save video and AREC on this {device}",
+      "whatLocal": "What Local AI does",
+      "preferences": "Recording preferences"
+    },
+    "whatToRecord": "What to record",
+    "hoverWindow": "Hover over a window to select…",
+    "loadingSources": "Loading sources…",
+    "change": "Change",
+    "settings": "Settings",
+    "noWindows": "No visible windows are available. Open a window and try again.",
+    "videoStays": "Video stays on this {device}",
+    "uploadsWhileRecording": "Uploads while you record, then gives you a link",
+    "open": "Open",
+    "startingIn": "Starting in",
+    "paused": "Paused",
+    "recording": "Recording",
+    "written": "{size} written",
+    "stopping": "Stopping...",
+    "stopRecording": "Stop Recording {elapsed}",
+    "dockHint": "The recording dock stays on the left of your capture. This button is a backup if the dock is hidden.",
+    "finalizing": "Finalizing",
+    "wrappingUp": "Wrapping up…",
+    "updateReady": "Clipy {version} is downloaded and ready.",
+    "restartNow": "Restart now",
+    "later": "Later",
+    "selectWindow": "Select window",
+    "hoverToSelect": "Hover over a window to select",
+    "escToCancel": "<key>ESC</key> to cancel",
+    "update": {
+      "required": "Update required",
+      "available": "Update available",
+      "outOfDate": "This version of Clipy ({version}) is out of date and can no longer record or upload. Update to continue.",
+      "ready": "Version <strong>{latest}</strong> is ready to install. You're currently on <strong>{current}</strong>. Clipy will download the update and relaunch.",
+      "unknown": "unknown",
+      "recordLocally": "Record locally",
+      "later": "Later",
+      "installing": "Installing…",
+      "install": "Install & Relaunch"
+    }
+  },
+  "notes": {
+    "title": "Notes",
+    "smaller": "Smaller text",
+    "larger": "Larger text",
+    "hide": "Hide notes",
+    "placeholder": "Talking points, links, the thing you keep forgetting to mention…"
+  },
+  "webcamControls": {
+    "small": "Small camera",
+    "medium": "Medium camera",
+    "large": "Large camera",
+    "label": "Camera",
+    "hidePreview": "Hide camera preview",
+    "hidePreviewHint": "Hide preview; camera keeps recording",
+    "turnOff": "Turn camera off",
+    "size": "Camera size"
+  },
+  "windowSelect": {
+    "select": "Select {app}",
+    "hint": "Hover over a window to select · Esc to cancel"
+  },
+  "stop": {
+    "micPaused": "Mic paused. Reconnect {device}",
+    "micSwitched": "Mic → {device}",
+    "noMicInput": "No mic input",
+    "coach": "Annotate · Turn on the pen, choose a color, then click and drag. Drawings fade together after two seconds without drawing. Esc returns to your screen.",
+    "discardConfirm": "Discard this recording?",
+    "discard": "Discard",
+    "keepRecording": "Keep recording",
+    "showControlsPaused": "Recording paused. Show recording controls",
+    "showControls": "Show recording controls",
+    "showControlsPausedTip": "Recording paused · Show the recording controls",
+    "showControlsTip": "Show the recording controls",
+    "cancelRecording": "Cancel recording",
+    "stopRecording": "Stop recording",
+    "cancelCountdown": "Cancel the countdown",
+    "stopLocal": "Stop & save locally",
+    "stopShare": "Stop & get your share link",
+    "resume": "Resume recording",
+    "pause": "Pause recording",
+    "discardRecording": "Discard recording",
+    "cancelNothingSaved": "Cancel, nothing is saved",
+    "discardNothingSaved": "Discard this recording, nothing is saved",
+    "hideNotes": "Hide notes",
+    "showNotes": "Show notes",
+    "hideNotesTip": "Hide your notes",
+    "showNotesTip": "Show your notes",
+    "stopAnnotating": "Stop annotating",
+    "annotate": "Annotate",
+    "stopAnnotatingTip": "Stop annotating · Esc returns to your screen",
+    "annotateTip": "Annotate · Click and drag to draw",
+    "cameraNotRecorded": "Camera is not recorded when only the window is recorded",
+    "hidePreview": "Hide camera preview",
+    "showPreview": "Show camera preview",
+    "turnCameraOff": "Turn camera off",
+    "turnCameraOn": "Turn camera on",
+    "cameraNotRecordedTip": "Only the window is recorded, so the camera isn't. Change it in Settings → Video & audio.",
+    "hidePreviewTip": "Hide preview; camera keeps recording",
+    "hideCameraTip": "Hide your camera from the recording",
+    "showCameraTip": "Show your camera in the recording",
+    "noMic": "No microphone in this recording",
+    "unmute": "Unmute microphone",
+    "mute": "Mute microphone",
+    "noMicTip": "No microphone is being recorded. Choose one before your next recording.",
+    "unmuteTip": "Unmute your microphone",
+    "muteTip": "Mute your microphone",
+    "hideControls": "Hide recording controls",
+    "hideControlsTip": "Hide these controls",
+    "pen": "Pen",
+    "penColor": "Pen color",
+    "colorPen": "{color} pen",
+    "penWidth": "Pen width",
+    "colors": {
+      "coral": "Coral",
+      "yellow": "Yellow",
+      "green": "Green",
+      "blue": "Blue",
+      "purple": "Purple",
+      "white": "White"
+    },
+    "clearAnnotations": "Clear annotations",
+    "clear": "Clear",
+    "done": "Done"
+  },
+  "webcam": {
+    "effectUnavailable": "Camera background effect is unavailable. Choose Original to continue.",
+    "previewUnavailable": "Camera preview is unavailable. Turn the camera off and on again.",
+    "permission": "Camera permission is needed. Enable Camera access for Clipy in System Settings.",
+    "busy": "Camera is unavailable. Close other camera apps and try again.",
+    "notFound": "No matching camera was found. Reopen the picker or choose another camera.",
+    "failed": "Could not start webcam. Check System Settings > Privacy > Camera."
+  },
+  "areaSelect": {
+    "video": {
+      "title": "Custom size recording",
+      "hint": "Records exactly the size you draw. Esc cancels.",
+      "confirm": "Record this area"
+    },
+    "screenshot": {
+      "title": "Custom size screenshot",
+      "hint": "Captures exactly the size you draw. Esc cancels.",
+      "confirm": "Capture this area"
+    },
+    "drag": "Drag to select an area",
+    "cancel": "Cancel"
+  },
+  "viewer": {
+    "notOnMac": "This recording is not on this Mac.",
+    "recordedFrom": "Recording from {date}",
+    "clicks": "{count, plural, one {# click} other {# clicks}}",
+    "onThisMac": "on this Mac",
+    "processingFailed": "Processing failed",
+    "preparing": "Preparing…",
+    "copied": "Copied",
+    "copyArecPath": "Copy AREC path",
+    "showInFinder": "Show in Finder",
+    "autoOff": "Recordings won't open by themselves any more. The AREC path is still copied when one is ready. Turn the window back on in Settings → Preferences.",
+    "autoOpened": "Clipy opened this for you because the recording finished.",
+    "gotIt": "Got it",
+    "dontOpen": "Don't open automatically",
+    "keyMoments": "Key moments",
+    "transcript": "Transcript",
+    "noSpeech": "No speech recognized.",
+    "transcribing": "Transcribing…"
+  },
+  "whatsNew": {
+    "features": {
+      "clipboard": {
+        "title": "Clipboard history",
+        "label": "Clipboard history",
+        "blurbMac": "Everything you copy, one shortcut away. It stays on this Mac and is never uploaded.",
+        "blurbWindows": "Everything you copy, one shortcut away. It stays on this PC and is never uploaded."
+      },
+      "window_recording": {
+        "title": "Record one window",
+        "label": "Record one window",
+        "blurbMac": "Clipy records only the window you pick, even when other windows cover it, and follows it when it moves.",
+        "blurbWindows": "Pick a window and Clipy records the area it covers."
+      },
+      "screenshot_style": {
+        "title": "Screenshot backgrounds and new markup tools",
+        "label": "Screenshot backgrounds",
+        "blurb": "Put a screenshot on a background with padding, rounded corners and a shadow, then point things out with callouts, emoji, a spotlight, a magnifier and blur."
+      },
+      "screenshot_markup": {
+        "title": "Annotate screenshots",
+        "label": "Screenshot markup",
+        "blurb": "Add arrows, boxes and text to a screenshot before you copy or share it."
+      },
+      "flare": {
+        "title": "Flare: hold Control to point",
+        "label": "Flare: hold Control",
+        "blurb": "While recording, hold Control and move the mouse to point at something. The trail fades when you let go, and your agent gets it as a key moment."
+      },
+      "pointer": {
+        "title": "Pointer: hold Control+Shift to point on a shared screen",
+        "label": "Pointer: hold Control+Shift",
+        "blurb": "Hold Control+Shift and move the mouse to point at something while you share your screen in Meet, Slack or Zoom. No recording needed, and the trail fades when you let go."
+      },
+      "draw": {
+        "title": "Draw on screen",
+        "label": "Draw on screen",
+        "blurb": "While recording, switch the pen on and drag to draw over anything on screen."
+      },
+      "custom_size": {
+        "title": "Record part of the screen",
+        "label": "Custom size",
+        "blurb": "Drag a box, resize it from any corner, and record just that area."
+      },
+      "local_ai": {
+        "title": "Local AI",
+        "label": "Local AI",
+        "blurbMac": "Keep a recording on this Mac. Your recording stays local, and Clipy writes the transcript and an AREC your agent can read.",
+        "blurbWindows": "Keep a recording on this PC. The video never leaves it; the audio is transcribed on Clipy's server and deleted there."
+      },
+      "agent": {
+        "title": "Let your agent record",
+        "label": "Your agent records",
+        "blurb": "Claude Code, Codex or Cursor can start a Clipy recording, mark what it checked, and hand you the link as proof.",
+        "blurbLocal": "Claude Code, Codex or Cursor can start a Clipy Local recording with clipy --local, mark what it checked, and hand you the AREC path as proof."
+      }
+    },
+    "nav": "What's new",
+    "rail": {
+      "whatsNew": "What's new",
+      "version": "Clipy {version}",
+      "tryIt": "Try it yourself",
+      "new": "NEW",
+      "progress": "<strong>{tried} of {total}</strong> tried"
+    },
+    "done": "Done",
+    "next": "Next: {label}",
+    "tried": "Tried",
+    "notTried": "Not tried yet",
+    "overview": {
+      "updatedFrom": "Updated · {from} → {to}",
+      "updatedTo": "Updated to {version}",
+      "onVersion": "You're on {version}",
+      "latestVersion": "the latest version",
+      "titleNews": "What's new in Clipy",
+      "titleRecent": "Recently added to Clipy",
+      "bodyNews": "Each one takes about 20 seconds to try right here. Practising records nothing, and nothing is uploaded unless you choose to.",
+      "bodyRecent": "Nothing new since your last update. These are the latest additions, and everything Clipy can do is on the left.",
+      "tryIt": "Try it",
+      "allReleases": "All releases ↗",
+      "close": "Close",
+      "tryAll": "{count, plural, =1 {Try it} =2 {Try all two} =3 {Try all three} =4 {Try all four} =5 {Try all five} =6 {Try all six} =7 {Try all seven} =8 {Try all eight} other {Try all #}}",
+      "startTrying": "Start trying"
+    },
+    "page": {
+      "progress": "Try it · {index} of {total}",
+      "back": "Back",
+      "skip": "Skip"
+    },
+    "practice": {
+      "flareHow": "Hold <keys></keys> and circle the <b>Pay now</b> button above.",
+      "flareDone": "That was a Flare. It works the same in your next recording.",
+      "pointerHow": "Hold <keys></keys> and move the mouse anywhere on your screen.",
+      "pointerDone": "That was the pointer. Anyone watching your shared screen sees it.",
+      "pointerStep1": "Share your screen in Meet, Slack, Zoom or any other app. Clipy only needs to be running.",
+      "pointerStep2": "Hold Control+Shift and move the mouse. Let go and the trail fades.",
+      "pointerStep3Mac": "To keep it on without holding keys, choose Show Pointer in the Clipy menu in the menu bar. Press Esc to turn it off.",
+      "pointerStep3Windows": "To keep it on without holding keys, choose Show Pointer in the Clipy menu in the system tray. Press Esc to turn it off.",
+      "drawHow": "Pick a colour and drag over the card. While recording, <keys></keys> turns the pen on, or use the pen on the recording controls.",
+      "drawDone": "Nice. The pen works over any app while you record.",
+      "clipboardDone": "Clipboard history is working. It keeps the last {items, number} things you copied, for up to {days} days.",
+      "markupDone": "Done. Screenshots open here for marking up before they are copied.",
+      "styleHow": "In the screenshot window, press Background and pick a look. The new tools sit in the toolbar: Callout, Emoji, Spotlight, Magnifier and Color picker.",
+      "styleDone": "Nice. The background goes with the image when you copy or upload it.",
+      "windowStep1": "Open the recorder, choose Specific window as the source, then Select.",
+      "windowStep2Windows": "Click the window you want to record.",
+      "windowStep2Mac": "Click the window you want. Other windows can sit on top of it while you record.",
+      "startRecording": "Start recording.",
+      "windowDone": "You've recorded a window.",
+      "areaStep1": "Open the recorder, choose Custom size as the source, then Select.",
+      "areaStep2": "Drag a box, then drag its corners or edges to resize it.",
+      "areaStep3": "Press Enter or Record this area.",
+      "areaDone": "You've recorded part of the screen.",
+      "localStep1": "Open the recorder and click Local AI, just under the top bar.",
+      "localStep2Windows": "Record as usual. Your recording stays local; only the audio is sent for the transcript, then deleted.",
+      "localStep2Mac": "Record as usual. Your recording stays local.",
+      "localStep3": "When you stop, the video and its AREC stay on this {device}, ready for your agent.",
+      "localDone": "You've made a Local AI recording.",
+      "agentDone": "Your agent has recorded with Clipy.",
+      "frameNote": "Practice area · nothing is recorded",
+      "mock": {
+        "checkout": "Checkout",
+        "total": "Total",
+        "payNow": "Pay now"
+      },
+      "flareArea": "Flare practice area",
+      "held": "Held",
+      "holdMe": "Hold me",
+      "drawArea": "Drawing practice area",
+      "penColour": "Pen colour",
+      "clipboardSample": "Clipy keeps what you copy, one shortcut away.",
+      "clipboardNote": "Your history stays on this device",
+      "clipboardOff": "Clipboard history is off",
+      "clipboardOffBody": "Turn it on to keep what you copy. You can turn it off again in Settings, which also clears it.",
+      "clipboardTurnOn": "Turn on clipboard history",
+      "copyLine": "Copy this line:",
+      "copied": "Copied",
+      "copy": "Copy",
+      "pressToOpen": "Press <keys></keys> to open your history.",
+      "noShortcut": "Clipboard history has no shortcut. Set one in Settings → Preferences → Shortcuts.",
+      "pickEntry": "Pick an entry to paste it into the app you were in.",
+      "screenshotBusy": "A screenshot is already open for annotating.",
+      "screenshotFailed": "Screenshot failed: {error}",
+      "screenshotNote": "Nothing is uploaded unless you press Upload",
+      "annotatingOff": "Annotating is switched off",
+      "annotatingOffBody": "Screenshots go straight to the clipboard. Turn on “Annotate before copying” to mark them up first.",
+      "annotatingTurnOn": "Turn on annotating",
+      "takeArea": "Take a screenshot of an area",
+      "withKeys": "with <keys></keys> or here:",
+      "waiting": "Waiting for you…",
+      "takeScreenshot": "Take a screenshot",
+      "drawArrow": "Draw an arrow or a box, or add text.",
+      "copyOrUpload": "Press Copy image to keep it on this {device}, or Upload if you want a share link.",
+      "openRecorder": "Open the recorder",
+      "ticksNote": "Ticks itself the first time you do it",
+      "cloud": "Cloud",
+      "localAi": "Local AI",
+      "startLocal": "Start local recording",
+      "start": "Start recording",
+      "nightCaption": "Local AI is on: the recorder turns dark",
+      "dayCaption": "Cloud and Local AI sit just under the top bar",
+      "agentNote": "Ticks itself when your agent first records",
+      "agentRun": "Run these once in a terminal. Use codex or cursor in place of claude for those agents.",
+      "agentRunLocal": "Install the CLI once, then your agent records through Clipy Local with --local. Nothing is uploaded and no account is needed.",
+      "agentThen": "Then ask your agent to verify a change and send proof through Clipy.",
+      "agentThenLocal": "Then ask your agent to verify a change and hand you the AREC path as proof.",
+      "howItWorks": "How it works ↗"
+    }
+  },
+  "onboarding": {
+    "steps": {
+      "welcome": "Welcome",
+      "signin": "Sign in",
+      "screen": "Screen recording",
+      "accessibility": "Accessibility",
+      "media": "Camera and mic",
+      "menuBar": "Menu bar",
+      "systemTray": "System tray",
+      "done": "All set"
+    },
+    "settingsName": {
+      "mac": "System Settings",
+      "windows": "Windows Settings"
+    },
+    "sidebar": {
+      "label": "Setup steps",
+      "footnote": "About a minute. Everything here can be changed later in Settings."
+    },
+    "back": "Back",
+    "continue": "Continue",
+    "errors": {
+      "checkFailed": "Clipy couldn't check {settings}: {error}",
+      "checkNoAnswer": "Clipy couldn't check {settings}: no answer.",
+      "openSettingsFailed": "Could not open {settings}: {error}",
+      "restartFailed": "Could not restart Clipy: {error}",
+      "taskbarFailed": "Could not open Taskbar settings: {error}"
+    },
+    "welcome": {
+      "eyebrow": "Welcome to Clipy",
+      "title": "Record it once. Everyone can follow it, even your agents.",
+      "start": "Get started",
+      "body": "Record your screen, camera and voice, get a link the moment you stop, and hand the recording to Claude Code or Codex as readable context. Let's get you set up."
+    },
+    "signIn": {
+      "title": "Sign in to Clipy",
+      "titleSignedIn": "You're signed in",
+      "google": "Continue with Google",
+      "openAgain": "Open the browser again",
+      "signedInAs": "Signed in as <b>{email}</b>.",
+      "signedIn": "You're signed in.",
+      "waiting": "Finish signing in in your browser. This window moves on by itself.",
+      "body": "Your recordings, links and transcripts live in your Clipy account. We'll open your browser to sign in with Google, then bring you straight back here."
+    },
+    "screen": {
+      "title": "Let Clipy see your screen",
+      "body": "macOS asks for this once. Switch Clipy on under Screen & System Audio Recording. Clipy only captures while you are recording.",
+      "pane": "Screen & System Audio Recording",
+      "allow": "Allow screen recording",
+      "granted": "Screen recording is on"
+    },
+    "accessibility": {
+      "title": "Show where you click",
+      "body": "Accessibility lets Clipy mark your clicks and pointer in the recording, so viewers and agents can follow every step. Switch Clipy on under Accessibility.",
+      "pane": "Accessibility",
+      "allow": "Allow accessibility",
+      "granted": "Accessibility is on"
+    },
+    "permission": {
+      "opening": "Opening…",
+      "checkAgain": "Check again",
+      "openSettings": "Open {settings}",
+      "restart": "Restart Clipy",
+      "quitReopen": "Quit & Reopen",
+      "stale": "macOS lists Screen Recording as allowed but is still blocking capture. Switch Clipy off and back on in {settings}, then restart Clipy.",
+      "checking": "Checking with macOS that Clipy can see your screen…",
+      "unanswered": "macOS is not answering whether Clipy can see your screen. Restarting Clipy usually sorts this out, and setup picks up where you left off.",
+      "switchedOn": "Switched it on? macOS applies it after Clipy restarts. Setup picks up where you left off."
+    },
+    "media": {
+      "eyebrow": "Optional",
+      "title": "Want to be in your recordings?",
+      "skip": "Skip for now",
+      "body": "Add your face and voice so people hear the why, not just see the clicks. You can switch either one on or off from the recorder at any time.",
+      "camera": {
+        "title": "Camera",
+        "detail": "A bubble with your face, in any corner.",
+        "allow": "Allow camera"
+      },
+      "microphone": {
+        "title": "Microphone",
+        "detail": "Narrate as you go. Transcripts come free.",
+        "allow": "Allow microphone"
+      },
+      "allowed": "Allowed",
+      "on": "On",
+      "checking": "Checking…",
+      "allowLabel": "Allow {name}",
+      "openSettingsLabel": "Open settings for {name}"
+    },
+    "find": {
+      "titleMenuBar": "Clipy lives in your menu bar",
+      "titleTray": "Clipy lives in your system tray",
+      "openTaskbar": "Open Taskbar settings",
+      "gotIt": "Got it",
+      "bodyMac": "Click the Clipy icon at the top of your screen to record. There is no window to keep open. Clipy waits up there until you need it.",
+      "bodyWindows": "Click the Clipy icon next to the clock to record. If it is not there, click the <key>^</key> arrow: Windows hides new icons there. Drag Clipy onto the taskbar, or switch it on in Taskbar settings so it always shows.",
+      "shortcut": "Once setup is done, start and stop from anywhere with"
+    },
+    "done": {
+      "title": "You're ready to record",
+      "titleBlocked": "Almost there",
+      "checking": "Checking…",
+      "opening": "Opening…",
+      "open": "Open the recorder",
+      "ready": "Your first recording is one click away. Stop, and the link is already on your clipboard.",
+      "readyLocal": "Your first recording is one click away. Stop, and the path to its AREC is already on your clipboard.",
+      "missing": "One required step still needs you. Fix it below and you're done.",
+      "waitingMac": "Waiting for macOS to confirm screen access.",
+      "waitingWindows": "Clipy couldn't read your Windows privacy settings yet.",
+      "rows": {
+        "signedIn": "Signed in",
+        "screen": "Screen recording",
+        "clicks": "Click tracking",
+        "camera": "Camera",
+        "microphone": "Microphone"
+      },
+      "off": "Off",
+      "needsOk": "Needs your OK",
+      "turnOn": "Turn on",
+      "fix": "Fix",
+      "screenUnconfirmed": "macOS has not confirmed screen access yet. If checking again does not help, restart Clipy; setup comes back afterwards.",
+      "windowsUnread": "Clipy couldn't read your Windows privacy settings. Check again, or restart Clipy if this keeps happening.",
+      "loginItem": "Open Clipy when I log in",
+      "approve": "(approve it in {settings})"
+    },
+    "visuals": {
+      "linkCopied": "Link copied",
+      "agentRead": "Your agent read it",
+      "settings": {
+        "general": "General",
+        "appearance": "Appearance",
+        "privacy": "Privacy & Security",
+        "desktopDock": "Desktop & Dock",
+        "displays": "Displays"
+      },
+      "menu": {
+        "file": "File",
+        "edit": "Edit",
+        "view": "View"
+      },
+      "menuBarClock": "Tue 9:41",
+      "menuBarHint": "Your recorder opens right under the icon.",
+      "trayHint": "Windows tucks new icons behind <key>^</key>. Drag Clipy onto the taskbar to keep it one click away.",
+      "trayTime": "9:41 AM",
+      "trayDay": "Tuesday",
+      "startRecording": "Start recording"
+    }
+  },
+  "clipboard": {
+    "filters": {
+      "all": "All",
+      "text": "Text",
+      "images": "Images",
+      "favorites": "Favorites"
+    },
+    "elapsed": "{unit, select, now {now} m {{count}m} h {{count}h} other {{count}d}}",
+    "elapsedAgo": "{unit, select, now {now ago} m {{count}m ago} h {{count}h ago} other {{count}d ago}}",
+    "copiedAgo": "copied {unit, select, now {now ago} m {{count}m ago} h {{count}h ago} other {{count}d ago}}",
+    "imageLabel": "Image ({width}×{height})",
+    "kinds": {
+      "image": "Image",
+      "color": "Colour",
+      "link": "Link",
+      "email": "Email",
+      "code": "Code",
+      "text": "Text"
+    },
+    "lines": "{lines} lines",
+    "characters": "{count, plural, one {{chars} character} other {{chars} characters}}",
+    "preview": {
+      "empty": "Select an item to see it here.",
+      "favorite": "Favorite",
+      "paste": "Paste",
+      "copy": "Copy",
+      "edit": "Edit"
+    },
+    "search": "Search clipboard history",
+    "pasteLabel": "Paste (↵)",
+    "copyLabel": "Copy without pasting ({keys})",
+    "filterLabel": "Show",
+    "clearAll": "Clear all",
+    "clearAllTitle": "Favorites are kept",
+    "hint": "Opened with {hotkey}. Some apps use that key to paste as plain text. You can change it in Clipy Settings → Preferences → Shortcuts.",
+    "dismissHint": "Dismiss tip",
+    "headings": {
+      "favorites": "Favorites",
+      "recent": "Recent"
+    },
+    "editHint": "{keys} save · esc cancel",
+    "cancel": "Cancel",
+    "save": "Save",
+    "rowDelete": "Delete ({keys})",
+    "rowEdit": "Edit ({keys})",
+    "rowAddFavorite": "Add to Favorites ({keys})",
+    "rowRemoveFavorite": "Remove from Favorites ({keys})",
+    "menu": {
+      "paste": "Paste",
+      "copy": "Copy",
+      "addFavorite": "Add to Favorites",
+      "removeFavorite": "Remove from Favorites",
+      "edit": "Edit…",
+      "delete": "Delete"
+    },
+    "empty": {
+      "nothing": "Nothing copied yet. Copy some text or an image and it shows up here.",
+      "noFavorites": "No favorites yet. Star an item, or press {keys}, to keep it here for good.",
+      "noMatches": "No matches."
+    },
+    "footer": {
+      "paste": "paste",
+      "copy": "copy",
+      "star": "star",
+      "type": "type",
+      "close": "close",
+      "kept": "Kept on this {device} only"
+    }
+  },
+  "screenshotEditor": {
+    "openFailed": "Couldn't open this screenshot.",
+    "tryAgain": "Try again",
+    "nothingWaiting": "No screenshot is waiting to be annotated.",
+    "close": "Close",
+    "loadFailed": "Couldn't load this screenshot.",
+    "loading": "Loading",
+    "toolbar": {
+      "tools": "Annotation tools",
+      "color": "Annotation color",
+      "colorSwatch": "Color {color}",
+      "customColor": "Custom color",
+      "strokeWeight": "Stroke weight",
+      "stroke": "{weight} stroke",
+      "background": "Background",
+      "backgroundTitle": "Background, padding, corners and shadow",
+      "undo": "Undo",
+      "undoTitle": "Undo ({keys})",
+      "redo": "Redo",
+      "redoTitle": "Redo ({keys})",
+      "clear": "Remove all annotations"
+    },
+    "canvas": "Screenshot annotation canvas",
+    "textPlaceholder": "Type, then {keys}",
+    "picked": "Picked {color}",
+    "resetCrop": "Reset crop",
+    "resetCuts": "Reset cuts",
+    "delete": "Delete",
+    "deleting": "Deleting…",
+    "deleteTitle": "Delete this screenshot without copying it",
+    "copy": "Copy image",
+    "copying": "Copying…",
+    "copyTitle": "Copy the image to the clipboard ({keys})",
+    "upload": "Upload",
+    "uploading": "Uploading…",
+    "updateLink": "Update link",
+    "updating": "Updating…",
+    "signInToUpload": "Sign in to Clipy to upload screenshots",
+    "uploadTitle": "Upload to Clipy and copy the share link{shortcut}",
+    "updateTitle": "Update the image behind this screenshot's link{shortcut}",
+    "result": {
+      "linkUpdated": "Link updated and copied to clipboard",
+      "linkCopied": "Screenshot link copied to clipboard",
+      "uploadFailedCopied": "Upload failed. The image was copied instead.",
+      "uploadFailed": "Upload failed",
+      "copied": "Screenshot copied to clipboard",
+      "notCopied": "Screenshot saved, but it couldn't be copied to the clipboard",
+      "openInBrowser": "Open in browser",
+      "showInExplorer": "Show in Explorer",
+      "showInFinder": "Show in Finder",
+      "dismiss": "Dismiss"
+    },
+    "hints": {
+      "crop": "Drag the area to keep. The crop applies when you copy or upload.",
+      "cut": "Drag down across rows or sideways across columns to cut that strip out and join the rest when you copy or upload. Click a strip to keep it after all."
+    }
+  }
+}

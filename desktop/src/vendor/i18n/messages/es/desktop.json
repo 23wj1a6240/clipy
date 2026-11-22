@@ -1,0 +1,1185 @@
+{
+  "native": {
+    "tray": {
+      "openClipy": "Abrir Clipy",
+      "quit": "Salir de Clipy",
+      "whatsNew": "Novedades…",
+      "showPointer": "Mostrar puntero ({shortcut})",
+      "signIn": "Iniciar sesión en Clipy…",
+      "startRecording": "Empezar a grabar",
+      "restartUpdate": "Reiniciar para terminar la actualización ({version})",
+      "starting": "Iniciando…",
+      "cancel": "Cancelar",
+      "stopRecordingElapsed": "Detener grabación  ({elapsed})",
+      "pauseRecording": "Pausar grabación",
+      "cancelDiscard": "Cancelar y descartar",
+      "resumeRecordingElapsed": "Reanudar grabación  ({elapsed})",
+      "stopRecording": "Detener grabación",
+      "stopping": "Deteniendo…",
+      "uploading": "Subiendo…",
+      "cancelUpload": "Cancelar subida",
+      "localProcessing": "Procesando…",
+      "localReady": "Listo"
+    },
+    "tooltip": {
+      "starting": "Clipy, iniciando…",
+      "recording": "Clipy, grabando {elapsed}",
+      "paused": "Clipy, en pausa en {elapsed}",
+      "stopping": "Clipy, deteniendo…",
+      "uploading": "Clipy, subiendo…"
+    },
+    "notifications": {
+      "micSilent": "No se detecta sonido del micrófono. Revisa tu micrófono o elige otra entrada.",
+      "micNotStartedMac": "No se pudo iniciar el micrófono. Revisa el permiso de Micrófono de macOS o elige otra entrada.",
+      "micNotStartedWindows": "No se pudo iniciar el micrófono. Revisa Configuración > Privacidad y seguridad > Micrófono o elige otra entrada.",
+      "windowsMicStartFailed": "Clipy no pudo iniciar tu micrófono, así que esta grabación no tiene audio del micrófono. Abre Configuración > Privacidad y seguridad > Micrófono y permite que las aplicaciones de escritorio lo usen, o elige otro micrófono.",
+      "micPaused": "Micrófono en pausa, {device} se desconectó. Esperando a que vuelva.",
+      "micSwitched": "Micrófono cambiado a {device}",
+      "recoveryOne": "Una grabación sin terminar sigue guardada en este equipo. Abre Clipy para subirla o descartarla.",
+      "recoveryMany": "{count} grabaciones sin terminar siguen guardadas en este equipo. Abre Clipy para subirlas o descartarlas.",
+      "clipboardCopiedOnly": "Copiado. Clipy no pudo pegarlo por ti, así que presiona {key}."
+    },
+    "windowTitles": {
+      "whatsNew": "Novedades de Clipy",
+      "selectWindow": "Selecciona una ventana",
+      "clipboard": "Historial del portapapeles",
+      "annotate": "Anotar captura de pantalla",
+      "welcome": "Te damos la bienvenida a Clipy",
+      "notes": "Notas",
+      "localRecording": "Grabación de Clipy"
+    },
+    "agentConsent": {
+      "title": "Clipy: ¿permitir que agentes de IA graben?",
+      "body": "Un agente de IA local (por ejemplo, Claude Code) le está pidiendo a Clipy que grabe tu pantalla.\n\nEl indicador de grabación normal siempre estará visible, las grabaciones se detienen solas al llegar a su límite de tiempo y solo los programas que se ejecutan con tu usuario pueden pedirlo.\n\n¿Permitir grabaciones iniciadas por agentes?",
+      "allow": "Permitir",
+      "dontAllow": "No permitir"
+    },
+    "errors": {
+      "notSignedIn": "No has iniciado sesión",
+      "offline": "Estás sin conexión. Conéctate a internet e inténtalo de nuevo.",
+      "offlineRecover": "Estás sin conexión. Conéctate a internet y vuelve a usar Recuperar.",
+      "micUnavailable": "Micrófono no disponible. Desactiva el Micrófono para grabar sin él.",
+      "noScreenFrames": "Clipy no pudo capturar tu pantalla, así que la grabación se detuvo y no se subió nada. Abre Ajustes del Sistema > Privacidad y seguridad > Grabación de pantalla, asegúrate de que Clipy esté activado, cierra y vuelve a abrir Clipy, e inténtalo de nuevo.",
+      "noWindowFrames": "Clipy no pudo capturar esa ventana, así que la grabación se detuvo y no se subió nada. Asegúrate de que la ventana esté abierta y no minimizada, y de que Clipy esté activado en Ajustes del Sistema > Privacidad y seguridad > Grabación de pantalla, e inténtalo de nuevo.",
+      "unreadableScreenFrames": "Clipy no pudo grabar lo que envió tu pantalla, así que la grabación se detuvo y no se subió nada. Inténtalo de nuevo o elige otra pantalla o ventana.",
+      "updateWindows": "La grabación de pantalla necesita Windows 10 versión 1903 o posterior. Actualiza Windows en Configuración > Windows Update e inténtalo de nuevo.",
+      "optionUnsupported": "Esta versión de Windows rechazó un ajuste de captura de pantalla. Actualiza Windows en Configuración > Windows Update e inténtalo de nuevo.",
+      "directxUnavailable": "Windows no pudo iniciar la captura de pantalla con esta tarjeta gráfica. Actualiza el controlador de gráficos, o graba en el propio equipo si esto es un Escritorio remoto.",
+      "itemFailed": "Windows no pudo abrir esa pantalla o ventana para capturarla. Vuelve a elegir la fuente e inténtalo otra vez.",
+      "wgcStartFailed": "Windows no pudo iniciar la captura de pantalla. Reinicia Clipy e inténtalo otra vez, o actualiza Windows y el controlador de gráficos si sigue pasando.",
+      "windowNotListed": "Esa ventana ya no está en la lista. Vuelve a elegirla e inténtalo otra vez.",
+      "windowClosed": "Esa ventana se cerró o ya no se puede grabar. Vuelve a elegirla e inténtalo otra vez.",
+      "windowHidden": "Esa ventana está oculta o en otro escritorio. Tráela de vuelta e inténtalo otra vez.",
+      "windowMinimized": "Esa ventana está minimizada. Restáurala en la pantalla e inténtalo otra vez.",
+      "wgcNoFrames": "Windows inició la captura de pantalla pero no envió ninguna imagen. Asegúrate de que la pantalla esté encendida y desbloqueada e inténtalo otra vez; algunos equipos de trabajo bloquean la grabación de pantalla.",
+      "displayDisconnected": "Esa pantalla ya no está conectada. Elige una pantalla e inténtalo otra vez.",
+      "displayNotListed": "Esa pantalla ya no está en la lista. Elige una pantalla e inténtalo otra vez.",
+      "windowOffscreen": "Esa ventana ya no está en pantalla. Muévela a la vista e inténtalo otra vez.",
+      "micStartFailedWindows": "Clipy no pudo iniciar tu micrófono, así que esta grabación no tiene audio del micrófono. Abre Configuración > Privacidad y seguridad > Micrófono y permite que las apps de escritorio lo usen, o elige otro micrófono.",
+      "micSilentWindows": "No se detecta sonido del micrófono. Comprueba que el micrófono no esté silenciado y que tenga permiso en Configuración > Privacidad y seguridad > Micrófono, o elige otra entrada.",
+      "micStoppedWindows": "No se detecta sonido del micrófono. Tu micrófono dejó de enviar audio. Comprueba que esté conectado o elige otra entrada."
+    }
+  },
+  "app": {
+    "loading": "Cargando Clipy…"
+  },
+  "local": {
+    "expiry": {
+      "kept": "Conservada",
+      "soon": "Se borrará pronto",
+      "days": "{days, plural, one {Se borra mañana} other {Se borra en # días}}"
+    },
+    "status": {
+      "ready": "Lista para pegar en tu agente",
+      "saved": "Guardada en esta {device}",
+      "failed": "La grabación necesita atención",
+      "recording": "Grabando en esta {device}"
+    },
+    "preparing": "Preparando la grabación…",
+    "pathCopied": "Ruta copiada",
+    "copyArecPath": "Copiar ruta del AREC",
+    "open": "Abrir",
+    "showInExplorer": "Mostrar en el Explorador",
+    "showInFinder": "Mostrar en Finder",
+    "retry": "Reintentar",
+    "stopKeeping": "Dejar de conservar",
+    "keep": "Conservar",
+    "moveToTrash": "Mover a la Papelera",
+    "cancel": "Cancelar",
+    "delete": "Eliminar",
+    "sectionLabel": "Grabaciones locales",
+    "openingSignIn": "Abriendo el inicio de sesión…",
+    "signInToRecord": "Inicia sesión para grabar localmente",
+    "totalOnDevice": "{size} en esta {device} · se borran a los {days} días si no las conservas",
+    "windowsAudio": "El audio se transcribe en el servidor de Clipy y luego se borra de allí. El video se queda en esta PC.",
+    "hidePrevious": "Ocultar grabaciones anteriores",
+    "previous": "Grabaciones anteriores ({count})",
+    "fullApp": {
+      "pitch": "¿Quieres enlaces que cualquiera pueda ver, IA sin claves que gestionar y espacios de equipo? Eso es la app completa de {fullApp}, una descarga aparte.",
+      "button": "Descargar {fullApp}"
+    },
+    "empty": "Todavía no hay grabaciones locales"
+  },
+  "whatsNewCard": {
+    "updatedTo": "Actualizado a {version}",
+    "dismissLabel": "Descartar novedades",
+    "dismiss": "Descartar",
+    "newThings": "{count, plural, one {# novedad para probar} other {# novedades para probar}}",
+    "more": "y {count} más",
+    "tryIt": "{count, plural, one {Probarla} other {Probarlas}}",
+    "later": "Más tarde"
+  },
+  "settings": {
+    "title": "Configuración",
+    "tabs": {
+      "enhance": "Mejorar imagen",
+      "video": "Video y audio",
+      "preferences": "Preferencias"
+    },
+    "clipboardSubtitle": {
+      "off": "Pega cualquier cosa que copiaste antes. Se queda en esta {device}.",
+      "registered": "Pega cualquier cosa que copiaste antes con {hotkey}. Se queda en esta {device}.",
+      "unavailable": "{hotkey} no está disponible, así que no se guarda nada. Elige otra tecla en Atajos.",
+      "noKey": "Necesita un atajo para abrirse. Asigna uno a Portapapeles en Atajos."
+    },
+    "reduceNoise": {
+      "title": "Reducir ruido de fondo",
+      "subtitle": "Baja el ruido constante del ambiente, como un ventilador o el aire acondicionado. Desactivado hasta que lo actives.",
+      "needsMic": "Disponible cuando el micrófono está activado"
+    },
+    "cameraEffects": {
+      "title": "Efectos de cámara",
+      "subtitle": "Los fondos, el recorte y los marcos están en Efectos, en la grabadora."
+    },
+    "resolution": {
+      "title": "Resolución",
+      "pro": "Se graba hasta este tamaño",
+      "free": "1440p, 4K y Nativa requieren Pro",
+      "proSuffix": "{label} · Pro"
+    },
+    "windowRecording": {
+      "title": "Grabación de ventana",
+      "subtitle": "Lo que captura una grabación de Ventana específica"
+    },
+    "countdown": {
+      "title": "Cuenta regresiva",
+      "subtitle": "Una cuenta corta antes de que empiece la captura",
+      "label": "Cuenta regresiva",
+      "off": "Desactivada",
+      "seconds": "{seconds, plural, one {# segundo} other {# segundos}}"
+    },
+    "flip": {
+      "title": "Voltear cámara",
+      "subtitle": "Invierte la orientación de tu cámara"
+    },
+    "persistBubble": {
+      "title": "Recordar la posición de la burbuja",
+      "subtitle": "Deja la burbuja de la cámara en su última posición"
+    },
+    "systemAudio": {
+      "title": "Usar audio del sistema",
+      "cameraOnly": "Disponible con grabación de pantalla",
+      "subtitle": "Todo lo que escuchas, incluso con audífonos"
+    },
+    "camera": {
+      "title": "Cámara",
+      "none": "No se encontró ninguna cámara. Conecta una y actualiza.",
+      "found": "{count, plural, one {# cámara encontrada} other {# cámaras encontradas}}"
+    },
+    "systemDefault": "Predeterminado del sistema",
+    "microphone": {
+      "title": "Micrófono",
+      "none": "Sin micrófono"
+    },
+    "refreshing": "Actualizando…",
+    "refreshDevices": "Actualizar dispositivos",
+    "setup": {
+      "title": "Configuración de cámara y micrófono",
+      "subtitle": "Revisa los permisos de Clipy en {os}",
+      "open": "Abrir configuración inicial"
+    },
+    "notSignedIn": "No has iniciado sesión",
+    "signInToCloud": "Inicia sesión para grabar en la nube",
+    "sections": {
+      "system": "Sistema",
+      "recording": "Grabación",
+      "screenshots": "Capturas de pantalla",
+      "clipboard": "Portapapeles",
+      "shortcuts": "Atajos",
+      "recordingsOnDevice": "Grabaciones en esta {device}",
+      "clipy": "Clipy",
+      "language": "Idioma"
+    },
+    "launchAtLogin": {
+      "title": "Abrir al iniciar sesión",
+      "approval": "Permite Clipy en Ajustes del Sistema → General → Ítems de inicio para terminar.",
+      "unavailable": "Mueve Clipy a Aplicaciones para abrirlo al iniciar sesión.",
+      "subtitle": "Mantén Clipy listo en la barra de menús"
+    },
+    "showInDock": {
+      "title": "Mostrar en el Dock",
+      "subtitle": "Muestra Clipy también en el Dock, no solo en la barra de menús"
+    },
+    "recordingControls": {
+      "title": "Controles de grabación",
+      "subtitle": "El dock flotante junto a tu captura. Desactivado, graba sin mostrarse; detén con el atajo o desde aquí."
+    },
+    "annotate": {
+      "title": "Anotar antes de copiar",
+      "subtitle": "Abre cada captura en el editor para añadir flechas, recuadros, texto o un ocultado. Desactivado: la captura se copia al instante."
+    },
+    "clipboardHistory": "Historial del portapapeles",
+    "clipboardClash": "{app} también se abre con {hotkey}, así que puede quedarse con la tecla en lugar de Clipy. Desinstala {app} o elige otra tecla para Portapapeles en Atajos.",
+    "shortcutsHint": "Haz clic en un campo y presiona las teclas.",
+    "localInfo": "Las grabaciones locales y su contexto AREC se quedan en la carpeta de Clipy en esta {device} y se borran a los {days} días si no las conservas. Las grabaciones en la nube guardan una copia local solo hasta que termina la subida.",
+    "localInfoWindows": "Local AI transcribe el audio en el servidor de Clipy y luego lo borra de allí; el video nunca sale de esta PC.",
+    "openArec": {
+      "title": "Abrir el AREC cuando esté listo",
+      "subtitle": "Las grabaciones locales se abren en el visor en cuanto terminan. Desactivado: no se abre ninguna ventana, pero la ruta del AREC se copia igualmente, lista para pegar en tu agente."
+    },
+    "links": {
+      "recordings": "Tus grabaciones",
+      "recordingsHint": "Abre tu biblioteca en clipy.online",
+      "whatsNew": "Novedades",
+      "whatsNewHint": "Funciones nuevas y un lugar para probar cada una",
+      "updates": "Buscar actualizaciones",
+      "version": "Versión {version}",
+      "latest": "Versión más reciente",
+      "privacy": "Privacidad",
+      "privacyHint": "Lo que Clipy guarda y lo que nunca lee"
+    },
+    "signOut": "Cerrar sesión",
+    "editAccount": "Editar cuenta",
+    "signIn": "Iniciar sesión",
+    "language": {
+      "title": "Idioma",
+      "subtitle": "Menús, ventanas y notificaciones. El predeterminado del sistema sigue el idioma de {os}.",
+      "label": "Idioma"
+    }
+  },
+  "ui": {
+    "on": "Activada",
+    "off": "Desactivada",
+    "back": "Atrás",
+    "more": "Más"
+  },
+  "camera": {
+    "touchUp": {
+      "title": "Retocar mi apariencia",
+      "subtitle": "Suaviza la piel y disimula imperfecciones",
+      "strength": "Intensidad del retoque"
+    },
+    "autoLighting": {
+      "title": "Iluminación automática",
+      "subtitle": "Luce bien con cualquier luz"
+    },
+    "view": {
+      "title": "Vista de cámara",
+      "subtitle": "Una burbuja flotante o anclada a un lado",
+      "floating": "Flotante",
+      "square": "Cuadrada",
+      "left": "Anclada a la izquierda",
+      "right": "Anclada a la derecha"
+    },
+    "size": {
+      "title": "Tamaño de la cámara",
+      "small": "Pequeño",
+      "medium": "Mediano",
+      "large": "Grande"
+    }
+  },
+  "windowCapture": {
+    "label": "Grabación de ventana",
+    "default": "Predeterminado",
+    "window": {
+      "title": "Solo la ventana",
+      "body": "Graba solo esta ventana, incluso con otras ventanas encima, y la sigue si la mueves. Sigue trabajando en otras apps mientras graba."
+    },
+    "area": {
+      "title": "Ventana y área de la pantalla",
+      "body": "Graba la parte de la pantalla donde empieza la ventana, con tu cámara y Flare. El área no se mueve si la ventana se mueve, y todo lo que pase por ella también se graba."
+    },
+    "chips": {
+      "windowAnywhere": "La ventana, esté donde esté",
+      "otherWindows": "Otras ventanas",
+      "popups": "Menús emergentes",
+      "camera": "Cámara",
+      "flare": "Flare",
+      "outsideArea": "Todo lo que quede fuera del área"
+    }
+  },
+  "selectDesktop": {
+    "title": "Seleccionar pantalla",
+    "noPreview": "Sin vista previa"
+  },
+  "shortcuts": {
+    "rows": {
+      "screenshot_area": {
+        "label": "Captura de pantalla",
+        "hint": "Arrastra para seleccionar un área"
+      },
+      "screenshot_display": {
+        "label": "Pantalla completa",
+        "hint": "Captura toda la pantalla"
+      },
+      "annotation": {
+        "label": "Dibujar",
+        "hint": "Activa o desactiva el lápiz"
+      },
+      "pause": {
+        "label": "Pausar",
+        "hint": "Pausa o reanuda"
+      },
+      "mic": {
+        "label": "Silenciar micrófono",
+        "hint": "Silencia o reactiva tu micrófono"
+      },
+      "camera": {
+        "label": "Cámara",
+        "hint": "Muestra u oculta la burbuja"
+      },
+      "clipboard_history": {
+        "label": "Portapapeles",
+        "hint": "Abre el historial del portapapeles"
+      }
+    },
+    "stopNeedsKey": "Iniciar/detener necesita un atajo.",
+    "stopName": "Iniciar o detener la grabación",
+    "fieldLabel": "Atajo de {name}",
+    "fieldLabelSet": "Atajo de {name}: {hotkey}",
+    "pressKeys": "Presiona las teclas… (Esc para cancelar)",
+    "clickToSet": "Haz clic para asignar",
+    "clearLabel": "Borrar atajo",
+    "clear": "Borrar",
+    "startStop": "Iniciar / detener",
+    "worksAnywhere": "Funciona en cualquier lugar"
+  },
+  "effects": {
+    "title": "Efectos",
+    "tabs": {
+      "backgrounds": "Fondos",
+      "frames": "Marcos",
+      "camera": "Cámara"
+    },
+    "imageTooLarge": "Elige un PNG o JPEG de menos de {mb} MB.",
+    "backgrounds": {
+      "none": "Ninguno",
+      "blur": "Desenfoque",
+      "clear": "Transparente",
+      "sunset": "Atardecer",
+      "aurora": "Aurora",
+      "dunes": "Dunas",
+      "studio": "Estudio",
+      "ink": "Tinta",
+      "cream": "Crema"
+    },
+    "frames": {
+      "none": "Ninguno",
+      "coral": "Coral",
+      "white": "Blanco",
+      "amber": "Ámbar",
+      "geometric": "Geométrico",
+      "confetti": "Confeti",
+      "botanical": "Botánico"
+    },
+    "cameraOff": "Activa la cámara para verlos en vivo en tu burbuja.",
+    "unsupported": "Los fondos de cámara están disponibles en macOS y Windows.",
+    "topPicks": "Destacados",
+    "colors": "Colores",
+    "popularAtWork": "Populares en el trabajo",
+    "addImage": "Añadir una imagen de fondo",
+    "addImageHint": "Añadir una imagen de fondo (PNG o JPEG, hasta {mb} MB)",
+    "customImage": "Imagen de fondo personalizada",
+    "cutOutNote": "El desenfoque y todos los fondos que siguen te recortan de lo que tienes detrás, aquí mismo en esta {device}.",
+    "pickBackgroundFirst": "Primero elige un fondo."
+  },
+  "windowSource": {
+    "hintWindow": "Solo la ventana, incluso\nbajo otras ventanas",
+    "hintArea": "Un área fija basada\nen la ventana",
+    "noteWindow": "Graba solo esta ventana, incluso bajo otras. La cámara y Flare quedan fuera.",
+    "noteArea": "Graba esta área de la pantalla, con la cámara y Flare.",
+    "cameraNote": "No aparece al grabar solo la ventana"
+  },
+  "recovery": {
+    "failed": "No se pudo recuperar esta grabación: {error}",
+    "offline": "Estás sin conexión. Conéctate a internet y vuelve a usar Recuperar."
+  },
+  "home": {
+    "localStage": {
+      "recording": "Grabando localmente…",
+      "transcribingWindows": "Transcribiendo con Clipy…",
+      "transcribingMac": "Transcribiendo en esta Mac…",
+      "selecting": "Eligiendo los momentos clave…",
+      "extracting": "Generando el AREC…",
+      "readyCopied": "AREC listo · ruta copiada",
+      "ready": "AREC listo",
+      "failed": "Falló el procesamiento local"
+    },
+    "recoveryAge": {
+      "minutes": "hace {minutes} min",
+      "hours": "hace {hours} h",
+      "days": "hace {days} días"
+    },
+    "recoveryExpiry": {
+      "hours": "{hours} h",
+      "days": "{days} días"
+    },
+    "source": {
+      "display": "Pantalla completa",
+      "window": "Ventana específica",
+      "area": "Tamaño personalizado",
+      "camera": "Solo cámara",
+      "select": "Seleccionar",
+      "displayHint": "Elige una pantalla",
+      "areaHint": "Arrastra un área de tu pantalla"
+    },
+    "permission": {
+      "screen": "macOS bloqueó la grabación de pantalla para Clipy. Si Grabación de pantalla ya está activada para Clipy, quita Clipy de esa lista en Ajustes del Sistema, vuelve a añadirlo y abre Clipy de nuevo.",
+      "camera": "macOS bloqueó el acceso a la cámara para Clipy. Permite Clipy en Cámara en Ajustes del Sistema o desactiva la cámara para esta grabación.",
+      "microphone": "macOS bloqueó el acceso al micrófono para Clipy. Permite Clipy en Micrófono en Ajustes del Sistema o desactiva el micrófono para esta grabación."
+    },
+    "setupCard": {
+      "title": "Configura Clipy",
+      "body": "macOS debe permitir la grabación de pantalla (y, si quieres, tu cámara y tu micrófono) antes de la primera toma. Esto se hace en una ventana aparte.",
+      "open": "Abrir configuración inicial"
+    },
+    "access": {
+      "title": "Cambiar acceso al video",
+      "public": "Público",
+      "restricted": "Restringido",
+      "private": "Privado",
+      "anyone": "Cualquier persona con el enlace",
+      "domains": "Personas de dominios permitidos",
+      "onlyMe": "Solo yo",
+      "allowedDomains": "Dominios permitidos",
+      "emailDomain": "Dominio de correo",
+      "add": "Añadir",
+      "remove": "Quitar {domain}"
+    },
+    "strip": {
+      "customized": "{label}, personalizado",
+      "effects": "Efectos",
+      "notes": "Notas",
+      "library": "Biblioteca",
+      "localLibrary": "Biblioteca local",
+      "more": "Más",
+      "label": "Opciones de grabación"
+    },
+    "summary": {
+      "region": "Región de {width}×{height}",
+      "dragRegion": "Arrastra en la pantalla para elegir una región",
+      "noWindow": "Todavía no elegiste una ventana",
+      "window": "Ventana",
+      "noDisplay": "Todavía no elegiste una pantalla",
+      "display": "Pantalla"
+    },
+    "shot": {
+      "uploaded": "Captura subida, enlace copiado",
+      "copied": "Captura copiada y guardada en Imágenes",
+      "saved": "Captura guardada en Imágenes",
+      "shareFailed": "Guardada en esta {device}, pero no se pudo compartir: {error}",
+      "closeEditorFirst": "Primero cierra la ventana de la captura.",
+      "failed": "La captura falló: {error}",
+      "area": "Seleccionar un área",
+      "display": "Pantalla completa",
+      "capturing": "Capturando…",
+      "shortcut": "Atajo {keys}",
+      "showInFolder": "Mostrar en la carpeta",
+      "showInFinder": "Mostrar en Finder",
+      "shortcutsHint": "Los atajos funcionan en cualquier lugar, incluso con Clipy cerrado. Cámbialos en Configuración → Preferencias."
+    },
+    "camera": {
+      "permissionBubble": "La burbuja de cámara necesita permiso de cámara. Activa el acceso a la Cámara para Clipy en Ajustes del Sistema.",
+      "noCamera": "No se detectó ninguna cámara. Conecta una cámara (o abre la tapa del MacBook) para usar la burbuja.",
+      "failedToStart": "La cámara no pudo iniciar: {error}",
+      "settingsUnavailable": "Ajustes de cámara no disponibles: {error}",
+      "permissionList": "Se necesita permiso de cámara para usar la burbuja de cámara. Activa el acceso a la Cámara para Clipy en Ajustes del Sistema.",
+      "listFailed": "No se pudieron listar las cámaras: {error}",
+      "systemDefault": "Cámara predeterminada del sistema",
+      "choose": "Elige una cámara",
+      "turnOff": "Desactivar cámara",
+      "turnOn": "Activar cámara",
+      "menuLabel": "Cámara",
+      "chooseConnected": "Elige una cámara conectada antes de grabar.",
+      "notFound": "No se encontró la cámara seleccionada. Vuelve a conectarla o elige otra cámara."
+    },
+    "mic": {
+      "off": "Micrófono desactivado",
+      "systemDefault": "Micrófono predeterminado del sistema",
+      "systemDefaultMenu": "Predeterminado del sistema",
+      "systemDefaultNamed": "Predeterminado del sistema ({name})",
+      "choose": "Elige un micrófono",
+      "turnOff": "Desactivar micrófono",
+      "turnOn": "Activar micrófono",
+      "menuLabel": "Micrófono",
+      "disconnected": "{name} está desconectado. Se usa el predeterminado del sistema hasta que vuelva."
+    },
+    "upload": {
+      "failedSaved": "La subida falló. El archivo de la grabación está guardado en esta Mac.",
+      "failedSavedError": "La subida falló: {error}. El archivo de la grabación está guardado en esta Mac.",
+      "preparing": "Preparando la subida",
+      "progress": "{uploaded} de {total}",
+      "liveStopped": "La subida en vivo se detuvo. Tu grabación sigue capturándose de forma segura en esta Mac.",
+      "liveStoppedError": "La subida en vivo se detuvo: {error}. Tu grabación sigue capturándose de forma segura en esta Mac.",
+      "failedNotLost": "La subida falló. El archivo de la grabación está guardado en esta Mac y no se perdió.",
+      "failedNotLostError": "La subida falló: {error}. El archivo de la grabación está guardado en esta Mac y no se perdió.",
+      "preparingStudio": "Preparando Studio",
+      "finishing": "Terminando",
+      "uploading": "Subiendo",
+      "studioOpens": "{status} · Studio se abre automáticamente",
+      "creatingLink": "Creando tu enlace, se abrirá en tu navegador",
+      "cancelUpload": "Cancelar subida",
+      "cancel": "Cancelar"
+    },
+    "toast": {
+      "openingStudio": "Abriendo Studio…",
+      "openingBrowser": "Abriendo en tu navegador · enlace copiado",
+      "upToDate": "Ya tienes la versión más reciente ({version}).",
+      "recovered": "Grabación recuperada. Procesando ahora."
+    },
+    "errors": {
+      "updateCheck": "No se pudieron buscar actualizaciones: {error}",
+      "openRecordings": "No se pudieron abrir las grabaciones anteriores: {error}",
+      "openUpgrade": "No se pudo abrir la página para mejorar: {error}",
+      "installUpdate": "No se pudo instalar la actualización: {error}",
+      "chooseSource": "Elige una fuente para el modo de grabación seleccionado antes de empezar.",
+      "discard": "No se pudo descartar esta grabación: {error}"
+    },
+    "start": "Empezar a grabar",
+    "startLocal": "Empezar grabación local",
+    "startWithCountdown": "{label} ({seconds} s)",
+    "starting": "Iniciando…",
+    "openSite": "Abrir clipy.online",
+    "captureMode": "Modo de captura",
+    "recordVideo": "Grabar video",
+    "takeScreenshot": "Hacer una captura de pantalla",
+    "close": "Cerrar",
+    "recovery": {
+      "pending": "Grabación pendiente de recuperar",
+      "expand": "Expandir",
+      "available": "Grabación local disponible",
+      "body": "Clipy no pudo confirmar que esta copia local se limpió. Recupérala si la subida falló o descártala si ya está en tu biblioteca.",
+      "collapse": "Contraer",
+      "from": "Grabación de {age}",
+      "sizeExpiry": "{size} · se borra automáticamente en {expiry}",
+      "recovering": "Recuperando…",
+      "recover": "Recuperar",
+      "discard": "Descartar"
+    },
+    "destination": {
+      "label": "Destino de la grabación",
+      "cloud": "Nube",
+      "cloudShort": "Enlace para compartir",
+      "cloudHint": "Se sube mientras grabas y luego te da un enlace para compartir",
+      "local": "Local AI",
+      "localShort": "En esta {device}",
+      "localHint": "Guarda el video y el AREC en esta {device}",
+      "whatLocal": "Qué hace Local AI",
+      "preferences": "Preferencias de grabación"
+    },
+    "whatToRecord": "Qué grabar",
+    "hoverWindow": "Pasa el cursor sobre una ventana para seleccionarla…",
+    "loadingSources": "Cargando fuentes…",
+    "change": "Cambiar",
+    "settings": "Configuración",
+    "noWindows": "No hay ventanas visibles. Abre una ventana e inténtalo de nuevo.",
+    "videoStays": "El video se queda en esta {device}",
+    "uploadsWhileRecording": "Se sube mientras grabas y luego te da un enlace",
+    "open": "Abrir",
+    "startingIn": "Empieza en",
+    "paused": "En pausa",
+    "recording": "Grabando",
+    "written": "{size} escritos",
+    "stopping": "Deteniendo...",
+    "stopRecording": "Detener grabación {elapsed}",
+    "dockHint": "El dock de grabación queda a la izquierda de tu captura. Este botón es un respaldo si el dock está oculto.",
+    "finalizing": "Finalizando",
+    "wrappingUp": "Terminando…",
+    "updateReady": "Clipy {version} está descargado y listo.",
+    "restartNow": "Reiniciar ahora",
+    "later": "Más tarde",
+    "selectWindow": "Seleccionar ventana",
+    "hoverToSelect": "Pasa el cursor sobre una ventana para seleccionarla",
+    "escToCancel": "<key>ESC</key> para cancelar",
+    "update": {
+      "required": "Actualización obligatoria",
+      "available": "Actualización disponible",
+      "outOfDate": "Esta versión de Clipy ({version}) está desactualizada y ya no puede grabar ni subir. Actualiza para continuar.",
+      "ready": "La versión <strong>{latest}</strong> está lista para instalarse. Ahora tienes la <strong>{current}</strong>. Clipy descargará la actualización y se volverá a abrir.",
+      "unknown": "desconocida",
+      "recordLocally": "Grabar localmente",
+      "later": "Más tarde",
+      "installing": "Instalando…",
+      "install": "Instalar y reabrir"
+    }
+  },
+  "notes": {
+    "title": "Notas",
+    "smaller": "Texto más pequeño",
+    "larger": "Texto más grande",
+    "hide": "Ocultar notas",
+    "placeholder": "Puntos a tratar, enlaces, eso que siempre olvidas mencionar…"
+  },
+  "webcamControls": {
+    "small": "Cámara pequeña",
+    "medium": "Cámara mediana",
+    "large": "Cámara grande",
+    "label": "Cámara",
+    "hidePreview": "Ocultar vista previa de la cámara",
+    "hidePreviewHint": "Ocultar vista previa; la cámara sigue grabando",
+    "turnOff": "Desactivar cámara",
+    "size": "Tamaño de la cámara"
+  },
+  "windowSelect": {
+    "select": "Seleccionar {app}",
+    "hint": "Pasa el cursor sobre una ventana para seleccionarla · Esc para cancelar"
+  },
+  "stop": {
+    "micPaused": "Micrófono en pausa. Vuelve a conectar {device}",
+    "micSwitched": "Micrófono → {device}",
+    "noMicInput": "Sin sonido del micrófono",
+    "coach": "Anotar · Activa el lápiz, elige un color y luego haz clic y arrastra. Los trazos desaparecen juntos tras dos segundos sin dibujar. Esc vuelve a tu pantalla.",
+    "discardConfirm": "¿Descartar esta grabación?",
+    "discard": "Descartar",
+    "keepRecording": "Seguir grabando",
+    "showControlsPaused": "Grabación en pausa. Mostrar los controles de grabación",
+    "showControls": "Mostrar los controles de grabación",
+    "showControlsPausedTip": "Grabación en pausa · Mostrar los controles de grabación",
+    "showControlsTip": "Mostrar los controles de grabación",
+    "cancelRecording": "Cancelar grabación",
+    "stopRecording": "Detener grabación",
+    "cancelCountdown": "Cancelar la cuenta regresiva",
+    "stopLocal": "Detener y guardar localmente",
+    "stopShare": "Detener y obtener tu enlace para compartir",
+    "resume": "Reanudar grabación",
+    "pause": "Pausar grabación",
+    "discardRecording": "Descartar grabación",
+    "cancelNothingSaved": "Cancelar, no se guarda nada",
+    "discardNothingSaved": "Descartar esta grabación, no se guarda nada",
+    "hideNotes": "Ocultar notas",
+    "showNotes": "Mostrar notas",
+    "hideNotesTip": "Ocultar tus notas",
+    "showNotesTip": "Mostrar tus notas",
+    "stopAnnotating": "Dejar de anotar",
+    "annotate": "Anotar",
+    "stopAnnotatingTip": "Dejar de anotar · Esc vuelve a tu pantalla",
+    "annotateTip": "Anotar · Haz clic y arrastra para dibujar",
+    "cameraNotRecorded": "La cámara no se graba cuando solo se graba la ventana",
+    "hidePreview": "Ocultar vista previa de la cámara",
+    "showPreview": "Mostrar vista previa de la cámara",
+    "turnCameraOff": "Desactivar cámara",
+    "turnCameraOn": "Activar cámara",
+    "cameraNotRecordedTip": "Solo se graba la ventana, así que la cámara no. Cámbialo en Configuración → Video y audio.",
+    "hidePreviewTip": "Ocultar vista previa; la cámara sigue grabando",
+    "hideCameraTip": "Ocultar tu cámara de la grabación",
+    "showCameraTip": "Mostrar tu cámara en la grabación",
+    "noMic": "Sin micrófono en esta grabación",
+    "unmute": "Reactivar micrófono",
+    "mute": "Silenciar micrófono",
+    "noMicTip": "No se está grabando ningún micrófono. Elige uno antes de tu próxima grabación.",
+    "unmuteTip": "Reactivar tu micrófono",
+    "muteTip": "Silenciar tu micrófono",
+    "hideControls": "Ocultar los controles de grabación",
+    "hideControlsTip": "Ocultar estos controles",
+    "pen": "Lápiz",
+    "penColor": "Color del lápiz",
+    "colorPen": "Lápiz {color}",
+    "penWidth": "Grosor del lápiz",
+    "colors": {
+      "coral": "coral",
+      "yellow": "amarillo",
+      "green": "verde",
+      "blue": "azul",
+      "purple": "morado",
+      "white": "blanco"
+    },
+    "clearAnnotations": "Borrar anotaciones",
+    "clear": "Borrar",
+    "done": "Listo"
+  },
+  "webcam": {
+    "effectUnavailable": "El efecto de fondo de la cámara no está disponible. Elige Original para continuar.",
+    "previewUnavailable": "La vista previa de la cámara no está disponible. Desactiva la cámara y vuelve a activarla.",
+    "permission": "Se necesita permiso de cámara. Activa el acceso a la Cámara para Clipy en Ajustes del Sistema.",
+    "busy": "La cámara no está disponible. Cierra otras apps de cámara e inténtalo de nuevo.",
+    "notFound": "No se encontró una cámara que coincida. Vuelve a abrir el selector o elige otra cámara.",
+    "failed": "No se pudo iniciar la cámara web. Revisa Ajustes del Sistema > Privacidad > Cámara."
+  },
+  "areaSelect": {
+    "video": {
+      "title": "Grabación de tamaño personalizado",
+      "hint": "Graba exactamente el tamaño que dibujes. Esc cancela.",
+      "confirm": "Grabar esta área"
+    },
+    "screenshot": {
+      "title": "Captura de tamaño personalizado",
+      "hint": "Captura exactamente el tamaño que dibujes. Esc cancela.",
+      "confirm": "Capturar esta área"
+    },
+    "drag": "Arrastra para seleccionar un área",
+    "cancel": "Cancelar"
+  },
+  "viewer": {
+    "notOnMac": "Esta grabación no está en esta Mac.",
+    "recordedFrom": "Grabación del {date}",
+    "clicks": "{count, plural, one {# clic} other {# clics}}",
+    "onThisMac": "en esta Mac",
+    "processingFailed": "Falló el procesamiento",
+    "preparing": "Preparando…",
+    "copied": "Copiado",
+    "copyArecPath": "Copiar ruta del AREC",
+    "showInFinder": "Mostrar en Finder",
+    "autoOff": "Las grabaciones ya no se abrirán solas. La ruta del AREC se sigue copiando cuando una está lista. Vuelve a activar la ventana en Configuración → Preferencias.",
+    "autoOpened": "Clipy abrió esto porque terminó la grabación.",
+    "gotIt": "Entendido",
+    "dontOpen": "No abrir automáticamente",
+    "keyMoments": "Momentos clave",
+    "transcript": "Transcripción",
+    "noSpeech": "No se reconoció ninguna voz.",
+    "transcribing": "Transcribiendo…"
+  },
+  "whatsNew": {
+    "features": {
+      "clipboard": {
+        "title": "Historial del portapapeles",
+        "label": "Historial del portapapeles",
+        "blurbMac": "Todo lo que copias, a un atajo de distancia. Se queda en esta Mac y nunca se sube.",
+        "blurbWindows": "Todo lo que copias, a un atajo de distancia. Se queda en esta PC y nunca se sube."
+      },
+      "window_recording": {
+        "title": "Graba una ventana",
+        "label": "Graba una ventana",
+        "blurbMac": "Clipy graba solo la ventana que elijas, incluso cuando otras ventanas la tapan, y la sigue cuando se mueve.",
+        "blurbWindows": "Elige una ventana y Clipy graba el área que ocupa."
+      },
+      "screenshot_style": {
+        "title": "Fondos para capturas y nuevas herramientas de marcado",
+        "label": "Fondos para capturas",
+        "blurb": "Pon una captura sobre un fondo con margen, esquinas redondeadas y sombra, y luego señala lo importante con globos, emoji, foco, lupa y desenfoque."
+      },
+      "screenshot_markup": {
+        "title": "Anota capturas de pantalla",
+        "label": "Marcado de capturas",
+        "blurb": "Añade flechas, recuadros y texto a una captura antes de copiarla o compartirla."
+      },
+      "flare": {
+        "title": "Flare: mantén Control para señalar",
+        "label": "Flare: mantén Control",
+        "blurb": "Mientras grabas, mantén Control y mueve el mouse para señalar algo. El rastro se desvanece al soltar, y tu agente lo recibe como un momento clave."
+      },
+      "pointer": {
+        "title": "Puntero: mantén Control+Shift para señalar en una pantalla compartida",
+        "label": "Puntero: mantén Control+Shift",
+        "blurb": "Mantén Control+Shift y mueve el ratón para señalar algo mientras compartes pantalla en Meet, Slack o Zoom. No hace falta grabar, y el trazo se desvanece al soltar."
+      },
+      "draw": {
+        "title": "Dibuja en la pantalla",
+        "label": "Dibuja en la pantalla",
+        "blurb": "Mientras grabas, activa el lápiz y arrastra para dibujar sobre cualquier cosa en la pantalla."
+      },
+      "custom_size": {
+        "title": "Graba parte de la pantalla",
+        "label": "Tamaño personalizado",
+        "blurb": "Arrastra un recuadro, cambia su tamaño desde cualquier esquina y graba solo esa área."
+      },
+      "local_ai": {
+        "title": "Local AI",
+        "label": "Local AI",
+        "blurbMac": "Guarda una grabación en esta Mac. Tu grabación se queda en local, y Clipy escribe la transcripción y un AREC que tu agente puede leer.",
+        "blurbWindows": "Guarda una grabación en esta PC. El video nunca sale de ella; el audio se transcribe en el servidor de Clipy y se borra de allí."
+      },
+      "agent": {
+        "title": "Deja que tu agente grabe",
+        "label": "Tu agente graba",
+        "blurb": "Claude Code, Codex o Cursor pueden iniciar una grabación de Clipy, marcar lo que comprobaron y darte el enlace como prueba.",
+        "blurbLocal": "Claude Code, Codex o Cursor pueden iniciar una grabación de Clipy Local con clipy --local, marcar lo que comprobaron y entregarte la ruta del AREC como prueba."
+      }
+    },
+    "nav": "Novedades",
+    "rail": {
+      "whatsNew": "Novedades",
+      "version": "Clipy {version}",
+      "tryIt": "Pruébalo tú mismo",
+      "new": "NUEVO",
+      "progress": "<strong>{tried} de {total}</strong> probadas"
+    },
+    "done": "Listo",
+    "next": "Siguiente: {label}",
+    "tried": "Probada",
+    "notTried": "Aún no probada",
+    "overview": {
+      "updatedFrom": "Actualizado · {from} → {to}",
+      "updatedTo": "Actualizado a {version}",
+      "onVersion": "Tienes la {version}",
+      "latestVersion": "la versión más reciente",
+      "titleNews": "Novedades de Clipy",
+      "titleRecent": "Añadido recientemente a Clipy",
+      "bodyNews": "Cada una se prueba aquí mismo en unos 20 segundos. Practicar no graba nada, y no se sube nada a menos que tú lo elijas.",
+      "bodyRecent": "No hay nada nuevo desde tu última actualización. Estas son las incorporaciones más recientes, y todo lo que hace Clipy está a la izquierda.",
+      "tryIt": "Probar",
+      "allReleases": "Todas las versiones ↗",
+      "close": "Cerrar",
+      "tryAll": "{count, plural, =1 {Probar} other {Probar las #}}",
+      "startTrying": "Empezar a probar"
+    },
+    "page": {
+      "progress": "Prueba · {index} de {total}",
+      "back": "Atrás",
+      "skip": "Omitir"
+    },
+    "practice": {
+      "flareHow": "Mantén <keys></keys> y haz un círculo alrededor del botón <b>Pagar ahora</b> de arriba.",
+      "flareDone": "Eso fue un Flare. Funciona igual en tu próxima grabación.",
+      "pointerHow": "Mantén <keys></keys> y mueve el ratón por cualquier parte de la pantalla.",
+      "pointerDone": "Ese fue el puntero. Quien vea tu pantalla compartida lo ve.",
+      "pointerStep1": "Comparte tu pantalla en Meet, Slack, Zoom o cualquier otra app. Solo hace falta que Clipy esté abierto.",
+      "pointerStep2": "Mantén Control+Shift y mueve el ratón. Suelta y el trazo se desvanece.",
+      "pointerStep3Mac": "Para dejarlo activo sin mantener teclas, elige Mostrar puntero en el menú de Clipy de la barra de menús. Pulsa Esc para desactivarlo.",
+      "pointerStep3Windows": "Para dejarlo activo sin mantener teclas, elige Mostrar puntero en el menú de Clipy de la bandeja del sistema. Pulsa Esc para desactivarlo.",
+      "drawHow": "Elige un color y arrastra sobre la tarjeta. Mientras grabas, <keys></keys> activa el lápiz, o usa el lápiz de los controles de grabación.",
+      "drawDone": "Muy bien. El lápiz funciona sobre cualquier app mientras grabas.",
+      "clipboardDone": "El historial del portapapeles funciona. Guarda las últimas {items, number} cosas que copiaste, hasta {days} días.",
+      "markupDone": "Listo. Las capturas se abren aquí para marcarlas antes de copiarlas.",
+      "styleHow": "En la ventana de la captura, pulsa Fondo y elige un estilo. Las herramientas nuevas están en la barra: Globo, Emoji, Foco, Lupa y Selector de color.",
+      "styleDone": "Muy bien. El fondo va con la imagen cuando la copias o la subes.",
+      "windowStep1": "Abre la grabadora, elige Ventana específica como fuente y luego Seleccionar.",
+      "windowStep2Windows": "Haz clic en la ventana que quieres grabar.",
+      "windowStep2Mac": "Haz clic en la ventana que quieres. Otras ventanas pueden quedar encima mientras grabas.",
+      "startRecording": "Empieza a grabar.",
+      "windowDone": "Grabaste una ventana.",
+      "areaStep1": "Abre la grabadora, elige Tamaño personalizado como fuente y luego Seleccionar.",
+      "areaStep2": "Arrastra un recuadro y luego sus esquinas o bordes para cambiar su tamaño.",
+      "areaStep3": "Presiona Enter o Grabar esta área.",
+      "areaDone": "Grabaste parte de la pantalla.",
+      "localStep1": "Abre la grabadora y haz clic en Local AI, justo debajo de la barra superior.",
+      "localStep2Windows": "Graba como siempre. Tu grabación se queda en local; solo el audio se envía para la transcripción y luego se borra.",
+      "localStep2Mac": "Graba como siempre. Tu grabación se queda en local.",
+      "localStep3": "Cuando te detengas, el video y su AREC se quedan en esta {device}, listos para tu agente.",
+      "localDone": "Hiciste una grabación con Local AI.",
+      "agentDone": "Tu agente grabó con Clipy.",
+      "frameNote": "Área de práctica · no se graba nada",
+      "mock": {
+        "checkout": "Pago",
+        "total": "Total",
+        "payNow": "Pagar ahora"
+      },
+      "flareArea": "Área de práctica de Flare",
+      "held": "Mantenido",
+      "holdMe": "Mantenme",
+      "drawArea": "Área de práctica de dibujo",
+      "penColour": "Color del lápiz",
+      "clipboardSample": "Clipy guarda lo que copias, a un atajo de distancia.",
+      "clipboardNote": "Tu historial se queda en este dispositivo",
+      "clipboardOff": "El historial del portapapeles está desactivado",
+      "clipboardOffBody": "Actívalo para guardar lo que copias. Puedes volver a desactivarlo en Configuración, lo que también lo borra.",
+      "clipboardTurnOn": "Activar el historial del portapapeles",
+      "copyLine": "Copia esta línea:",
+      "copied": "Copiado",
+      "copy": "Copiar",
+      "pressToOpen": "Presiona <keys></keys> para abrir tu historial.",
+      "noShortcut": "El historial del portapapeles no tiene atajo. Asigna uno en Configuración → Preferencias → Atajos.",
+      "pickEntry": "Elige un elemento para pegarlo en la app en la que estabas.",
+      "screenshotBusy": "Ya hay una captura abierta para anotar.",
+      "screenshotFailed": "La captura falló: {error}",
+      "screenshotNote": "No se sube nada a menos que pulses Subir",
+      "annotatingOff": "Las anotaciones están desactivadas",
+      "annotatingOffBody": "Las capturas van directo al portapapeles. Activa “Anotar antes de copiar” para marcarlas primero.",
+      "annotatingTurnOn": "Activar anotaciones",
+      "takeArea": "Haz una captura de un área",
+      "withKeys": "con <keys></keys> o aquí:",
+      "waiting": "Esperándote…",
+      "takeScreenshot": "Hacer una captura de pantalla",
+      "drawArrow": "Dibuja una flecha o un recuadro, o añade texto.",
+      "copyOrUpload": "Pulsa Copiar imagen para guardarla en esta {device}, o Subir si quieres un enlace para compartir.",
+      "openRecorder": "Abrir la grabadora",
+      "ticksNote": "Se marca solo la primera vez que lo haces",
+      "cloud": "Nube",
+      "localAi": "Local AI",
+      "startLocal": "Empezar grabación local",
+      "start": "Empezar a grabar",
+      "nightCaption": "Local AI está activado: la grabadora se oscurece",
+      "dayCaption": "Nube y Local AI están justo debajo de la barra superior",
+      "agentNote": "Se marca solo cuando tu agente graba por primera vez",
+      "agentRun": "Ejecuta estos comandos una vez en una terminal. Usa codex o cursor en lugar de claude para esos agentes.",
+      "agentRunLocal": "Instala la CLI una vez y tu agente grabará con Clipy Local usando --local. No se sube nada y no hace falta una cuenta.",
+      "agentThen": "Luego pide a tu agente que verifique un cambio y envíe la prueba a través de Clipy.",
+      "agentThenLocal": "Después pide a tu agente que verifique un cambio y te entregue la ruta del AREC como prueba.",
+      "howItWorks": "Cómo funciona ↗"
+    }
+  },
+  "onboarding": {
+    "steps": {
+      "welcome": "Bienvenida",
+      "signin": "Iniciar sesión",
+      "screen": "Grabación de pantalla",
+      "accessibility": "Accesibilidad",
+      "media": "Cámara y micrófono",
+      "menuBar": "Barra de menús",
+      "systemTray": "Bandeja del sistema",
+      "done": "Todo listo"
+    },
+    "settingsName": {
+      "mac": "Ajustes del Sistema",
+      "windows": "Configuración de Windows"
+    },
+    "sidebar": {
+      "label": "Pasos de configuración",
+      "footnote": "Toma alrededor de un minuto. Puedes cambiar todo esto después en Configuración."
+    },
+    "back": "Atrás",
+    "continue": "Continuar",
+    "errors": {
+      "checkFailed": "Clipy no pudo revisar {settings}: {error}",
+      "checkNoAnswer": "Clipy no pudo revisar {settings}: no hubo respuesta.",
+      "openSettingsFailed": "No se pudo abrir {settings}: {error}",
+      "restartFailed": "No se pudo reiniciar Clipy: {error}",
+      "taskbarFailed": "No se pudo abrir la configuración de la barra de tareas: {error}"
+    },
+    "welcome": {
+      "eyebrow": "Te damos la bienvenida a Clipy",
+      "title": "Grábalo una vez. Todos pueden seguirlo, incluso tus agentes.",
+      "start": "Empezar",
+      "body": "Graba tu pantalla, tu cámara y tu voz, obtén un enlace en cuanto te detengas y pasa la grabación a Claude Code o Codex como contexto legible. Vamos a dejarlo todo listo."
+    },
+    "signIn": {
+      "title": "Inicia sesión en Clipy",
+      "titleSignedIn": "Ya iniciaste sesión",
+      "google": "Continuar con Google",
+      "openAgain": "Abrir el navegador de nuevo",
+      "signedInAs": "Sesión iniciada como <b>{email}</b>.",
+      "signedIn": "Ya iniciaste sesión.",
+      "waiting": "Termina de iniciar sesión en tu navegador. Esta ventana avanza sola.",
+      "body": "Tus grabaciones, enlaces y transcripciones viven en tu cuenta de Clipy. Abriremos tu navegador para que inicies sesión con Google y luego te traeremos directo de vuelta aquí."
+    },
+    "screen": {
+      "title": "Deja que Clipy vea tu pantalla",
+      "body": "macOS lo pide una sola vez. Activa Clipy en Grabación de pantalla y audio del sistema. Clipy solo captura mientras grabas.",
+      "pane": "Grabación de pantalla y audio del sistema",
+      "allow": "Permitir grabación de pantalla",
+      "granted": "La grabación de pantalla está activada"
+    },
+    "accessibility": {
+      "title": "Muestra dónde haces clic",
+      "body": "Accesibilidad permite que Clipy marque tus clics y tu puntero en la grabación, para que los espectadores y los agentes sigan cada paso. Activa Clipy en Accesibilidad.",
+      "pane": "Accesibilidad",
+      "allow": "Permitir accesibilidad",
+      "granted": "Accesibilidad está activada"
+    },
+    "permission": {
+      "opening": "Abriendo…",
+      "checkAgain": "Volver a comprobar",
+      "openSettings": "Abrir {settings}",
+      "restart": "Reiniciar Clipy",
+      "quitReopen": "Salir y volver a abrir",
+      "stale": "macOS muestra Grabación de pantalla como permitida, pero sigue bloqueando la captura. Desactiva y vuelve a activar Clipy en {settings} y luego reinicia Clipy.",
+      "checking": "Comprobando con macOS que Clipy puede ver tu pantalla…",
+      "unanswered": "macOS no responde si Clipy puede ver tu pantalla. Reiniciar Clipy suele resolverlo, y la configuración sigue donde la dejaste.",
+      "switchedOn": "¿Ya lo activaste? macOS lo aplica cuando Clipy se reinicia. La configuración sigue donde la dejaste."
+    },
+    "media": {
+      "eyebrow": "Opcional",
+      "title": "¿Quieres aparecer en tus grabaciones?",
+      "skip": "Omitir por ahora",
+      "body": "Añade tu cara y tu voz para que la gente entienda el porqué, no solo vea los clics. Puedes activar o desactivar cada uno desde el grabador cuando quieras.",
+      "camera": {
+        "title": "Cámara",
+        "detail": "Una burbuja con tu cara, en cualquier esquina.",
+        "allow": "Permitir cámara"
+      },
+      "microphone": {
+        "title": "Micrófono",
+        "detail": "Narra mientras grabas. Las transcripciones vienen incluidas.",
+        "allow": "Permitir micrófono"
+      },
+      "allowed": "Permitido",
+      "on": "Activado",
+      "checking": "Comprobando…",
+      "allowLabel": "Permitir {name}",
+      "openSettingsLabel": "Abrir la configuración de {name}"
+    },
+    "find": {
+      "titleMenuBar": "Clipy vive en tu barra de menús",
+      "titleTray": "Clipy vive en tu bandeja del sistema",
+      "openTaskbar": "Abrir configuración de la barra de tareas",
+      "gotIt": "Entendido",
+      "bodyMac": "Haz clic en el icono de Clipy en la parte superior de la pantalla para grabar. No hay ninguna ventana que mantener abierta. Clipy espera ahí arriba hasta que lo necesites.",
+      "bodyWindows": "Haz clic en el icono de Clipy junto al reloj para grabar. Si no está ahí, haz clic en la flecha <key>^</key>: Windows esconde ahí los iconos nuevos. Arrastra Clipy a la barra de tareas o actívalo en la configuración de la barra de tareas para que siempre se muestre.",
+      "shortcut": "Cuando termines la configuración, empieza y detén la grabación desde cualquier lugar con"
+    },
+    "done": {
+      "title": "Ya puedes grabar",
+      "titleBlocked": "Casi listo",
+      "checking": "Comprobando…",
+      "opening": "Abriendo…",
+      "open": "Abrir el grabador",
+      "ready": "Tu primera grabación está a un clic. Detente y el enlace ya estará en tu portapapeles.",
+      "readyLocal": "Tu primera grabación está a un clic. Al detenerla, la ruta de su AREC ya estará en tu portapapeles.",
+      "missing": "Falta un paso obligatorio. Resuélvelo abajo y listo.",
+      "waitingMac": "Esperando a que macOS confirme el acceso a la pantalla.",
+      "waitingWindows": "Clipy todavía no pudo leer la configuración de privacidad de Windows.",
+      "rows": {
+        "signedIn": "Sesión iniciada",
+        "screen": "Grabación de pantalla",
+        "clicks": "Registro de clics",
+        "camera": "Cámara",
+        "microphone": "Micrófono"
+      },
+      "off": "Desactivado",
+      "needsOk": "Necesita tu permiso",
+      "turnOn": "Activar",
+      "fix": "Resolver",
+      "screenUnconfirmed": "macOS todavía no confirmó el acceso a la pantalla. Si volver a comprobar no ayuda, reinicia Clipy; la configuración vuelve después.",
+      "windowsUnread": "Clipy no pudo leer la configuración de privacidad de Windows. Vuelve a comprobar o reinicia Clipy si sigue pasando.",
+      "loginItem": "Abrir Clipy al iniciar sesión",
+      "approve": "(apruébalo en {settings})"
+    },
+    "visuals": {
+      "linkCopied": "Enlace copiado",
+      "agentRead": "Tu agente lo leyó",
+      "settings": {
+        "general": "General",
+        "appearance": "Apariencia",
+        "privacy": "Privacidad y seguridad",
+        "desktopDock": "Escritorio y Dock",
+        "displays": "Pantallas"
+      },
+      "menu": {
+        "file": "Archivo",
+        "edit": "Edición",
+        "view": "Visualización"
+      },
+      "menuBarClock": "mar 9:41",
+      "menuBarHint": "Tu grabador se abre justo debajo del icono.",
+      "trayHint": "Windows esconde los iconos nuevos detrás de <key>^</key>. Arrastra Clipy a la barra de tareas para tenerlo a un clic.",
+      "trayTime": "9:41",
+      "trayDay": "martes",
+      "startRecording": "Empezar a grabar"
+    }
+  },
+  "clipboard": {
+    "filters": {
+      "all": "Todo",
+      "text": "Texto",
+      "images": "Imágenes",
+      "favorites": "Favoritos"
+    },
+    "elapsed": "{unit, select, now {ahora} m {{count} min} h {{count} h} other {{count} d}}",
+    "elapsedAgo": "{unit, select, now {ahora} m {hace {count} min} h {hace {count} h} other {hace {count} d}}",
+    "copiedAgo": "copiado {unit, select, now {ahora} m {hace {count} min} h {hace {count} h} other {hace {count} d}}",
+    "imageLabel": "Imagen ({width}×{height})",
+    "kinds": {
+      "image": "Imagen",
+      "color": "Color",
+      "link": "Enlace",
+      "email": "Correo",
+      "code": "Código",
+      "text": "Texto"
+    },
+    "lines": "{lines} líneas",
+    "characters": "{count, plural, one {{chars} carácter} other {{chars} caracteres}}",
+    "preview": {
+      "empty": "Selecciona un elemento para verlo aquí.",
+      "favorite": "Favorito",
+      "paste": "Pegar",
+      "copy": "Copiar",
+      "edit": "Editar"
+    },
+    "search": "Buscar en el historial del portapapeles",
+    "pasteLabel": "Pegar (↵)",
+    "copyLabel": "Copiar sin pegar ({keys})",
+    "filterLabel": "Mostrar",
+    "clearAll": "Borrar todo",
+    "clearAllTitle": "Los favoritos se conservan",
+    "hint": "Se abrió con {hotkey}. Algunas apps usan esa tecla para pegar como texto sin formato. Puedes cambiarla en Configuración de Clipy → Preferencias → Atajos.",
+    "dismissHint": "Cerrar consejo",
+    "headings": {
+      "favorites": "Favoritos",
+      "recent": "Recientes"
+    },
+    "editHint": "{keys} guardar · esc cancelar",
+    "cancel": "Cancelar",
+    "save": "Guardar",
+    "rowDelete": "Eliminar ({keys})",
+    "rowEdit": "Editar ({keys})",
+    "rowAddFavorite": "Añadir a favoritos ({keys})",
+    "rowRemoveFavorite": "Quitar de favoritos ({keys})",
+    "menu": {
+      "paste": "Pegar",
+      "copy": "Copiar",
+      "addFavorite": "Añadir a favoritos",
+      "removeFavorite": "Quitar de favoritos",
+      "edit": "Editar…",
+      "delete": "Eliminar"
+    },
+    "empty": {
+      "nothing": "Todavía no has copiado nada. Copia un texto o una imagen y aparecerá aquí.",
+      "noFavorites": "Aún no hay favoritos. Marca un elemento con una estrella, o pulsa {keys}, para guardarlo aquí para siempre.",
+      "noMatches": "Sin resultados."
+    },
+    "footer": {
+      "paste": "pegar",
+      "copy": "copiar",
+      "star": "favorito",
+      "type": "tipo",
+      "close": "cerrar",
+      "kept": "Solo se guarda en esta {device}"
+    }
+  },
+  "screenshotEditor": {
+    "openFailed": "No se pudo abrir esta captura.",
+    "tryAgain": "Reintentar",
+    "nothingWaiting": "No hay ninguna captura esperando anotaciones.",
+    "close": "Cerrar",
+    "loadFailed": "No se pudo cargar esta captura.",
+    "loading": "Cargando",
+    "toolbar": {
+      "tools": "Herramientas de anotación",
+      "color": "Color de la anotación",
+      "colorSwatch": "Color {color}",
+      "customColor": "Color personalizado",
+      "strokeWeight": "Grosor del trazo",
+      "stroke": "Trazo {weight}",
+      "background": "Fondo",
+      "backgroundTitle": "Fondo, margen, esquinas y sombra",
+      "undo": "Deshacer",
+      "undoTitle": "Deshacer ({keys})",
+      "redo": "Rehacer",
+      "redoTitle": "Rehacer ({keys})",
+      "clear": "Quitar todas las anotaciones"
+    },
+    "canvas": "Lienzo de anotación de la captura",
+    "textPlaceholder": "Escribe y luego {keys}",
+    "picked": "Color elegido: {color}",
+    "resetCrop": "Restablecer recorte",
+    "resetCuts": "Restablecer cortes",
+    "delete": "Eliminar",
+    "deleting": "Eliminando…",
+    "deleteTitle": "Eliminar esta captura sin copiarla",
+    "copy": "Copiar imagen",
+    "copying": "Copiando…",
+    "copyTitle": "Copiar la imagen al portapapeles ({keys})",
+    "upload": "Subir",
+    "uploading": "Subiendo…",
+    "updateLink": "Actualizar enlace",
+    "updating": "Actualizando…",
+    "signInToUpload": "Inicia sesión en Clipy para subir capturas",
+    "uploadTitle": "Subir a Clipy y copiar el enlace para compartir{shortcut}",
+    "updateTitle": "Actualizar la imagen del enlace de esta captura{shortcut}",
+    "result": {
+      "linkUpdated": "Enlace actualizado y copiado al portapapeles",
+      "linkCopied": "Enlace de la captura copiado al portapapeles",
+      "uploadFailedCopied": "No se pudo subir. En su lugar se copió la imagen.",
+      "uploadFailed": "No se pudo subir",
+      "copied": "Captura copiada al portapapeles",
+      "notCopied": "La captura se guardó, pero no se pudo copiar al portapapeles",
+      "openInBrowser": "Abrir en el navegador",
+      "showInExplorer": "Mostrar en el Explorador",
+      "showInFinder": "Mostrar en Finder",
+      "dismiss": "Cerrar"
+    },
+    "hints": {
+      "crop": "Arrastra el área que quieres conservar. El recorte se aplica al copiar o subir.",
+      "cut": "Arrastra hacia abajo por las filas o hacia los lados por las columnas para quitar esa franja y unir el resto al copiar o subir. Haz clic en una franja para conservarla."
+    }
+  }
+}

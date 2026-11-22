@@ -1,0 +1,10 @@
+
+
+# Staged FFmpeg DLLs (copied from FFMPEG_DIR by scripts/stage-ffmpeg-dlls.mjs)
+ffmpeg-bin/
+
+# Staged MediaPipe runtime (copied from node_modules by scripts/stage-segmentation-assets.mjs)
+segmentation/vision_wasm_internal.*
+
+# Staged sherpa-onnx DLLs for the local edition (scripts/stage-sherpa-onnx.mjs)
+sherpa-bin/

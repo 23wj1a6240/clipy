@@ -1,0 +1,13 @@
+{
+  "$schema": "https://schema.tauri.app/config/2",
+  "build": {
+    "beforeDevCommand": "node scripts/stage-ffmpeg-dlls.mjs && node scripts/stage-segmentation-assets.mjs && pnpm run dev",
+    "beforeBuildCommand": "node scripts/stage-ffmpeg-dlls.mjs && node scripts/stage-segmentation-assets.mjs && pnpm run build"
+  },
+  "bundle": {
+    "resources": {
+      "ffmpeg-bin/*.dll": "./",
+      "segmentation/*": "segmentation/"
+    }
+  }
+}

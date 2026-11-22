@@ -1,0 +1,28 @@
+{
+  "name": "@clipy/moments",
+  "version": "0.1.0",
+  "private": true,
+  "description": "Pick the moments of a screen recording worth a screenshot: rules on device, spoken cues with your own model key.",
+  "license": "Apache-2.0",
+  "type": "module",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "files": ["dist"],
+  "scripts": {
+    "prebuild": "node ../../scripts/sync-from-monorepo.mjs",
+    "build": "tsc -p tsconfig.json",
+    "pretypecheck": "node ../../scripts/sync-from-monorepo.mjs",
+    "typecheck": "tsc -p tsconfig.json --noEmit",
+    "pretest": "node ../../scripts/sync-from-monorepo.mjs",
+    "test": "vitest run"
+  },
+  "dependencies": {
+    "zod": "^4.4.3"
+  },
+  "devDependencies": {
+    "@types/node": "^22.0.0",
+    "typescript": "^5.6.0",
+    "vitest": "^4.1.4"
+  },
+  "engines": { "node": ">=20.19" }
+}

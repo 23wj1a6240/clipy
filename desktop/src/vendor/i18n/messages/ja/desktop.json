@@ -1,0 +1,1185 @@
+{
+  "native": {
+    "tray": {
+      "openClipy": "Clipy を開く",
+      "quit": "Clipy を終了",
+      "whatsNew": "新機能…",
+      "showPointer": "ポインタを表示（{shortcut}）",
+      "signIn": "Clipy にサインイン…",
+      "startRecording": "録画を開始",
+      "restartUpdate": "再起動してアップデートを完了（{version}）",
+      "starting": "開始中…",
+      "cancel": "キャンセル",
+      "stopRecordingElapsed": "録画を停止  （{elapsed}）",
+      "pauseRecording": "録画を一時停止",
+      "cancelDiscard": "キャンセルして破棄",
+      "resumeRecordingElapsed": "録画を再開  （{elapsed}）",
+      "stopRecording": "録画を停止",
+      "stopping": "停止中…",
+      "uploading": "アップロード中…",
+      "cancelUpload": "アップロードをキャンセル",
+      "localProcessing": "処理中…",
+      "localReady": "完了"
+    },
+    "tooltip": {
+      "starting": "Clipy、開始中…",
+      "recording": "Clipy、録画中 {elapsed}",
+      "paused": "Clipy、{elapsed} で一時停止中",
+      "stopping": "Clipy、停止中…",
+      "uploading": "Clipy、アップロード中…"
+    },
+    "notifications": {
+      "micSilent": "マイクの入力が検出されません。マイクを確認するか、別の入力を選んでください。",
+      "micNotStartedMac": "マイクを開始できませんでした。macOS のマイクの許可を確認するか、別の入力を選んでください。",
+      "micNotStartedWindows": "マイクを開始できませんでした。設定 > プライバシーとセキュリティ > マイク を確認するか、別の入力を選んでください。",
+      "windowsMicStartFailed": "Clipy がマイクを開始できなかったため、この録画にはマイクの音声が入っていません。設定 > プライバシーとセキュリティ > マイク を開いてデスクトップ アプリによる使用を許可するか、別のマイクを選んでください。",
+      "micPaused": "マイクを一時停止しました。{device} が切断されています。再接続を待っています。",
+      "micSwitched": "マイクを {device} に切り替えました",
+      "recoveryOne": "未完了の録画がこのコンピューターに保存されています。Clipy を開いてアップロードするか破棄してください。",
+      "recoveryMany": "未完了の録画が {count} 件、このコンピューターに保存されています。Clipy を開いてアップロードするか破棄してください。",
+      "clipboardCopiedOnly": "コピーしました。Clipy が貼り付けられなかったので、{key} を押してください。"
+    },
+    "windowTitles": {
+      "whatsNew": "Clipy の新機能",
+      "selectWindow": "ウィンドウを選択",
+      "clipboard": "クリップボード履歴",
+      "annotate": "スクリーンショットに注釈",
+      "welcome": "Clipy へようこそ",
+      "notes": "メモ",
+      "localRecording": "Clipy の録画"
+    },
+    "agentConsent": {
+      "title": "Clipy：AI エージェントによる録画を許可しますか？",
+      "body": "ローカルの AI エージェント（例：Claude Code）が、Clipy に画面の録画を依頼しています。\n\n通常の録画インジケーターは常に表示され、録画は制限時間に達すると自動で停止し、依頼できるのはあなたのユーザーとして実行中のプログラムだけです。\n\nエージェントによる録画を許可しますか？",
+      "allow": "許可",
+      "dontAllow": "許可しない"
+    },
+    "errors": {
+      "notSignedIn": "サインインしていません",
+      "offline": "オフラインです。インターネットに接続してもう一度お試しください。",
+      "offlineRecover": "オフラインです。インターネットに接続して、もう一度［復元］を押してください。",
+      "micUnavailable": "マイクを使用できません。マイクをオフにすると、マイクなしで録画できます。",
+      "noScreenFrames": "Clipy が画面をキャプチャできなかったため、録画を停止し、何もアップロードしませんでした。システム設定 > プライバシーとセキュリティ > 画面収録 を開いて Clipy がオンになっていることを確認し、Clipy を終了して開き直してから、もう一度お試しください。",
+      "noWindowFrames": "Clipy がそのウィンドウをキャプチャできなかったため、録画を停止し、何もアップロードしませんでした。ウィンドウが開いていて最小化されていないこと、システム設定 > プライバシーとセキュリティ > 画面収録 で Clipy がオンになっていることを確認して、もう一度お試しください。",
+      "unreadableScreenFrames": "Clipy が画面から送られた映像を録画できなかったため、録画を停止し、何もアップロードしませんでした。もう一度お試しいただくか、別のディスプレイやウィンドウを選んでください。",
+      "updateWindows": "画面録画には Windows 10 バージョン 1903 以降が必要です。設定 > Windows Update で Windows を更新してから、もう一度お試しください。",
+      "optionUnsupported": "このバージョンの Windows では画面キャプチャの設定を使用できませんでした。設定 > Windows Update で Windows を更新してから、もう一度お試しください。",
+      "directxUnavailable": "このグラフィックス カードでは Windows が画面キャプチャを開始できませんでした。グラフィックス ドライバーを更新するか、リモート デスクトップの場合はそのコンピューター上で直接録画してください。",
+      "itemFailed": "Windows がその画面やウィンドウをキャプチャ用に開けませんでした。ソースを選び直して、もう一度お試しください。",
+      "wgcStartFailed": "Windows が画面キャプチャを開始できませんでした。Clipy を再起動してもう一度お試しください。繰り返し発生する場合は、Windows とグラフィックス ドライバーを更新してください。",
+      "windowNotListed": "そのウィンドウは一覧にありません。選び直して、もう一度お試しください。",
+      "windowClosed": "そのウィンドウは閉じられたか、録画できなくなりました。選び直して、もう一度お試しください。",
+      "windowHidden": "そのウィンドウは非表示か、別のデスクトップにあります。元に戻してから、もう一度お試しください。",
+      "windowMinimized": "そのウィンドウは最小化されています。画面に戻してから、もう一度お試しください。",
+      "wgcNoFrames": "Windows は画面キャプチャを開始しましたが、映像が送られてきませんでした。画面がオンでロック解除されていることを確認して、もう一度お試しください。職場のコンピューターでは画面録画がブロックされている場合があります。",
+      "displayDisconnected": "そのディスプレイは接続されていません。画面を選んで、もう一度お試しください。",
+      "displayNotListed": "そのディスプレイは一覧にありません。画面を選んで、もう一度お試しください。",
+      "windowOffscreen": "そのウィンドウは画面上にありません。表示される位置に移動してから、もう一度お試しください。",
+      "micStartFailedWindows": "Clipy がマイクを開始できなかったため、この録画にはマイクの音声がありません。設定 > プライバシーとセキュリティ > マイク を開いてデスクトップ アプリにマイクの使用を許可するか、別のマイクを選んでください。",
+      "micSilentWindows": "マイクの入力が検出されません。マイクがミュートになっていないこと、設定 > プライバシーとセキュリティ > マイク で許可されていることを確認するか、別の入力を選んでください。",
+      "micStoppedWindows": "マイクの入力が検出されません。マイクからの音声が止まりました。接続されていることを確認するか、別の入力を選んでください。"
+    }
+  },
+  "app": {
+    "loading": "Clipy を読み込み中…"
+  },
+  "local": {
+    "expiry": {
+      "kept": "保持中",
+      "soon": "まもなく削除",
+      "days": "{days, plural, other {# 日後に削除}}"
+    },
+    "status": {
+      "ready": "エージェントに貼り付けられます",
+      "saved": "この {device} に保存済み",
+      "failed": "録画の確認が必要です",
+      "recording": "この {device} で録画中"
+    },
+    "preparing": "録画を準備中…",
+    "pathCopied": "パスをコピーしました",
+    "copyArecPath": "AREC のパスをコピー",
+    "open": "開く",
+    "showInExplorer": "エクスプローラーで表示",
+    "showInFinder": "Finder で表示",
+    "retry": "再試行",
+    "stopKeeping": "保持を解除",
+    "keep": "保持",
+    "moveToTrash": "ゴミ箱に移動",
+    "cancel": "キャンセル",
+    "delete": "削除",
+    "sectionLabel": "ローカル録画",
+    "openingSignIn": "サインインを開いています…",
+    "signInToRecord": "サインインしてローカルに録画",
+    "totalOnDevice": "この {device} に {size} · 保持しない録画は {days} 日後に削除",
+    "windowsAudio": "音声は Clipy のサーバーで文字起こしされ、その後サーバーから削除されます。動画はこの PC に残ります。",
+    "hidePrevious": "以前の録画を非表示",
+    "previous": "以前の録画（{count}）",
+    "fullApp": {
+      "pitch": "誰でも視聴できる共有リンク、キー管理不要の AI、チームのワークスペースが必要ですか？それは完全版の {fullApp} アプリで、別途ダウンロードできます。",
+      "button": "{fullApp} を入手"
+    },
+    "empty": "ローカル録画はまだありません"
+  },
+  "whatsNewCard": {
+    "updatedTo": "{version} にアップデートしました",
+    "dismissLabel": "新機能のお知らせを閉じる",
+    "dismiss": "閉じる",
+    "newThings": "{count, plural, other {試せる新機能が # 件}}",
+    "more": "ほか {count} 件",
+    "tryIt": "{count, plural, other {試してみる}}",
+    "later": "あとで"
+  },
+  "settings": {
+    "title": "設定",
+    "tabs": {
+      "enhance": "補正",
+      "video": "ビデオとオーディオ",
+      "preferences": "環境設定"
+    },
+    "clipboardSubtitle": {
+      "off": "以前コピーしたものを何でも貼り付けられます。この {device} にだけ保存されます。",
+      "registered": "以前コピーしたものを {hotkey} で貼り付けられます。この {device} にだけ保存されます。",
+      "unavailable": "{hotkey} は使用できないため、何も保存されません。ショートカットで別のキーを選んでください。",
+      "noKey": "開くにはショートカットが必要です。ショートカットでクリップボード用に設定してください。"
+    },
+    "reduceNoise": {
+      "title": "背景ノイズを低減",
+      "subtitle": "扇風機やエアコンなどの一定した環境音を抑えます。オンにするまではオフです。",
+      "needsMic": "マイクがオンのときに使用できます"
+    },
+    "cameraEffects": {
+      "title": "カメラエフェクト",
+      "subtitle": "背景、切り抜き、フレームはレコーダーのエフェクトにあります。"
+    },
+    "resolution": {
+      "title": "解像度",
+      "pro": "この大きさまで録画します",
+      "free": "1440p、4K、ネイティブには Pro が必要です",
+      "proSuffix": "{label} · Pro"
+    },
+    "windowRecording": {
+      "title": "ウィンドウ録画",
+      "subtitle": "特定のウィンドウの録画で記録される内容"
+    },
+    "countdown": {
+      "title": "録画のカウントダウン",
+      "subtitle": "キャプチャ開始前の短いカウント",
+      "label": "カウントダウン",
+      "off": "オフ",
+      "seconds": "{seconds, plural, other {# 秒}}"
+    },
+    "flip": {
+      "title": "カメラを反転",
+      "subtitle": "カメラの向きを左右反転します"
+    },
+    "persistBubble": {
+      "title": "カメラバブルの位置を保持",
+      "subtitle": "カメラバブルを前回の位置に残します"
+    },
+    "systemAudio": {
+      "title": "システムオーディオを使用",
+      "cameraOnly": "画面録画で使用できます",
+      "subtitle": "聞こえている音すべて、ヘッドホン使用中でも"
+    },
+    "camera": {
+      "title": "カメラ",
+      "none": "カメラが見つかりません。接続してから更新してください。",
+      "found": "{count, plural, other {# 台のカメラが見つかりました}}"
+    },
+    "systemDefault": "システムのデフォルト",
+    "microphone": {
+      "title": "マイク",
+      "none": "マイクなし"
+    },
+    "refreshing": "更新中…",
+    "refreshDevices": "デバイスを更新",
+    "setup": {
+      "title": "カメラとマイクの設定",
+      "subtitle": "Clipy の {os} の権限を確認",
+      "open": "セットアップを開く"
+    },
+    "notSignedIn": "サインインしていません",
+    "signInToCloud": "サインインするとクラウドに録画できます",
+    "sections": {
+      "system": "システム",
+      "recording": "録画",
+      "screenshots": "スクリーンショット",
+      "clipboard": "クリップボード",
+      "shortcuts": "ショートカット",
+      "recordingsOnDevice": "この {device} の録画",
+      "clipy": "Clipy",
+      "language": "言語"
+    },
+    "launchAtLogin": {
+      "title": "ログイン時に起動",
+      "approval": "完了するには、システム設定 → 一般 → ログイン項目 で Clipy を許可してください。",
+      "unavailable": "ログイン時に起動するには、Clipy をアプリケーションに移動してください。",
+      "subtitle": "Clipy をメニューバーにいつでも待機させます"
+    },
+    "showInDock": {
+      "title": "Dock に表示",
+      "subtitle": "メニューバーだけでなく Dock にも Clipy を表示します"
+    },
+    "recordingControls": {
+      "title": "録画コントロール",
+      "subtitle": "キャプチャの横に浮かぶドックです。オフにすると表示せずに録画し、ショートカットかここから停止します。"
+    },
+    "annotate": {
+      "title": "コピー前に注釈を付ける",
+      "subtitle": "各スクリーンショットをエディターで開き、矢印、枠、テキスト、塗りつぶしを追加します。オフの場合はすぐにコピーされます。"
+    },
+    "clipboardHistory": "クリップボード履歴",
+    "clipboardClash": "{app} も {hotkey} で開くため、Clipy ではなくそちらがキーを受け取る場合があります。{app} をアンインストールするか、ショートカットでクリップボード用に別のキーを選んでください。",
+    "shortcutsHint": "フィールドをクリックしてキーを押してください。",
+    "localInfo": "ローカル録画とその AREC コンテキストは、この {device} の Clipy フォルダーに保存され、保持しない場合は {days} 日後に削除されます。クラウド録画は、アップロードが終わるまでだけローカルにコピーを残します。",
+    "localInfoWindows": "Local AI は音声を Clipy のサーバーで文字起こしし、その後サーバーから削除します。動画はこの PC から出ません。",
+    "openArec": {
+      "title": "AREC の準備ができたら開く",
+      "subtitle": "ローカル録画は終わるとすぐにビューアーで開きます。オフの場合はウィンドウは開きませんが、AREC のパスはどちらの場合もコピーされ、エージェントにすぐ貼り付けられます。"
+    },
+    "links": {
+      "recordings": "あなたの録画",
+      "recordingsHint": "clipy.online でライブラリを開く",
+      "whatsNew": "新機能",
+      "whatsNewHint": "新しい機能と、それぞれを試せる場所",
+      "updates": "アップデートを確認",
+      "version": "バージョン {version}",
+      "latest": "最新リリース",
+      "privacy": "プライバシー",
+      "privacyHint": "Clipy が保存するものと、決して読まないもの"
+    },
+    "signOut": "サインアウト",
+    "editAccount": "アカウントを編集",
+    "signIn": "サインイン",
+    "language": {
+      "title": "言語",
+      "subtitle": "メニュー、ウィンドウ、通知。システムのデフォルトは {os} の言語に従います。",
+      "label": "言語"
+    }
+  },
+  "ui": {
+    "on": "オン",
+    "off": "オフ",
+    "back": "戻る",
+    "more": "その他"
+  },
+  "camera": {
+    "touchUp": {
+      "title": "外見を補正",
+      "subtitle": "肌をなめらかにし、気になる部分を目立たなくします",
+      "strength": "補正の強さ"
+    },
+    "autoLighting": {
+      "title": "自動ライティング",
+      "subtitle": "どんな照明でもきれいに"
+    },
+    "view": {
+      "title": "カメラの表示",
+      "subtitle": "浮かぶバブル、または片側に固定",
+      "floating": "フローティング",
+      "square": "正方形",
+      "left": "左に固定",
+      "right": "右に固定"
+    },
+    "size": {
+      "title": "カメラのサイズ",
+      "small": "小",
+      "medium": "中",
+      "large": "大"
+    }
+  },
+  "windowCapture": {
+    "label": "ウィンドウ録画",
+    "default": "デフォルト",
+    "window": {
+      "title": "ウィンドウのみ",
+      "body": "このウィンドウだけを録画します。ほかのウィンドウが重なっていても録画され、移動すると追従します。録画中もほかのアプリで作業を続けられます。"
+    },
+    "area": {
+      "title": "ウィンドウと画面の領域",
+      "body": "ウィンドウが最初にある画面の範囲を、カメラと Flare も含めて録画します。ウィンドウを動かしても範囲は固定され、そこを横切るものもすべて録画されます。"
+    },
+    "chips": {
+      "windowAnywhere": "ウィンドウ（どこにあっても）",
+      "otherWindows": "ほかのウィンドウ",
+      "popups": "ポップアップメニュー",
+      "camera": "カメラ",
+      "flare": "Flare",
+      "outsideArea": "範囲外のすべて"
+    }
+  },
+  "selectDesktop": {
+    "title": "デスクトップを選択",
+    "noPreview": "プレビューなし"
+  },
+  "shortcuts": {
+    "rows": {
+      "screenshot_area": {
+        "label": "スクリーンショット",
+        "hint": "ドラッグして範囲を選択"
+      },
+      "screenshot_display": {
+        "label": "全画面",
+        "hint": "画面全体を撮影"
+      },
+      "annotation": {
+        "label": "描画",
+        "hint": "ペンのオン・オフ"
+      },
+      "pause": {
+        "label": "一時停止",
+        "hint": "一時停止・再開"
+      },
+      "mic": {
+        "label": "マイクをミュート",
+        "hint": "マイクをミュート・解除"
+      },
+      "camera": {
+        "label": "カメラ",
+        "hint": "バブルの表示・非表示"
+      },
+      "clipboard_history": {
+        "label": "クリップボード",
+        "hint": "クリップボード履歴を開く"
+      }
+    },
+    "stopNeedsKey": "開始/停止にはショートカットが必要です。",
+    "stopName": "録画の開始・停止",
+    "fieldLabel": "{name}のショートカット",
+    "fieldLabelSet": "{name}のショートカット：{hotkey}",
+    "pressKeys": "キーを押してください…（Esc でキャンセル）",
+    "clickToSet": "クリックして設定",
+    "clearLabel": "ショートカットを解除",
+    "clear": "解除",
+    "startStop": "開始 / 停止",
+    "worksAnywhere": "どこでも使えます"
+  },
+  "effects": {
+    "title": "エフェクト",
+    "tabs": {
+      "backgrounds": "背景",
+      "frames": "フレーム",
+      "camera": "カメラ"
+    },
+    "imageTooLarge": "{mb} MB 未満の PNG または JPEG を選んでください。",
+    "backgrounds": {
+      "none": "なし",
+      "blur": "ぼかし",
+      "clear": "透明",
+      "sunset": "夕焼け",
+      "aurora": "オーロラ",
+      "dunes": "砂丘",
+      "studio": "スタジオ",
+      "ink": "インク",
+      "cream": "クリーム"
+    },
+    "frames": {
+      "none": "なし",
+      "coral": "コーラル",
+      "white": "ホワイト",
+      "amber": "アンバー",
+      "geometric": "ジオメトリック",
+      "confetti": "紙吹雪",
+      "botanical": "ボタニカル"
+    },
+    "cameraOff": "カメラをオンにすると、バブル上でリアルタイムに確認できます。",
+    "unsupported": "カメラの背景は macOS と Windows で使用できます。",
+    "topPicks": "おすすめ",
+    "colors": "カラー",
+    "popularAtWork": "仕事で人気",
+    "addImage": "背景画像を追加",
+    "addImageHint": "背景画像を追加（PNG または JPEG、最大 {mb} MB）",
+    "customImage": "カスタム背景画像",
+    "cutOutNote": "ぼかし以降の背景はすべて、あなたを背後から切り抜きます。処理はこの {device} 上で行われます。",
+    "pickBackgroundFirst": "先に背景を選んでください。"
+  },
+  "windowSource": {
+    "hintWindow": "ウィンドウのみ。\nほかのウィンドウの下でも",
+    "hintArea": "ウィンドウの位置を\n基準にした固定範囲",
+    "noteWindow": "このウィンドウだけを録画します。ほかのウィンドウの下にあっても録画され、カメラと Flare は入りません。",
+    "noteArea": "画面のこの範囲を、カメラと Flare も含めて録画します。",
+    "cameraNote": "ウィンドウのみの録画には含まれません"
+  },
+  "recovery": {
+    "failed": "この録画を復元できませんでした：{error}",
+    "offline": "オフラインです。インターネットに接続して、もう一度［復元］を押してください。"
+  },
+  "home": {
+    "localStage": {
+      "recording": "ローカルに録画中…",
+      "transcribingWindows": "Clipy で文字起こし中…",
+      "transcribingMac": "この Mac で文字起こし中…",
+      "selecting": "キーモーメントを選んでいます…",
+      "extracting": "AREC を生成中…",
+      "readyCopied": "AREC 準備完了 · パスをコピーしました",
+      "ready": "AREC 準備完了",
+      "failed": "ローカル処理に失敗しました"
+    },
+    "recoveryAge": {
+      "minutes": "{minutes} 分前",
+      "hours": "{hours} 時間前",
+      "days": "{days} 日前"
+    },
+    "recoveryExpiry": {
+      "hours": "{hours} 時間",
+      "days": "{days} 日"
+    },
+    "source": {
+      "display": "全画面",
+      "window": "特定のウィンドウ",
+      "area": "カスタムサイズ",
+      "camera": "カメラのみ",
+      "select": "選択",
+      "displayHint": "ディスプレイを選択",
+      "areaHint": "画面の範囲をドラッグ"
+    },
+    "permission": {
+      "screen": "macOS が Clipy の画面録画をブロックしました。画面収録で Clipy がすでにオンになっている場合は、システム設定のその一覧から Clipy を削除して追加し直し、Clipy を開き直してください。",
+      "camera": "macOS が Clipy のカメラへのアクセスをブロックしました。システム設定のカメラで Clipy を許可するか、この録画ではカメラをオフにしてください。",
+      "microphone": "macOS が Clipy のマイクへのアクセスをブロックしました。システム設定のマイクで Clipy を許可するか、この録画ではマイクをオフにしてください。"
+    },
+    "setupCard": {
+      "title": "Clipy をセットアップ",
+      "body": "最初の録画の前に、macOS で画面録画（必要に応じてカメラとマイクも）を許可する必要があります。設定は別のウィンドウで行います。",
+      "open": "セットアップを開く"
+    },
+    "access": {
+      "title": "動画のアクセス設定を変更",
+      "public": "公開",
+      "restricted": "制限付き",
+      "private": "非公開",
+      "anyone": "リンクを知っている全員",
+      "domains": "許可したドメインのユーザー",
+      "onlyMe": "自分のみ",
+      "allowedDomains": "許可したドメイン",
+      "emailDomain": "メールのドメイン",
+      "add": "追加",
+      "remove": "{domain} を削除"
+    },
+    "strip": {
+      "customized": "{label}、カスタマイズ済み",
+      "effects": "エフェクト",
+      "notes": "メモ",
+      "library": "ライブラリ",
+      "localLibrary": "ローカルライブラリ",
+      "more": "その他",
+      "label": "録画オプション"
+    },
+    "summary": {
+      "region": "{width}×{height} の範囲",
+      "dragRegion": "画面上でドラッグして範囲を選択",
+      "noWindow": "ウィンドウがまだ選ばれていません",
+      "window": "ウィンドウ",
+      "noDisplay": "ディスプレイがまだ選ばれていません",
+      "display": "ディスプレイ"
+    },
+    "shot": {
+      "uploaded": "スクリーンショットをアップロードし、リンクをコピーしました",
+      "copied": "スクリーンショットをコピーし、ピクチャに保存しました",
+      "saved": "スクリーンショットをピクチャに保存しました",
+      "shareFailed": "この {device} に保存しましたが、共有に失敗しました：{error}",
+      "closeEditorFirst": "先にスクリーンショットのウィンドウを閉じてください。",
+      "failed": "スクリーンショットに失敗しました：{error}",
+      "area": "範囲を選択",
+      "display": "全画面",
+      "capturing": "撮影中…",
+      "shortcut": "ショートカット {keys}",
+      "showInFolder": "フォルダーで表示",
+      "showInFinder": "Finder で表示",
+      "shortcutsHint": "ショートカットは Clipy を閉じていてもどこでも使えます。設定 → 環境設定 で変更できます。"
+    },
+    "camera": {
+      "permissionBubble": "カメラバブルにはカメラの許可が必要です。システム設定で Clipy のカメラへのアクセスを有効にしてください。",
+      "noCamera": "カメラが検出されません。バブルを使うには、カメラを接続するか MacBook を開いてください。",
+      "failedToStart": "カメラを開始できませんでした：{error}",
+      "settingsUnavailable": "カメラの設定を使用できません：{error}",
+      "permissionList": "カメラバブルを使うにはカメラの許可が必要です。システム設定で Clipy のカメラへのアクセスを有効にしてください。",
+      "listFailed": "カメラデバイスを一覧表示できませんでした：{error}",
+      "systemDefault": "システムのデフォルトカメラ",
+      "choose": "カメラを選択",
+      "turnOff": "カメラをオフ",
+      "turnOn": "カメラをオン",
+      "menuLabel": "カメラ",
+      "chooseConnected": "録画の前に、接続されているカメラを選んでください。",
+      "notFound": "選択したカメラが見つかりません。接続し直すか、別のカメラを選んでください。"
+    },
+    "mic": {
+      "off": "マイクはオフです",
+      "systemDefault": "システムのデフォルトマイク",
+      "systemDefaultMenu": "システムのデフォルト",
+      "systemDefaultNamed": "システムのデフォルト（{name}）",
+      "choose": "マイクを選択",
+      "turnOff": "マイクをオフ",
+      "turnOn": "マイクをオン",
+      "menuLabel": "マイク",
+      "disconnected": "{name} が切断されています。戻るまでシステムのデフォルトを使用します。"
+    },
+    "upload": {
+      "failedSaved": "アップロードに失敗しました。録画ファイルはこの Mac に保存されています。",
+      "failedSavedError": "アップロードに失敗しました：{error}。録画ファイルはこの Mac に保存されています。",
+      "preparing": "アップロードを準備中",
+      "progress": "{uploaded} / {total}",
+      "liveStopped": "ライブアップロードが止まりました。録画はこの Mac で安全にキャプチャを続けています。",
+      "liveStoppedError": "ライブアップロードが止まりました：{error}。録画はこの Mac で安全にキャプチャを続けています。",
+      "failedNotLost": "アップロードに失敗しました。録画ファイルはこの Mac に保存されており、失われていません。",
+      "failedNotLostError": "アップロードに失敗しました：{error}。録画ファイルはこの Mac に保存されており、失われていません。",
+      "preparingStudio": "Studio を準備中",
+      "finishing": "仕上げ中",
+      "uploading": "アップロード中",
+      "studioOpens": "{status} · Studio は自動で開きます",
+      "creatingLink": "リンクを作成中です。ブラウザで開きます",
+      "cancelUpload": "アップロードをキャンセル",
+      "cancel": "キャンセル"
+    },
+    "toast": {
+      "openingStudio": "Studio を開いています…",
+      "openingBrowser": "ブラウザで開いています · リンクをコピーしました",
+      "upToDate": "最新バージョンです（{version}）。",
+      "recovered": "録画を復元しました。処理しています。"
+    },
+    "errors": {
+      "updateCheck": "アップデートの確認に失敗しました：{error}",
+      "openRecordings": "以前の録画を開けませんでした：{error}",
+      "openUpgrade": "アップグレードページを開けませんでした：{error}",
+      "installUpdate": "アップデートのインストールに失敗しました：{error}",
+      "chooseSource": "開始する前に、選んだ録画モードのソースを選択してください。",
+      "discard": "この録画を破棄できませんでした：{error}"
+    },
+    "start": "録画を開始",
+    "startLocal": "ローカル録画を開始",
+    "startWithCountdown": "{label}（{seconds} 秒）",
+    "starting": "開始中…",
+    "openSite": "clipy.online を開く",
+    "captureMode": "キャプチャモード",
+    "recordVideo": "動画を録画",
+    "takeScreenshot": "スクリーンショットを撮る",
+    "close": "閉じる",
+    "recovery": {
+      "pending": "復元待ちの録画があります",
+      "expand": "展開",
+      "available": "ローカル録画があります",
+      "body": "Clipy はこのローカルコピーが削除されたことを確認できませんでした。アップロードに失敗した場合は復元し、すでにライブラリにある場合は破棄してください。",
+      "collapse": "折りたたむ",
+      "from": "{age}の録画",
+      "sizeExpiry": "{size} · {expiry}後に自動削除",
+      "recovering": "復元中…",
+      "recover": "復元",
+      "discard": "破棄"
+    },
+    "destination": {
+      "label": "録画の保存先",
+      "cloud": "クラウド",
+      "cloudShort": "共有リンク",
+      "cloudHint": "録画しながらアップロードし、終わったら共有リンクを用意します",
+      "local": "Local AI",
+      "localShort": "この {device} に保存",
+      "localHint": "動画と AREC をこの {device} に保存します",
+      "whatLocal": "Local AI でできること",
+      "preferences": "録画の環境設定"
+    },
+    "whatToRecord": "録画する対象",
+    "hoverWindow": "ウィンドウにカーソルを合わせて選択…",
+    "loadingSources": "ソースを読み込み中…",
+    "change": "変更",
+    "settings": "設定",
+    "noWindows": "表示中のウィンドウがありません。ウィンドウを開いてもう一度お試しください。",
+    "videoStays": "動画はこの {device} に残ります",
+    "uploadsWhileRecording": "録画しながらアップロードし、終わったらリンクを用意します",
+    "open": "開く",
+    "startingIn": "まもなく開始",
+    "paused": "一時停止中",
+    "recording": "録画中",
+    "written": "{size} 書き込み済み",
+    "stopping": "停止中...",
+    "stopRecording": "録画を停止 {elapsed}",
+    "dockHint": "録画ドックはキャプチャの左側に表示されます。このボタンはドックが非表示のときの予備です。",
+    "finalizing": "仕上げ中",
+    "wrappingUp": "まとめています…",
+    "updateReady": "Clipy {version} をダウンロードしました。準備ができています。",
+    "restartNow": "今すぐ再起動",
+    "later": "あとで",
+    "selectWindow": "ウィンドウを選択",
+    "hoverToSelect": "ウィンドウにカーソルを合わせて選択",
+    "escToCancel": "<key>ESC</key> でキャンセル",
+    "update": {
+      "required": "アップデートが必要です",
+      "available": "アップデートがあります",
+      "outOfDate": "このバージョンの Clipy（{version}）は古いため、録画やアップロードができなくなりました。続けるにはアップデートしてください。",
+      "ready": "バージョン <strong>{latest}</strong> をインストールできます。現在は <strong>{current}</strong> です。Clipy がアップデートをダウンロードして再起動します。",
+      "unknown": "不明",
+      "recordLocally": "ローカルに録画",
+      "later": "あとで",
+      "installing": "インストール中…",
+      "install": "インストールして再起動"
+    }
+  },
+  "notes": {
+    "title": "メモ",
+    "smaller": "文字を小さく",
+    "larger": "文字を大きく",
+    "hide": "メモを隠す",
+    "placeholder": "話すポイント、リンク、いつも言い忘れるあのこと…"
+  },
+  "webcamControls": {
+    "small": "カメラ（小）",
+    "medium": "カメラ（中）",
+    "large": "カメラ（大）",
+    "label": "カメラ",
+    "hidePreview": "カメラのプレビューを隠す",
+    "hidePreviewHint": "プレビューを隠す（カメラは録画を続けます）",
+    "turnOff": "カメラをオフ",
+    "size": "カメラのサイズ"
+  },
+  "windowSelect": {
+    "select": "{app} を選択",
+    "hint": "ウィンドウにカーソルを合わせて選択 · Esc でキャンセル"
+  },
+  "stop": {
+    "micPaused": "マイクを一時停止中。{device} を接続し直してください",
+    "micSwitched": "マイク → {device}",
+    "noMicInput": "マイクの入力なし",
+    "coach": "注釈 · ペンをオンにして色を選び、クリックしてドラッグします。描かない状態が 2 秒続くと、描いた線はまとめて消えます。Esc で画面に戻ります。",
+    "discardConfirm": "この録画を破棄しますか？",
+    "discard": "破棄",
+    "keepRecording": "録画を続ける",
+    "showControlsPaused": "録画を一時停止中。録画コントロールを表示",
+    "showControls": "録画コントロールを表示",
+    "showControlsPausedTip": "録画を一時停止中 · 録画コントロールを表示",
+    "showControlsTip": "録画コントロールを表示",
+    "cancelRecording": "録画をキャンセル",
+    "stopRecording": "録画を停止",
+    "cancelCountdown": "カウントダウンをキャンセル",
+    "stopLocal": "停止してローカルに保存",
+    "stopShare": "停止して共有リンクを取得",
+    "resume": "録画を再開",
+    "pause": "録画を一時停止",
+    "discardRecording": "録画を破棄",
+    "cancelNothingSaved": "キャンセル（何も保存されません）",
+    "discardNothingSaved": "この録画を破棄（何も保存されません）",
+    "hideNotes": "メモを隠す",
+    "showNotes": "メモを表示",
+    "hideNotesTip": "メモを隠す",
+    "showNotesTip": "メモを表示",
+    "stopAnnotating": "注釈を終了",
+    "annotate": "注釈",
+    "stopAnnotatingTip": "注釈を終了 · Esc で画面に戻ります",
+    "annotateTip": "注釈 · クリックしてドラッグで描画",
+    "cameraNotRecorded": "ウィンドウのみを録画する場合、カメラは録画されません",
+    "hidePreview": "カメラのプレビューを隠す",
+    "showPreview": "カメラのプレビューを表示",
+    "turnCameraOff": "カメラをオフ",
+    "turnCameraOn": "カメラをオン",
+    "cameraNotRecordedTip": "ウィンドウだけを録画しているため、カメラは入りません。設定 → ビデオとオーディオ で変更できます。",
+    "hidePreviewTip": "プレビューを隠す（カメラは録画を続けます）",
+    "hideCameraTip": "録画からカメラを隠す",
+    "showCameraTip": "録画にカメラを表示",
+    "noMic": "この録画にはマイクがありません",
+    "unmute": "マイクのミュートを解除",
+    "mute": "マイクをミュート",
+    "noMicTip": "マイクを録音していません。次の録画の前に選んでください。",
+    "unmuteTip": "マイクのミュートを解除",
+    "muteTip": "マイクをミュート",
+    "hideControls": "録画コントロールを隠す",
+    "hideControlsTip": "このコントロールを隠す",
+    "pen": "ペン",
+    "penColor": "ペンの色",
+    "colorPen": "{color}のペン",
+    "penWidth": "ペンの太さ",
+    "colors": {
+      "coral": "コーラル",
+      "yellow": "イエロー",
+      "green": "グリーン",
+      "blue": "ブルー",
+      "purple": "パープル",
+      "white": "ホワイト"
+    },
+    "clearAnnotations": "注釈を消去",
+    "clear": "消去",
+    "done": "完了"
+  },
+  "webcam": {
+    "effectUnavailable": "カメラの背景エフェクトを使用できません。続けるにはオリジナルを選んでください。",
+    "previewUnavailable": "カメラのプレビューを使用できません。カメラをオフにしてから、もう一度オンにしてください。",
+    "permission": "カメラの許可が必要です。システム設定で Clipy のカメラへのアクセスを有効にしてください。",
+    "busy": "カメラを使用できません。カメラを使っているほかのアプリを閉じて、もう一度お試しください。",
+    "notFound": "一致するカメラが見つかりません。ピッカーを開き直すか、別のカメラを選んでください。",
+    "failed": "Web カメラを開始できませんでした。システム設定 > プライバシー > カメラ を確認してください。"
+  },
+  "areaSelect": {
+    "video": {
+      "title": "カスタムサイズで録画",
+      "hint": "描いたサイズのとおりに録画します。Esc でキャンセル。",
+      "confirm": "この範囲を録画"
+    },
+    "screenshot": {
+      "title": "カスタムサイズのスクリーンショット",
+      "hint": "描いたサイズのとおりに撮影します。Esc でキャンセル。",
+      "confirm": "この範囲を撮影"
+    },
+    "drag": "ドラッグして範囲を選択",
+    "cancel": "キャンセル"
+  },
+  "viewer": {
+    "notOnMac": "この録画はこの Mac にありません。",
+    "recordedFrom": "{date} の録画",
+    "clicks": "{count, plural, other {# 回のクリック}}",
+    "onThisMac": "この Mac 上",
+    "processingFailed": "処理に失敗しました",
+    "preparing": "準備中…",
+    "copied": "コピーしました",
+    "copyArecPath": "AREC のパスをコピー",
+    "showInFinder": "Finder で表示",
+    "autoOff": "録画は自動では開かなくなります。録画の準備ができたときは、引き続き AREC のパスがコピーされます。設定 → 環境設定 でウィンドウをもう一度オンにできます。",
+    "autoOpened": "録画が終わったので、Clipy がこのウィンドウを開きました。",
+    "gotIt": "OK",
+    "dontOpen": "自動で開かない",
+    "keyMoments": "キーモーメント",
+    "transcript": "文字起こし",
+    "noSpeech": "音声は認識されませんでした。",
+    "transcribing": "文字起こし中…"
+  },
+  "whatsNew": {
+    "features": {
+      "clipboard": {
+        "title": "クリップボード履歴",
+        "label": "クリップボード履歴",
+        "blurbMac": "コピーしたものすべてに、ショートカットひとつでアクセス。この Mac にだけ保存され、アップロードされることはありません。",
+        "blurbWindows": "コピーしたものすべてに、ショートカットひとつでアクセス。この PC にだけ保存され、アップロードされることはありません。"
+      },
+      "window_recording": {
+        "title": "ひとつのウィンドウを録画",
+        "label": "ひとつのウィンドウを録画",
+        "blurbMac": "Clipy は選んだウィンドウだけを録画します。ほかのウィンドウに隠れていても録画し、移動すると追従します。",
+        "blurbWindows": "ウィンドウを選ぶと、Clipy はそのウィンドウがある範囲を録画します。"
+      },
+      "screenshot_style": {
+        "title": "スクリーンショットの背景と新しいマークアップツール",
+        "label": "スクリーンショットの背景",
+        "blurb": "スクリーンショットを余白、角丸、影の付いた背景に載せ、吹き出し、絵文字、スポットライト、拡大鏡、ぼかしでポイントを示せます。"
+      },
+      "screenshot_markup": {
+        "title": "スクリーンショットに注釈",
+        "label": "スクリーンショットのマークアップ",
+        "blurb": "コピーや共有の前に、スクリーンショットに矢印、枠、テキストを追加できます。"
+      },
+      "flare": {
+        "title": "Flare：Control を押して指し示す",
+        "label": "Flare：Control を押す",
+        "blurb": "録画中に Control を押したままマウスを動かすと、対象を指し示せます。離すと軌跡が消え、エージェントはそれをキーモーメントとして受け取ります。"
+      },
+      "pointer": {
+        "title": "ポインタ：Control+Shift を押して共有画面で指し示す",
+        "label": "ポインタ：Control+Shift を押す",
+        "blurb": "Meet、Slack、Zoom で画面を共有しているときに、Control+Shift を押したままマウスを動かすと対象を指し示せます。録画は不要で、離すと軌跡が消えます。"
+      },
+      "draw": {
+        "title": "画面に描画",
+        "label": "画面に描画",
+        "blurb": "録画中にペンをオンにしてドラッグすると、画面上のあらゆるものに描けます。"
+      },
+      "custom_size": {
+        "title": "画面の一部を録画",
+        "label": "カスタムサイズ",
+        "blurb": "枠をドラッグし、どの角からでもサイズを変えて、その範囲だけを録画します。"
+      },
+      "local_ai": {
+        "title": "Local AI",
+        "label": "Local AI",
+        "blurbMac": "録画をこの Mac に残します。録画はローカルにとどまり、Clipy が文字起こしとエージェントが読める AREC を作成します。",
+        "blurbWindows": "録画をこの PC に残します。動画が外に出ることはありません。音声は Clipy のサーバーで文字起こしされ、その後削除されます。"
+      },
+      "agent": {
+        "title": "エージェントに録画させる",
+        "label": "エージェントが録画",
+        "blurb": "Claude Code、Codex、Cursor が Clipy の録画を開始し、確認した内容をマークして、証拠としてリンクを渡せます。",
+        "blurbLocal": "Claude Code、Codex、Cursor は clipy --local で Clipy Local の録画を始め、確認した内容をマークし、証拠として AREC のパスを渡せます。"
+      }
+    },
+    "nav": "新機能",
+    "rail": {
+      "whatsNew": "新機能",
+      "version": "Clipy {version}",
+      "tryIt": "自分で試す",
+      "new": "NEW",
+      "progress": "<strong>{total} 件中 {tried} 件</strong>試しました"
+    },
+    "done": "完了",
+    "next": "次へ：{label}",
+    "tried": "試しました",
+    "notTried": "まだ試していません",
+    "overview": {
+      "updatedFrom": "アップデート · {from} → {to}",
+      "updatedTo": "{version} にアップデートしました",
+      "onVersion": "現在のバージョンは {version} です",
+      "latestVersion": "最新バージョン",
+      "titleNews": "Clipy の新機能",
+      "titleRecent": "Clipy に最近追加された機能",
+      "bodyNews": "どれもここで 20 秒ほどで試せます。練習では何も録画されず、選ばない限り何もアップロードされません。",
+      "bodyRecent": "前回のアップデート以降、新しい機能はありません。最近追加された機能はこちらで、Clipy でできることはすべて左側にあります。",
+      "tryIt": "試す",
+      "allReleases": "すべてのリリース ↗",
+      "close": "閉じる",
+      "tryAll": "{count, plural, =1 {試す} other {# 件すべて試す}}",
+      "startTrying": "試してみる"
+    },
+    "page": {
+      "progress": "試す · {total} 件中 {index} 件目",
+      "back": "戻る",
+      "skip": "スキップ"
+    },
+    "practice": {
+      "flareHow": "<keys></keys> を押したまま、上の<b>今すぐ支払う</b>ボタンを丸で囲んでください。",
+      "flareDone": "これが Flare です。次の録画でも同じように使えます。",
+      "pointerHow": "<keys></keys> を押したまま、画面のどこでもマウスを動かしてください。",
+      "pointerDone": "これがポインタです。共有画面を見ている人にも表示されます。",
+      "pointerStep1": "Meet、Slack、Zoom などのアプリで画面を共有します。Clipy が起動していれば使えます。",
+      "pointerStep2": "Control+Shift を押したままマウスを動かします。離すと軌跡が消えます。",
+      "pointerStep3Mac": "キーを押さずに表示し続けるには、メニューバーの Clipy メニューで「ポインタを表示」を選びます。Esc でオフになります。",
+      "pointerStep3Windows": "キーを押さずに表示し続けるには、システムトレイの Clipy メニューで「ポインタを表示」を選びます。Esc でオフになります。",
+      "drawHow": "色を選んでカードの上をドラッグしてください。録画中は <keys></keys> でペンがオンになります。録画コントロールのペンも使えます。",
+      "drawDone": "いいですね。録画中は、どのアプリの上でもペンが使えます。",
+      "clipboardDone": "クリップボード履歴が動いています。コピーした最新の {items, number} 件を、最長 {days} 日間保存します。",
+      "markupDone": "完了です。スクリーンショットはコピーされる前に、ここで開いてマークアップできます。",
+      "styleHow": "スクリーンショットのウィンドウで［背景］を押し、スタイルを選んでください。新しいツールはツールバーにあります：吹き出し、絵文字、スポットライト、拡大鏡、カラーピッカー。",
+      "styleDone": "いいですね。コピーやアップロードのとき、背景も画像と一緒に含まれます。",
+      "windowStep1": "レコーダーを開き、ソースとして［特定のウィンドウ］を選んでから［選択］を押してください。",
+      "windowStep2Windows": "録画したいウィンドウをクリックしてください。",
+      "windowStep2Mac": "録画したいウィンドウをクリックしてください。録画中はほかのウィンドウが上に重なっていても構いません。",
+      "startRecording": "録画を開始してください。",
+      "windowDone": "ウィンドウを録画しました。",
+      "areaStep1": "レコーダーを開き、ソースとして［カスタムサイズ］を選んでから［選択］を押してください。",
+      "areaStep2": "枠をドラッグし、角や辺をドラッグしてサイズを変えてください。",
+      "areaStep3": "Enter を押すか、［この範囲を録画］を押してください。",
+      "areaDone": "画面の一部を録画しました。",
+      "localStep1": "レコーダーを開き、上部バーのすぐ下にある［Local AI］をクリックしてください。",
+      "localStep2Windows": "いつもどおり録画してください。録画はローカルにとどまり、文字起こしのために音声だけが送信され、その後削除されます。",
+      "localStep2Mac": "いつもどおり録画してください。録画はローカルにとどまります。",
+      "localStep3": "停止すると、動画とその AREC がこの {device} に残り、エージェントがすぐ使えます。",
+      "localDone": "Local AI で録画しました。",
+      "agentDone": "エージェントが Clipy で録画しました。",
+      "frameNote": "練習エリア · 何も録画されません",
+      "mock": {
+        "checkout": "チェックアウト",
+        "total": "合計",
+        "payNow": "今すぐ支払う"
+      },
+      "flareArea": "Flare の練習エリア",
+      "held": "押しています",
+      "holdMe": "押したままに",
+      "drawArea": "描画の練習エリア",
+      "penColour": "ペンの色",
+      "clipboardSample": "Clipy はコピーしたものを保存し、ショートカットひとつで呼び出せます。",
+      "clipboardNote": "履歴はこのデバイスにだけ保存されます",
+      "clipboardOff": "クリップボード履歴はオフです",
+      "clipboardOffBody": "オンにすると、コピーしたものを保存します。設定でいつでもオフに戻せます。オフにすると履歴も消去されます。",
+      "clipboardTurnOn": "クリップボード履歴をオンにする",
+      "copyLine": "この行をコピー：",
+      "copied": "コピーしました",
+      "copy": "コピー",
+      "pressToOpen": "<keys></keys> を押して履歴を開きます。",
+      "noShortcut": "クリップボード履歴にはショートカットがありません。設定 → 環境設定 → ショートカット で設定してください。",
+      "pickEntry": "項目を選ぶと、直前に使っていたアプリに貼り付けます。",
+      "screenshotBusy": "注釈用のスクリーンショットがすでに開いています。",
+      "screenshotFailed": "スクリーンショットに失敗しました：{error}",
+      "screenshotNote": "［アップロード］を押さない限り、何もアップロードされません",
+      "annotatingOff": "注釈はオフです",
+      "annotatingOffBody": "スクリーンショットはそのままクリップボードにコピーされます。先にマークアップするには「コピー前に注釈を付ける」をオンにしてください。",
+      "annotatingTurnOn": "注釈をオンにする",
+      "takeArea": "範囲のスクリーンショットを撮る",
+      "withKeys": "<keys></keys> またはここから：",
+      "waiting": "お待ちしています…",
+      "takeScreenshot": "スクリーンショットを撮る",
+      "drawArrow": "矢印や枠を描くか、テキストを追加してください。",
+      "copyOrUpload": "この {device} に残すなら［画像をコピー］、共有リンクが必要なら［アップロード］を押してください。",
+      "openRecorder": "レコーダーを開く",
+      "ticksNote": "初めて行うと自動でチェックが付きます",
+      "cloud": "クラウド",
+      "localAi": "Local AI",
+      "startLocal": "ローカル録画を開始",
+      "start": "録画を開始",
+      "nightCaption": "Local AI がオン：レコーダーがダークになります",
+      "dayCaption": "クラウドと Local AI は上部バーのすぐ下にあります",
+      "agentNote": "エージェントが初めて録画すると自動でチェックが付きます",
+      "agentRun": "これらのコマンドをターミナルで一度実行してください。ほかのエージェントでは claude の代わりに codex または cursor を使います。",
+      "agentRunLocal": "CLI を一度インストールすれば、エージェントが --local で Clipy Local を使って録画します。何もアップロードされず、アカウントも不要です。",
+      "agentThen": "その後、エージェントに変更の確認を依頼し、Clipy で証拠を送ってもらいましょう。",
+      "agentThenLocal": "あとはエージェントに変更の確認を頼み、証拠として AREC のパスを受け取ってください。",
+      "howItWorks": "仕組み ↗"
+    }
+  },
+  "onboarding": {
+    "steps": {
+      "welcome": "ようこそ",
+      "signin": "サインイン",
+      "screen": "画面収録",
+      "accessibility": "アクセシビリティ",
+      "media": "カメラとマイク",
+      "menuBar": "メニューバー",
+      "systemTray": "システムトレイ",
+      "done": "準備完了"
+    },
+    "settingsName": {
+      "mac": "システム設定",
+      "windows": "Windows の設定"
+    },
+    "sidebar": {
+      "label": "セットアップの手順",
+      "footnote": "1 分ほどで終わります。ここで設定した内容はあとから設定で変更できます。"
+    },
+    "back": "戻る",
+    "continue": "続ける",
+    "errors": {
+      "checkFailed": "Clipy が{settings}を確認できませんでした：{error}",
+      "checkNoAnswer": "Clipy が{settings}を確認できませんでした：応答がありません。",
+      "openSettingsFailed": "{settings}を開けませんでした：{error}",
+      "restartFailed": "Clipy を再起動できませんでした：{error}",
+      "taskbarFailed": "タスクバーの設定を開けませんでした：{error}"
+    },
+    "welcome": {
+      "eyebrow": "Clipy へようこそ",
+      "title": "一度録画すれば、誰でも、エージェントでも理解できます。",
+      "start": "はじめる",
+      "body": "画面、カメラ、声を録画すると、停止した瞬間にリンクが手に入り、録画を読める形のコンテキストとして Claude Code や Codex に渡せます。さっそくセットアップしましょう。"
+    },
+    "signIn": {
+      "title": "Clipy にサインイン",
+      "titleSignedIn": "サインインしました",
+      "google": "Google で続ける",
+      "openAgain": "ブラウザをもう一度開く",
+      "signedInAs": "<b>{email}</b> としてサインインしています。",
+      "signedIn": "サインインしました。",
+      "waiting": "ブラウザでサインインを完了してください。このウィンドウは自動で次に進みます。",
+      "body": "録画、リンク、文字起こしは Clipy アカウントに保存されます。ブラウザを開いて Google でサインインしたら、すぐにここへ戻ります。"
+    },
+    "screen": {
+      "title": "Clipy に画面の収録を許可",
+      "body": "macOS が一度だけ確認します。画面収録とシステムオーディオ録音 で Clipy をオンにしてください。Clipy がキャプチャするのは録画中だけです。",
+      "pane": "画面収録とシステムオーディオ録音",
+      "allow": "画面収録を許可",
+      "granted": "画面収録はオンです"
+    },
+    "accessibility": {
+      "title": "クリックした場所を見せる",
+      "body": "アクセシビリティを許可すると、Clipy が録画内のクリックとポインタを記録し、視聴者やエージェントがすべての手順を追えるようになります。アクセシビリティ で Clipy をオンにしてください。",
+      "pane": "アクセシビリティ",
+      "allow": "アクセシビリティを許可",
+      "granted": "アクセシビリティはオンです"
+    },
+    "permission": {
+      "opening": "開いています…",
+      "checkAgain": "もう一度確認",
+      "openSettings": "{settings}を開く",
+      "restart": "Clipy を再起動",
+      "quitReopen": "終了して開き直す",
+      "stale": "macOS では画面収録が許可されていますが、まだキャプチャがブロックされています。{settings}で Clipy をいったんオフにしてからオンに戻し、Clipy を再起動してください。",
+      "checking": "Clipy が画面を見られるか macOS に確認しています…",
+      "unanswered": "Clipy が画面を見られるかどうか、macOS から応答がありません。Clipy を再起動するとたいてい解決し、セットアップは中断したところから再開します。",
+      "switchedOn": "オンにしましたか？macOS では Clipy の再起動後に反映されます。セットアップは中断したところから再開します。"
+    },
+    "media": {
+      "eyebrow": "任意",
+      "title": "録画に自分も映りますか？",
+      "skip": "今はスキップ",
+      "body": "顔と声を加えれば、クリックだけでなく、その理由まで伝わります。どちらも録画ツールからいつでもオン・オフできます。",
+      "camera": {
+        "title": "カメラ",
+        "detail": "顔を映すバブルを、好きな隅に置けます。",
+        "allow": "カメラを許可"
+      },
+      "microphone": {
+        "title": "マイク",
+        "detail": "話しながら録画できます。文字起こしは無料で付きます。",
+        "allow": "マイクを許可"
+      },
+      "allowed": "許可済み",
+      "on": "オン",
+      "checking": "確認中…",
+      "allowLabel": "{name}を許可",
+      "openSettingsLabel": "{name}の設定を開く"
+    },
+    "find": {
+      "titleMenuBar": "Clipy はメニューバーにあります",
+      "titleTray": "Clipy はシステムトレイにあります",
+      "openTaskbar": "タスクバーの設定を開く",
+      "gotIt": "OK",
+      "bodyMac": "画面上部の Clipy アイコンをクリックすると録画できます。開いたままにしておくウィンドウはありません。Clipy は必要なときまでそこで待機しています。",
+      "bodyWindows": "時計の横にある Clipy アイコンをクリックすると録画できます。見当たらない場合は <key>^</key> の矢印をクリックしてください。Windows は新しいアイコンをそこに隠します。Clipy をタスクバーにドラッグするか、タスクバーの設定でオンにすると、常に表示されます。",
+      "shortcut": "セットアップが終われば、どこからでも次のキーで開始・停止できます"
+    },
+    "done": {
+      "title": "録画の準備ができました",
+      "titleBlocked": "あと少しです",
+      "checking": "確認中…",
+      "opening": "開いています…",
+      "open": "録画ツールを開く",
+      "ready": "最初の録画はワンクリックで始められます。停止すれば、リンクはもうクリップボードにあります。",
+      "readyLocal": "最初の録画はワンクリックで始められます。停止すると、その AREC のパスがクリップボードにコピーされています。",
+      "missing": "必須の手順がまだ一つ残っています。下で対応すれば完了です。",
+      "waitingMac": "macOS が画面へのアクセスを確認するのを待っています。",
+      "waitingWindows": "Clipy はまだ Windows のプライバシー設定を読み取れていません。",
+      "rows": {
+        "signedIn": "サインイン",
+        "screen": "画面収録",
+        "clicks": "クリックの記録",
+        "camera": "カメラ",
+        "microphone": "マイク"
+      },
+      "off": "オフ",
+      "needsOk": "許可が必要です",
+      "turnOn": "オンにする",
+      "fix": "対応する",
+      "screenUnconfirmed": "macOS がまだ画面へのアクセスを確認していません。もう一度確認しても解決しない場合は Clipy を再起動してください。再起動後にセットアップが戻ります。",
+      "windowsUnread": "Clipy が Windows のプライバシー設定を読み取れませんでした。もう一度確認するか、繰り返し起きる場合は Clipy を再起動してください。",
+      "loginItem": "ログイン時に Clipy を開く",
+      "approve": "（{settings}で承認してください）"
+    },
+    "visuals": {
+      "linkCopied": "リンクをコピーしました",
+      "agentRead": "エージェントが読み取りました",
+      "settings": {
+        "general": "一般",
+        "appearance": "外観",
+        "privacy": "プライバシーとセキュリティ",
+        "desktopDock": "デスクトップと Dock",
+        "displays": "ディスプレイ"
+      },
+      "menu": {
+        "file": "ファイル",
+        "edit": "編集",
+        "view": "表示"
+      },
+      "menuBarClock": "(火) 9:41",
+      "menuBarHint": "アイコンのすぐ下に録画ツールが開きます。",
+      "trayHint": "Windows は新しいアイコンを <key>^</key> の奥に隠します。Clipy をタスクバーにドラッグすれば、ワンクリックで開けます。",
+      "trayTime": "9:41",
+      "trayDay": "火曜日",
+      "startRecording": "録画を開始"
+    }
+  },
+  "clipboard": {
+    "filters": {
+      "all": "すべて",
+      "text": "テキスト",
+      "images": "画像",
+      "favorites": "お気に入り"
+    },
+    "elapsed": "{unit, select, now {今} m {{count}分} h {{count}時間} other {{count}日}}",
+    "elapsedAgo": "{unit, select, now {たった今} m {{count}分前} h {{count}時間前} other {{count}日前}}",
+    "copiedAgo": "{unit, select, now {たった今コピー} m {{count}分前にコピー} h {{count}時間前にコピー} other {{count}日前にコピー}}",
+    "imageLabel": "画像（{width}×{height}）",
+    "kinds": {
+      "image": "画像",
+      "color": "カラー",
+      "link": "リンク",
+      "email": "メール",
+      "code": "コード",
+      "text": "テキスト"
+    },
+    "lines": "{lines} 行",
+    "characters": "{count, plural, other {{chars} 文字}}",
+    "preview": {
+      "empty": "項目を選択すると、ここに表示されます。",
+      "favorite": "お気に入り",
+      "paste": "貼り付け",
+      "copy": "コピー",
+      "edit": "編集"
+    },
+    "search": "クリップボード履歴を検索",
+    "pasteLabel": "貼り付け（↵）",
+    "copyLabel": "貼り付けずにコピー（{keys}）",
+    "filterLabel": "表示",
+    "clearAll": "すべて消去",
+    "clearAllTitle": "お気に入りは残ります",
+    "hint": "{hotkey} で開きました。このキーをプレーンテキストの貼り付けに使うアプリもあります。Clipy の設定 → 環境設定 → ショートカット で変更できます。",
+    "dismissHint": "ヒントを閉じる",
+    "headings": {
+      "favorites": "お気に入り",
+      "recent": "最近"
+    },
+    "editHint": "{keys} 保存 · esc キャンセル",
+    "cancel": "キャンセル",
+    "save": "保存",
+    "rowDelete": "削除（{keys}）",
+    "rowEdit": "編集（{keys}）",
+    "rowAddFavorite": "お気に入りに追加（{keys}）",
+    "rowRemoveFavorite": "お気に入りから削除（{keys}）",
+    "menu": {
+      "paste": "貼り付け",
+      "copy": "コピー",
+      "addFavorite": "お気に入りに追加",
+      "removeFavorite": "お気に入りから削除",
+      "edit": "編集…",
+      "delete": "削除"
+    },
+    "empty": {
+      "nothing": "まだ何もコピーされていません。テキストや画像をコピーすると、ここに表示されます。",
+      "noFavorites": "お気に入りはまだありません。項目に星を付けるか {keys} を押すと、ここにずっと残せます。",
+      "noMatches": "一致する項目はありません。"
+    },
+    "footer": {
+      "paste": "貼り付け",
+      "copy": "コピー",
+      "star": "星を付ける",
+      "type": "種類",
+      "close": "閉じる",
+      "kept": "この {device} にだけ保存"
+    }
+  },
+  "screenshotEditor": {
+    "openFailed": "このスクリーンショットを開けませんでした。",
+    "tryAgain": "もう一度試す",
+    "nothingWaiting": "注釈を待っているスクリーンショットはありません。",
+    "close": "閉じる",
+    "loadFailed": "このスクリーンショットを読み込めませんでした。",
+    "loading": "読み込み中",
+    "toolbar": {
+      "tools": "注釈ツール",
+      "color": "注釈の色",
+      "colorSwatch": "色 {color}",
+      "customColor": "カスタムカラー",
+      "strokeWeight": "線の太さ",
+      "stroke": "{weight}の線",
+      "background": "背景",
+      "backgroundTitle": "背景、余白、角、影",
+      "undo": "取り消す",
+      "undoTitle": "取り消す（{keys}）",
+      "redo": "やり直す",
+      "redoTitle": "やり直す（{keys}）",
+      "clear": "すべての注釈を削除"
+    },
+    "canvas": "スクリーンショットの注釈キャンバス",
+    "textPlaceholder": "入力して {keys}",
+    "picked": "取得した色 {color}",
+    "resetCrop": "切り抜きをリセット",
+    "resetCuts": "カットをリセット",
+    "delete": "削除",
+    "deleting": "削除中…",
+    "deleteTitle": "コピーせずにこのスクリーンショットを削除",
+    "copy": "画像をコピー",
+    "copying": "コピー中…",
+    "copyTitle": "画像をクリップボードにコピー（{keys}）",
+    "upload": "アップロード",
+    "uploading": "アップロード中…",
+    "updateLink": "リンクを更新",
+    "updating": "更新中…",
+    "signInToUpload": "スクリーンショットをアップロードするには Clipy にサインインしてください",
+    "uploadTitle": "Clipy にアップロードして共有リンクをコピー{shortcut}",
+    "updateTitle": "このスクリーンショットのリンク先の画像を更新{shortcut}",
+    "result": {
+      "linkUpdated": "リンクを更新してクリップボードにコピーしました",
+      "linkCopied": "スクリーンショットのリンクをクリップボードにコピーしました",
+      "uploadFailedCopied": "アップロードできませんでした。代わりに画像をコピーしました。",
+      "uploadFailed": "アップロードできませんでした",
+      "copied": "スクリーンショットをクリップボードにコピーしました",
+      "notCopied": "スクリーンショットは保存されましたが、クリップボードにコピーできませんでした",
+      "openInBrowser": "ブラウザで開く",
+      "showInExplorer": "エクスプローラーで表示",
+      "showInFinder": "Finder で表示",
+      "dismiss": "閉じる"
+    },
+    "hints": {
+      "crop": "残したい範囲をドラッグしてください。切り抜きはコピーまたはアップロード時に適用されます。",
+      "cut": "行に沿って下へ、または列に沿って横へドラッグすると、その帯を切り取り、コピーまたはアップロード時に残りをつなげます。帯をクリックすると、やはり残せます。"
+    }
+  }
+}

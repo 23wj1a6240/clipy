@@ -1,0 +1,1185 @@
+{
+  "native": {
+    "tray": {
+      "openClipy": "打开 Clipy",
+      "quit": "退出 Clipy",
+      "whatsNew": "新功能…",
+      "showPointer": "显示指针（{shortcut}）",
+      "signIn": "登录 Clipy…",
+      "startRecording": "开始录制",
+      "restartUpdate": "重启以完成更新（{version}）",
+      "starting": "正在开始…",
+      "cancel": "取消",
+      "stopRecordingElapsed": "停止录制  （{elapsed}）",
+      "pauseRecording": "暂停录制",
+      "cancelDiscard": "取消并丢弃",
+      "resumeRecordingElapsed": "继续录制  （{elapsed}）",
+      "stopRecording": "停止录制",
+      "stopping": "正在停止…",
+      "uploading": "正在上传…",
+      "cancelUpload": "取消上传",
+      "localProcessing": "正在处理…",
+      "localReady": "已就绪"
+    },
+    "tooltip": {
+      "starting": "Clipy，正在开始…",
+      "recording": "Clipy，正在录制 {elapsed}",
+      "paused": "Clipy，已暂停于 {elapsed}",
+      "stopping": "Clipy，正在停止…",
+      "uploading": "Clipy，正在上传…"
+    },
+    "notifications": {
+      "micSilent": "未检测到麦克风输入。请检查麦克风或选择其他输入设备。",
+      "micNotStartedMac": "无法启动麦克风。请检查 macOS 的麦克风权限，或选择其他输入设备。",
+      "micNotStartedWindows": "无法启动麦克风。请检查“设置 > 隐私和安全性 > 麦克风”，或选择其他输入设备。",
+      "windowsMicStartFailed": "Clipy 无法启动你的麦克风，因此这段录制没有麦克风声音。请打开“设置 > 隐私和安全性 > 麦克风”并允许桌面应用使用麦克风，或选择其他麦克风。",
+      "micPaused": "麦克风已暂停，{device} 已断开。正在等待它重新连接。",
+      "micSwitched": "麦克风已切换到 {device}",
+      "recoveryOne": "这台电脑上仍保存着一段未完成的录制。打开 Clipy 即可上传或丢弃。",
+      "recoveryMany": "这台电脑上仍保存着 {count} 段未完成的录制。打开 Clipy 即可上传或丢弃。",
+      "clipboardCopiedOnly": "已复制。Clipy 无法替你粘贴，请按 {key}。"
+    },
+    "windowTitles": {
+      "whatsNew": "Clipy 新功能",
+      "selectWindow": "选择窗口",
+      "clipboard": "剪贴板历史",
+      "annotate": "标注截图",
+      "welcome": "欢迎使用 Clipy",
+      "notes": "笔记",
+      "localRecording": "Clipy 录制内容"
+    },
+    "agentConsent": {
+      "title": "Clipy：允许 AI 智能体录制吗？",
+      "body": "一个本地 AI 智能体（例如 Claude Code）正在请求 Clipy 录制你的屏幕。\n\n常规的录制指示器会一直显示，录制会在达到时间上限时自动停止，并且只有以你的用户身份运行的程序才能发出请求。\n\n允许由智能体发起录制吗？",
+      "allow": "允许",
+      "dontAllow": "不允许"
+    },
+    "errors": {
+      "notSignedIn": "尚未登录",
+      "offline": "你已离线。请连接互联网后重试。",
+      "offlineRecover": "你已离线。请连接互联网后再次点击“恢复”。",
+      "micUnavailable": "麦克风不可用。关闭麦克风即可在没有麦克风的情况下录制。",
+      "noScreenFrames": "Clipy 无法捕获你的屏幕，因此录制已停止，没有上传任何内容。请打开“系统设置 > 隐私与安全性 > 录屏”，确认已为 Clipy 开启，然后退出并重新打开 Clipy 再试一次。",
+      "noWindowFrames": "Clipy 无法捕获该窗口，因此录制已停止，没有上传任何内容。请确认窗口已打开且未最小化，并且已在“系统设置 > 隐私与安全性 > 录屏”中为 Clipy 开启，然后重试。",
+      "unreadableScreenFrames": "Clipy 无法录制屏幕发送的画面，因此录制已停止，没有上传任何内容。请重试，或选择其他显示器或窗口。",
+      "updateWindows": "屏幕录制需要 Windows 10 1903 或更高版本。请在“设置 > Windows 更新”中更新 Windows，然后重试。",
+      "optionUnsupported": "此版本的 Windows 拒绝了一项屏幕捕获设置。请在“设置 > Windows 更新”中更新 Windows，然后重试。",
+      "directxUnavailable": "Windows 无法在这块显卡上启动屏幕捕获。请更新显卡驱动；如果这是远程桌面，请直接在该电脑上录制。",
+      "itemFailed": "Windows 无法打开该屏幕或窗口进行捕获。请重新选择来源后重试。",
+      "wgcStartFailed": "Windows 无法启动屏幕捕获。请重启 Clipy 后重试；如果问题持续出现，请更新 Windows 和显卡驱动。",
+      "windowNotListed": "该窗口已不在列表中。请重新选择后重试。",
+      "windowClosed": "该窗口已关闭或无法再录制。请重新选择后重试。",
+      "windowHidden": "该窗口已隐藏或位于其他桌面。请将它移回后重试。",
+      "windowMinimized": "该窗口已最小化。请将它还原到屏幕上后重试。",
+      "wgcNoFrames": "Windows 已启动屏幕捕获，但没有发送任何画面。请确认屏幕已开启并已解锁，然后重试；部分工作电脑会禁止屏幕录制。",
+      "displayDisconnected": "该显示器已断开连接。请选择一个屏幕后重试。",
+      "displayNotListed": "该显示器已不在列表中。请选择一个屏幕后重试。",
+      "windowOffscreen": "该窗口已不在屏幕上。请将它移回可见区域后重试。",
+      "micStartFailedWindows": "Clipy 无法启动你的麦克风，因此这段录制没有麦克风声音。请打开“设置 > 隐私和安全性 > 麦克风”，允许桌面应用使用麦克风，或选择其他麦克风。",
+      "micSilentWindows": "未检测到麦克风输入。请确认麦克风没有静音，并已在“设置 > 隐私和安全性 > 麦克风”中获得允许，或选择其他输入设备。",
+      "micStoppedWindows": "未检测到麦克风输入。你的麦克风已停止发送音频。请确认它已连接，或选择其他输入设备。"
+    }
+  },
+  "app": {
+    "loading": "正在加载 Clipy…"
+  },
+  "local": {
+    "expiry": {
+      "kept": "已保留",
+      "soon": "即将清除",
+      "days": "{days, plural, other {# 天后清除}}"
+    },
+    "status": {
+      "ready": "可以粘贴给你的智能体了",
+      "saved": "已保存在这台 {device}",
+      "failed": "录制需要处理",
+      "recording": "正在这台 {device} 上录制"
+    },
+    "preparing": "正在准备录制…",
+    "pathCopied": "路径已复制",
+    "copyArecPath": "复制 AREC 路径",
+    "open": "打开",
+    "showInExplorer": "在资源管理器中显示",
+    "showInFinder": "在访达中显示",
+    "retry": "重试",
+    "stopKeeping": "取消保留",
+    "keep": "保留",
+    "moveToTrash": "移到废纸篓",
+    "cancel": "取消",
+    "delete": "删除",
+    "sectionLabel": "本地录制",
+    "openingSignIn": "正在打开登录…",
+    "signInToRecord": "登录后即可本地录制",
+    "totalOnDevice": "这台 {device} 上共 {size} · 未保留的内容 {days} 天后清除",
+    "windowsAudio": "音频会在 Clipy 服务器上转写，随后从服务器删除。视频保留在这台电脑上。",
+    "hidePrevious": "隐藏以前的录制",
+    "previous": "以前的录制（{count}）",
+    "fullApp": {
+      "pitch": "想要任何人都能观看的分享链接、无需管理密钥的 AI 和团队工作区？那是完整版 {fullApp} 应用，需要单独下载。",
+      "button": "获取 {fullApp}"
+    },
+    "empty": "还没有本地录制"
+  },
+  "whatsNewCard": {
+    "updatedTo": "已更新到 {version}",
+    "dismissLabel": "关闭新功能提示",
+    "dismiss": "关闭",
+    "newThings": "{count, plural, other {# 项新功能可以试试}}",
+    "more": "还有 {count} 项",
+    "tryIt": "{count, plural, other {试一试}}",
+    "later": "稍后"
+  },
+  "settings": {
+    "title": "设置",
+    "tabs": {
+      "enhance": "增强",
+      "video": "视频和音频",
+      "preferences": "偏好设置"
+    },
+    "clipboardSubtitle": {
+      "off": "粘贴你之前复制过的任何内容。只保存在这台 {device} 上。",
+      "registered": "用 {hotkey} 粘贴你之前复制过的任何内容。只保存在这台 {device} 上。",
+      "unavailable": "{hotkey} 不可用，因此不会保存任何内容。请在“快捷键”中选择其他按键。",
+      "noKey": "需要一个快捷键才能打开。请在“快捷键”中为“剪贴板”设置一个。"
+    },
+    "reduceNoise": {
+      "title": "降低背景噪音",
+      "subtitle": "减弱风扇、空调等持续的环境噪音。默认关闭，需要时再开启。",
+      "needsMic": "麦克风开启时可用"
+    },
+    "cameraEffects": {
+      "title": "摄像头效果",
+      "subtitle": "背景、抠像和边框都在录制器的“效果”中。"
+    },
+    "resolution": {
+      "title": "分辨率",
+      "pro": "最高按此尺寸录制",
+      "free": "1440p、4K 和原生分辨率需要 Pro",
+      "proSuffix": "{label} · Pro"
+    },
+    "windowRecording": {
+      "title": "窗口录制",
+      "subtitle": "“指定窗口”录制会捕获哪些内容"
+    },
+    "countdown": {
+      "title": "录制倒计时",
+      "subtitle": "开始捕获前的短暂倒数",
+      "label": "倒计时",
+      "off": "关闭",
+      "seconds": "{seconds, plural, other {# 秒}}"
+    },
+    "flip": {
+      "title": "翻转摄像头",
+      "subtitle": "翻转摄像头画面方向"
+    },
+    "persistBubble": {
+      "title": "记住摄像头气泡的位置",
+      "subtitle": "让摄像头气泡停留在上次的位置"
+    },
+    "systemAudio": {
+      "title": "使用系统音频",
+      "cameraOnly": "录制屏幕时可用",
+      "subtitle": "你听到的所有声音，戴着耳机也可以"
+    },
+    "camera": {
+      "title": "摄像头",
+      "none": "未找到摄像头。请连接一个后刷新。",
+      "found": "{count, plural, other {找到 # 个摄像头}}"
+    },
+    "systemDefault": "系统默认",
+    "microphone": {
+      "title": "麦克风",
+      "none": "不使用麦克风"
+    },
+    "refreshing": "正在刷新…",
+    "refreshDevices": "刷新设备",
+    "setup": {
+      "title": "摄像头和麦克风设置",
+      "subtitle": "检查 Clipy 的 {os} 权限",
+      "open": "打开设置向导"
+    },
+    "notSignedIn": "尚未登录",
+    "signInToCloud": "登录后即可录制到云端",
+    "sections": {
+      "system": "系统",
+      "recording": "录制",
+      "screenshots": "截图",
+      "clipboard": "剪贴板",
+      "shortcuts": "快捷键",
+      "recordingsOnDevice": "这台 {device} 上的录制",
+      "clipy": "Clipy",
+      "language": "语言"
+    },
+    "launchAtLogin": {
+      "title": "登录时启动",
+      "approval": "请在“系统设置 → 通用 → 登录项”中允许 Clipy 以完成设置。",
+      "unavailable": "请将 Clipy 移到“应用程序”文件夹以使用登录时启动。",
+      "subtitle": "让 Clipy 随时在菜单栏待命"
+    },
+    "showInDock": {
+      "title": "在程序坞中显示",
+      "subtitle": "除了菜单栏，也在程序坞中显示 Clipy"
+    },
+    "recordingControls": {
+      "title": "录制控制栏",
+      "subtitle": "捕获区域旁的浮动控制栏。关闭后将隐身录制，可用快捷键或在这里停止。"
+    },
+    "annotate": {
+      "title": "复制前先标注",
+      "subtitle": "在编辑器中打开每张截图，添加箭头、方框、文字或遮挡。关闭时截图会立即复制。"
+    },
+    "clipboardHistory": "剪贴板历史",
+    "clipboardClash": "{app} 也使用 {hotkey} 打开，可能会抢先响应这个按键。请卸载 {app}，或在“快捷键”中为“剪贴板”选择其他按键。",
+    "shortcutsHint": "点击输入框，然后按下按键。",
+    "localInfo": "本地录制及其 AREC 上下文保存在这台 {device} 的 Clipy 文件夹中，未保留的内容 {days} 天后清除。云端录制只在上传完成前保留本地副本。",
+    "localInfoWindows": "Local AI 会在 Clipy 服务器上转写音频，随后从服务器删除；视频始终不会离开这台电脑。",
+    "openArec": {
+      "title": "AREC 准备好后自动打开",
+      "subtitle": "本地录制完成后会立即在查看器中打开。关闭时不弹出窗口，但 AREC 路径仍会被复制，可以直接粘贴给你的智能体。"
+    },
+    "links": {
+      "recordings": "你的录制内容",
+      "recordingsHint": "在 clipy.online 打开你的资料库",
+      "whatsNew": "新功能",
+      "whatsNewHint": "新功能介绍，以及逐一试用的地方",
+      "updates": "检查更新",
+      "version": "版本 {version}",
+      "latest": "最新版本",
+      "privacy": "隐私",
+      "privacyHint": "Clipy 会存储什么，以及永远不会读取什么"
+    },
+    "signOut": "退出登录",
+    "editAccount": "编辑账户",
+    "signIn": "登录",
+    "language": {
+      "title": "语言",
+      "subtitle": "菜单、窗口和通知。“系统默认”会跟随你的 {os} 语言。",
+      "label": "语言"
+    }
+  },
+  "ui": {
+    "on": "开",
+    "off": "关",
+    "back": "返回",
+    "more": "更多"
+  },
+  "camera": {
+    "touchUp": {
+      "title": "美化我的外观",
+      "subtitle": "柔化肌肤，淡化瑕疵",
+      "strength": "美化强度"
+    },
+    "autoLighting": {
+      "title": "自动补光",
+      "subtitle": "在任何光线下都好看"
+    },
+    "view": {
+      "title": "摄像头视图",
+      "subtitle": "浮动气泡，或停靠在一侧",
+      "floating": "浮动",
+      "square": "方形",
+      "left": "停靠在左侧",
+      "right": "停靠在右侧"
+    },
+    "size": {
+      "title": "摄像头大小",
+      "small": "小",
+      "medium": "中",
+      "large": "大"
+    }
+  },
+  "windowCapture": {
+    "label": "窗口录制",
+    "default": "默认",
+    "window": {
+      "title": "仅窗口",
+      "body": "只录制这个窗口，即使上面盖着其他窗口；移动窗口时也会跟随。录制时你可以继续在其他应用中工作。"
+    },
+    "area": {
+      "title": "窗口及屏幕区域",
+      "body": "录制窗口起始位置所在的屏幕区域，包含你的摄像头和 Flare。窗口移动时区域保持不动，经过该区域的任何内容也会被录下。"
+    },
+    "chips": {
+      "windowAnywhere": "窗口，无论它在哪里",
+      "otherWindows": "其他窗口",
+      "popups": "弹出菜单",
+      "camera": "摄像头",
+      "flare": "Flare",
+      "outsideArea": "区域以外的任何内容"
+    }
+  },
+  "selectDesktop": {
+    "title": "选择桌面",
+    "noPreview": "无预览"
+  },
+  "shortcuts": {
+    "rows": {
+      "screenshot_area": {
+        "label": "截图",
+        "hint": "拖动选择一个区域"
+      },
+      "screenshot_display": {
+        "label": "全屏",
+        "hint": "截取整个屏幕"
+      },
+      "annotation": {
+        "label": "绘图",
+        "hint": "开启或关闭画笔"
+      },
+      "pause": {
+        "label": "暂停",
+        "hint": "暂停或继续"
+      },
+      "mic": {
+        "label": "麦克风静音",
+        "hint": "静音或恢复麦克风"
+      },
+      "camera": {
+        "label": "摄像头",
+        "hint": "显示或隐藏气泡"
+      },
+      "clipboard_history": {
+        "label": "剪贴板",
+        "hint": "打开剪贴板历史"
+      }
+    },
+    "stopNeedsKey": "开始/停止需要一个快捷键。",
+    "stopName": "开始或停止录制",
+    "fieldLabel": "{name}快捷键",
+    "fieldLabelSet": "{name}快捷键：{hotkey}",
+    "pressKeys": "请按下按键…（按 Esc 取消）",
+    "clickToSet": "点击设置",
+    "clearLabel": "清除快捷键",
+    "clear": "清除",
+    "startStop": "开始 / 停止",
+    "worksAnywhere": "随处可用"
+  },
+  "effects": {
+    "title": "效果",
+    "tabs": {
+      "backgrounds": "背景",
+      "frames": "边框",
+      "camera": "摄像头"
+    },
+    "imageTooLarge": "请选择小于 {mb} MB 的 PNG 或 JPEG 图片。",
+    "backgrounds": {
+      "none": "无",
+      "blur": "模糊",
+      "clear": "透明",
+      "sunset": "日落",
+      "aurora": "极光",
+      "dunes": "沙丘",
+      "studio": "工作室",
+      "ink": "墨色",
+      "cream": "奶油色"
+    },
+    "frames": {
+      "none": "无",
+      "coral": "珊瑚色",
+      "white": "白色",
+      "amber": "琥珀色",
+      "geometric": "几何",
+      "confetti": "彩纸",
+      "botanical": "植物"
+    },
+    "cameraOff": "打开摄像头即可在气泡上实时预览这些效果。",
+    "unsupported": "摄像头背景适用于 macOS 和 Windows。",
+    "topPicks": "精选",
+    "colors": "颜色",
+    "popularAtWork": "工作常用",
+    "addImage": "添加背景图片",
+    "addImageHint": "添加背景图片（PNG 或 JPEG，最大 {mb} MB）",
+    "customImage": "自定义背景图片",
+    "cutOutNote": "从“模糊”开始的每种背景都会把你从身后的画面中抠出来，全部在这台 {device} 上完成。",
+    "pickBackgroundFirst": "请先选择一个背景。"
+  },
+  "windowSource": {
+    "hintWindow": "只录这个窗口，\n即使被其他窗口遮住",
+    "hintArea": "基于窗口位置的\n固定区域",
+    "noteWindow": "只录制这个窗口，即使被其他窗口遮住。摄像头和 Flare 不会被录入。",
+    "noteArea": "录制屏幕上的这个区域，包含摄像头和 Flare。",
+    "cameraNote": "仅窗口录制时不包含"
+  },
+  "recovery": {
+    "failed": "无法恢复此录制：{error}",
+    "offline": "你已离线。请连接互联网后再次点击“恢复”。"
+  },
+  "home": {
+    "localStage": {
+      "recording": "正在本地录制…",
+      "transcribingWindows": "正在通过 Clipy 转写…",
+      "transcribingMac": "正在这台 Mac 上转写…",
+      "selecting": "正在挑选关键时刻…",
+      "extracting": "正在生成 AREC…",
+      "readyCopied": "AREC 已就绪 · 路径已复制",
+      "ready": "AREC 已就绪",
+      "failed": "本地处理失败"
+    },
+    "recoveryAge": {
+      "minutes": "{minutes} 分钟前",
+      "hours": "{hours} 小时前",
+      "days": "{days} 天前"
+    },
+    "recoveryExpiry": {
+      "hours": "{hours} 小时",
+      "days": "{days} 天"
+    },
+    "source": {
+      "display": "全屏",
+      "window": "指定窗口",
+      "area": "自定义大小",
+      "camera": "仅摄像头",
+      "select": "选择",
+      "displayHint": "选择一个显示器",
+      "areaHint": "拖动选择屏幕上的一个区域"
+    },
+    "permission": {
+      "screen": "macOS 阻止了 Clipy 录制屏幕。如果“录屏”中已为 Clipy 开启，请在“系统设置”中将 Clipy 从该列表移除后重新添加，然后重新打开 Clipy。",
+      "camera": "macOS 阻止了 Clipy 访问摄像头。请在“系统设置”的“摄像头”中允许 Clipy，或在本次录制中关闭摄像头。",
+      "microphone": "macOS 阻止了 Clipy 访问麦克风。请在“系统设置”的“麦克风”中允许 Clipy，或在本次录制中关闭麦克风。"
+    },
+    "setupCard": {
+      "title": "设置 Clipy",
+      "body": "首次录制前，macOS 需要允许屏幕录制（摄像头和麦克风可选）。这会在单独的窗口中完成。",
+      "open": "打开设置向导"
+    },
+    "access": {
+      "title": "更改视频访问权限",
+      "public": "公开",
+      "restricted": "受限",
+      "private": "私密",
+      "anyone": "任何拥有链接的人",
+      "domains": "允许域名中的人员",
+      "onlyMe": "仅自己",
+      "allowedDomains": "允许的域名",
+      "emailDomain": "邮箱域名",
+      "add": "添加",
+      "remove": "移除 {domain}"
+    },
+    "strip": {
+      "customized": "{label}，已自定义",
+      "effects": "效果",
+      "notes": "笔记",
+      "library": "资料库",
+      "localLibrary": "本地资料库",
+      "more": "更多",
+      "label": "录制选项"
+    },
+    "summary": {
+      "region": "{width}×{height} 区域",
+      "dragRegion": "在屏幕上拖动以选择区域",
+      "noWindow": "尚未选择窗口",
+      "window": "窗口",
+      "noDisplay": "尚未选择显示器",
+      "display": "显示器"
+    },
+    "shot": {
+      "uploaded": "截图已上传，链接已复制",
+      "copied": "截图已复制并保存到“图片”",
+      "saved": "截图已保存到“图片”",
+      "shareFailed": "已保存在这台 {device}，但分享失败：{error}",
+      "closeEditorFirst": "请先关闭截图窗口。",
+      "failed": "截图失败：{error}",
+      "area": "选择区域",
+      "display": "全屏",
+      "capturing": "正在截图…",
+      "shortcut": "快捷键 {keys}",
+      "showInFolder": "在文件夹中显示",
+      "showInFinder": "在访达中显示",
+      "shortcutsHint": "这些快捷键随处可用，即使 Clipy 已关闭。可在“设置 → 偏好设置”中更改。"
+    },
+    "camera": {
+      "permissionBubble": "摄像头气泡需要摄像头权限。请在“系统设置”中为 Clipy 开启摄像头访问。",
+      "noCamera": "未检测到摄像头。请连接摄像头（或打开 MacBook 屏幕）以使用气泡。",
+      "failedToStart": "摄像头启动失败：{error}",
+      "settingsUnavailable": "摄像头设置不可用：{error}",
+      "permissionList": "使用摄像头气泡需要摄像头权限。请在“系统设置”中为 Clipy 开启摄像头访问。",
+      "listFailed": "无法列出摄像头设备：{error}",
+      "systemDefault": "系统默认摄像头",
+      "choose": "选择摄像头",
+      "turnOff": "关闭摄像头",
+      "turnOn": "打开摄像头",
+      "menuLabel": "摄像头",
+      "chooseConnected": "录制前请选择一个已连接的摄像头。",
+      "notFound": "找不到所选摄像头。请重新连接，或选择其他摄像头。"
+    },
+    "mic": {
+      "off": "麦克风已关闭",
+      "systemDefault": "系统默认麦克风",
+      "systemDefaultMenu": "系统默认",
+      "systemDefaultNamed": "系统默认（{name}）",
+      "choose": "选择麦克风",
+      "turnOff": "关闭麦克风",
+      "turnOn": "打开麦克风",
+      "menuLabel": "麦克风",
+      "disconnected": "{name} 已断开连接。在它重新连接前将使用系统默认设备。"
+    },
+    "upload": {
+      "failedSaved": "上传失败。录制文件已保存在这台 Mac 上。",
+      "failedSavedError": "上传失败：{error}。录制文件已保存在这台 Mac 上。",
+      "preparing": "正在准备上传",
+      "progress": "{uploaded} / {total}",
+      "liveStopped": "实时上传已停止。你的录制仍在这台 Mac 上安全地继续捕获。",
+      "liveStoppedError": "实时上传已停止：{error}。你的录制仍在这台 Mac 上安全地继续捕获。",
+      "failedNotLost": "上传失败。录制文件已保存在这台 Mac 上，不会丢失。",
+      "failedNotLostError": "上传失败：{error}。录制文件已保存在这台 Mac 上，不会丢失。",
+      "preparingStudio": "正在准备 Studio",
+      "finishing": "即将完成",
+      "uploading": "正在上传",
+      "studioOpens": "{status} · Studio 会自动打开",
+      "creatingLink": "正在创建链接，将在浏览器中打开",
+      "cancelUpload": "取消上传",
+      "cancel": "取消"
+    },
+    "toast": {
+      "openingStudio": "正在打开 Studio…",
+      "openingBrowser": "正在浏览器中打开 · 链接已复制",
+      "upToDate": "已是最新版本（{version}）。",
+      "recovered": "录制已恢复，正在处理。"
+    },
+    "errors": {
+      "updateCheck": "检查更新失败：{error}",
+      "openRecordings": "无法打开以前的录制：{error}",
+      "openUpgrade": "无法打开升级页面：{error}",
+      "installUpdate": "更新安装失败：{error}",
+      "chooseSource": "开始前请为所选录制模式选择一个来源。",
+      "discard": "无法丢弃此录制：{error}"
+    },
+    "start": "开始录制",
+    "startLocal": "开始本地录制",
+    "startWithCountdown": "{label}（{seconds} 秒）",
+    "starting": "正在开始…",
+    "openSite": "打开 clipy.online",
+    "captureMode": "捕获模式",
+    "recordVideo": "录制视频",
+    "takeScreenshot": "截图",
+    "close": "关闭",
+    "recovery": {
+      "pending": "有待恢复的录制",
+      "expand": "展开",
+      "available": "有可用的本地录制",
+      "body": "Clipy 无法确认这份本地副本已被清理。如果上传失败，请恢复它；如果它已在你的资料库中，请丢弃。",
+      "collapse": "收起",
+      "from": "来自 {age} 的录制",
+      "sizeExpiry": "{size} · {expiry}后自动删除",
+      "recovering": "正在恢复…",
+      "recover": "恢复",
+      "discard": "丢弃"
+    },
+    "destination": {
+      "label": "录制位置",
+      "cloud": "云端",
+      "cloudShort": "分享链接",
+      "cloudHint": "边录边上传，结束后给你分享链接",
+      "local": "Local AI",
+      "localShort": "在这台 {device} 上",
+      "localHint": "将视频和 AREC 保存在这台 {device} 上",
+      "whatLocal": "Local AI 能做什么",
+      "preferences": "录制偏好设置"
+    },
+    "whatToRecord": "录制什么",
+    "hoverWindow": "将鼠标悬停在窗口上进行选择…",
+    "loadingSources": "正在加载来源…",
+    "change": "更改",
+    "settings": "设置",
+    "noWindows": "没有可见的窗口。请打开一个窗口后重试。",
+    "videoStays": "视频保留在这台 {device} 上",
+    "uploadsWhileRecording": "边录边上传，结束后给你链接",
+    "open": "打开",
+    "startingIn": "即将开始",
+    "paused": "已暂停",
+    "recording": "正在录制",
+    "written": "已写入 {size}",
+    "stopping": "正在停止...",
+    "stopRecording": "停止录制 {elapsed}",
+    "dockHint": "录制控制栏位于捕获区域左侧。如果控制栏被隐藏，可使用此按钮。",
+    "finalizing": "正在收尾",
+    "wrappingUp": "即将完成…",
+    "updateReady": "Clipy {version} 已下载完成，可以安装。",
+    "restartNow": "立即重启",
+    "later": "稍后",
+    "selectWindow": "选择窗口",
+    "hoverToSelect": "将鼠标悬停在窗口上进行选择",
+    "escToCancel": "按 <key>ESC</key> 取消",
+    "update": {
+      "required": "需要更新",
+      "available": "有可用更新",
+      "outOfDate": "此版本的 Clipy（{version}）已过旧，无法再录制或上传。请更新后继续。",
+      "ready": "版本 <strong>{latest}</strong> 已可安装。你当前使用的是 <strong>{current}</strong>。Clipy 将下载更新并重新启动。",
+      "unknown": "未知",
+      "recordLocally": "本地录制",
+      "later": "稍后",
+      "installing": "正在安装…",
+      "install": "安装并重新启动"
+    }
+  },
+  "notes": {
+    "title": "笔记",
+    "smaller": "缩小文字",
+    "larger": "放大文字",
+    "hide": "隐藏笔记",
+    "placeholder": "要点、链接，还有你总忘记提的那件事…"
+  },
+  "webcamControls": {
+    "small": "小摄像头",
+    "medium": "中摄像头",
+    "large": "大摄像头",
+    "label": "摄像头",
+    "hidePreview": "隐藏摄像头预览",
+    "hidePreviewHint": "隐藏预览；摄像头继续录制",
+    "turnOff": "关闭摄像头",
+    "size": "摄像头大小"
+  },
+  "windowSelect": {
+    "select": "选择 {app}",
+    "hint": "将鼠标悬停在窗口上进行选择 · 按 Esc 取消"
+  },
+  "stop": {
+    "micPaused": "麦克风已暂停。请重新连接 {device}",
+    "micSwitched": "麦克风 → {device}",
+    "noMicInput": "没有麦克风输入",
+    "coach": "标注 · 打开画笔，选择颜色，然后点击并拖动。停笔两秒后，所有笔迹会一起淡出。按 Esc 返回你的屏幕。",
+    "discardConfirm": "丢弃这段录制？",
+    "discard": "丢弃",
+    "keepRecording": "继续录制",
+    "showControlsPaused": "录制已暂停。显示录制控制栏",
+    "showControls": "显示录制控制栏",
+    "showControlsPausedTip": "录制已暂停 · 显示录制控制栏",
+    "showControlsTip": "显示录制控制栏",
+    "cancelRecording": "取消录制",
+    "stopRecording": "停止录制",
+    "cancelCountdown": "取消倒计时",
+    "stopLocal": "停止并保存在本地",
+    "stopShare": "停止并获取分享链接",
+    "resume": "继续录制",
+    "pause": "暂停录制",
+    "discardRecording": "丢弃录制",
+    "cancelNothingSaved": "取消，不保存任何内容",
+    "discardNothingSaved": "丢弃这段录制，不保存任何内容",
+    "hideNotes": "隐藏笔记",
+    "showNotes": "显示笔记",
+    "hideNotesTip": "隐藏你的笔记",
+    "showNotesTip": "显示你的笔记",
+    "stopAnnotating": "停止标注",
+    "annotate": "标注",
+    "stopAnnotatingTip": "停止标注 · 按 Esc 返回你的屏幕",
+    "annotateTip": "标注 · 点击并拖动即可绘图",
+    "cameraNotRecorded": "仅录制窗口时不会录入摄像头",
+    "hidePreview": "隐藏摄像头预览",
+    "showPreview": "显示摄像头预览",
+    "turnCameraOff": "关闭摄像头",
+    "turnCameraOn": "打开摄像头",
+    "cameraNotRecordedTip": "只录制窗口，因此不会录入摄像头。可在“设置 → 视频和音频”中更改。",
+    "hidePreviewTip": "隐藏预览；摄像头继续录制",
+    "hideCameraTip": "在录制中隐藏你的摄像头",
+    "showCameraTip": "在录制中显示你的摄像头",
+    "noMic": "本次录制没有麦克风",
+    "unmute": "取消麦克风静音",
+    "mute": "麦克风静音",
+    "noMicTip": "当前没有录制任何麦克风。请在下次录制前选择一个。",
+    "unmuteTip": "取消麦克风静音",
+    "muteTip": "将麦克风静音",
+    "hideControls": "隐藏录制控制栏",
+    "hideControlsTip": "隐藏这些控件",
+    "pen": "画笔",
+    "penColor": "画笔颜色",
+    "colorPen": "{color}画笔",
+    "penWidth": "画笔粗细",
+    "colors": {
+      "coral": "珊瑚色",
+      "yellow": "黄色",
+      "green": "绿色",
+      "blue": "蓝色",
+      "purple": "紫色",
+      "white": "白色"
+    },
+    "clearAnnotations": "清除标注",
+    "clear": "清除",
+    "done": "完成"
+  },
+  "webcam": {
+    "effectUnavailable": "摄像头背景效果不可用。请选择“原始”以继续。",
+    "previewUnavailable": "摄像头预览不可用。请关闭摄像头后重新打开。",
+    "permission": "需要摄像头权限。请在“系统设置”中为 Clipy 开启摄像头访问。",
+    "busy": "摄像头不可用。请关闭其他使用摄像头的应用后重试。",
+    "notFound": "找不到匹配的摄像头。请重新打开选择器，或选择其他摄像头。",
+    "failed": "无法启动摄像头。请检查“系统设置 > 隐私 > 摄像头”。"
+  },
+  "areaSelect": {
+    "video": {
+      "title": "自定义大小录制",
+      "hint": "精确录制你画出的尺寸。按 Esc 取消。",
+      "confirm": "录制此区域"
+    },
+    "screenshot": {
+      "title": "自定义大小截图",
+      "hint": "精确截取你画出的尺寸。按 Esc 取消。",
+      "confirm": "截取此区域"
+    },
+    "drag": "拖动选择一个区域",
+    "cancel": "取消"
+  },
+  "viewer": {
+    "notOnMac": "这段录制不在这台 Mac 上。",
+    "recordedFrom": "录制于 {date}",
+    "clicks": "{count, plural, other {# 次点击}}",
+    "onThisMac": "在这台 Mac 上",
+    "processingFailed": "处理失败",
+    "preparing": "正在准备…",
+    "copied": "已复制",
+    "copyArecPath": "复制 AREC 路径",
+    "showInFinder": "在访达中显示",
+    "autoOff": "录制将不再自动打开。录制就绪时仍会复制 AREC 路径。可在“设置 → 偏好设置”中重新开启此窗口。",
+    "autoOpened": "录制已完成，Clipy 为你打开了它。",
+    "gotIt": "知道了",
+    "dontOpen": "不要自动打开",
+    "keyMoments": "关键时刻",
+    "transcript": "转写",
+    "noSpeech": "未识别到语音。",
+    "transcribing": "正在转写…"
+  },
+  "whatsNew": {
+    "features": {
+      "clipboard": {
+        "title": "剪贴板历史",
+        "label": "剪贴板历史",
+        "blurbMac": "你复制的一切，一个快捷键就能找回。只保存在这台 Mac 上，从不上传。",
+        "blurbWindows": "你复制的一切，一个快捷键就能找回。只保存在这台电脑上，从不上传。"
+      },
+      "window_recording": {
+        "title": "录制单个窗口",
+        "label": "录制单个窗口",
+        "blurbMac": "Clipy 只录制你选择的窗口，即使被其他窗口遮住也一样，窗口移动时也会跟随。",
+        "blurbWindows": "选择一个窗口，Clipy 会录制它所在的区域。"
+      },
+      "screenshot_style": {
+        "title": "截图背景和新的标注工具",
+        "label": "截图背景",
+        "blurb": "为截图加上带内边距、圆角和阴影的背景，再用标注框、表情、聚光灯、放大镜和模糊突出重点。"
+      },
+      "screenshot_markup": {
+        "title": "标注截图",
+        "label": "截图标注",
+        "blurb": "在复制或分享前，为截图添加箭头、方框和文字。"
+      },
+      "flare": {
+        "title": "Flare：按住 Control 指示",
+        "label": "Flare：按住 Control",
+        "blurb": "录制时按住 Control 并移动鼠标，即可指向某处。松开后轨迹会淡出，你的智能体会把它当作一个关键时刻。"
+      },
+      "pointer": {
+        "title": "指针：按住 Control+Shift 在共享屏幕上指示",
+        "label": "指针：按住 Control+Shift",
+        "blurb": "在 Meet、Slack 或 Zoom 中共享屏幕时，按住 Control+Shift 并移动鼠标即可指示内容。无需录制，松开后轨迹会淡出。"
+      },
+      "draw": {
+        "title": "在屏幕上绘图",
+        "label": "在屏幕上绘图",
+        "blurb": "录制时打开画笔并拖动，即可在屏幕上任何内容上绘图。"
+      },
+      "custom_size": {
+        "title": "录制部分屏幕",
+        "label": "自定义大小",
+        "blurb": "拖出一个框，从任意角调整大小，只录制该区域。"
+      },
+      "local_ai": {
+        "title": "Local AI",
+        "label": "Local AI",
+        "blurbMac": "把录制保存在这台 Mac 上。录制内容留在本地，Clipy 会写出转写和一份你的智能体能读取的 AREC。",
+        "blurbWindows": "把录制保存在这台电脑上。视频从不离开它；音频会在 Clipy 服务器上转写，随后从服务器删除。"
+      },
+      "agent": {
+        "title": "让你的智能体录制",
+        "label": "智能体录制",
+        "blurb": "Claude Code、Codex 或 Cursor 可以开始一段 Clipy 录制，标记它检查过的内容，并把链接交给你作为证明。",
+        "blurbLocal": "Claude Code、Codex 或 Cursor 可以用 clipy --local 开始一段 Clipy Local 录制，标记它检查过的内容，并把 AREC 路径交给你作为证明。"
+      }
+    },
+    "nav": "新功能",
+    "rail": {
+      "whatsNew": "新功能",
+      "version": "Clipy {version}",
+      "tryIt": "亲自试试",
+      "new": "新",
+      "progress": "已试用 <strong>{tried} / {total}</strong>"
+    },
+    "done": "完成",
+    "next": "下一项：{label}",
+    "tried": "已试用",
+    "notTried": "尚未试用",
+    "overview": {
+      "updatedFrom": "已更新 · {from} → {to}",
+      "updatedTo": "已更新到 {version}",
+      "onVersion": "你使用的是 {version}",
+      "latestVersion": "最新版本",
+      "titleNews": "Clipy 新功能",
+      "titleRecent": "Clipy 最近新增",
+      "bodyNews": "每一项都可以在这里花约 20 秒试一试。练习不会录制任何内容，除非你主动选择，否则不会上传任何内容。",
+      "bodyRecent": "自上次更新以来没有新内容。以下是最近新增的功能，Clipy 的全部功能都在左侧。",
+      "tryIt": "试一试",
+      "allReleases": "所有版本 ↗",
+      "close": "关闭",
+      "tryAll": "{count, plural, =1 {试一试} other {全部试一试（# 项）}}",
+      "startTrying": "开始试用"
+    },
+    "page": {
+      "progress": "试一试 · 第 {index} 项，共 {total} 项",
+      "back": "返回",
+      "skip": "跳过"
+    },
+    "practice": {
+      "flareHow": "按住 <keys></keys>，在上方的<b>立即支付</b>按钮周围画个圈。",
+      "flareDone": "这就是 Flare。下次录制时用法完全一样。",
+      "pointerHow": "按住 <keys></keys>，在屏幕任意位置移动鼠标。",
+      "pointerDone": "这就是指针。观看你共享屏幕的人都能看到它。",
+      "pointerStep1": "在 Meet、Slack、Zoom 或其他任何应用中共享屏幕。只需保持 Clipy 运行。",
+      "pointerStep2": "按住 Control+Shift 并移动鼠标。松开后轨迹会淡出。",
+      "pointerStep3Mac": "想不按键也保持开启，请在菜单栏的 Clipy 菜单中选择“显示指针”。按 Esc 关闭。",
+      "pointerStep3Windows": "想不按键也保持开启，请在系统托盘的 Clipy 菜单中选择“显示指针”。按 Esc 关闭。",
+      "drawHow": "选择一种颜色，在卡片上拖动。录制时，按 <keys></keys> 打开画笔，或使用录制控制栏上的画笔。",
+      "drawDone": "很好。录制时，画笔可以在任何应用上使用。",
+      "clipboardDone": "剪贴板历史已开始工作。它会保留你最近复制的 {items, number} 条内容，最长 {days} 天。",
+      "markupDone": "完成。截图会先在这里打开以便标注，然后再复制。",
+      "styleHow": "在截图窗口中点击“背景”并选择一种样式。新工具都在工具栏中：标注框、表情、聚光灯、放大镜和取色器。",
+      "styleDone": "很好。复制或上传时，背景会随图片一起带上。",
+      "windowStep1": "打开录制器，选择“指定窗口”作为来源，然后点击“选择”。",
+      "windowStep2Windows": "点击你要录制的窗口。",
+      "windowStep2Mac": "点击你要录制的窗口。录制时其他窗口可以盖在它上面。",
+      "startRecording": "开始录制。",
+      "windowDone": "你已录制了一个窗口。",
+      "areaStep1": "打开录制器，选择“自定义大小”作为来源，然后点击“选择”。",
+      "areaStep2": "拖出一个框，再拖动它的角或边调整大小。",
+      "areaStep3": "按 Enter 或点击“录制此区域”。",
+      "areaDone": "你已录制了部分屏幕。",
+      "localStep1": "打开录制器，点击顶部栏下方的 Local AI。",
+      "localStep2Windows": "照常录制。录制内容留在本地；只有音频会被发送去转写，随后删除。",
+      "localStep2Mac": "照常录制。录制内容留在本地。",
+      "localStep3": "停止后，视频及其 AREC 会保存在这台 {device} 上，随时供你的智能体使用。",
+      "localDone": "你已完成一次 Local AI 录制。",
+      "agentDone": "你的智能体已用 Clipy 完成录制。",
+      "frameNote": "练习区 · 不会录制任何内容",
+      "mock": {
+        "checkout": "结账",
+        "total": "合计",
+        "payNow": "立即支付"
+      },
+      "flareArea": "Flare 练习区",
+      "held": "已按住",
+      "holdMe": "按住我",
+      "drawArea": "绘图练习区",
+      "penColour": "画笔颜色",
+      "clipboardSample": "Clipy 会保留你复制的内容，一个快捷键就能找回。",
+      "clipboardNote": "你的历史记录保存在这台设备上",
+      "clipboardOff": "剪贴板历史已关闭",
+      "clipboardOffBody": "开启后即可保留你复制的内容。之后可在“设置”中再次关闭，关闭时也会清除历史。",
+      "clipboardTurnOn": "开启剪贴板历史",
+      "copyLine": "复制这一行：",
+      "copied": "已复制",
+      "copy": "复制",
+      "pressToOpen": "按 <keys></keys> 打开你的历史记录。",
+      "noShortcut": "剪贴板历史没有快捷键。请在“设置 → 偏好设置 → 快捷键”中设置一个。",
+      "pickEntry": "选择一条内容，把它粘贴到你刚才所在的应用中。",
+      "screenshotBusy": "已有一张截图正在标注。",
+      "screenshotFailed": "截图失败：{error}",
+      "screenshotNote": "除非你点击“上传”，否则不会上传任何内容",
+      "annotatingOff": "标注已关闭",
+      "annotatingOffBody": "截图会直接复制到剪贴板。开启“复制前先标注”即可先进行标注。",
+      "annotatingTurnOn": "开启标注",
+      "takeArea": "截取一个区域",
+      "withKeys": "使用 <keys></keys> 或在这里：",
+      "waiting": "等待你操作…",
+      "takeScreenshot": "截图",
+      "drawArrow": "画一个箭头或方框，或添加文字。",
+      "copyOrUpload": "点击“复制图片”将它保存在这台 {device} 上，或点击“上传”获取分享链接。",
+      "openRecorder": "打开录制器",
+      "ticksNote": "你第一次完成时会自动打勾",
+      "cloud": "云端",
+      "localAi": "Local AI",
+      "startLocal": "开始本地录制",
+      "start": "开始录制",
+      "nightCaption": "Local AI 已开启：录制器会变成深色",
+      "dayCaption": "云端和 Local AI 就在顶部栏下方",
+      "agentNote": "你的智能体首次录制时会自动打勾",
+      "agentRun": "在终端中运行一次以下命令。使用其他智能体时，把 claude 换成 codex 或 cursor。",
+      "agentRunLocal": "只需安装一次 CLI，你的智能体就能用 --local 通过 Clipy Local 录制。不会上传任何内容，也无需账号。",
+      "agentThen": "然后让你的智能体验证一项改动，并通过 Clipy 发送证明。",
+      "agentThenLocal": "然后让你的智能体验证一项改动，并把 AREC 路径交给你作为证明。",
+      "howItWorks": "了解原理 ↗"
+    }
+  },
+  "onboarding": {
+    "steps": {
+      "welcome": "欢迎",
+      "signin": "登录",
+      "screen": "屏幕录制",
+      "accessibility": "辅助功能",
+      "media": "摄像头和麦克风",
+      "menuBar": "菜单栏",
+      "systemTray": "系统托盘",
+      "done": "全部就绪"
+    },
+    "settingsName": {
+      "mac": "系统设置",
+      "windows": "Windows 设置"
+    },
+    "sidebar": {
+      "label": "设置步骤",
+      "footnote": "大约需要一分钟。这里的所有内容之后都可以在设置中更改。"
+    },
+    "back": "返回",
+    "continue": "继续",
+    "errors": {
+      "checkFailed": "Clipy 无法检查{settings}：{error}",
+      "checkNoAnswer": "Clipy 无法检查{settings}：没有响应。",
+      "openSettingsFailed": "无法打开{settings}：{error}",
+      "restartFailed": "无法重启 Clipy：{error}",
+      "taskbarFailed": "无法打开任务栏设置：{error}"
+    },
+    "welcome": {
+      "eyebrow": "欢迎使用 Clipy",
+      "title": "录一次，人人都能看懂，你的智能体也一样。",
+      "start": "开始",
+      "body": "录制你的屏幕、摄像头和声音，一停止就拿到链接，还能把录制内容作为可读上下文交给 Claude Code 或 Codex。我们来完成设置吧。"
+    },
+    "signIn": {
+      "title": "登录 Clipy",
+      "titleSignedIn": "你已登录",
+      "google": "使用 Google 继续",
+      "openAgain": "再次打开浏览器",
+      "signedInAs": "已登录为 <b>{email}</b>。",
+      "signedIn": "你已登录。",
+      "waiting": "请在浏览器中完成登录。此窗口会自动继续。",
+      "body": "你的录制内容、链接和转写都保存在你的 Clipy 账户中。我们会打开浏览器让你用 Google 登录，然后直接带你回到这里。"
+    },
+    "screen": {
+      "title": "让 Clipy 看到你的屏幕",
+      "body": "macOS 只会询问一次。请在“录屏与系统录音”中为 Clipy 开启权限。Clipy 只在你录制时捕获屏幕。",
+      "pane": "录屏与系统录音",
+      "allow": "允许屏幕录制",
+      "granted": "屏幕录制已开启"
+    },
+    "accessibility": {
+      "title": "显示你的点击位置",
+      "body": "辅助功能让 Clipy 在录制中标出你的点击和指针，让观众和智能体都能跟上每一步。请在“辅助功能”中为 Clipy 开启权限。",
+      "pane": "辅助功能",
+      "allow": "允许辅助功能",
+      "granted": "辅助功能已开启"
+    },
+    "permission": {
+      "opening": "正在打开…",
+      "checkAgain": "再次检查",
+      "openSettings": "打开{settings}",
+      "restart": "重启 Clipy",
+      "quitReopen": "退出并重新打开",
+      "stale": "macOS 显示录屏已允许，但仍在阻止捕获。请在{settings}中关闭再重新开启 Clipy，然后重启 Clipy。",
+      "checking": "正在向 macOS 确认 Clipy 能否看到你的屏幕…",
+      "unanswered": "macOS 没有回应 Clipy 能否看到你的屏幕。重启 Clipy 通常可以解决，设置会从中断处继续。",
+      "switchedOn": "已经开启了？macOS 会在 Clipy 重启后生效。设置会从中断处继续。"
+    },
+    "media": {
+      "eyebrow": "可选",
+      "title": "想出现在你的录制中吗？",
+      "skip": "暂时跳过",
+      "body": "加入你的面孔和声音，让大家不只看到点击，还能听到原因。你可以随时在录制器中开启或关闭任一项。",
+      "camera": {
+        "title": "摄像头",
+        "detail": "一个显示你面孔的气泡，可放在任意角落。",
+        "allow": "允许摄像头"
+      },
+      "microphone": {
+        "title": "麦克风",
+        "detail": "边录边讲解。转写免费附带。",
+        "allow": "允许麦克风"
+      },
+      "allowed": "已允许",
+      "on": "已开启",
+      "checking": "正在检查…",
+      "allowLabel": "允许{name}",
+      "openSettingsLabel": "打开{name}的设置"
+    },
+    "find": {
+      "titleMenuBar": "Clipy 就在你的菜单栏中",
+      "titleTray": "Clipy 就在你的系统托盘中",
+      "openTaskbar": "打开任务栏设置",
+      "gotIt": "知道了",
+      "bodyMac": "点击屏幕顶部的 Clipy 图标即可录制。无需保持任何窗口打开，Clipy 会一直在那里待命。",
+      "bodyWindows": "点击时钟旁的 Clipy 图标即可录制。如果看不到，请点击 <key>^</key> 箭头：Windows 会把新图标藏在那里。把 Clipy 拖到任务栏上，或在任务栏设置中开启它，让它始终显示。",
+      "shortcut": "完成设置后，随时随地都能用以下快捷键开始和停止"
+    },
+    "done": {
+      "title": "你已准备好录制",
+      "titleBlocked": "就快好了",
+      "checking": "正在检查…",
+      "opening": "正在打开…",
+      "open": "打开录制器",
+      "ready": "你的第一次录制只差一次点击。停止后，链接就已在你的剪贴板上。",
+      "readyLocal": "只需一次点击就能开始第一次录制。停止后，它的 AREC 路径已在你的剪贴板中。",
+      "missing": "还有一个必需步骤需要你处理。在下方完成即可。",
+      "waitingMac": "正在等待 macOS 确认屏幕访问权限。",
+      "waitingWindows": "Clipy 暂时无法读取你的 Windows 隐私设置。",
+      "rows": {
+        "signedIn": "已登录",
+        "screen": "屏幕录制",
+        "clicks": "点击追踪",
+        "camera": "摄像头",
+        "microphone": "麦克风"
+      },
+      "off": "未开启",
+      "needsOk": "需要你的许可",
+      "turnOn": "开启",
+      "fix": "修复",
+      "screenUnconfirmed": "macOS 尚未确认屏幕访问权限。如果再次检查没有帮助，请重启 Clipy，之后会回到设置。",
+      "windowsUnread": "Clipy 无法读取你的 Windows 隐私设置。请再次检查；如果问题持续，请重启 Clipy。",
+      "loginItem": "登录时打开 Clipy",
+      "approve": "（请在{settings}中批准）"
+    },
+    "visuals": {
+      "linkCopied": "链接已复制",
+      "agentRead": "你的智能体已读取",
+      "settings": {
+        "general": "通用",
+        "appearance": "外观",
+        "privacy": "隐私与安全性",
+        "desktopDock": "桌面与程序坞",
+        "displays": "显示器"
+      },
+      "menu": {
+        "file": "文件",
+        "edit": "编辑",
+        "view": "显示"
+      },
+      "menuBarClock": "周二 9:41",
+      "menuBarHint": "录制器会在图标正下方打开。",
+      "trayHint": "Windows 会把新图标藏在 <key>^</key> 后面。把 Clipy 拖到任务栏上，一键即可打开。",
+      "trayTime": "9:41",
+      "trayDay": "星期二",
+      "startRecording": "开始录制"
+    }
+  },
+  "clipboard": {
+    "filters": {
+      "all": "全部",
+      "text": "文本",
+      "images": "图片",
+      "favorites": "收藏"
+    },
+    "elapsed": "{unit, select, now {刚刚} m {{count} 分钟} h {{count} 小时} other {{count} 天}}",
+    "elapsedAgo": "{unit, select, now {刚刚} m {{count} 分钟前} h {{count} 小时前} other {{count} 天前}}",
+    "copiedAgo": "{unit, select, now {刚刚复制} m {{count} 分钟前复制} h {{count} 小时前复制} other {{count} 天前复制}}",
+    "imageLabel": "图片（{width}×{height}）",
+    "kinds": {
+      "image": "图片",
+      "color": "颜色",
+      "link": "链接",
+      "email": "邮箱",
+      "code": "代码",
+      "text": "文本"
+    },
+    "lines": "{lines} 行",
+    "characters": "{count, plural, other {{chars} 个字符}}",
+    "preview": {
+      "empty": "选择一项即可在这里查看。",
+      "favorite": "已收藏",
+      "paste": "粘贴",
+      "copy": "复制",
+      "edit": "编辑"
+    },
+    "search": "搜索剪贴板历史",
+    "pasteLabel": "粘贴（↵）",
+    "copyLabel": "复制但不粘贴（{keys}）",
+    "filterLabel": "显示",
+    "clearAll": "全部清除",
+    "clearAllTitle": "收藏的内容会保留",
+    "hint": "已通过 {hotkey} 打开。有些应用用这个快捷键粘贴纯文本。你可以在 Clipy 设置 → 偏好设置 → 快捷键中更改。",
+    "dismissHint": "关闭提示",
+    "headings": {
+      "favorites": "收藏",
+      "recent": "最近"
+    },
+    "editHint": "{keys} 保存 · esc 取消",
+    "cancel": "取消",
+    "save": "保存",
+    "rowDelete": "删除（{keys}）",
+    "rowEdit": "编辑（{keys}）",
+    "rowAddFavorite": "加入收藏（{keys}）",
+    "rowRemoveFavorite": "取消收藏（{keys}）",
+    "menu": {
+      "paste": "粘贴",
+      "copy": "复制",
+      "addFavorite": "加入收藏",
+      "removeFavorite": "取消收藏",
+      "edit": "编辑…",
+      "delete": "删除"
+    },
+    "empty": {
+      "nothing": "还没有复制任何内容。复制一些文本或图片，就会显示在这里。",
+      "noFavorites": "还没有收藏。为某一项加星标，或按 {keys}，即可把它一直保留在这里。",
+      "noMatches": "没有匹配结果。"
+    },
+    "footer": {
+      "paste": "粘贴",
+      "copy": "复制",
+      "star": "收藏",
+      "type": "类型",
+      "close": "关闭",
+      "kept": "仅保存在这台 {device} 上"
+    }
+  },
+  "screenshotEditor": {
+    "openFailed": "无法打开这张截图。",
+    "tryAgain": "重试",
+    "nothingWaiting": "没有等待标注的截图。",
+    "close": "关闭",
+    "loadFailed": "无法加载这张截图。",
+    "loading": "正在加载",
+    "toolbar": {
+      "tools": "标注工具",
+      "color": "标注颜色",
+      "colorSwatch": "颜色 {color}",
+      "customColor": "自定义颜色",
+      "strokeWeight": "线条粗细",
+      "stroke": "{weight}线条",
+      "background": "背景",
+      "backgroundTitle": "背景、边距、圆角和阴影",
+      "undo": "撤销",
+      "undoTitle": "撤销（{keys}）",
+      "redo": "重做",
+      "redoTitle": "重做（{keys}）",
+      "clear": "移除所有标注"
+    },
+    "canvas": "截图标注画布",
+    "textPlaceholder": "输入文字，然后按 {keys}",
+    "picked": "已取色 {color}",
+    "resetCrop": "重置裁剪",
+    "resetCuts": "重置剪切",
+    "delete": "删除",
+    "deleting": "正在删除…",
+    "deleteTitle": "删除这张截图且不复制",
+    "copy": "复制图片",
+    "copying": "正在复制…",
+    "copyTitle": "将图片复制到剪贴板（{keys}）",
+    "upload": "上传",
+    "uploading": "正在上传…",
+    "updateLink": "更新链接",
+    "updating": "正在更新…",
+    "signInToUpload": "登录 Clipy 即可上传截图",
+    "uploadTitle": "上传到 Clipy 并复制分享链接{shortcut}",
+    "updateTitle": "更新这张截图链接背后的图片{shortcut}",
+    "result": {
+      "linkUpdated": "链接已更新并复制到剪贴板",
+      "linkCopied": "截图链接已复制到剪贴板",
+      "uploadFailedCopied": "上传失败。已改为复制图片。",
+      "uploadFailed": "上传失败",
+      "copied": "截图已复制到剪贴板",
+      "notCopied": "截图已保存，但无法复制到剪贴板",
+      "openInBrowser": "在浏览器中打开",
+      "showInExplorer": "在文件资源管理器中显示",
+      "showInFinder": "在访达中显示",
+      "dismiss": "关闭"
+    },
+    "hints": {
+      "crop": "拖动选出要保留的区域。裁剪会在复制或上传时生效。",
+      "cut": "沿行向下或沿列横向拖动，即可剪掉这条区域，并在复制或上传时拼接其余部分。点击某条区域可以改为保留它。"
+    }
+  }
+}

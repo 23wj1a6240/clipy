@@ -1,0 +1,69 @@
+name: Bug report
+description: Something in Clipy Local or the packages does not work as described.
+labels: ["bug"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Thanks for the report. Security problems go through SECURITY.md, not here.
+  - type: dropdown
+    id: area
+    attributes:
+      label: Area
+      options:
+        - Clipy Local (desktop app)
+        - packages/moments
+        - packages/config
+        - packages/capture
+        - packages/transcribe
+        - clipy CLI with --local
+        - Docs
+    validations:
+      required: true
+  - type: textarea
+    id: what-happened
+    attributes:
+      label: What happened
+      description: What you did, what you expected, and what happened instead. A short screen recording helps.
+    validations:
+      required: true
+  - type: textarea
+    id: steps
+    attributes:
+      label: Steps to reproduce
+      placeholder: |
+        1. Build Clipy Local from main
+        2. Record a window for 30 seconds with the microphone on
+        3. ...
+    validations:
+      required: true
+  - type: input
+    id: os
+    attributes:
+      label: OS and version
+      placeholder: macOS 15.5 on Apple silicon, Windows 11 24H2, Ubuntu 24.04
+    validations:
+      required: true
+  - type: input
+    id: commit
+    attributes:
+      label: Commit or version
+      description: "`git rev-parse --short HEAD` for a build from source, or `clipy --version` for the CLI."
+  - type: dropdown
+    id: provider
+    attributes:
+      label: Model provider and transcription
+      description: Which settings were in use. Never paste a key.
+      multiple: true
+      options:
+        - No model provider
+        - OpenRouter, OpenAI, Gemini or Groq
+        - Ollama or LM Studio
+        - On-device transcription
+        - A transcription key
+  - type: textarea
+    id: logs
+    attributes:
+      label: Logs or the AREC
+      description: Relevant log lines, or the parts of recording.arec that look wrong. Remove anything private first.
+      render: text

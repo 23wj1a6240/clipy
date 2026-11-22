@@ -1,0 +1,501 @@
+{
+  "name": "clicks-only",
+  "description": "Click clusters, element labels (whitespace, length, timing), a click outside the capture, no transcript.",
+  "input": {
+    "schemaVersion": 2,
+    "durationMs": 10000,
+    "transcript": [],
+    "interactions": [
+      {
+        "kind": "down",
+        "time_ms": 1000,
+        "x": 200,
+        "y": 200,
+        "button": 1
+      },
+      {
+        "kind": "up",
+        "time_ms": 1080,
+        "x": 200,
+        "y": 200,
+        "button": 1
+      },
+      {
+        "kind": "down",
+        "time_ms": 1300,
+        "x": 200,
+        "y": 200,
+        "button": 1
+      },
+      {
+        "kind": "move",
+        "time_ms": 1350,
+        "x": 210,
+        "y": 205
+      },
+      {
+        "kind": "up",
+        "time_ms": 1380,
+        "x": 200,
+        "y": 200,
+        "button": 1
+      },
+      {
+        "kind": "down",
+        "time_ms": 1400,
+        "x": 210,
+        "y": 205,
+        "button": 1
+      },
+      {
+        "kind": "up",
+        "time_ms": 1480,
+        "x": 210,
+        "y": 205,
+        "button": 1
+      },
+      {
+        "kind": "move",
+        "time_ms": 1530,
+        "x": 225,
+        "y": 211
+      },
+      {
+        "kind": "move",
+        "time_ms": 1560,
+        "x": 239,
+        "y": 217
+      },
+      {
+        "kind": "move",
+        "time_ms": 1590,
+        "x": 254,
+        "y": 223
+      },
+      {
+        "kind": "move",
+        "time_ms": 1620,
+        "x": 269,
+        "y": 228
+      },
+      {
+        "kind": "move",
+        "time_ms": 1650,
+        "x": 284,
+        "y": 234
+      },
+      {
+        "kind": "move",
+        "time_ms": 1680,
+        "x": 298,
+        "y": 240
+      },
+      {
+        "kind": "move",
+        "time_ms": 1710,
+        "x": 313,
+        "y": 246
+      },
+      {
+        "kind": "move",
+        "time_ms": 1740,
+        "x": 328,
+        "y": 252
+      },
+      {
+        "kind": "move",
+        "time_ms": 1770,
+        "x": 342,
+        "y": 258
+      },
+      {
+        "kind": "move",
+        "time_ms": 1800,
+        "x": 357,
+        "y": 264
+      },
+      {
+        "kind": "move",
+        "time_ms": 1830,
+        "x": 372,
+        "y": 269
+      },
+      {
+        "kind": "move",
+        "time_ms": 1860,
+        "x": 386,
+        "y": 275
+      },
+      {
+        "kind": "move",
+        "time_ms": 1890,
+        "x": 401,
+        "y": 281
+      },
+      {
+        "kind": "move",
+        "time_ms": 1920,
+        "x": 416,
+        "y": 287
+      },
+      {
+        "kind": "move",
+        "time_ms": 1950,
+        "x": 431,
+        "y": 293
+      },
+      {
+        "kind": "move",
+        "time_ms": 1980,
+        "x": 445,
+        "y": 299
+      },
+      {
+        "kind": "move",
+        "time_ms": 2010,
+        "x": 460,
+        "y": 304
+      },
+      {
+        "kind": "move",
+        "time_ms": 2040,
+        "x": 475,
+        "y": 310
+      },
+      {
+        "kind": "move",
+        "time_ms": 2070,
+        "x": 489,
+        "y": 316
+      },
+      {
+        "kind": "move",
+        "time_ms": 2100,
+        "x": 504,
+        "y": 322
+      },
+      {
+        "kind": "move",
+        "time_ms": 2130,
+        "x": 519,
+        "y": 328
+      },
+      {
+        "kind": "move",
+        "time_ms": 2160,
+        "x": 533,
+        "y": 334
+      },
+      {
+        "kind": "move",
+        "time_ms": 2190,
+        "x": 548,
+        "y": 340
+      },
+      {
+        "kind": "move",
+        "time_ms": 2220,
+        "x": 563,
+        "y": 345
+      },
+      {
+        "kind": "move",
+        "time_ms": 2250,
+        "x": 578,
+        "y": 351
+      },
+      {
+        "kind": "move",
+        "time_ms": 2280,
+        "x": 592,
+        "y": 357
+      },
+      {
+        "kind": "move",
+        "time_ms": 2310,
+        "x": 607,
+        "y": 363
+      },
+      {
+        "kind": "move",
+        "time_ms": 2340,
+        "x": 622,
+        "y": 369
+      },
+      {
+        "kind": "move",
+        "time_ms": 2370,
+        "x": 636,
+        "y": 375
+      },
+      {
+        "kind": "move",
+        "time_ms": 2400,
+        "x": 651,
+        "y": 381
+      },
+      {
+        "kind": "move",
+        "time_ms": 2430,
+        "x": 666,
+        "y": 386
+      },
+      {
+        "kind": "move",
+        "time_ms": 2460,
+        "x": 680,
+        "y": 392
+      },
+      {
+        "kind": "move",
+        "time_ms": 2490,
+        "x": 695,
+        "y": 398
+      },
+      {
+        "kind": "move",
+        "time_ms": 2500,
+        "x": 700,
+        "y": 400
+      },
+      {
+        "kind": "down",
+        "time_ms": 2600,
+        "x": 700,
+        "y": 400,
+        "button": 1
+      },
+      {
+        "kind": "up",
+        "time_ms": 2680,
+        "x": 700,
+        "y": 400,
+        "button": 1
+      },
+      {
+        "kind": "move",
+        "time_ms": 2700,
+        "x": 702,
+        "y": 401
+      },
+      {
+        "kind": "down",
+        "time_ms": 2800,
+        "x": 702,
+        "y": 401,
+        "button": 1
+      },
+      {
+        "kind": "up",
+        "time_ms": 2880,
+        "x": 702,
+        "y": 401,
+        "button": 1
+      },
+      {
+        "kind": "down",
+        "time_ms": 4000,
+        "x": 900,
+        "y": 600,
+        "button": 1
+      },
+      {
+        "kind": "up",
+        "time_ms": 4080,
+        "x": 900,
+        "y": 600,
+        "button": 1
+      },
+      {
+        "kind": "down",
+        "time_ms": 5000,
+        "x": 2000,
+        "y": 600,
+        "button": 1
+      },
+      {
+        "kind": "up",
+        "time_ms": 5080,
+        "x": 2000,
+        "y": 600,
+        "button": 1
+      },
+      {
+        "kind": "down",
+        "time_ms": 6000,
+        "x": 300,
+        "y": 800,
+        "button": 2
+      },
+      {
+        "kind": "down",
+        "time_ms": 6050,
+        "x": 310,
+        "y": 805,
+        "button": 1
+      },
+      {
+        "kind": "up",
+        "time_ms": 6080,
+        "x": 300,
+        "y": 800,
+        "button": 2
+      },
+      {
+        "kind": "up",
+        "time_ms": 6130,
+        "x": 310,
+        "y": 805,
+        "button": 1
+      },
+      {
+        "kind": "down",
+        "time_ms": 7000,
+        "x": 500,
+        "y": 500,
+        "button": 1
+      },
+      {
+        "kind": "up",
+        "time_ms": 7080,
+        "x": 500,
+        "y": 500,
+        "button": 1
+      },
+      {
+        "kind": "down",
+        "time_ms": 9000,
+        "x": 520,
+        "y": 520,
+        "button": 1
+      }
+    ],
+    "clickElements": [
+      {
+        "time_ms": 1000,
+        "role": "AXButton",
+        "label": "Save"
+      },
+      {
+        "time_ms": 1300,
+        "role": "AXButton",
+        "label": "Save"
+      },
+      {
+        "time_ms": 1400,
+        "role": "AXButton",
+        "label": null
+      },
+      {
+        "time_ms": 2600,
+        "role": "AXButton",
+        "label": "  Open   the\n settings\tpanel  "
+      },
+      {
+        "time_ms": 2800,
+        "role": "AXButton",
+        "label": "Other label"
+      },
+      {
+        "time_ms": 4000,
+        "role": "AXStaticText",
+        "label": "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx"
+      },
+      {
+        "time_ms": 5000,
+        "role": "AXButton",
+        "label": "Off screen"
+      },
+      {
+        "time_ms": 6000,
+        "role": "AXButton",
+        "label": "Right click"
+      },
+      {
+        "time_ms": 6090,
+        "role": "AXButton",
+        "label": "Late label"
+      },
+      {
+        "time_ms": 7000,
+        "role": "AXButton",
+        "label": ""
+      },
+      {
+        "time_ms": 9000,
+        "role": "AXButton",
+        "label": "No up"
+      }
+    ],
+    "interactionSelection": "bounded sample; full stream retained locally",
+    "capture": {
+      "x": 0,
+      "y": 0,
+      "width": 1440,
+      "height": 900,
+      "output_width": 1440,
+      "output_height": 900
+    }
+  },
+  "rules": {
+    "planner": "rules",
+    "moments": [
+      {
+        "timestamp_ms": 1000,
+        "frame_at_ms": 1000,
+        "reason": "Clicks 'Save' 3 times (no narration at this moment)",
+        "source": "click",
+        "x": 0.1389,
+        "y": 0.2222
+      },
+      {
+        "timestamp_ms": 2600,
+        "frame_at_ms": 2600,
+        "reason": "Clicks 'Open the settings panel' (no narration at this moment)",
+        "source": "click",
+        "x": 0.4861,
+        "y": 0.4444
+      },
+      {
+        "timestamp_ms": 2800,
+        "frame_at_ms": 2800,
+        "reason": "Clicks 'Other label' (no narration at this moment)",
+        "source": "click",
+        "x": 0.4875,
+        "y": 0.4456
+      },
+      {
+        "timestamp_ms": 4000,
+        "frame_at_ms": 4000,
+        "reason": "Clicks 'xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx' (no narration at this moment)",
+        "source": "click",
+        "x": 0.625,
+        "y": 0.6667
+      },
+      {
+        "timestamp_ms": 6000,
+        "frame_at_ms": 6000,
+        "reason": "Clicks 'Right click' 2 times (no narration at this moment)",
+        "source": "click",
+        "x": 0.2083,
+        "y": 0.8889
+      },
+      {
+        "timestamp_ms": 7000,
+        "frame_at_ms": 7000,
+        "reason": "Clicks here (no narration at this moment)",
+        "source": "click",
+        "x": 0.3472,
+        "y": 0.5556
+      },
+      {
+        "timestamp_ms": 9000,
+        "frame_at_ms": 9000,
+        "reason": "Clicks 'No up' (no narration at this moment)",
+        "source": "click",
+        "x": 0.3611,
+        "y": 0.5778
+      }
+    ]
+  }
+}

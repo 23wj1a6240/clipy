@@ -1,0 +1,8 @@
+# Clipy Local's window is its own pnpm project, separate from the packages at
+# the repository root: run pnpm install in this folder.
+packages:
+  - "."
+
+# esbuild (used by Vite) downloads its native binary in an install script.
+onlyBuiltDependencies:
+  - esbuild

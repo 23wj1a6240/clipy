@@ -1,0 +1,35 @@
+{
+  "name": "@clipy/transcribe",
+  "version": "0.1.0",
+  "private": true,
+  "description": "Turn a recording's audio into timestamped transcript segments: on-device models or your own provider key.",
+  "license": "Apache-2.0",
+  "type": "module",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "files": ["dist"],
+  "scripts": {
+    "build": "tsc -p tsconfig.json",
+    "typecheck": "tsc -p tsconfig.json --noEmit",
+    "test": "vitest run"
+  },
+  "dependencies": {
+    "seek-bzip": "^2.0.0",
+    "zod": "^4.4.3"
+  },
+  "peerDependencies": {
+    "sherpa-onnx-node": "2.0.1"
+  },
+  "peerDependenciesMeta": {
+    "sherpa-onnx-node": {
+      "optional": true
+    }
+  },
+  "devDependencies": {
+    "@types/node": "^22.0.0",
+    "sherpa-onnx-node": "2.0.1",
+    "typescript": "^5.6.0",
+    "vitest": "^4.1.4"
+  },
+  "engines": { "node": ">=20.19" }
+}

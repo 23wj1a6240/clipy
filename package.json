@@ -1,0 +1,17 @@
+{
+  "name": "clipy-local",
+  "private": true,
+  "description": "Clipy local edition: record your screen, build an AREC on your machine, hand it to an AI agent.",
+  "license": "Apache-2.0",
+  "type": "module",
+  "scripts": {
+    "sync": "node scripts/sync-from-monorepo.mjs",
+    "build": "pnpm -r run build",
+    "test": "pnpm -r run test",
+    "typecheck": "pnpm -r run typecheck"
+  },
+  "packageManager": "pnpm@10.18.0",
+  "devDependencies": {
+    "typescript": "^5.9.3"
+  }
+}

@@ -1,0 +1,7 @@
+{
+  "$schema": "../gen/schemas/desktop-schema.json",
+  "identifier": "recording-controls",
+  "description": "Read the registered stop shortcut for the recording toolbar",
+  "windows": ["stop-controls"],
+  "permissions": ["global-shortcut:allow-is-registered"]
+}

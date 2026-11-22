@@ -1,0 +1,22 @@
+# ffmpeg-sys-next resolution order:
+#
+# 1. `FFMPEG_DIR` — preferred. Points at Spacedrive's prebuilt
+#    native-deps tree (downloaded by `scripts/setup-native-deps.mjs`).
+#    This is what makes the .dmg self-contained: the same framework
+#    that's bundled into the app's `Contents/Frameworks/` provides the
+#    headers + dylibs the Rust compile links against.
+#
+# 2. `PKG_CONFIG_PATH` + `BINDGEN_EXTRA_CLANG_ARGS` — fallback for devs
+#    who skipped `pnpm setup:native-deps` and have `brew install
+#    ffmpeg@7` instead. Note that `force = false` (default) means
+#    these only apply if the env vars are unset; if the user has them
+#    set explicitly, theirs win.
+#
+# The fragmented MP4 encoder (src/encoder.rs) targets ffmpeg 7 ABI via
+# Cap.so's fork of ffmpeg-next (rev 49db1fede112). ffmpeg 8 dropped
+# `libavcodec/avfft.h` which breaks bindgen. Spacedrive's native-deps
+# v0.25 ships ffmpeg 7.
+[env]
+FFMPEG_DIR = { value = "target/native-deps", relative = true }
+PKG_CONFIG_PATH = { value = "/opt/homebrew/opt/ffmpeg@7/lib/pkgconfig:/opt/homebrew/lib/pkgconfig:/opt/homebrew/share/pkgconfig" }
+BINDGEN_EXTRA_CLANG_ARGS = { value = "-I/opt/homebrew/opt/ffmpeg@7/include" }

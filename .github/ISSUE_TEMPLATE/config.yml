@@ -1,0 +1,11 @@
+blank_issues_enabled: false
+contact_links:
+  - name: Questions and ideas
+    url: https://github.com/clipy-recorder/clipy/discussions
+    about: Ask how something works or share what you built with it.
+  - name: Security report
+    url: https://github.com/clipy-recorder/clipy/security/advisories/new
+    about: Report a security problem privately.
+  - name: Hosted Clipy and the official apps
+    url: https://clipy.online/support
+    about: Help with share links, accounts and the full Clipy app.

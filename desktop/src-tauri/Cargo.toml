@@ -1,0 +1,260 @@
+[package]
+name = "clipy-desktop"
+version = "1.1.82"
+description = "Clipy screen recorder — cross-platform desktop app"
+authors = ["Clipy"]
+edition = "2021"
+rust-version = "1.88"
+
+[lib]
+name = "clipy_desktop_lib"
+# rlib only. The staticlib and cdylib outputs from Tauri's template exist for
+# Tauri mobile, which Clipy does not use, and each one repeated the release
+# profile's single-threaded LTO pass on every release build.
+crate-type = ["rlib"]
+
+[features]
+default = ["local"]
+# The official Clipy app (account, upload, updates). Its sources are not in
+# this repository, so it cannot be built here.
+cloud = []
+# What the local edition runs in place of Clipy's servers: moment selection on
+# this computer (plus an optional model provider of the user's own), local
+# settings and keys, and on Windows on-device or own-key transcription. Build
+# the local edition with no flags; it is the default here.
+local = [
+    "dep:clipy-local-moments",
+    "dep:clipy-local-edition",
+    "dep:clipy-local-stt",
+]
+
+[build-dependencies]
+tauri-build = { version = "2", features = [] }
+
+[target.'cfg(target_os = "macos")'.build-dependencies]
+cc = "1"
+
+[dependencies]
+tauri = { version = "2", features = ["tray-icon", "macos-private-api", "protocol-asset"] }
+tauri-plugin-shell = "2"
+tauri-plugin-deep-link = "2"
+tauri-plugin-dialog = "2"
+tauri-plugin-store = "2"
+tauri-plugin-single-instance = { version = "2", features = ["deep-link"] }
+serde = { version = "1", features = ["derive"] }
+serde_json = "1"
+tokio = { version = "1", features = ["macros", "rt-multi-thread", "sync", "fs", "io-util", "process", "time", "net"] }
+anyhow = "1"
+thiserror = "2"
+tracing = "0.1"
+tracing-subscriber = { version = "0.3", features = ["env-filter"] }
+
+# Phase 1 — auth
+reqwest = { version = "0.12", default-features = false, features = ["json", "rustls-tls", "multipart"] }
+base64 = "0.22"
+sha2 = "0.10"
+rand = "0.8"
+url = "2"
+parking_lot = "0.12"
+fs2 = "0.4"
+time = { version = "0.3", features = ["parsing"] }
+
+# ---------------------------------------------------------------------------
+# Cross-platform runtime deps — required by BOTH macOS and Windows.
+#
+# These MUST NOT live under a per-OS `[target.…]` table. `encoder.rs`,
+# `monitoring.rs` and the `sentry`/`global-shortcut` wiring in `lib.rs` are
+# ungated modules, and `capture/windows.rs` needs `cpal` while the Windows
+# pump in `recording.rs` needs `ffmpeg`. Until 2026-08-15 this whole block
+# sat inside `cfg(target_os = "macos")`, which is why the Windows target had
+# never compiled once: it resolved without ffmpeg, cpal, or any of the five
+# Tauri plugins, so `cargo check` died in the build script on the first
+# missing plugin permission (`clipboard-manager:allow-write-text`).
+# ---------------------------------------------------------------------------
+
+# Phase 5 polish — cursor + click tracking for Screen Studio-style auto-zoom.
+# `device_query` polls global mouse position via Core Graphics on macOS and
+# Win32 GetCursorPos / GetAsyncKeyState on Windows. Position polling needs
+# no special permission on either OS; click polling reads keyboard/mouse
+# button state via the same APIs. Same crate Cap.so uses, public API only —
+# none of Cap's AGPL cursor-capture code is reused. Cross-platform.
+#
+# NOTE: `cursor_track.rs` gates its use on `cfg(not(target_os = "macos"))`,
+# so Windows is the ONLY desktop platform that actually calls this. It used
+# to be declared under `cfg(unix)` — false on Windows — meaning the one
+# platform that needs it was the one platform that never got it.
+device_query = "4.0.1"
+
+# Phase 2 — capture + recording pipeline.
+#
+# Encoder: ffmpeg-next pinned to Cap.so's fork (rev 49db1fede112) because
+# mainline ffmpeg-next doesn't yet track the ffmpeg 7/8 ABI. macOS encodes
+# via `h264_videotoolbox`; Windows falls back to `libx264` (the probe order
+# lives in `encoder.rs`). Both mux fragmented MP4 via libavformat.
+uuid = { version = "1", features = ["v4", "serde"] }
+bytes = "1"
+futures = "0.3"
+regex = "1"
+cpal = "0.15"
+ffmpeg = { package = "ffmpeg-next", git = "https://github.com/CapSoftware/rust-ffmpeg", rev = "49db1fede112" }
+
+# Phase 3 — clipboard + native notifications
+tauri-plugin-clipboard-manager = "2"
+tauri-plugin-notification = "2"
+
+tauri-plugin-process = "2"
+
+# Phase 5 polish — global hotkey for Start/Stop without focusing the app.
+tauri-plugin-global-shortcut = "2"
+
+# Local edition only (feature `local`): the moment planner and the pure glue
+# around it (settings, keys, sidecar mapping, AREC disclosure). Neither is in
+# the official app's dependency graph.
+clipy-local-moments = { path = "crates/clipy-local-moments", optional = true }
+clipy-local-edition = { path = "crates/clipy-local-edition", optional = true }
+
+[target.'cfg(target_os = "macos")'.dependencies]
+security-framework = "3"
+cap-camera = { git = "https://github.com/CapSoftware/Cap", rev = "52b0acc85570abf77748fe5533a42fbc0f2de556", package = "cap-camera" }
+cap-camera-ffmpeg = { git = "https://github.com/CapSoftware/Cap", rev = "52b0acc85570abf77748fe5533a42fbc0f2de556", package = "cap-camera-ffmpeg" }
+image = { version = "0.25", default-features = false, features = ["bmp", "jpeg", "png"] }
+# Camera preview socket (`camera_preview_ws.rs`), the transport Cap uses for
+# its camera window.
+tokio-tungstenite = { version = "0.30", default-features = false, features = ["handshake"] }
+
+[target.'cfg(unix)'.dependencies]
+libc = "0.2"
+
+[target.'cfg(target_os = "macos")'.dependencies.objc2]
+version = "0.6"
+features = ["exception"]
+
+# Pinned to Cap.so's MIT-licensed crates. Cap is an AGPL-overall workspace,
+# but the `scap-screencapturekit` and `cidre` deps used here are MIT.
+# Rev locked 2026-04-25 against Cap @ 52b0acc.
+[target.'cfg(target_os = "macos")'.dependencies.scap-screencapturekit]
+git = "https://github.com/CapSoftware/Cap"
+rev = "52b0acc85570abf77748fe5533a42fbc0f2de556"
+
+# cidre provides Rust bindings for AVFoundation (AVAssetWriter), ScreenCaptureKit,
+# CoreMedia, CoreVideo, and CoreAudio. Pinned to the same rev Cap uses so the
+# transitive copy from scap-screencapturekit stays consistent with our direct use.
+[target.'cfg(target_os = "macos")'.dependencies.cidre]
+git = "https://github.com/CapSoftware/cidre"
+rev = "bf84b67079a8"
+default-features = false
+features = [
+    "macos_12_7",
+    "ax",
+    "cv",
+    "cf",
+    "cg",
+    "core_audio",
+    "sc",
+    "av",
+    "blocks",
+    "async",
+    "dispatch",
+    "nw",
+    "vt",
+]
+
+# ---------------------------------------------------------------------------
+# Windows screen + system-audio capture.
+#
+# `windows-capture` uses the Windows Graphics Capture (WGC) API on Win10
+# 1903+ — same primitive every modern recorder (OBS, Cap.so, ShareX) builds
+# on. We use it for the screen lane; system-audio loopback rides through
+# cpal's WASAPI backend (already a cross-platform dep below).
+#
+# `windows` is Microsoft's official windows-rs crate; we keep a small surface
+# here for any direct Win32 calls we need (e.g. enumerating displays for the
+# source picker, opening Settings panels for permission help URLs).
+# ---------------------------------------------------------------------------
+[target.'cfg(target_os = "windows")'.dependencies]
+windows-capture = "1.4"
+windows = { version = "0.58", features = [
+    "Win32_Foundation",
+    "Win32_Graphics_Gdi",
+    # DWMWA_CLOAKED: the window picker skips windows the compositor hides.
+    "Win32_Graphics_Dwm",
+    "Win32_UI_HiDpi",
+    "Win32_UI_WindowsAndMessaging",
+    "Win32_System_Com",
+    # PrintWindow + PRINT_WINDOW_FLAGS live under Storage::Xps in windows-rs,
+    # not WindowsAndMessaging. Needed for window thumbnails.
+    "Win32_Storage_Xps",
+    "Win32_Media_Audio",
+    "Win32_Media_MediaFoundation",
+    # Putting a screenshot on the clipboard as an image: the clipboard calls,
+    # the CF_DIB format constant, and the movable global the format needs.
+    # Windows ML, for the camera-only recorder's background segmentation.
+    "AI_MachineLearning",
+    "Foundation",
+    "Foundation_Collections",
+    # Camera and microphone privacy switches, for the setup window.
+    "Win32_System_Registry",
+    # Background-mode thread priority for the local recording processor.
+    "Win32_System_Threading",
+    # ProcessIdToSessionId: Remote Desktop detection for capture exclusion.
+    "Win32_System_RemoteDesktop",
+    "Win32_System_DataExchange",
+    "Win32_System_Ole",
+    "Win32_System_Memory",
+    # Recording health samples: the app's working set, physical memory
+    # totals and CPU time (`recording_health.rs`).
+    "Win32_System_ProcessStatus",
+    "Win32_System_SystemInformation",
+    # Clipboard history pastes into the previous window with SendInput.
+    "Win32_UI_Input_KeyboardAndMouse",
+] }
+image = { version = "0.25", default-features = false, features = ["bmp", "png", "jpeg"] }
+# Expired local recordings go to the Recycle Bin, as macOS sends them to the
+# Trash: recoverable, never silently gone.
+trash = "5"
+# WebView2 controller interfaces for webview_scale.rs. Versions must match the
+# ones wry links (see Cargo.lock) so Tauri's controller casts to them.
+webview2-com = "0.38.2"
+windows-core = "0.61"
+
+# Local edition transcription on Windows (feature `local`): sherpa-onnx
+# models and own-key providers. Windows links sherpa-onnx's shared DLLs, which
+# `scripts/stage-sherpa-onnx.mjs` verifies and stages next to the exe (the
+# static archive is /MT and would clash with this /MD binary). macOS keeps
+# Apple Speech: the engine would not fit the DMG size ceiling.
+[target.'cfg(windows)'.dependencies]
+clipy-local-stt = { path = "crates/clipy-local-stt", optional = true, default-features = false, features = ["local", "shared"] }
+clipy-local-edition = { path = "crates/clipy-local-edition", optional = true, features = ["stt"] }
+
+# Cap's workspace-hack is a Hakari build-optimization crate that pulls in
+# specta-2.0.0-rc.24, which uses unstable Rust features. Stub it out — it
+# exports nothing functional; its only purpose is to unify feature flags
+# inside Cap's own workspace, which doesn't apply to us.
+[patch."https://github.com/CapSoftware/Cap"]
+workspace-hack = { path = "patches/workspace-hack" }
+
+[dev-dependencies]
+tempfile = "3"
+tokio = { version = "1", features = ["macros", "rt-multi-thread", "sync", "fs", "io-util", "process", "time", "net"] }
+
+[profile.release]
+codegen-units = 1
+lto = true
+opt-level = "s"
+panic = "abort"
+# The shipped binary stays stripped; the debug info goes into a side-car .dSYM
+# so crash reports can still be symbolicated. Without it, a minidump resolves
+# to raw addresses with no Clipy frames. Mac release builds may override this
+# with CARGO_PROFILE_RELEASE_STRIP=false: on macOS 27.2 a stripped binary
+# failed dyld's load check. The .dSYM is unaffected.
+strip = true
+debug = true
+split-debuginfo = "packed"
+
+# Build scripts and proc macros run during the build and never ship, so do not
+# strip them. On macOS 27.2 / Xcode 27.2 (Mac runner, Oct 2026) some stripped
+# proc-macro dylibs failed dyld's load check ("mis-aligned LINKEDIT string
+# pool") and the compile stopped. scripts/verify-macos-dyld.sh checks the
+# shipped binaries, which are still stripped.
+[profile.release.build-override]
+strip = false
