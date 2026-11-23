@@ -42,7 +42,8 @@ clipy context import "<url>" --json
 No Clipy account and no login. YouTube captions and Loom transcripts are
 fetched on this machine, and nothing is sent to Clipy. Do not add `--sync`
 unless the user asks to save the video to their Clipy library: `--sync` needs
-a Clipy account and sends the transcript to Clipy.
+a Clipy account and saves the transcript, the AREC document and the selected
+frames (never the video itself) to their private Clipy library.
 
 Useful flags, only when they apply:
 
@@ -58,6 +59,15 @@ check that the model and the speech engine are installed:
 ```bash
 clipy local status
 ```
+
+If it prints `unknown command: local`, this copy of the Clipy CLI has no
+on-device transcription. If `clipy` is a global install, ask the user before
+running `npm i -g @clipy/cli@latest`, or use `npx -y @clipy/cli@latest` in
+its place, and check again. If the latest CLI says the same, do not try the
+`--local` import. Ask for a caption file and run
+`clipy context import "<path to the file>" --transcript <file.vtt> --json`
+(no `--local`; it prints `contextPath` like a URL import), or ask for a
+YouTube or Loom link to the same video.
 
 Look at the "local models" and "local speech" lines. If the model is not
 downloaded or the speech engine is not installed, tell the user this is a
@@ -93,12 +103,17 @@ With `--json` the command prints one JSON object.
   `bundlePath`, its folder.
 - A `--local` file import prints `arec`, the full path of `recording.arec`,
   and `dir`, its folder, which also holds the screenshots under `frames/`.
-- A failure prints `"ok": false` with `code`, `error` and `remediation`.
+- A failure prints `"ok": false` with `error`, and with `code` and
+  `remediation` for the failures in the table below. A `--local` failure may
+  carry only `error` (and `keptVideo` when the video was saved); read it.
 
 Read `recording.arec` with the Read tool. It is Markdown. When the question is
 about something on screen and the AREC lists key moments with frames, read the
 frame images it names. Check `warnings` in the JSON: a transcript gap or a
-missing piece is reported there.
+missing piece is reported there. A `--local` import still succeeds when the
+speech model is missing: `transcript.engine` is `failed`, `warnings` names the
+model, and the AREC has screenshots but no transcript. Tell the user, offer
+the one-time setup from step 2, and import again after it.
 
 ## 4. Answer
 
@@ -119,13 +134,17 @@ Read `code` and `remediation` from the JSON and act on them:
 
 | `code` | What to do |
 |---|---|
-| `no_captions` | The video has no usable captions. If the error lists other languages, re-run with `--language <code>`. Otherwise offer `--transcript <file.vtt>`, or, if the user has the video file, a `--local` import of it. |
-| `invalid_url` | Only a single video works, not a channel, playlist, folder or search page. Ask for the video's own link. |
+| `no_captions` | The video has no usable captions. If the error lists other languages, re-run with `--language <code>`. Otherwise offer `--transcript <file.vtt>`, or, if the user has the video file, a `--local` import of it. If the error says local files cannot be transcribed, this CLI has no on-device transcription: see the note under "A video file on this machine". |
+| `invalid_url` | Only a single video works, not a channel, playlist, folder or search page, and the Loom link must point at a video that exists. Ask for the video's own link. |
+| `source_unreadable` | The path is not a readable file. Paths are relative to the current folder; check it exists and quote it if it has spaces. |
 | `source_private` | The Loom video is private or password protected. Ask for a public share link. |
 | `loom_unreachable` | Loom did not answer. Wait a moment and try once more. |
-| `ytdlp_missing`, `ytdlp_download_403` | The YouTube helper is missing or out of date. Follow `remediation`, then run `clipy doctor`. |
+| `ytdlp_missing` | The YouTube helper could not be installed. Follow `remediation`, then run `clipy doctor`. |
+| `ytdlp_download_403` | YouTube refused the download. The CLI already retried, so do not run it again now; follow `remediation`. |
 | `ffmpeg_missing` | Install ffmpeg (`brew install ffmpeg` on macOS, `winget install Gyan.FFmpeg` on Windows, `sudo apt install ffmpeg` on Linux), then run `clipy doctor`. |
 | `speech_engine_required` | Ask the user, then run `clipy speech install` and import again. |
+| `unknown`, and `error` says "Sign in to confirm you're not a bot" | YouTube is refusing requests from this network, which happens on cloud servers, CI runners and some VPNs. Running it again will not help, and `--transcript` does not get around it for a YouTube URL. Tell the user, and suggest running `/watch` on their own computer, or a `--local` import if they have the video file. |
+| `unknown`, and `error` says "Private video" or "Video unavailable" | Ask for a public link to the video. |
 | anything else | Run `clipy doctor` (or `clipy doctor --local` for a video file) and tell the user what it reports. |
 
 Never retry the same failing command in a loop. Explain what happened in one

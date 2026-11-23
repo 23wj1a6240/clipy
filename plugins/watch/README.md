@@ -33,9 +33,14 @@ clipy context import "https://www.youtube.com/watch?v=<id>"   # YouTube or Loom
 clipy context import ./demo.mov --local                        # a file on your machine
 ```
 
-Each import writes a folder with `recording.arec` (the same bytes as
-`recording.md`), `transcript.json` and `manifest.json`. Claude reads
-`recording.arec` and answers from it.
+Each import writes a folder and Claude reads `recording.arec` in it:
+
+- A YouTube or Loom link gives a `clipy-context-<id>` folder in the current
+  directory, with `recording.arec` (the same bytes as `recording.md`),
+  `transcript.json` and `manifest.json`.
+- A `--local` file import gives a folder under `~/clipy/recordings/` with
+  `recording.arec`, a copy of the video, `transcript.json`, `moments.json` and
+  a screenshot of each key moment in `frames/`.
 
 AREC is the open format that makes a recording readable by AI agents: the
 transcript, the key moments with a frame of each, and timestamps, in plain
@@ -56,10 +61,11 @@ clipy speech install                 # about 35 MB
   account and no login.
 - `--local` transcribes on your machine with an on-device model. Nothing is
   uploaded to Clipy.
-- `--sync` is optional and needs a Clipy account. It sends the transcript to
-  Clipy, which classifies the video, picks the moments worth a frame (the
-  frames are extracted on your machine with ffmpeg) and adds the video to your
-  Clipy memory, where your agents search it through the Clipy MCP server. The
+- `--sync` is optional and needs a Clipy account. It saves the transcript, the
+  AREC document and the selected frames, never the video itself, to your
+  private Clipy library. Clipy classifies the video and picks the moments worth
+  a frame; the frames are extracted on your machine with ffmpeg and then
+  uploaded. Your agents search the library through the Clipy MCP server. The
   plugin never adds `--sync` unless you ask for it.
 
 ## Codex, Cursor and other agents
