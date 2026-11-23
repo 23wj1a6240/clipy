@@ -1,0 +1,17 @@
+{
+  "name": "clipy",
+  "description": "Clipy plugins for Claude Code. Let your AI agent watch any video: YouTube, Loom or a file on your machine.",
+  "owner": {
+    "name": "Clipy",
+    "url": "https://clipy.online"
+  },
+  "plugins": [
+    {
+      "name": "watch",
+      "source": "./plugins/watch",
+      "description": "/watch a YouTube video, a Loom link or a local video file, then ask about it. Answers cite timestamps.",
+      "category": "productivity",
+      "tags": ["video", "youtube", "loom", "transcript", "arec"]
+    }
+  ]
+}

@@ -15,6 +15,30 @@ manage, search across all your recordings and team workspaces? That is the
 full Clipy app, a separate download at
 [clipy.online/download](https://clipy.online/download).
 
+## Let your AI agent watch any video
+
+Clipy is a free tool to connect your AI agents and let them watch videos. This
+repository is also a Claude Code plugin marketplace. In Claude Code:
+
+```text
+/plugin marketplace add clipy-recorder/clipy
+/plugin install watch@clipy
+```
+
+Then `/watch <YouTube URL | Loom link | video file> [question]`, for example
+`/watch https://www.youtube.com/watch?v=<id> what are the main steps?`. Claude
+turns the video into an AREC on your machine and answers with timestamps.
+YouTube captions and Loom transcripts are fetched on your machine, with no
+account; a video file is transcribed on your machine with `--local`. Details
+in [plugins/watch](plugins/watch/README.md).
+
+For Codex, Cursor and other agents, install the same workflow as a skill:
+
+```bash
+npm i -g @clipy/cli
+clipy agents install codex     # or: cursor, claude
+```
+
 ## Use it
 
 The command line is the official Clipy CLI with `--local`. It bundles the
