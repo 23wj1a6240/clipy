@@ -1,5 +1,9 @@
 # Clipy Local
 
+[![npm](https://img.shields.io/npm/v/@clipy/cli?label=%40clipy%2Fcli)](https://www.npmjs.com/package/@clipy/cli)
+[![License: Apache-2.0](https://img.shields.io/badge/license-Apache--2.0-blue)](LICENSE)
+[![Docs](https://img.shields.io/badge/docs-clipy.online-orange)](https://clipy.online/docs/clipy-local)
+
 Record your screen and talk. Clipy Local turns the recording into an AREC file
 ([AREC](https://arecformat.org/spec) is an open, plain-text format for
 recordings that AI agents read) on your own machine: the transcript, the moments that matter and a screenshot
@@ -14,6 +18,9 @@ for macOS and Windows. Want a share link anyone can watch, AI with no keys to
 manage, search across all your recordings and team workspaces? That is the
 full Clipy app, a separate download at
 [clipy.online/download](https://clipy.online/download).
+
+The full guide, with build steps, agent setup and where your data goes, is at
+[clipy.online/docs/clipy-local](https://clipy.online/docs/clipy-local).
 
 ## Let your AI agent watch any video
 
