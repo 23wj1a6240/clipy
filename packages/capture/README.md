@@ -55,6 +55,32 @@ The package exports these main functions:
 - `startVirtualDisplay` — starts a virtual display where supported.
 
 Additional lower-level utilities and types are also exported.
+import {
+  checkCapture,
+  listSources,
+  startCapture,
+} from "@clipy/capture";
+
+const check = await checkCapture();
+
+if (!check.ok) {
+  throw new Error(check.problems.join("\n"));
+}
+
+const sources = await listSources();
+console.log("Available sources:", sources);
+
+const session = await startCapture({
+  outPath: "./capture.mp4",
+  fps: 30,
+  maxSeconds: 5,
+});
+
+await session.ended;
+const result = await session.stop();
+
+console.log("Saved recording:", result.path);
+console.log("Duration:", result.durationMs, "ms");
 
 ## Platform support
 
