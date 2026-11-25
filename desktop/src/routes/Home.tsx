@@ -77,6 +77,7 @@ import {
   onPanelDismissed,
   onPanelRestored,
   signOut,
+  beginSignIn,
   stageUpdateInBackground,
   startRecording,
   stopRecording,
@@ -129,6 +130,7 @@ import { recoveryErrorMessage } from "../lib/recoveryError";
 import { EffectsSheet } from "../components/recorder/EffectsSheet";
 import LocalModePanel from "../components/LocalModePanel";
 import { SettingsSheet } from "../components/recorder/SettingsSheet";
+import { AccountMenu } from "../components/recorder/AccountMenu";
 import { isWindowOnlyCapture, windowOnlyCameraNote, windowSourceHint, windowSourceNote } from "../lib/windowCapture";
 import { useDesktopT, type DesktopT } from "../lib/messages";
 import { Icon, Menu, OnOffPill, PrimaryButton, Row, ScreenHeader, type MenuItem, SectionTitle } from "../components/recorder/ui";
@@ -1900,9 +1902,19 @@ export default function Home({ user, onCloud, initialLocal = false }: Props) {
     setBusy(true);
     try {
       await signOut();
+    } catch (err) {
+      setError(String(err));
+      throw err;
     } finally {
       setBusy(false);
     }
+  };
+
+  // Sign out, then go straight to the browser sign-in so the next person (a
+  // QA teammate on a shared Mac) lands in their own account in one step.
+  const handleSwitchAccount = async () => {
+    await handleSignOut();
+    await beginSignIn().catch(() => {});
   };
 
   const handleCheckForUpdates = async () => {
@@ -2822,6 +2834,17 @@ export default function Home({ user, onCloud, initialLocal = false }: Props) {
             </button>
           </div>
         ) : null}
+        <div className="flex items-center gap-1">
+        {!LOCAL_EDITION && user && phase === "idle" && (
+          <AccountMenu
+            user={user}
+            isPro={isPro}
+            onOpenRecordings={() => void handleOpenPreviousRecordings()}
+            onEditAccount={() => void open("https://clipy.online/profile").catch((err) => setError(String(err)))}
+            onSignOut={handleSignOut}
+            onSwitchAccount={handleSwitchAccount}
+          />
+        )}
         <button
           type="button"
           onClick={dismissPanel}
@@ -2830,6 +2853,7 @@ export default function Home({ user, onCloud, initialLocal = false }: Props) {
         >
           <Icon name="close" size={22} />
         </button>
+        </div>
       </header>
 
       <div ref={contentRef} className="relative z-10 flex min-h-0 flex-1 flex-col overflow-y-auto">
@@ -3635,7 +3659,7 @@ export default function Home({ user, onCloud, initialLocal = false }: Props) {
           onOpenRecordings={() => void handleOpenPreviousRecordings()}
           onSetupGuide={() => void showOnboardingWindow().catch((err) => setError(String(err)))}
           onCheckForUpdates={() => void handleCheckForUpdates()}
-          onSignOut={() => void handleSignOut()}
+          onSignOut={() => void handleSignOut().catch(() => {})}
           onSignIn={() => { onCloud?.(); }}
           busy={busy}
         />

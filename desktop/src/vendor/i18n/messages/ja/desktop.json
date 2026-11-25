@@ -19,7 +19,9 @@
       "uploading": "アップロード中…",
       "cancelUpload": "アップロードをキャンセル",
       "localProcessing": "処理中…",
-      "localReady": "完了"
+      "localReady": "完了",
+      "signedInAs": "{email} でサインイン中",
+      "signOut": "サインアウト"
     },
     "tooltip": {
       "starting": "Clipy、開始中…",
@@ -611,6 +613,19 @@
       "later": "あとで",
       "installing": "インストール中…",
       "install": "インストールして再起動"
+    },
+    "account": {
+      "title": "アカウント",
+      "open": "アカウント: {email}",
+      "signedInOn": "この{device}でサインイン中",
+      "recordings": "自分の録画",
+      "editAccount": "アカウントを編集",
+      "switchAccount": "アカウントを切り替え",
+      "signOut": "サインアウト",
+      "signingOut": "サインアウト中…",
+      "confirmTitle": "この{device}からサインアウトしますか？",
+      "confirmBody": "録画はライブラリに残ります。次にサインインした人は自分のアカウントに録画します。",
+      "cancel": "キャンセル"
     }
   },
   "notes": {

@@ -19,7 +19,9 @@
       "uploading": "अपलोड हो रहा है…",
       "cancelUpload": "अपलोड रद्द करें",
       "localProcessing": "प्रोसेस हो रहा है…",
-      "localReady": "तैयार"
+      "localReady": "तैयार",
+      "signedInAs": "{email} के रूप में साइन इन",
+      "signOut": "साइन आउट करें"
     },
     "tooltip": {
       "starting": "Clipy, शुरू हो रहा है…",
@@ -611,6 +613,19 @@
       "later": "बाद में",
       "installing": "इंस्टॉल हो रहा है…",
       "install": "इंस्टॉल करें और दोबारा खोलें"
+    },
+    "account": {
+      "title": "अकाउंट",
+      "open": "अकाउंट: {email}",
+      "signedInOn": "इस {device} पर साइन इन है",
+      "recordings": "मेरी रिकॉर्डिंग",
+      "editAccount": "अकाउंट बदलें",
+      "switchAccount": "दूसरा अकाउंट चुनें",
+      "signOut": "साइन आउट करें",
+      "signingOut": "साइन आउट हो रहा है…",
+      "confirmTitle": "इस {device} पर साइन आउट करें?",
+      "confirmBody": "आपकी रिकॉर्डिंग आपकी लाइब्रेरी में रहती हैं। अगला व्यक्ति जो साइन इन करेगा, वह अपने अकाउंट में रिकॉर्ड करेगा।",
+      "cancel": "रद्द करें"
     }
   },
   "notes": {

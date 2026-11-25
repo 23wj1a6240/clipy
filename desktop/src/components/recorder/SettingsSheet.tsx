@@ -385,10 +385,22 @@ export function SettingsSheet(p: SettingsSheetProps) {
                   </span>
                 )}
               </span>
-              <div className="min-w-0">
+              <div className="min-w-0 flex-1">
                 <div className="truncate text-[16px] font-semibold text-ink-text">{p.user?.name ?? p.user?.email ?? t("notSignedIn")}</div>
                 <div className="truncate text-[14px] text-ink-secondary">{p.user ? p.user.email : t("signInToCloud")}</div>
               </div>
+              {/* Sign out sits beside the account it signs out of, not only at
+                  the foot of this long tab where QA teams could not find it. */}
+              {p.user && (
+                <button
+                  type="button"
+                  onClick={p.onSignOut}
+                  disabled={p.busy}
+                  className="shrink-0 rounded-full border border-strong px-3.5 py-1.5 text-[13px] font-semibold text-ink-text transition-colors hover:border-flash-500/50 hover:bg-flash-500/10 hover:text-flash-600 disabled:opacity-50"
+                >
+                  {t("signOut")}
+                </button>
+              )}
             </div>}
             {!LOCAL_EDITION && p.user && !p.accountIsPro && <PlanRow onUpgrade={p.onUpgradePlan} />}
 

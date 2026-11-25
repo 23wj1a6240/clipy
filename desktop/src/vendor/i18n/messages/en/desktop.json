@@ -19,7 +19,9 @@
       "uploading": "Uploading…",
       "cancelUpload": "Cancel Upload",
       "localProcessing": "Processing…",
-      "localReady": "Ready"
+      "localReady": "Ready",
+      "signedInAs": "Signed in as {email}",
+      "signOut": "Sign Out"
     },
     "tooltip": {
       "starting": "Clipy, starting…",
@@ -611,6 +613,19 @@
       "later": "Later",
       "installing": "Installing…",
       "install": "Install & Relaunch"
+    },
+    "account": {
+      "title": "Account",
+      "open": "Account: {email}",
+      "signedInOn": "Signed in on this {device}",
+      "recordings": "My recordings",
+      "editAccount": "Edit account",
+      "switchAccount": "Switch account",
+      "signOut": "Sign out",
+      "signingOut": "Signing out…",
+      "confirmTitle": "Sign out on this {device}?",
+      "confirmBody": "Your recordings stay in your library. The next person to sign in records to their own account.",
+      "cancel": "Cancel"
     }
   },
   "notes": {

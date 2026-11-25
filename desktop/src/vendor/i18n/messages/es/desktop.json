@@ -19,7 +19,9 @@
       "uploading": "Subiendo…",
       "cancelUpload": "Cancelar subida",
       "localProcessing": "Procesando…",
-      "localReady": "Listo"
+      "localReady": "Listo",
+      "signedInAs": "Sesión iniciada como {email}",
+      "signOut": "Cerrar sesión"
     },
     "tooltip": {
       "starting": "Clipy, iniciando…",
@@ -611,6 +613,19 @@
       "later": "Más tarde",
       "installing": "Instalando…",
       "install": "Instalar y reabrir"
+    },
+    "account": {
+      "title": "Cuenta",
+      "open": "Cuenta: {email}",
+      "signedInOn": "Sesión iniciada en este {device}",
+      "recordings": "Mis grabaciones",
+      "editAccount": "Editar cuenta",
+      "switchAccount": "Cambiar de cuenta",
+      "signOut": "Cerrar sesión",
+      "signingOut": "Cerrando sesión…",
+      "confirmTitle": "¿Cerrar sesión en este {device}?",
+      "confirmBody": "Tus grabaciones se quedan en tu biblioteca. La próxima persona que inicie sesión grabará en su propia cuenta.",
+      "cancel": "Cancelar"
     }
   },
   "notes": {

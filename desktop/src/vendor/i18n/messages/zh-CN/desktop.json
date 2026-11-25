@@ -19,7 +19,9 @@
       "uploading": "正在上传…",
       "cancelUpload": "取消上传",
       "localProcessing": "正在处理…",
-      "localReady": "已就绪"
+      "localReady": "已就绪",
+      "signedInAs": "已登录：{email}",
+      "signOut": "退出登录"
     },
     "tooltip": {
       "starting": "Clipy，正在开始…",
@@ -611,6 +613,19 @@
       "later": "稍后",
       "installing": "正在安装…",
       "install": "安装并重新启动"
+    },
+    "account": {
+      "title": "账户",
+      "open": "账户：{email}",
+      "signedInOn": "已在此 {device} 上登录",
+      "recordings": "我的录制",
+      "editAccount": "编辑账户",
+      "switchAccount": "切换账户",
+      "signOut": "退出登录",
+      "signingOut": "正在退出…",
+      "confirmTitle": "要在此 {device} 上退出登录吗？",
+      "confirmBody": "你的录制会保留在你的资料库中。下一位登录的人会录制到自己的账户。",
+      "cancel": "取消"
     }
   },
   "notes": {

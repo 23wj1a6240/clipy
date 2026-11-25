@@ -770,6 +770,10 @@ fn spawn_cancel_recording<R: Runtime>(app: AppHandle<R>) {
     });
 }
 
+/// Clears the session; the auth-state event rebuilds this menu and sends the
+/// window back to the sign-in screen. The item only exists while idle, but a
+/// recording can start between opening the menu and clicking, so check again.
+
 #[allow(dead_code)]
 fn _typecheck_tray_param(_t: &TrayIcon) {}
 
