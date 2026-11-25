@@ -56,6 +56,7 @@ The package exports these main functions:
 
 Additional lower-level utilities and types are also exported.
 import {
+  ```ts
   checkCapture,
   listSources,
   startCapture,
@@ -81,6 +82,7 @@ const result = await session.stop();
 
 console.log("Saved recording:", result.path);
 console.log("Duration:", result.durationMs, "ms");
+```
 
 ## Platform support
 
